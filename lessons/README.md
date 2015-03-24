@@ -1,1 +1,1 @@
-Lessons for Data wranngling/QC
+Lessons for Data wrangling/QC
