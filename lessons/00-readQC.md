@@ -126,6 +126,15 @@ The main functions of FastQC are
 * Export of results to an HTML based permanent report
 * Offline operation to allow automated generation of reports without running the interactive application
 
+## Running FastQC
+Note: this has been run already for the first file
+```
+cd ~/data/SRR
+../data/FastQC/fastqc SRR447649_1.fastq # runs in < 1 min for each .fastq
+```
+## Viewing the FastQC output
+
+
 <!-- Don't need this!
 ## Running FastQC
 ```
