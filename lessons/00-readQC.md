@@ -1,4 +1,4 @@
-# Lesson QC of Sequencing read data
+# Lesson QC of Sequence Read Data
 
 ##Assessment and Objectives
 ###Declarative knowledge
@@ -33,6 +33,35 @@
 
 ## The data
 We have received Fastq data files for Illumina paired end reads.  The first thing we want to do is to assess the quality of the read data and determine whether some clean-up is required.
+
+## Amazon instance 
+An Amazon Linux AMI ami-3c1c3454 named dataCgen-qc is set up and publicly available. It has FastQC, Trimmomatic, and sample data for the quality control tutorial. You can search for it in the public AMIs.  It is assumed that you know how to launch an AWS instance and have the private key downloaded to your computer.
+
+### Setup
+You will need:
+* A t2.medium instance of mi-3c1c3454
+* The pem file from you public/private key pair
+* The public IP address of your AWS instance
+
+### Connecting
+<pemfile.pem> is the name of your locally saved private key
+<public IP> is the IP address of your AWS instance
+
+  ssh -i <pemfile.pem> ec2-user@<public IP>
+
+<pre>
+Last login: Wed Mar 25 10:14:10 2015 from ool-addc1c9a.static.optonline.net
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2014.09-release-notes/
+18 package(s) needed for security, out of 147 available
+Run "sudo yum update" to apply all updates.
+Amazon Linux version 2015.03 is available.
+</pre>
+
 
 ## FastQC
 FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
@@ -77,7 +106,7 @@ Once we have an idea of the quality of our raw data, it is time to trim away ada
 * annotation
 * paired-end
 * QC
-# Amazon instance ami-3c1c3454 named dataCgen-qc is set up and publicly available. It has FastQC, Trimmomatic, and sample data for the quality control tutorial. You can search for it in the public AMIs.
+
 
 It is pretty trivial, but all the commands to recreate the AMI are here:
 # code for AWS setup and install
