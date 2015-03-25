@@ -89,7 +89,7 @@ cd ~/data/SRR
 
 ## Use web server to view the results
 ### Put the data where the web server can see it
---placeholder more helpful words here--
+placeholder more helpful words here
 ```
 sudo cp SRR447649_1_fastqc* /var/www/html
 cd /var/www/html
@@ -100,14 +100,14 @@ sudo unzip SRR447649_1_fastqc.zip
 On your (local) computer, point any web browser to the address below,
 where `<public IP>` is the ip address of your AWS instance.
 
-http://<public IP>/SRR447649_1_fastqc.html
+``http://<public IP>/SRR447649_1_fastqc.html``
 
---image placeholder fastqc front page SUCCESS!--
+image placeholder fastqc front page SUCCESS!
     
 ## Summary of FastQC Outputs
 ### Per Base Sequence Quality
--image placeholder example of good data-<br>
--image placeholder example of bad data-
+image placeholder example of good data-<br>
+image placeholder example of bad data-
 * what QC steps can be taken based on this report
 ### more
 * what QC steps can be taken based on this report
