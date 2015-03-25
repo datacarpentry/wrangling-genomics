@@ -60,7 +60,8 @@ Run "sudo yum update" to apply all updates.
 Amazon Linux version 2015.03 is available.
 ```
 
-### Set up apache web server (for fastQC results)  **ACTUALLY, just have them download the files to their desktop**
+### Set up apache web server (for fastQC results)  
+**NEVERMIND, just have them download the files to their desktop**
 <!--* We will set up our AWS instance as a web server so we can view and share our FastQC results
 * This distribution of Linux used the [redhat yum package manager](https://access.redhat.com/solutions/9934)
 * It is very easy to install the [apache web server software](http://httpd.apache.org/)
