@@ -2,7 +2,7 @@
 
 ##Assessment and Objectives
 ###Declarative knowledge
-*Learners will archive the following objectives in this lesson: *<br>
+*Learners will archive the following objectives in this lesson:*<br>
 1. Know FASTQC is used to determine the quality of FASTQ data <br>
 2. Know Trimmomatic can be used to trim and filter FASTQ data<br>
 3. Recognize the following file types:<br>
