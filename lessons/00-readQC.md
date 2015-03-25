@@ -6,8 +6,8 @@
 1. Know FASTQC is used to determine the quality of FASTQ data <br>
 2. Know Trimmomatic can be used to trim and filter FASTQ data<br>
 3. Recognize the following file types:<br>
-    - FASTA<br>
-    - FASTQ<br>
+* FASTA
+* FASTQ
 4. Know what a Phred score is and what it means<br>
 5. Know older FASTQ files may have different quality scoring<br>
 6. Understand a FASTQC report and what QC checks must pass in order to work with the data<br>
@@ -106,10 +106,13 @@ http://<public IP>/SRR447649_1_fastqc.html
     
 ## Summary of FastQC Outputs
 ### Per Base Sequence Quality
-
--image placeholder example of good data-
+-image placeholder example of good data-<br>
 -image placeholder example of bad data-
-
+* what QC steps can be taken based on this report
+### more
+* what QC steps can be taken based on this report
+### still more
+* what QC steps can be taken based on this report
 
 # Placeholder splitting paired read files
 * Do we need to?
