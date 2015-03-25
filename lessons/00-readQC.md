@@ -44,8 +44,8 @@ You will need:
 * The public IP address of your AWS instance
 
 ### Connecting
-`<pemfile.pem>` is the name of your locally saved private key
-<public IP> is the IP address of your AWS instance
+* `<pemfile.pem>` is the name of your locally saved private key file
+* `<public IP>` is the IP address of your AWS instance
 ```
 ssh -i <pemfile.pem> ec2-user@<public IP>
 Last login: Wed Mar 25 10:14:10 2015 from ool-addc1c9a.static.optonline.net
