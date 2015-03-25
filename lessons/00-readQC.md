@@ -46,10 +46,8 @@ You will need:
 ### Connecting
 <pemfile.pem> is the name of your locally saved private key
 <public IP> is the IP address of your AWS instance
-
-  ssh -i <pemfile.pem> ec2-user@<public IP>
-
-<pre>
+```
+ssh -i <pemfile.pem> ec2-user@<public IP>
 Last login: Wed Mar 25 10:14:10 2015 from ool-addc1c9a.static.optonline.net
 
        __|  __|_  )
@@ -60,8 +58,10 @@ https://aws.amazon.com/amazon-linux-ami/2014.09-release-notes/
 18 package(s) needed for security, out of 147 available
 Run "sudo yum update" to apply all updates.
 Amazon Linux version 2015.03 is available.
-</pre>
+```
 
+### Set up apache web server (for fastQC results)
+`sudo yum install httpd`
 
 ## FastQC
 FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
@@ -73,23 +73,40 @@ The main functions of FastQC are
 * Export of results to an HTML based permanent report
 * Offline operation to allow automated generation of reports without running the interactive application
 
+## Running FastQC
+```
+cd ~/data/SRR
+../data/FastQC/fastqc SRR447649_1.fastq # runs in < 1 min for each .fastq
+```
 
-[Sheldon to document critical outputs before tomorrow]
+## Use web server to view the results
+### Put the data where the web server can see it
+--placeholder more helpful words here--
+```
+sudo cp SRR447649_1_fastqc* /var/www/html
+cd /var/www/html
+sudo unzip SRR447649_1_fastqc.zip
+```
 
+### From the web browser
+On your (local) computer, point any web browser to the address below,
+where <public IP> is the ip address of your AWS instance.
+
+http://<public IP>/SRR447649_1_fastqc.html
+
+--image placeholder fastqc front page SUCCESS!--
+    
 ## Summary of FastQC Outputs
 ### Per Base Sequence Quality
 
 -image placeholder example of good data-
 -image placeholder example of bad data-
 
-For each position a BoxWhisker type plot is drawn. The elements of the plot are as follows:
-The central red line is the median value
-The yellow box represents the inter-quartile range (25-75%)
-The upper and lower whiskers represent the 10% and 90% points
-The blue line represents the mean quality
 
-The y-axis on the graph shows the quality scores. The higher the score the better the base call. The background of the graph divides the y axis into very good quality calls (green), calls of reasonable quality (orange), and calls of poor quality (red). The quality of calls on most platforms will degrade as the run progresses, so it is common to see base calls falling into the orange area towards the end of a read.
-It should be mentioned that there are number of different ways to encode a quality score in a FastQ file. FastQC attempts to automatically determine which encoding method was used, but in some very limited datasets it is possible that it will guess this incorrectly (ironically only when your data is universally very good!). The title of the graph will describe the encoding FastQC thinks your file used.
+# Placeholder splitting paired read files
+* Do we need to?
+* How do we do it?
+
 
 ## Quality Trimming and Filtering
 Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads.  To accomplish this task we will use Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic). 
@@ -108,27 +125,34 @@ Once we have an idea of the quality of our raw data, it is time to trim away ada
 * QC
 
 
-It is pretty trivial, but all the commands to recreate the AMI are here:
-# code for AWS setup and install
+
+# (Optional) steps for software installation on the AWS instance
+```
 mkdir data
 cd data
+```
 
-# Fastqc
+## FastQC
+```
 wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.2.zip
 unzip fastqc_v0.11.2.zip
 chmod +x FastQC/fastqc
 sudo cp fastqc /usr/bin/
-#Trimmomatic
-wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.32.zip
-unzip Trimmomatic-0.32.zip
-#Acquire data
-mkdir SRR
-cd SRR
-wget apollo.huck.psu.edu/data/SRR.tar.gz
-tar -zxvf SRR.tar.gz
-#qc data
-../FastQC/fastqc SRR447649_1.fastq # runs in < 1 min for each .fastq
-java ../Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR447649_1.fastq SLIDINGWINDOW:4:20 MINLEN:36 fastqc good.fq
+```
+## Trimmomatic
+    wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.32.zip
+    unzip Trimmomatic-0.32.zip
+    
+## Acquiring data
+    mkdir SRR
+    cd SRR
+    wget apollo.huck.psu.edu/data/SRR.tar.gz
+    tar -zxvf SRR.tar.gz
+    
+## Trimming reads
+    java ../Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR447649_1.fastq SLIDINGWINDOW:4:20 MINLEN:36 fastqc good.fq
+
+
 
 
 
