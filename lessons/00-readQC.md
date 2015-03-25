@@ -44,7 +44,7 @@ You will need:
 * The public IP address of your AWS instance
 
 ### Connecting
-<pemfile.pem> is the name of your locally saved private key
+`<pemfile.pem>` is the name of your locally saved private key
 <public IP> is the IP address of your AWS instance
 ```
 ssh -i <pemfile.pem> ec2-user@<public IP>
@@ -98,7 +98,7 @@ sudo unzip SRR447649_1_fastqc.zip
 
 ### From the web browser
 On your (local) computer, point any web browser to the address below,
-where <public IP> is the ip address of your AWS instance.
+where `<public IP>` is the ip address of your AWS instance.
 
 http://<public IP>/SRR447649_1_fastqc.html
 
