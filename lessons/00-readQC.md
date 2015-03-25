@@ -85,6 +85,7 @@ The main functions of FastQC are
 * Export of results to an HTML based permanent report
 * Offline operation to allow automated generation of reports without running the interactive application
 
+<!-- Don't need this!
 ## Running FastQC
 ```
 cd ~/data/SRR
@@ -104,10 +105,11 @@ sudo unzip SRR447649_1_fastqc.zip
 On your (local) computer, point any web browser to the address below,
 where `<public IP>` is the ip address of your AWS instance.
 
-``http://<public IP>/SRR447649_1_fastqc.html``
+`http://<public IP>/SRR447649_1_fastqc.html`
 
 image placeholder fastqc front page SUCCESS!
-    
+-->
+
 ## Summary of FastQC Outputs
 ### Per Base Sequence Quality
 image placeholder example of good data-<br>
