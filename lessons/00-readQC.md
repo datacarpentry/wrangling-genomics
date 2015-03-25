@@ -34,6 +34,8 @@
 ## The data
 We have received Fastq data files for Illumina paired end reads.  The first thing we want to do is to assess the quality of the read data and determine whether some clean-up is required.
 
+## We will assume the starting point is a completed FastQC analysis (from another module), so some stuff below does not apply
+
 ## Amazon instance 
 An Amazon Linux AMI ami-3c1c3454 named dataCgen-qc is set up and publicly available. It has FastQC, Trimmomatic, and sample data for the quality control tutorial. You can search for it in the public AMIs.  It is assumed that you know how to launch an AWS instance and have the private key downloaded to your computer.
 
