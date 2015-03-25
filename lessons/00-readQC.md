@@ -60,8 +60,8 @@ Run "sudo yum update" to apply all updates.
 Amazon Linux version 2015.03 is available.
 ```
 
-### Set up apache web server (for fastQC results)
-* We will set up our AWS instance as a web server so we can view and share our FastQC results
+### Set up apache web server (for fastQC results)  **ACTUALLY, just have them download the files to their desktop**
+<!--* We will set up our AWS instance as a web server so we can view and share our FastQC results
 * This distribution of Linux used the [redhat yum package manager](https://access.redhat.com/solutions/9934)
 * It is very easy to install the [apache web server software](http://httpd.apache.org/)
 * **Note: ** you need to use root-level access to install apache (SHELDON says: we should pre-install this on the AMI)
@@ -70,6 +70,7 @@ Amazon Linux version 2015.03 is available.
 
 * Once the software is installed, the (document root) is `/var/www/html`, which is where you will copy content you wish to publish on the web
 ** **Note: ** You need root (sudo) access to copy files here (SHELDON says: we should probably just make ec2-user the owner or usr a symlink to ~ec2-user/data/SRR/fastQC or something like that)
+-->
 
 ## FastQC
 FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
