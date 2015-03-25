@@ -176,7 +176,17 @@ image placeholder example of bad data-
 
 
 ## Quality Trimming and Filtering
-Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads.  To accomplish this task we will use Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic). 
+Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads.  To accomplish this task we will use Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic).  Trimmomatic has a variety of options and parameters:
+
+  * ILLUMINACLIP: Cut adapter and other illumina-specific sequences from the read.
+  * SLIDINGWINDOW: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold.
+  * LEADING: Cut bases off the start of a read, if below a threshold quality
+  * TRAILING: Cut bases off the end of a read, if below a threshold quality
+  * CROP: Cut the read to a specified length
+  * HEADCROP: Cut the specified number of bases from the start of the read
+  * MINLEN: Drop the read if it is below a specified length
+  * TOPHRED33: Convert quality scores to Phred-33
+  * TOPHRED64: Convert quality scores to Phred-64
 
 ## Vocabulary
 * Phred score
