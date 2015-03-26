@@ -185,20 +185,43 @@ Read quality is assessed using the Phred Quality Score.  This score is logarithm
 # Placeholder splitting paired read files
 * Do we need to?
 * How do we do it?
+```
 
+##How to *Trimmomatic*
+###A detailed explanation of features
 
-## Quality Trimming and Filtering
-Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads.  To accomplish this task we will use Trimmomatic (http://www.usadellab.org/cms/?page=trimmomatic).  Trimmomatic has a variety of options and parameters:
+Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads. To accomplish this task we will use *Trimmomatic* (http://www.usadellab.org/cms/?page=trimmomatic).
 
-  * ILLUMINACLIP: Cut adapter and other illumina-specific sequences from the read.
-  * SLIDINGWINDOW: Perform a sliding window trimming, cutting once the average quality within the window falls below a threshold.
-  * LEADING: Cut bases off the start of a read, if below a threshold quality
-  * TRAILING: Cut bases off the end of a read, if below a threshold quality
-  * CROP: Cut the read to a specified length
-  * HEADCROP: Cut the specified number of bases from the start of the read
-  * MINLEN: Drop the read if it is below a specified length
-  * TOPHRED33: Convert quality scores to Phred-33
-  * TOPHRED64: Convert quality scores to Phred-64
+*Trimmomatic* is a java based program that can remove sequencer specific reads and nucleotides that fall below a certain threshold. *Trimmomatic* can be multithreaded to run quickly. 
+
+Because *Trimmomatic* is java based, it is run using the command:
+
+**_java jar trimmomatic-0.32.jar_**
+
+What follows this are the specific commands that tells the program exactly how you want it to operate. *Trimmomatic* has a variety of options and parameters:
+
+* **_-threds_** How many processors do you want *Trimmomatic* to run with?
+* **_SE_** or **_PE_** Single End or Paired End reads?
+* **_-phred33_** or **_-phred64_** Which quality score do your reads have?
+* **_SLIDINGWINDOW_** Perform sliding window trimming, cutting once the average quality within the window falls below a threshold.
+* **_LEADING_** Cut bases off the start of a read, if below a threshold quality.
+* **_TRAILING_** Cut bases off the end of a read, if below a threshold quality.
+* **_CROP_** Cut the read to a specified length.
+* **_HEADCROP_** Cut the specified number of bases from the start of the read.
+* **_MINLEN_** Drop an entire read if it is below a specified length.
+* **_TOPHRED33_** Convert quality scores to Phred-33.
+* **_TOPHRED64_** Convert quality scores to Phred-64.
+
+A generic command for *Trimmomatic* looks like this:
+
+**_java jar trimmomatic-0.32.jar SE -thr _**
+
+A complete command for *Trimmomatic* will look something like this:
+
+**_java jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_0156.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20 _**
+
+This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``, in this case), the output file will be called ``SRR_0156_trimmed.fastq``,  there is a file with Illumina adapters called ``SRR_adapters.fa``, and we are using a sliding window of size 4 that will remove those bases if their phred score is below 20.
+
 
 ## Vocabulary
 * Phred score
