@@ -114,11 +114,11 @@ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 
 ****
 **Exercise**
-1) Use nano to create a shell script using with the code above (you can copy/paste),
-named read_qc.sh
+1) Use nano to create a shell script using with the code above (you can copy/paste), named read_qc.sh
+
 2) Run the script
-3) Bonus points: Use something you learned yesterday to save the output of the script
-to a file while it is running.
+
+3) Bonus points: Use something you learned yesterday to save the output of the script to a file while it is running.
 ****
 
 
