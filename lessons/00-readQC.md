@@ -142,9 +142,12 @@ You start with 'do', then enter your commands, then end with 'done' to execute t
     > done
 
 Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable
-with the syntax $zip.  This loop is basically a simple program.  When it runs, it will run unzip 
+with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each
+iteration of the loop.
+
+This loop is basically a simple program.  When it runs, it will run unzip 
 once for each file (whose name is stored in the $zip variable). The contents of each file will 
-be unpacked into a separate directory.
+be unpacked into a separate directory by the unzip program.
 
 The for loop is intepreted as a multipart command.  If you press the up arrow
 on your keyboard to recall the command, it will be shown like so:
@@ -200,7 +203,7 @@ This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``
 
 ## Exercise - Running Trimmomatic
 
-The comman line incantation for trimmomatic is more complicated.  This is where what you have
+The command line incantation for trimmomatic is more complicated.  This is where what you have
 been learning about accessing your command line history will start to become important.
 
 The general form of the command is:
