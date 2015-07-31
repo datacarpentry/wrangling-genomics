@@ -203,6 +203,11 @@ This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``
 
 ## Exercise - Running Trimmomatic
 
+Go to the untrimmed fastq data location:
+
+     cd /home/dcuser/dc_workshop/data/untrimmed_fastq
+
+
 The command line incantation for trimmomatic is more complicated.  This is where what you have
 been learning about accessing your command line history will start to become important.
 
@@ -224,7 +229,6 @@ aruments to be composed.
 
 So, for the single fastq input file 'SRR098283.fastq', the command would be:
 
-    cd /home/dcuser/dc_workshop/data/untrimmed_fastq
     java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
     SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
 
