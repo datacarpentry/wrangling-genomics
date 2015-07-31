@@ -84,21 +84,79 @@ The main functions of FastQC are
 * Export of results to an HTML based permanent report
 * Offline operation to allow automated generation of reports without running the interactive application
 
-## Exercise - Running FASTQC
 
+## Running FASTQC
 ### A. Stage your data
 
-~move data from hidden into dc_workshop/data
+Create a working directory for your analysis
+    cd
+    mkdir dc_workshop
 
-### B. Run Fastqc 
+Give it three three subdirectories
 
-run fastqc
-move results to dc_workshop/results
-look at summary.txt
+    mkdir dc_workshop/data
+    mkdir dc_workshop/docs
+    mkdir dc_workshop/results
+
+The sample data we will be working with is in a hidden directory, we will
+move it to our working directory
+
+    mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
+
+###B. Run FastQC
+
+    cd ~/dc_workshop/data/untrimmed_fastq/
+
+To run the fastqc program, we call it from its location in '~/FastQC'
+
+    ~/FastQC/fastqc *.fastq
+
+Now, let's create a home for our results
+
+    mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
+
+...and move them there (recall, we are still in '~/dc_workshop/data/untrimmed_fastq/')
+
+    mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
+    mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+
+###C. Results
+   ~/dc_workshop/results/fastqc_untrimmed_reads/
+   ls 
+   
+The zip files need to be unpacked with the 'unzip' program.  If we try to do them all
+at once:
+
+    unzip *.zip
+
+...it will not work.  'unzip' expects to get only one zip file.  We can use a simple shell
+'for loop' to do each one by one.  After you type the first line, you will get a special '>'
+prompt to type next next lines.  You start with 'do', then enter your commands, then end with 'done'.
+
+    $ for zip in *.zip:
+    > do
+    > echo File $zip
+    > unzip $zip
+    > done
+
+This is basically a simple program.  When it runs, it will unzip each zipfile into its own
+subdirectory.  The for loop is intepreted as a multipart command.  If you press the up arrow
+on your keyboard to recall the command, it will be show like so:
+
+    for zip in *.zip; do echo File $zip; unzip $zip; done
+
+When you check your history later, it will help your remember what you did!
+
 
 ### C. Document your work
 
-cat all fastqc summary.txts into one full_report.txt and move this to ~/dc_workshop/docs
+cat all fastqc summary.txts into one full_report.txt and move this to ~/dc_workshop/docs. 
+You can use wilcards in paths as well as file names.  Do you remember how we said 'cat' is
+really meant for concatenating text files?
+    
+    cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+
+
 
 
 ##How to clean reads using *Trimmomatic*
