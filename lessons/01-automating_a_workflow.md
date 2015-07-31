@@ -44,12 +44,12 @@ variant_calling
 
 Without getting into the details yet, the variant calling workflow will do the following steps
 
-# Index the reference genome for use by bwa and samtools
-# Align reads to reference genome
-# Convert the format of the alignment to sorted BAM, with some intermediate steps.
-# Calculate the read coverage of positions in the genome
-# Detect the single nucleotide polymorphisms (SNPs)
-# Filter and report the SNP variants in VCF (variant calling format)
+1. Index the reference genome for use by bwa and samtools
+2. Align reads to reference genome
+3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
+4. Calculate the read coverage of positions in the genome
+5. Detect the single nucleotide polymorphisms (SNPs)
+6. Filter and report the SNP variants in VCF (variant calling format)
 
 Let's walk through the commands in the workflow
 
