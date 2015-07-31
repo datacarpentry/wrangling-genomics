@@ -149,6 +149,12 @@ Do the SNP calling with bcftools
 Filter the SNPs for the final output
 
     bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    
+    
+****
+**Exercise**
+Run the script run_variant_calling.sh
+****
 
 
 
