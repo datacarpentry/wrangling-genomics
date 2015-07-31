@@ -28,7 +28,7 @@ That is also the definition of pretty much any computer program.
 
 cd ~/dc_sample_data
 
-for file in untrimmed_fastq
+for file in untrimmed_fastq/*.fastq
 do
   echo "My file name is $file"
 done
@@ -36,11 +36,12 @@ done
 
 This looks a lot like the for loops we saw earlier.  In fact, it
 is no different, apart from using indentation and the lack of the '>'
-prompts; it's just saved in a text file.  The only real difference
-is the first line.  '#!/bin/bash' is commanly called the shebang line,
+prompts; it's just saved in a text file.  
+The line at the top ('#!/bin/bash') is commonly called the shebang line,
 which is a special kind of comment that tells the shell which program
-is to be used as the 'intepreter' that executes the code.  In this case,
-the intepreter is bash, which is the shell environment we are working in.
+is to be used as the 'intepreter' that executes the code.  
+
+In this case, the intepreter is bash, which is the shell environment we are working in.
 The same approach is also used for other scripting languages such as perl
 and python.  The shebang line is actually optionally unless you want to
 make the script executable like a 'real' program.
@@ -92,27 +93,22 @@ cd ~/dc_workshop/data/untrimmed_fastq/
 echo "Running fastqc..."
 ~/FastQC/fastqc *.fastq
 
-echo "Saving my results..."
-mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
+mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
+
+echo "saving..."
 mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
 mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
 
-echo "Unzipping my results"
 cd ~/dc_workshop/results/fastqc_untrimmed_reads/
-for zip in *.zip:
+
+echo "Unzipping..."
+for zip in *.zip
 do
   unzip $zip
 done
 
+echo "saving..."
 cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
-
-cd ~/dc_workshop/untrimmed_fastq
-
-for infile in *.fastq
-do
-  outfile=$infile\_trim.fastq
-  java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
-done
 </pre>
 
 
