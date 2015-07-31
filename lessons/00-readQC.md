@@ -221,6 +221,7 @@ aruments to be composed.
 
 So, for the single fastq input file 'SRR098283.fastq', the command would be:
 
+    cd /home/dcuser/dc_workshop/data/untrimmed_fastq
     java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
     SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
 
@@ -237,16 +238,8 @@ So that worked and we have a new fastq file.
 
 Now we know how to run trimmomatic but there is some good news and bad news.  
 One should always ask for the bad news first.  Trimmomatic only operates on 
-one input file at a time and we have more than one input file.  The good news?  
+one input file at a time and we have more than one input file.  The good news?
 We already know how to use a for loop to deal with this situation.
-
-Do you remeber how the first specifies a variable that is assigned the value of each item in the list
-in turn?  We can call it whatever we like.  This time it is called infile.  Note that the third line
-of this for loop is creating a second variable called outfile.  We assign it the value of $infile
-with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever
-follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.
-
-    cd /home/dcuser/dc_workshop/data/untrimmed_fastq
 
     for infile in *.fastq
     >do
@@ -254,7 +247,12 @@ follows \ is not part of the variable name $infile.  There are no spaces before 
     >java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
     >done
 
-java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $file ${file}_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+Do you remember how the first specifies a variable that is assigned the value of each item in the list
+in turn?  We can call it whatever we like.  This time it is called infile.  Note that the third line
+of this for loop is creating a second variable called outfile.  We assign it the value of $infile
+with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever
+follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.
+
 
 
 
