@@ -1,154 +1,130 @@
 # Lesson
 
-Quality Control of NGS Data
+Shell scripts
 ===================
 
 Learning Objectives:
 -------------------
 #### What's the goal for this lesson?
 
-* Use a series of command line tools to perform a variant calling workflow
-* Use a For loop from the previous lesson to help automate repetitive tasks
-* Group a series of sequential commands into a script to automate a workflow
+* Understand what a shell script is
+* Learn how automate an analytical workflow
 
-To get started with this lesson, we will need to grab some data from an outside
-server using `wget` on the command line.
 
-Make sure you are in the dc_workshop drectory first
+## What is a shell script?
+A shell script is basically a text file that contains a list of commands
+that are executed sequentially.  The commands in a shell script are the same
+as you would use on the command line.
 
-    cd ~/dc_workshop
-    wget http://reactomerelease.oicr.on.ca/download/archive/variant_calling.tar.gz
+Once you have worked out the details and tested your commands in the shell, you can
+save them into a file so, the next time, you can automate the process with
+a script.
 
-The file 'variant_calling.tar.gz' is what is commonly called a "tarball", which is
-a compressed archive similar to the .zip files we have seen before.  We can decompress
-this archive using the command below.
-
-    tar zxvf variant_calling.tar.gz
-
-This will create a directory tree that contains some input data (reference genome and fastq files)
-and a shell script that details the series of commands used to run the variant calling workflow.
+The basic anatomy of a shell script is a file with a list of commands.
+That is also the definition of pretty much any computer program.
 
 <pre>
-variant_calling
-├── ref_genome
-│   └── ecoli_rel606.fasta
-├── run_variant_calling.sh
-└── trimmed_fastq
-    ├── SRR097977.fastq
-    ├── SRR098026.fastq
-    ├── SRR098027.fastq
-    ├── SRR098028.fastq
-    ├── SRR098281.fastq
-    └── SRR098283.fastq
+#!/bin/bash
+
+cd ~/dc_sample_data
+
+for file in untrimmed_fastq
+do
+  echo "My file name is $file"
+done
 </pre>
 
-Without getting into the details yet, the variant calling workflow will do the following steps
+This looks a lot like the for loops we saw earlier.  In fact, it
+is no different, apart from using indentation and the lack of the '>'
+prompts; it's just saved in a text file.  The only real difference
+is the first line.  '#!/bin/bash' is commanly called the shebang line,
+which is a special kind of comment that tells the shell which program
+is to be used as the 'intepreter' that executes the code.  In this case,
+the intepreter is bash, which is the shell environment we are working in.
+The same approach is also used for other scripting languages such as perl
+and python.  The shebang line is actually optionally unless you want to
+make the script executable like a 'real' program.
 
-1. Index the reference genome for use by bwa and samtools
-2. Align reads to reference genome
-3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
-4. Calculate the read coverage of positions in the genome
-5. Detect the single nucleotide polymorphisms (SNPs)
-6. Filter and report the SNP variants in VCF (variant calling format)
+## How to run a shell script
+There are two ways to run a shell script the first way is to specify the
+interpreter (bash) and the name of the script.  By convention, shell script
+use the .sh extension, though this is not enforced.
 
-Let's walk through the commands in the workflow
+    bash myscript.sh
+    My file name is untrimmed_fastq/SRR097977.fastq
+    My file name is untrimmed_fastq/SRR098026.fastq
 
-The first command is to change to our working directory
-so the script can find all the files it expects
+The second was is a little more complicated to set up and requires the shebang line
+we talked about earlier.
 
-     cd ~/dc_workshop/variant_calling
+The first step, which only needs to be done once, is to modify the 'permissions' of
+the text file so that the shell knows the file is executable.
 
-Assign the name/location of our reference genome
-to a variable ($genome)
+    chmod +x myscript.sh
 
-     genome=data/ref_genome/ecoli_rel606.fasta
+After that, you can run the script as a regular program.
 
-We need to index the refernce genome for bwa and samtools. bwa
-and samtools are programs that are pre-installed on our server.
+    ./myscript.sh
+    bash myscript.sh 
+    My file name is untrimmed_fastq/SRR097977.fastq
+    My file name is untrimmed_fastq/SRR098026.fastq
 
-     bwa index $genome
-     samtools faidx $genome
+The thing about running programs on the command line is that the shell
+may not know the location of your executables unless they are in the
+'path' of know locations for programs.  So, you need to tell the shell
+the path to your script, which is './' if it is in the same directory.
 
-Create output paths for various intermediate and result files
-The -p option means mkdir will create the whole path if it
-does not exist and refrain from complaining if it does exist
+****
+**Exercise**
+1) Use nano to save the code above to a script called myscript.sh
+2) run the script
+****
 
-     mkdir -p results/sai
-     mkdir -p results/sam
-     mkdir -p results/bam
-     mkdir -p results/bcf
-     mkdir -p results/vcf
 
-We will now use a loop to run the variant calling work flow of
-each of our fastq files, so the list of command below will be execute
-once for each fastq files.
+## A real shell script
 
-We would start the loop like this, so the name of each fastq file will
-by assigned to $fq
+Now, let's do something real.  First, recall the code from our our fastqc
+workflow from this morning, with a few extra "echo" statements.
 
-    for fq in data/trimmed_fastq/*.fastq
-    do
-    # etc...
+<pre>
+cd ~/dc_workshop/data/untrimmed_fastq/
 
-In the script, it is a good idea to use echo for debugging/reporting to the screen
+echo "Running fastqc..."
+~/FastQC/fastqc *.fastq
 
-    echo "working with file $fq"
+echo "Saving my results..."
+mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
+mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
+mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
 
-This command will extract the base name of the file
-(without the path and .fastq extension) and assign it
-to the $base variable
-   
-    base=$(basename $fq .fastq)
-    echo "base name is $base"
+echo "Unzipping my results"
+cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+for zip in *.zip:
+do
+  unzip $zip
+done
 
-We will assign various file names to variables both
-for convenience but also to make it easier to see what 
-is going on in the sommand below.
+cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 
-    fq=data/trimmed_fastq/$base\.fastq
-    sai=results/sai/$base\_aligned.sai
-    sam=results/sam/$base\_aligned.sam
-    bam=results/bam/$base\_aligned.bam
-    sorted_bam=results/bam/$base\_aligned_sorted.bam
-    raw_bcf=results/bcf/$base\_raw.bcf
-    variants=results/bcf/$base\_variants.bcf
-    final_variants=results/vcf/$base\_final_variants.vcf
+cd ~/dc_workshop/untrimmed_fastq
 
-Our data are now staged.  The series of command below will run
-the steps of the analytical workflow
+for infile in *.fastq
+do
+  outfile=$infile\_trim.fastq
+  java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+done
+</pre>
 
-Align the reads to the reference genome
 
-    bwa aln $genome $fq > $sai
+****
+**Exercise**
+1) Use nano to create a shell script using with the code above (you can copy/paste),
+named read_qc.sh
+2) Run the script
+3) Bonus points: Use something you learned yesterday to save the output of the script
+to a file while it is running.
+****
 
-Convert the output to the SAM format
-
-    bwa samse $genome $sai $fq > $sam
-
-Convert the SAM file to BAM format
-
-    samtools view -S -b $sam > $bam
-
-Sort the BAM file
-
-    samtools sort -f $bam $sorted_bam
-
-Index the BAM file for display purposes
-
-    samtools index $sorted_bam
-
-Do the first pass on variant calling by counting
-read coverage
-
-    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
-
-Do the SNP calling with bcftools
-
-    bcftools view -bvcg $raw_bcf > $variants
-
-Filter the SNPs for the final output
-
-    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
 
 
 
