@@ -136,7 +136,7 @@ We can save time by using a simple shell 'for loop' to iterate through the list 
 After you type the first line, you will get a special '>' prompt to type next next lines.  
 You start with 'do', then enter your commands, then end with 'done' to execute the loop.
 
-    $ for zip in *.zip:
+    $ for zip in *.zip
     > do
     > unzip $zip
     > done
