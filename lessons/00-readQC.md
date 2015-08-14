@@ -128,47 +128,49 @@ Now, let's create a home for our results
     ```bash
     $ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
     ```
-...and move them there (recall, we are still in ``~/dc_workshop/data/untrimmed_fastq/``)
+3. Next, move the files there (recall, we are still in ``~/dc_workshop/data/untrimmed_fastq/``)
    ```bash 
     $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
     $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
-
+    ```
 ###C. Results
 
 Lets examine the results in detail
 
-Navigate to the results and view the directory contents
+1. Navigate to the results and view the directory contents
 
-```bash
+   ```bash
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 $ ls
 ```
    
-The zip files need to be unpacked with the 'unzip' program.  If we try to do them all at once.
+ > The zip files need to be unpacked with the 'unzip' program.  
+2. Use unzip to unzip the FastQC results: 
    ```bash
 $ unzip *.zip
 ```
 Did it work? No, because 'unzip' expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can save time by using a simple shell 'for loop' to iterate through the list of files in *.zip. After you type the first line, you will get a special '>' prompt to type next next lines. You start with 'do', then enter your commands, then end with 'done' to execute the loop.
+3. Build a ``for`` loop to unzip the files
 
-```bash 
+   ```bash 
 $ for zip in *.zip
 > do
 > unzip $zip
 > done
 ```
-Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
+
+  Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
 
 This loop is basically a simple program.  When it runs, it will run unzip once for each file (whose name is stored in the $zip variable). The contents of each file will be unpacked into a separate directory by the unzip program.
 
 The for loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
-
-```bash
+   ```bash
     for zip in *.zip; do echo File $zip; unzip $zip; done
 ```
 
 When you check your history later, it will help your remember what you did!
 
-### C. Document your work
+### D. Document your work
 
 To save a record, let's cat all fastqc summary.txts into one full_report.txt and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we said 'cat' is really meant for concatenating text files?
 
@@ -215,9 +217,9 @@ This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``
 
 ## Exercise - Running Trimmomatic
 
-Go to the untrimmed fastq data location:
+1. Go to the untrimmed fastq data location:
 
-```bash
+   ```bash
 $ cd /home/dcuser/dc_workshop/data/untrimmed_fastq
 ```
 
@@ -225,16 +227,16 @@ The command line incantation for trimmomatic is more complicated.  This is where
 
 The general form of the command is:
 
-```bash
+   ```bash
 java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar inputfile outputfile OPTION:VALUE...
-```
+```    
 'java -jar' calls the Java program, which is needed to run trimmomargumentstic, which lived in a 'jar' file (trimmomatic-0.32.jar), a special kind of java archive that is often used for programs written in the Java programing language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed 'java -jar program name'.  The 'SE' argument is a keyword that specifies we are working with single-end reads.
 
 The next two arguments are input file and output file names.  These are then followed by a series of options. The specifics of how options are passed to a program are different depending on the program. You will always have to read the manual of a new program to learn which way it expects its command-line arguments to be composed.
 
 
 So, for the single fastq input file 'SRR098283.fastq', the command would be:
-```bash
+   ```bash
 $ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
     SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
 
@@ -244,10 +246,9 @@ $ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fast
     Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
     TrimmomaticSE: Completed successfully
 ```
-
 So that worked and we have a new fastq file.
 
-```bash
+   ```bash
     $ ls SRR098283*
     SRR098283.fastq  SRR098283.fastq_trim.fastq
 ```
