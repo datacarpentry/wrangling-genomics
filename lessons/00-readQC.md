@@ -133,7 +133,7 @@ Now, let's create a home for our results
     $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
     $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
     ```
-###C. Results
+### C. Results
 
 Lets examine the results in detail
 
