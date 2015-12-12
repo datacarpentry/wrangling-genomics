@@ -1,120 +1,78 @@
 # Lesson QC of Sequence Read Data
 
-##Assessment and Objectives
-###Declarative knowledge
-*Learners will archive the following objectives in this lesson:*<br>
-1. Know FASTQC is used to determine the quality of FASTQ data <br>
-2. Know Trimmomatic can be used to trim and filter FASTQ data<br>
-3. Recognize the following file types:<br>
-* FASTA
-* FASTQ
-4. Know what a Phred score is and what it means<br>
-5. Know older FASTQ files may have different quality scoring<br>
-6. Understand a FASTQC report and what QC checks must pass in order to work with the data<br>
+Quality Control of NGS Data
+===================
 
-###Attitudinal / disposition
-*Learner should conclude the workshop with the following impressions, attitudes*<br>
-1. Feel confident that a data set has been adequately  QC'd<br>
-2. Feel that it is important to keep notes on QC steps<br>
-3.  Feels confident about how much detail to include in their documentation of work<br>
+Learning Objectives:
+-------------------
+#### What's the goal for this lesson?
 
-###Skills
-*Learner should conclude the workshop able to do the following*<br>
-1. Preview the first few lines of a FASTQ file using head or (zcat | head)<br>
-2. Determine if a FASTQ file is paired or unpaired<br>
-3. Determine if a FASTQ file is barcoded<br>
-4. Use FASTQC to generate a report on one or multiple FASTQ files<br>
-5. Interpret a FASTQC report<br>
-6. Use information from the FASTQC report to decide if data is viable<br>
-7. Use information from the FASTQC report to select trimming and filtering settings on Trimmommatic <br>
-8. Trim and filter FASTQ files using Trimmommatic <br>
-9. Verify Trimmommatic output using FASTQC<br>
+* Understand how the FastQ format encodes quality
+* Be able to evaluate a FastQC report
+* Use Trimmommatic to clean FastQ reads
+* Use a For loop to automate operations on multiple files
 
-## Amazon instance 
-An Amazon Linux AMI ami-3c1c3454 named dataCgen-qc is set up and publicly available. It has FastQC, Trimmomatic, and sample data for the quality control tutorial. You can search for it in the public AMIs.  It is assumed that you know how to launch an AWS instance and have the private key downloaded to your computer.
 
-### Setup
-You will need:
-* A t2.medium instance of mi-3c1c3454
-* The pem file from you public/private key pair
-* The public IP address of your AWS instance
+## Details on the FASTQ format
 
-### Connecting
-* `<pemfile.pem>` is the name of your locally saved private key file
-* `<public IP>` is the IP address of your AWS instance
+Although it looks complicated  (and maybe it is), its easy to understand the [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format include...
+
+|Line|Description|
+|----|-----------|
+|1|Always begins with '@' and then information about the read|
+|2|The actual DNA sequence|
+|3|Always begins with a '+' and sometimes the same info in line 1|
+|4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
+
+so for example in our data set, one complete read is:
 ```
-ssh -i <pemfile.pem> ec2-user@<public IP>
-Last login: Wed Mar 25 10:14:10 2015 from ool-addc1c9a.static.optonline.net
-
-       __|  __|_  )
-       _|  (     /   Amazon Linux AMI
-      ___|\___|___|
-
-https://aws.amazon.com/amazon-linux-ami/2014.09-release-notes/
-18 package(s) needed for security, out of 147 available
-Run "sudo yum update" to apply all updates.
-Amazon Linux version 2015.03 is available.
+$ head -n4 SRR098281.fastq 
+@SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
+CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
++SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ```
-## The data
-We have received Fastq data files for Illumina paired end reads.  The first thing we want to do is to assess the quality of the read data and determine whether some clean-up is required.  FastQC has been run on one of the FastQ files.
+This is a pretty bad read. 
 
-* The data are on the folder `~/data/SRR/`
+Notice that line 4 is:
+```
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+```
+As mentioned above, line 4 is a encoding of the quality. In this case, the code is the [ASCII](https://en.wikipedia.org/wiki/ASCII#ASCII_printable_code_chart) character table. According to the chart a '#' has the value 35 and '!' has the value 33 - **But these values are not actually the quality scores!** There are actually several historical differences in how Illumina and other players have encoded the scores. Heres the chart from wikipedia:
 
 ```
-ls -al ~/data/SRR
-total 1523764
-drwxrwxr-x 2 ec2-user ec2-user      4096 Mar 25 01:37 .
-drwxrwxr-x 5 ec2-user ec2-user      4096 Mar 25 01:36 ..
--rw-r--r-- 1 ec2-user ec2-user 453225654 Jul 22  2014 SRR447649_1.fastq
--rw-rw-r-- 1 ec2-user ec2-user    370420 Mar 25 10:17 SRR447649_1_fastqc.html
--rw-rw-r-- 1 ec2-user ec2-user    675772 Mar 25 10:17 SRR447649_1_fastqc.zip
--rw-r--r-- 1 ec2-user ec2-user 192198334 Jul 22  2014 SRR447649_2.fastq
--rw-r--r-- 1 ec2-user ec2-user 453225654 Jul 22  2014 SRR447649_3.fastq
--rw-r--r-- 1 ec2-user ec2-user 230298876 Jul 22  2014 SRR519926_1.fastq
--rw-r--r-- 1 ec2-user ec2-user 230298876 Jul 22  2014 SRR519926_2.fastq
-```
+  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
+  ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................
+  ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................
+  .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ......................
+  LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL....................................................
+  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+  |                         |    |        |                              |                     |
+ 33                        59   64       73                            104                   126
+  0........................26...31.......40                                
+                           -5....0........9.............................40 
+                                 0........9.............................40 
+                                    3.....9.............................40 
+  0.2......................26...31........41                              
 
-* The FastQC software is installed in the folder `~/data/FastQC`
-```
- ls -al ~/data/FastQC/
-total 820
-drwxrwxr-x 8 ec2-user ec2-user   4096 Mar 25 01:30 .
-drwxrwxr-x 5 ec2-user ec2-user   4096 Mar 25 01:36 ..
-drwxrwxr-x 2 ec2-user ec2-user   4096 Jun  6  2014 Configuration
--rwxrwxr-x 1 ec2-user ec2-user  12802 Jun  4  2014 fastqc
--rw-rw-r-- 1 ec2-user ec2-user   2238 Mar 21  2012 fastqc_icon.ico
-drwxrwxr-x 5 ec2-user ec2-user   4096 Jun  6  2014 Help
--rw-rw-r-- 1 ec2-user ec2-user   5611 May  7  2014 INSTALL.txt
--rw-rw-r-- 1 ec2-user ec2-user  50147 Feb 24  2014 jbzip2-0.9.jar
--rw-rw-r-- 1 ec2-user ec2-user  35821 Mar 21  2012 LICENSE.txt
-drwxrwxr-x 3 ec2-user ec2-user   4096 Jun  6  2014 net
-drwxrwxr-x 3 ec2-user ec2-user   4096 Jun  6  2014 org
--rw-rw-r-- 1 ec2-user ec2-user   2143 Mar 21  2012 README.txt
--rw-rw-r-- 1 ec2-user ec2-user  31771 Jun  6  2014 RELEASE_NOTES.txt
--rw-rw-r-- 1 ec2-user ec2-user    101 May  6  2014 run_fastqc.bat
--rw-rw-r-- 1 ec2-user ec2-user 644848 Feb 14  2014 sam-1.103.jar
-drwxrwxr-x 3 ec2-user ec2-user   4096 Jun  6  2014 Templates
-drwxrwxr-x 3 ec2-user ec2-user   4096 Jun  6  2014 uk
-```
-The file `fastqc` is the one that will be executed.  Make sure it is executable:
-```
-chmod +x ~/data/SRR/FastQC/fastqc
-```
+ S - Sanger        Phred+33,  raw reads typically (0, 40)
+ X - Solexa        Solexa+64, raw reads typically (-5, 40)
+ I - Illumina 1.3+ Phred+64,  raw reads typically (0, 40)
+ J - Illumina 1.5+ Phred+64,  raw reads typically (3, 40)
+     with 0=unused, 1=unused, 2=Read Segment Quality Control Indicator (bold) 
+     (Note: See discussion above).
+ L - Illumina 1.8+ Phred+33,  raw reads typically (0, 41)
+ ```
+ So using the Illumina 1.8 encouding, which is what you will mostly see from now on, our first c is called with a Phred score of 0 and our Ns are called with a score of 2. Read quality is assessed using the Phred Quality Score.  This score is logarithmically based and the score values can be interpreted as follows:
 
-<!--
-### Set up apache web server (for
-fastQC results)  
-**NEVERMIND, just have them download the files to their desktop**
-* We will set up our AWS instance as a web server so we can view and share our FastQC results
-* This distribution of Linux used the [redhat yum package manager](https://access.redhat.com/solutions/9934)
-* It is very easy to install the [apache web server software](http://httpd.apache.org/)
-* **Note: ** you need to use root-level access to install apache (SHELDON says: we should pre-install this on the AMI)
-
-`sudo yum install httpd`
-
-* Once the software is installed, the (document root) is `/var/www/html`, which is where you will copy content you wish to publish on the web
-** **Note: ** You need root (sudo) access to copy files here (SHELDON says: we should probably just make ec2-user the owner or usr a symlink to ~ec2-user/data/SRR/fastQC or something like that)
--->
+|Phred Quality Score |Probability of incorrect base call |Base call accuracy|
+|:-------------------|:---------------------------------:|-----------------:|
+|10	|1 in 10 |	90%|
+|20	|1 in 100|	99%|
+|30	|1 in 1000|	99.9%|
+|40	|1 in 10,000|	99.99%|
+|50	|1 in 100,000|	99.999%|
+|60	|1 in 1,000,000|	99.9999%|
 
 ## FastQC
 FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
@@ -126,71 +84,105 @@ The main functions of FastQC are
 * Export of results to an HTML based permanent report
 * Offline operation to allow automated generation of reports without running the interactive application
 
-## Running FastQC
-Note: this has been run already for the first file
-```
-cd ~/data/SRR
-../data/FastQC/fastqc SRR447649_1.fastq # runs in < 1 min for each .fastq
-```
-## Viewing the FastQC output
 
+## Running FASTQC
+### A. Stage your data
 
-<!-- Don't need this!
-## Running FastQC
-```
-cd ~/data/SRR
-../data/FastQC/fastqc SRR447649_1.fastq # runs in < 1 min for each .fastq
-```
+1. Create a working directory for your analysis
+   
+    ```bash
+    $ cd
+    # this command takes us to the home directory
+    
+    $ mkdir dc_workshop
+    ```
+2. Create three three subdirectories
 
-## Use web server to view the results
-### Put the data where the web server can see it
-placeholder more helpful words here
-```
-sudo cp SRR447649_1_fastqc* /var/www/html
-cd /var/www/html
-sudo unzip SRR447649_1_fastqc.zip
+   ```bash
+    mkdir dc_workshop/data
+    mkdir dc_workshop/docs
+    mkdir dc_workshop/results
 ```
 
-### From the web browser
-On your (local) computer, point any web browser to the address below,
-where `<public IP>` is the ip address of your AWS instance.
-
-`http://<public IP>/SRR447649_1_fastqc.html`
-
-image placeholder fastqc front page SUCCESS!
--->
-
-## Summary of FastQC Outputs
-### Per Base Sequence Quality
-image placeholder example of good data-<br>
-image placeholder example of bad data-
-* what QC steps can be taken based on this report
-
-Read quality is assessed using the Phred Quality Score.  This score is logarithmically based and the score values can be interpreted as follows:
-
-|Phred Quality Score |Probability of incorrect base call |Base call accuracy|
-|:-------------------|:---------------------------------:|-----------------:|
-|10	|1 in 10 |	90%|
-|20	|1 in 100|	99%|
-|30	|1 in 1000|	99.9%|
-|40	|1 in 10,000|	99.99%|
-|50	|1 in 100,000|	99.999%|
-|60	|1 in 1,000,000|	99.9999%|
-
-### more
-* what QC steps can be taken based on this report
-### still more
-* what QC steps can be taken based on this report
-
-# Placeholder splitting paired read files
-* Do we need to?
-* How do we do it?
+  > The sample data we will be working with is in a hidden directory (placing a '.' in front of a directory name hides the directory. In the next step we will move some of those hidden files into our new dirctories to start our project. 
+3. Move our sample data to our working (home) directory
+   
+   ```bash 
+$ mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
 ```
 
-##How to *Trimmomatic*
+###B. Run FastQC
+
+1. Navigate to the initial fastq dataset
+   
+    ```bash
+    $ cd ~/dc_workshop/data/untrimmed_fastq/
+    ```
+To run the fastqc program, we call it from its location in ``~/FastQC``.  fastqc will accept multiple file names as input, so we can use the *.fastq wildcard.
+2. Run FastQC on all fastq files in the directory
+
+    ```bash
+    $ ~/FastQC/fastqc *.fastq
+    ```
+Now, let's create a home for our results
+    ```bash
+    $ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
+    ```
+3. Next, move the files there (recall, we are still in ``~/dc_workshop/data/untrimmed_fastq/``)
+   ```bash 
+    $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
+    $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+    ```
+### C. Results
+
+Lets examine the results in detail
+
+1. Navigate to the results and view the directory contents
+
+   ```bash
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ ls
+```
+   
+ > The zip files need to be unpacked with the 'unzip' program.  
+2. Use unzip to unzip the FastQC results: 
+   ```bash
+$ unzip *.zip
+```
+Did it work? No, because 'unzip' expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can save time by using a simple shell 'for loop' to iterate through the list of files in *.zip. After you type the first line, you will get a special '>' prompt to type next next lines. You start with 'do', then enter your commands, then end with 'done' to execute the loop.
+3. Build a ``for`` loop to unzip the files
+
+   ```bash 
+$ for zip in *.zip
+> do
+> unzip $zip
+> done
+```
+
+  Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
+
+This loop is basically a simple program.  When it runs, it will run unzip once for each file (whose name is stored in the $zip variable). The contents of each file will be unpacked into a separate directory by the unzip program.
+
+The for loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
+   ```bash
+    for zip in *.zip; do echo File $zip; unzip $zip; done
+```
+
+When you check your history later, it will help your remember what you did!
+
+### D. Document your work
+
+To save a record, let's cat all fastqc summary.txts into one full_report.txt and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we said 'cat' is really meant for concatenating text files?
+
+```bash    
+cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+```
+
+
+##How to clean reads using *Trimmomatic*
 ###A detailed explanation of features
 
-Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads. To accomplish this task we will use *Trimmomatic* (http://www.usadellab.org/cms/?page=trimmomatic).
+Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads. To accomplish this task we will use *Trimmomatic* [http://www.usadellab.org/cms/?page=trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
 
 *Trimmomatic* is a java based program that can remove sequencer specific reads and nucleotides that fall below a certain threshold. *Trimmomatic* can be multithreaded to run quickly. 
 
@@ -214,55 +206,67 @@ What follows this are the specific commands that tells the program exactly how y
 
 A generic command for *Trimmomatic* looks like this:
 
-**_java jar trimmomatic-0.32.jar SE -thr _**
+**java jar trimmomatic-0.32.jar SE -thr**
 
 A complete command for *Trimmomatic* will look something like this:
 
-**_java jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_0156.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20 _**
+**java jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20**
 
 This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``, in this case), the output file will be called ``SRR_0156_trimmed.fastq``,  there is a file with Illumina adapters called ``SRR_adapters.fa``, and we are using a sliding window of size 4 that will remove those bases if their phred score is below 20.
 
 
-## Vocabulary
-* Phred score
-* kmer
-* contig
-* scaffold
-* N50
-* adapter
-* assembly
-* alignment
-* annotation
-* paired-end
-* QC
+## Exercise - Running Trimmomatic
 
+1. Go to the untrimmed fastq data location:
 
-
-# (Optional) steps for software installation on the AWS instance
-```
-mkdir data
-cd data
+   ```bash
+$ cd /home/dcuser/dc_workshop/data/untrimmed_fastq
 ```
 
-## FastQC
+The command line incantation for trimmomatic is more complicated.  This is where what you have been learning about accessing your command line history will start to become important.
+
+The general form of the command is:
+
+   ```bash
+java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar inputfile outputfile OPTION:VALUE...
+```    
+'java -jar' calls the Java program, which is needed to run trimmomargumentstic, which lived in a 'jar' file (trimmomatic-0.32.jar), a special kind of java archive that is often used for programs written in the Java programing language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed 'java -jar program name'.  The 'SE' argument is a keyword that specifies we are working with single-end reads.
+
+The next two arguments are input file and output file names.  These are then followed by a series of options. The specifics of how options are passed to a program are different depending on the program. You will always have to read the manual of a new program to learn which way it expects its command-line arguments to be composed.
+
+
+So, for the single fastq input file 'SRR098283.fastq', the command would be:
+   ```bash
+$ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
+    SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+
+    TrimmomaticSE: Started with arguments: SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+    Automatically using 2 threads
+    Quality encoding detected as phred33
+    Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
+    TrimmomaticSE: Completed successfully
 ```
-wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.2.zip
-unzip fastqc_v0.11.2.zip
-chmod +x FastQC/fastqc
-sudo cp fastqc /usr/bin/
+So that worked and we have a new fastq file.
+
+   ```bash
+    $ ls SRR098283*
+    SRR098283.fastq  SRR098283.fastq_trim.fastq
 ```
-## Trimmomatic
-    wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.32.zip
-    unzip Trimmomatic-0.32.zip
-    
-## Acquiring data
-    mkdir SRR
-    cd SRR
-    wget apollo.huck.psu.edu/data/SRR.tar.gz
-    tar -zxvf SRR.tar.gz
-    
-## Trimming reads
-    java ../Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR447649_1.fastq SLIDINGWINDOW:4:20 MINLEN:36 fastqc good.fq
+
+Now we know how to run trimmomatic but there is some good news and bad news.  
+One should always ask for the bad news first.  Trimmomatic only operates on 
+one input file at a time and we have more than one input file.  The good news?
+We already know how to use a for loop to deal with this situation.
+
+```bash
+$ for infile in *.fastq
+    >do
+    >outfile=$infile\_trim.fastq
+    >java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+    >done
+```
+
+Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called infile.  Note that the third line of this for loop is creating a second variable called outfile.  We assign it the value of $infile with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.
 
 
 
