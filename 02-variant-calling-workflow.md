@@ -1,11 +1,12 @@
-# Lesson
+---
+layout: lesson
+root: .
+title: Variant calling workflow - shell script
+minutes: 30
+---
 
-Automating a workflow
-===================
+### Learning Objectives:
 
-Learning Objectives:
--------------------
-#### What's the goal for this lesson?
 
 * Use a series of command line tools to perform a variant calling workflow
 * Use a For loop from the previous lesson to help automate repetitive tasks
