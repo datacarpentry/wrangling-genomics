@@ -282,7 +282,6 @@ The next two arguments are input file and output file names.  These are then fol
 
 So, for the single fastq input file 'SRR098283.fastq', the command would be:
 
-
     $ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
     SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
 
