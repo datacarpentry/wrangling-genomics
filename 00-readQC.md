@@ -27,6 +27,7 @@ Although it looks complicated  (and maybe it is), its easy to understand the [fa
 |4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
 
 so for example in our data set, one complete read is:
+
 ```
 $ head -n4 SRR098281.fastq 
 @SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
@@ -37,13 +38,13 @@ CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 This is a pretty bad read. 
 
 Notice that line 4 is:
+
 ```
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ```
 As mentioned above, line 4 is a encoding of the quality. In this case, the code is the [ASCII](https://en.wikipedia.org/wiki/ASCII#ASCII_printable_code_chart) character table. According to the chart a '#' has the value 35 and '!' has the value 33 - **But these values are not actually the quality scores!** There are actually several historical differences in how Illumina and other players have encoded the scores. Heres the chart from wikipedia:
 
-```
-  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
+```  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
   ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................
   ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................
   .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ......................
