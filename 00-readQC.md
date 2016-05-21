@@ -282,6 +282,7 @@ The next two arguments are input file and output file names.  These are then fol
 
 
 So, for the single fastq input file 'SRR098283.fastq', the command would be:
+
    ```bash
 $ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
     SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
@@ -292,6 +293,7 @@ $ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fast
     Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
     TrimmomaticSE: Completed successfully
 ```
+
 So that worked and we have a new fastq file.
 
    ```bash
@@ -305,7 +307,7 @@ one input file at a time and we have more than one input file.  The good news?
 We already know how to use a for loop to deal with this situation.
 
 ```bash
-$ for infile in *.fastq
+    $ for infile in *.fastq
     >do
     >outfile=$infile\_trim.fastq
     >java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
