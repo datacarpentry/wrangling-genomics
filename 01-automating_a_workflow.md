@@ -36,8 +36,7 @@ done
 
 This looks a lot like the for loops we saw earlier.  In fact, it is no different, apart from using indentation and the lack of the '>' prompts; it's just saved in a text file. The line at the top ('#!/bin/bash') is commonly called the shebang line, which is a special kind of comment that tells the shell which program is to be used as the 'intepreter' that executes the code.  
 
-In this case, the interpreter is bash, which is the shell environment we are working in. The same approach is also used for other scripting languages such as perl and python.  The shebang line is actually optionally unless you want to
-make the script executable like a 'real' program.
+In this case, the interpreter is bash, which is the shell environment we are working in. The same approach is also used for other scripting languages such as perl and python. 
 
 ## How to run a shell script
 There are two ways to run a shell script the first way is to specify the
@@ -50,19 +49,18 @@ My file name is untrimmed_fastq/SRR097977.fastq
 My file name is untrimmed_fastq/SRR098026.fastq
 ```
 
-The second was is a little more complicated to set up and requires the shebang line we talked about earlier.
+The second was is a little more complicated to set up.
 
-The first step, which only needs to be done once, is to modify the 'permissions' of the text file so that the shell knows the file is executable.
+The first step, which only needs to be done once, is to modify the file 'permissions' of the text file so that the shell knows the file is executable.
 
 ```bash
 $ chmod +x myscript.sh
 ```
 
-After that, you can run the script as a regular program.
+After that, you can run the script as a regular program by just typing it's name on the command line.
 
 ```bash
 $ ./myscript.sh
-$ bash myscript.sh 
 My file name is untrimmed_fastq/SRR097977.fastq
 My file name is untrimmed_fastq/SRR098026.fastq
 ```
