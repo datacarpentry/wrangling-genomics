@@ -16,7 +16,7 @@ Learning Objectives:
 
 ## Bioinformatics workflows
 
-When working with high--throughput sequencing data, the raw reads you get off of the sequencer will need to pass through a number of  different tools in order to generate your final desired output. The execution of this set of tools in a specified order is commonly referred to as a *workflow* or a *pipeline*. 
+When working with high-throughput sequencing data, the raw reads you get off of the sequencer will need to pass through a number of  different tools in order to generate your final desired output. The execution of this set of tools in a specified order is commonly referred to as a *workflow* or a *pipeline*. 
 
 An example of the workflow we will be using for our variant calling analysis is provided below with a brief description of each step. 
 
