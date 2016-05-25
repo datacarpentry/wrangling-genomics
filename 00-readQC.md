@@ -66,7 +66,8 @@ Notice that line 4 is:
 ```
 As mentioned above, line 4 is a encoding of the quality. In this case, the code is the [ASCII](https://en.wikipedia.org/wiki/ASCII#ASCII_printable_code_chart) character table. According to the chart a '#' has the value 35 and '!' has the value 33 - **But these values are not actually the quality scores!** There are actually several historical differences in how Illumina and other players have encoded the scores. Heres the chart from wikipedia:
 
-```  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
+```
+  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
   ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................
   ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................
   .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ......................
@@ -89,7 +90,7 @@ As mentioned above, line 4 is a encoding of the quality. In this case, the code 
  L - Illumina 1.8+ Phred+33,  raw reads typically (0, 41)
  ```
  So using the Illumina 1.8 encoding, which is what you will mostly see from now on, our first c is called with a Phred score of 0 and our Ns are called with a score of 2. Read quality is assessed using the Phred Quality Score.  This score is logarithmically based and the score values can be interpreted as follows:
-
+ 
 |Phred Quality Score |Probability of incorrect base call |Base call accuracy|
 |:-------------------|:---------------------------------:|-----------------:|
 |10	|1 in 10 |	90%|
@@ -136,9 +137,7 @@ The main functions of FastQC are:
 - Export of results to an HTML based permanent report
 - Offline operation to allow automated generation of reports without running the interactive application
 
-### Assessing quality with FastQC
-
-The quality scores are useful in determining whether a sample is good or bad. Rather than looking at quality scores for each individual read, we use a tool called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to looks at quality collectively across all reads within a sample. The image below is a plot that indicates a (very) good quality sample:
+Rather than looking at quality scores for each individual read, FastQC looks at quality collectively across all reads within a sample. The image below is a plot that indicates a (very) good quality sample:
 
 ![good_quality](./img/good_quality.png)
 
@@ -286,7 +285,7 @@ This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``
 
 ## Exercise - Running Trimmomatic
 
-1. Go to the untrimmed fastq data location:
+Go to the untrimmed fastq data location:
 
    ```bash
 $ cd /home/dcuser/dc_workshop/data/untrimmed_fastq
