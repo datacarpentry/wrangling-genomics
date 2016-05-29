@@ -207,11 +207,10 @@ Now, let's create a home for our results
 Lets examine the results in detail
 
 1. Navigate to the results and view the directory contents
-
    ```bash
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 $ ls
-```
+    ```
    
  > The zip files need to be unpacked with the 'unzip' program.  
 2. Use unzip to unzip the FastQC results: 
