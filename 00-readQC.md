@@ -196,7 +196,6 @@ Now, let's create a home for our results
     $ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
     ```
 3. Next, move the files there (recall, we are still in ``~/dc_workshop/data/untrimmed_fastq/``)
-   
    ```bash 
     $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
     $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
@@ -207,10 +206,10 @@ Now, let's create a home for our results
 Lets examine the results in detail
 
 1. Navigate to the results and view the directory contents
-   ```bash
+```bash
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 $ ls
-    ```
+```
    
  > The zip files need to be unpacked with the 'unzip' program.  
 2. Use unzip to unzip the FastQC results: 
