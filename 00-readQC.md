@@ -196,6 +196,7 @@ Now, let's create a home for our results
     $ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
     ```
 3. Next, move the files there (recall, we are still in ``~/dc_workshop/data/untrimmed_fastq/``)
+   
    ```bash 
     $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
     $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
