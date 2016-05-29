@@ -164,19 +164,18 @@ The *FASTQC* tool produces several other diagnostic plots to assess sample quali
     $ mkdir dc_workshop
     ```
 2. Create three three subdirectories
-
-   ```bash
+    
+    ```bash
     mkdir dc_workshop/data
     mkdir dc_workshop/docs
     mkdir dc_workshop/results
-```
-
-  > The sample data we will be working with is in a hidden directory (placing a '.' in front of a directory name hides the directory. In the next step we will move some of those hidden files into our new dirctories to start our project. 
+    ``` 
+> The sample data we will be working with is in a hidden directory (placing a '.' in front of a directory name hides the directory. In the next step we will move some of those hidden files into our new dirctories to start our project.
 3. Move our sample data to our working (home) directory
    
-   ```bash 
+    ```bash
 $ mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
-```
+    ```
 
 ###B. Run FastQC
 
@@ -191,50 +190,54 @@ To run the fastqc program, we call it from its location in ``~/FastQC``.  fastqc
     ```bash
     $ ~/FastQC/fastqc *.fastq
     ```
-Now, let's create a home for our results
+3. Now, let's create a home for our results
+    
     ```bash
     $ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
     ```
-3. Next, move the files there (recall, we are still in ``~/dc_workshop/data/untrimmed_fastq/``)
-   ```bash 
-    $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
+4. Next, move the files there (recall, we are still in ```~/dc_workshop/data/untrimmed_fastq/```)
+    
+    ```bash    
+$ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
     $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
-    ```
+```
 
 ###C. Results
 
 Lets examine the results in detail
 
 1. Navigate to the results and view the directory contents
-```bash
+
+    ```
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 $ ls
-```
-   
- > The zip files need to be unpacked with the 'unzip' program.  
-2. Use unzip to unzip the FastQC results: 
-   ```bash
-$ unzip *.zip
-```
-Did it work? No, because 'unzip' expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can save time by using a simple shell 'for loop' to iterate through the list of files in *.zip. After you type the first line, you will get a special '>' prompt to type next next lines. You start with 'do', then enter your commands, then end with 'done' to execute the loop.
-3. Build a ``for`` loop to unzip the files
+    ``` 
+    > The zip files need to be unpacked with the 'unzip' program. 
 
-   ```bash 
+2. Use unzip to unzip the FastQC results: 
+
+    ```
+$ unzip *.zip
+    ```
+Did it work? No, because 'unzip' expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can save time by using a simple shell 'for loop' to iterate through the list of files in *.zip. After you type the first line, you will get a special '>' prompt to type next next lines. You start with 'do', then enter your commands, then end with 'done' to execute the loop.
+
+3. Build a ``for`` loop to unzip the files
+    
+    ```
 $ for zip in *.zip
 > do
 > unzip $zip
 > done
-```
-
-  Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
+    ```
+Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
 
 This loop is basically a simple program.  When it runs, it will run unzip once for each file (whose name is stored in the $zip variable). The contents of each file will be unpacked into a separate directory by the unzip program.
 
 The for loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
-   ```bash
-    for zip in *.zip; do echo File $zip; unzip $zip; done
-```
-
+   
+   ```
+$ for zip in *.zip; do echo File $zip; unzip $zip; done
+   ```
 When you check your history later, it will help your remember what you did!
 
 ### D. Document your work
