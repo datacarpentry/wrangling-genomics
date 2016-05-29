@@ -160,11 +160,9 @@ dc_workshop
 
 </pre>
 
-<p>You will also need to create directories for the results that will be generated as part of the workflow: 
-<code>bash
-$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
-</code></p>
-
+<p>You will also need to create directories for the results that will be generated as part of the workflow: </p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>mkdir  results/sai results/sam results/bam results/bcf results/vcf
+</code></pre></div>
 <blockquote>
 <p><em>NOTE: All of the tools that we will be using in this workflow have been pre-installed on our remote computer</em></p>
 </blockquote>
@@ -194,7 +192,10 @@ $ mkdir  results/sai results/sam results/bam results/bcf results/vcf
 
 <p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence reads up to 100bp, while the rest two for longer sequences ranged from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it is faster and more accurate.</p>
 
-<p>Since we are working with short reads we will be using BWA-backtrack. The usage for BWA-backtrack is <code>bwa aln path/to/ref_genome.fasta path/to/fastq &gt; SAIfile</code>. This will create a <code>.sai</code> file which is an intermediate file containing the suffix array indexes. </p>
+<p>Since we are working with short reads we will be using BWA-backtrack. The usage for BWA-backtrack is </p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ bwa aln path/to/ref_genome.fasta path/to/fastq &gt; SAIfile
+</code></pre></div>
+<p>This will create a <code>.sai</code> file which is an intermediate file containing the suffix array indexes. </p>
 
 <p>Have a look at the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">bwa options page</a>. While we are running bwa with the default parameters here, your use case might require a change of parameters. <em>NOTE: Always read the manual page for any tool before using and try to understand the options.</em></p>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bwa aln data/ref_genome/ecoli_rel606.fasta <span class="se">\</span>
@@ -265,12 +266,9 @@ $ mkdir  results/sai results/sam results/bam results/bcf results/vcf
 </code></pre></div>
 <h3>Step 3: Filter and report the SNP variants in VCF (variant calling format)</h3>
 
-<p>Filter the SNPs for the final output in VCF format, using vcfutils.pl:
-<code>bash
-$ bcftools view results/bcf/SRR097977_variants.bcf \
-        | /usr/share/samtools/vcfutils.pl varFilter - &gt; results/vcf/SRR097977_final_variants.vcf
-</code></p>
-
+<p>Filter the SNPs for the final output in VCF format, using vcfutils.pl:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bcftools view results/bcf/SRR097977_variants.bcf <span class="se">\ </span>| /usr/share/samtools/vcfutils.pl varFilter - &gt; results/vcf/SRR097977_final_variants.vcf
+</code></pre></div>
 <p><em><code>bcftools view</code> converts the binary format of bcf files into human readable format (tab-delimited) for <code>vcfutils.pl</code> to perform the filtering. Note that the output is in VCF format, which is a text format.</em></p>
 
 <h2>Explore the VCF format:</h2>
@@ -344,14 +342,14 @@ NC_012967.1     247796  .       T       C       221     .       DP=18;VDB=1.8876
 
 <p><code>results/vcf/SRR097977_final_variants.vcf</code></p>
 
-<p><strong>Visualize</strong>   </p>
+<h2><strong>Visualize</strong></h2>
 
-<ul>
+<ol>
 <li>Start <a href="https://www.broadinstitute.org/software/igv/download">IGV</a></li>
-<li>Load the genome file into IGV using the <strong>&quot;Load Genomes from File...&quot;</strong> option under the <strong>&quot;Genomes&quot;</strong> pull-down menu.</li>
-<li>Load the .bam file using the <strong>&quot;Load from File...&quot;</strong> option under the <strong>&quot;File&quot;</strong> pull-down menu. <em>IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, but there is no direct use for that file.</em></li>
-<li>Load in the VCF file using the <strong>&quot;Load from File...&quot;</strong> option under the <strong>&quot;File&quot;</strong> pull-down menu</li>
-</ul>
+<li> Load the genome file into IGV using the <strong>&quot;Load Genomes from File...&quot;</strong> option under the <strong>&quot;Genomes&quot;</strong> pull-down menu.</li>
+<li> Load the .bam file using the <strong>&quot;Load from File...&quot;</strong> option under the <strong>&quot;File&quot;</strong> pull-down menu. <em>IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, but there is no direct use for that file.</em></li>
+<li> Load in the VCF file using the <strong>&quot;Load from File...&quot;</strong> option under the <strong>&quot;File&quot;</strong> pull-down menu</li>
+</ol>
 
 <p>Your IGV browser should look like the screenshot below:</p>
 
