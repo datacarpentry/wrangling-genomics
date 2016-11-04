@@ -81,7 +81,6 @@ samtools faidx $genome
 Create output paths for various intermediate and result files The -p option means mkdir will create the whole path if it does not exist (no error or message will give given if it does exist)
 
 ```bash
-$ mkdir -p results/sai
 $ mkdir -p results/sam
 $ mkdir -p results/bam
 $ mkdir -p results/bcf
@@ -118,7 +117,6 @@ for convenience but also to make it easier to see what
 is going on in the commands below.
 ```bash
 $ fq=data/trimmed_fastq/$base\.fastq
-$ sai=results/sai/$base\_aligned.sai
 $ sam=results/sam/$base\_aligned.sam
 $ bam=results/bam/$base\_aligned.bam
 $ sorted_bam=results/bam/$base\_aligned_sorted.bam
@@ -132,13 +130,7 @@ Our data are now staged.  The series of command below will run the steps of the 
 Align the reads to the reference genome
 
 ```bash
-$ bwa aln $genome $fq > $sai
-```
-
-Convert the output to the SAM format
-
-```bash
-$ bwa samse $genome $sai $fq > $sam
+$ bwa mem -M $genome $fq > $sam
 ```
 
 Convert the SAM file to BAM format
@@ -149,7 +141,7 @@ $ samtools view -S -b $sam > $bam
 Sort the BAM file
 
 ```bash
-$ samtools sort -f $bam $sorted_bam
+$ samtools sort $bam $sorted_bam
 ```
 Index the BAM file for display purposes
 
