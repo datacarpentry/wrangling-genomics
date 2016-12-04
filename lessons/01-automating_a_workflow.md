@@ -39,7 +39,7 @@ In this case, the interpreter is bash, which is the shell environment we are wor
 make the script executable like a 'real' program.
 
 ## How to run a shell script
-There are two ways to run a shell script the first way is to specify the
+There are two ways to run a shell script. The first way is to specify the
 interpreter (bash) and the name of the script.  By convention, shell script
 use the .sh extension, though this is not enforced.
 
@@ -49,7 +49,7 @@ My file name is untrimmed_fastq/SRR097977.fastq
 My file name is untrimmed_fastq/SRR098026.fastq
 ```
 
-The second was is a little more complicated to set up and requires the shebang line we talked about earlier.
+The second way is a little more complicated to set up and requires the shebang line we talked about earlier.
 
 The first step, which only needs to be done once, is to modify the 'permissions' of the text file so that the shell knows the file is executable.
 
@@ -66,7 +66,7 @@ My file name is untrimmed_fastq/SRR097977.fastq
 My file name is untrimmed_fastq/SRR098026.fastq
 ```
 
-The thing about running programs on the command line is that the shell may not know the location of your executables unless they are in the 'path' of know locations for programs.  So, you need to tell the shell the path to your script, which is './' if it is in the same directory.
+The thing about running programs on the command line is that the shell may not know the location of your executables unless they are in the 'path' of known locations for programs.  So, you need to tell the shell the path to your script, which is './' if it is in the same directory.
 
 ****
 **Exercise**
