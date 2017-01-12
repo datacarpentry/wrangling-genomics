@@ -3,12 +3,9 @@
 Shell scripts
 ===================
 
-Learning Objectives:
--------------------
-#### What's the goal for this lesson?
-
-* Understand what a shell script is
-* Learn how automate an analytical workflow
+# Learning Objectives:
+* Describe what a shell script is.
+* Run a shell script.
 
 
 ## What is a shell script?
