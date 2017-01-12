@@ -3,14 +3,11 @@
 Quality Control of NGS Data
 ===================
 
-Learning Objectives:
--------------------
-#### What's the goal for this lesson?
-
-* Understand how the FastQ format encodes quality
-* Be able to evaluate a FastQC report
-* Use Trimmommatic to clean FastQ reads
-* Use a For loop to automate operations on multiple files
+# Learning Objectives:
+* Describe how the FastQ format encodes quality.
+* Evaluate a FastQC report.
+* Clean FastQ reads using Trimmommatic.
+* Employ for loops to automate operations on multiple files.
 
 
 ## Details on the FASTQ format
