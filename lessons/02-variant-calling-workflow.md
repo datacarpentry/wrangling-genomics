@@ -78,7 +78,7 @@ bwa index $genome
 samtools faidx $genome
 ```
 
-Create output paths for various intermediate and result files The -p option means mkdir will create the whole path if it does not exist (no error or message will give given if it does exist)
+Create output paths for various intermediate and result files. The -p option means mkdir will create the whole path if it does not exist (no error or message will be given if it does exist)
 
 ```bash
 $ mkdir -p results/sai
@@ -88,9 +88,9 @@ $ mkdir -p results/bcf
 $ mkdir -p results/vcf
 ```
 
-We will now use a loop to run the variant calling work flow of each of our fastq files, so the list of command below will be execute once for each fastq files.
+We will now use a loop to run the variant calling workflow of each of our fastq files, so the list of commands below will be executed once for each fastq file.
 
-We would start the loop like this, so the name of each fastq file will by assigned to $fq
+We will start the loop like this, so the name of each fastq file will by assigned to $fq
 
 ```bash
 $ for fq in data/trimmed_fastq/*.fastq
