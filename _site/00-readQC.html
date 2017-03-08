@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+      <title>QC of  Read Data</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+<link href="./css/bootstrap/bootstrap.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="./css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="./css/swc.css" />
+<link rel="stylesheet" type="text/css" href="./css/swc-bootstrap.css" />
+<meta charset="UTF-8" />
+<meta http-equiv="last-modified" content="" />
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="./css/lesson.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="banner">
+  <a href="http://datacarpentry.org" title="Data Carpentry">
+    <img alt="Data Carpentry banner" src="./img/DC1_logo_small.png" height="50px" />
+  </a>
+</div>
+
+
+      <div class="row-fluid">
+        <div class="span10 offset1">
+	  <!-- start content -->
+          
+          <h1>QC of  Read Data</h1>
+          
+          <h2>Learning Objectives:</h2>
+
+<ul>
+<li>Understand how the FastQ format encodes quality</li>
+<li>Be able to evaluate a FastQC report</li>
+<li>Use Trimmommatic to clean FastQ reads</li>
+<li>Use a For loop to automate operations on multiple files</li>
+</ul>
+
+<h2>Bioinformatics workflows</h2>
+
+<p>When working with high-throughput sequencing data, the raw reads you get off of the sequencer will need to pass through a number of  different tools in order to generate your final desired output. The execution of this set of tools in a specified order is commonly referred to as a <em>workflow</em> or a <em>pipeline</em>. </p>
+
+<p>An example of the workflow we will be using for our variant calling analysis is provided below with a brief description of each step. </p>
+
+<p><img src="./img/variant_calling_workflow.png" alt="workflow"></p>
+
+<ol>
+<li>Quality control - Assessing quality using FastQC</li>
+<li>Quality control - Trimming and/or filtering reads (if necessary)</li>
+<li>Align reads to reference genome </li>
+<li>Perform post-alignment clean-up</li>
+<li>Variant calling</li>
+</ol>
+
+<p>These workflows in bioinformatics adopt a plug-and-play approach in that the output of one tool can be easily used as input to another tool without any extensive configuration. Having standards for data formats is what makes this feasible. Standards ensure that data is stored in a way that is generally accepted and agreed upon within the community. The tools that are used to analyze data at different stages of the workflow are therefore built under the assumption that the data will be provided in a specific format.  </p>
+
+<h2>Quality Control</h2>
+
+<p>The first step in the variant calling work flow is to take the FASTQ files received from the sequencing facility and assess the quality of the sequence reads. </p>
+
+<p><img src="./img/var_calling_workflow_qc.png" alt="workflow_qc"></p>
+
+<h2>Details on the FASTQ format</h2>
+
+<p>Although it looks complicated  (and maybe it is), its easy to understand the <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format with a little decoding. Some rules about the format include...</p>
+
+<table><thead>
+<tr>
+<th>Line</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Always begins with &#39;@&#39; and then information about the read</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The actual DNA sequence</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Always begins with a &#39;+&#39; and sometimes the same info in line 1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Has a string of characters which represent the quality scores; must have same number of characters as line 2</td>
+</tr>
+</tbody></table>
+
+<p>so for example in our data set, one complete read is:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ head -n4 SRR098281.fastq 
+@SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
+CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
++SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</code></pre></div>
+<p>This is a pretty bad read. </p>
+
+<p>Notice that line 4 is:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</code></pre></div>
+<p>As mentioned above, line 4 is a encoding of the quality. In this case, the code is the <a href="https://en.wikipedia.org/wiki/ASCII#ASCII_printable_code_chart">ASCII</a> character table. According to the chart a &#39;#&#39; has the value 35 and &#39;!&#39; has the value 33 - <strong>But these values are not actually the quality scores!</strong> There are actually several historical differences in how Illumina and other players have encoded the scores. Heres the chart from wikipedia:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">  SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
+  ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................
+  ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................
+  .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ......................
+  LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL....................................................
+  !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+  |                         |    |        |                              |                     |
+ 33                        59   64       73                            104                   126
+  0........................26...31.......40                                
+                           -5....0........9.............................40 
+                                 0........9.............................40 
+                                    3.....9.............................40 
+  0.2......................26...31........41                              
+
+ S - Sanger        Phred+33,  raw reads typically (0, 40)
+ X - Solexa        Solexa+64, raw reads typically (-5, 40)
+ I - Illumina 1.3+ Phred+64,  raw reads typically (0, 40)
+ J - Illumina 1.5+ Phred+64,  raw reads typically (3, 40)
+     with 0=unused, 1=unused, 2=Read Segment Quality Control Indicator (bold) 
+     (Note: See discussion above).
+ L - Illumina 1.8+ Phred+33,  raw reads typically (0, 41)
+</code></pre></div>
+<p>So using the Illumina 1.8 encoding, which is what you will mostly see from now on, our first c is called with a Phred score of 0 and our Ns are called with a score of 2. Read quality is assessed using the Phred Quality Score.  This score is logarithmically based and the score values can be interpreted as follows:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Phred Quality Score</th>
+<th style="text-align: center">Probability of incorrect base call</th>
+<th style="text-align: right">Base call accuracy</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">10</td>
+<td style="text-align: center">1 in 10</td>
+<td style="text-align: right">90%</td>
+</tr>
+<tr>
+<td style="text-align: left">20</td>
+<td style="text-align: center">1 in 100</td>
+<td style="text-align: right">99%</td>
+</tr>
+<tr>
+<td style="text-align: left">30</td>
+<td style="text-align: center">1 in 1000</td>
+<td style="text-align: right">99.9%</td>
+</tr>
+<tr>
+<td style="text-align: left">40</td>
+<td style="text-align: center">1 in 10,000</td>
+<td style="text-align: right">99.99%</td>
+</tr>
+<tr>
+<td style="text-align: left">50</td>
+<td style="text-align: center">1 in 100,000</td>
+<td style="text-align: right">99.999%</td>
+</tr>
+<tr>
+<td style="text-align: left">60</td>
+<td style="text-align: center">1 in 1,000,000</td>
+<td style="text-align: right">99.9999%</td>
+</tr>
+</tbody></table>
+
+<p>Let&#39;s use the following read as an example:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">@HWI-ST330:304:H045HADXX:1:1101:1111:61397
+CACTTGTAAGGGCAGGCCCCCTTCACCCTCCCGCTCCTGGGGGANNNNNNNNNNANNNCGAGGCCCTGGGGTAGAGGGNNNNNNNNNNNNNNGATCTTGG
++
+@?@DDDDDDHHH?GH:?FCBGGB@C?DBEGIIIIAEF;FCGGI#########################################################
+</code></pre></div>
+<p>As mentioned previously, line 4 has characters encoding the quality of each nucleotide in the read. The legend below provides the mapping of quality scores (Phred-33) to the quality encoding characters. ** <em>Different quality encoding scales exist (differing by offset in the ASCII table), but note the most commonly used one is fastqsanger</em> **</p>
+<div class="highlight"><pre><code class="language-" data-lang=""> Quality encoding: !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHI
+                   |         |         |         |         |
+    Quality score: 0........10........20........30........40                                
+</code></pre></div>
+<p>Using the quality encoding character legend, the first nucleotide in the read (C) is called with a quality score of 31 and our Ns are called with a score of 2. <strong>As you can tell by now, this is a bad read.</strong> </p>
+
+<p>Each quality score represents the probability that the corresponding nucleotide call is incorrect. This quality score is logarithmically based and is calculated as:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">Q = -10 x log10(P), where P is the probability that a base call is erroneous
+</code></pre></div>
+<p>These probability values are the results from the base calling algorithm and dependent on how much signal was captured for the base incorporation. </p>
+
+<h2>FastQC</h2>
+
+<p>FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.</p>
+
+<p>The main functions of FastQC are:</p>
+
+<ul>
+<li>Import of data from BAM, SAM or FastQ files (any variant)</li>
+<li>Providing a quick overview to tell you in which areas there may be problems</li>
+<li>Summary graphs and tables to quickly assess your data</li>
+<li>Export of results to an HTML based permanent report</li>
+<li>Offline operation to allow automated generation of reports without running the interactive application</li>
+</ul>
+
+<p>Rather than looking at quality scores for each individual read, FastQC looks at quality collectively across all reads within a sample. The image below is a plot that indicates a (very) good quality sample:</p>
+
+<p><img src="./img/good_quality.png" alt="good_quality"></p>
+
+<p>On the x-axis you have the base position in the read, and on the y-axis you have quality scores. In this example, the sample contains reads that are 40 bp long. For each position, there is a box plotted to illustrate the distribution of values (with the whiskers indicating the 90th and 10th percentile scores). For every position here, the quality values do not drop much lower than 32 -- which if you refer to the table above is a pretty good quality score. The plot background is also color-coded to identify good (green), acceptable (yellow), and bad (red) quality scores.  </p>
+
+<p>Now let&#39;s take a look at a quality plot on the other end of the spectrum. </p>
+
+<p><img src="./img/bad_quality.png" alt="bad_quality"></p>
+
+<p>Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the &#39;bad&#39; range, particularly on the tail end of the reads. When you encounter a quality plot such as this one, the first step is to troubleshoot. Why might we be seeing something like this? </p>
+
+<p>The <em>FASTQC</em> tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above. </p>
+
+<h2>Running FASTQC</h2>
+
+<h3>A. Stage your data</h3>
+
+<ol>
+<li><p>Create a working directory for your analysis</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span>
+<span class="c"># this command takes us to the home directory</span>
+
+<span class="gp">$ </span>mkdir dc_workshop
+</code></pre></div></li>
+<li><p>Create three three subdirectories</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir dc_workshop/data
+mkdir dc_workshop/docs
+mkdir dc_workshop/results
+</code></pre></div>
+<blockquote>
+<p>The sample data we will be working with is in a hidden directory (placing a &#39;.&#39; in front of a directory name hides the directory. In the next step we will move some of those hidden files into our new dirctories to start our project.</p>
+</blockquote></li>
+<li><p>Move our sample data to our working (home) directory</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>mv ~/.dc_sampledata_lite/untrimmed_fastq/ ~/dc_workshop/data/
+</code></pre></div></li>
+</ol>
+
+<h3>B. Run FastQC</h3>
+
+<ol>
+<li><p>Navigate to the initial fastq dataset</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> ~/dc_workshop/data/untrimmed_fastq/
+</code></pre></div>
+<p>To run the fastqc program, we call it from its location in <code>~/FastQC</code>.  fastqc will accept multiple file names as input, so we can use the *.fastq wildcard.</p></li>
+<li><p>Run FastQC on all fastq files in the directory</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>~/FastQC/fastqc <span class="k">*</span>.fastq
+</code></pre></div></li>
+<li><p>Now, let&#39;s create a home for our results</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
+</code></pre></div></li>
+<li><p>Next, move the files there (recall, we are still in <code>~/dc_workshop/data/untrimmed_fastq/</code>)</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>mv <span class="k">*</span>.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
+<span class="gp">$ </span>mv <span class="k">*</span>.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+</code></pre></div></li>
+</ol>
+
+<h3>C. Results</h3>
+
+<p>Lets examine the results in detail</p>
+
+<ol>
+<li><p>Navigate to the results and view the directory contents</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ ls
+</code></pre></div>
+<blockquote>
+<p>The zip files need to be unpacked with the &#39;unzip&#39; program. </p>
+</blockquote></li>
+<li><p>Use unzip to unzip the FastQC results: </p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ unzip *.zip
+</code></pre></div>
+<p>Did it work? No, because &#39;unzip&#39; expects to get only one zip file.  Welcome to the real world. We <em>could</em> do each file, one by one, but what if we have 500 files?  There is a smarter way. We can save time by using a simple shell &#39;for loop&#39; to iterate through the list of files in *.zip. After you type the first line, you will get a special &#39;&gt;&#39; prompt to type next next lines. You start with &#39;do&#39;, then enter your commands, then end with &#39;done&#39; to execute the loop.</p></li>
+<li><p>Build a <code>for</code> loop to unzip the files</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ for zip in *.zip
+&gt; do
+&gt; unzip $zip
+&gt; done
+</code></pre></div>
+<p>Note that, in the first line, we create a variable named &#39;zip&#39;.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.</p></li>
+</ol>
+
+<p>This loop is basically a simple program.  When it runs, it will run unzip once for each file (whose name is stored in the $zip variable). The contents of each file will be unpacked into a separate directory by the unzip program.</p>
+
+<p>The for loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ for zip in *.zip; do echo File $zip; unzip $zip; done
+</code></pre></div>
+<p>When you check your history later, it will help your remember what you did!</p>
+
+<h3>D. Document your work</h3>
+
+<p>To save a record, let&#39;s cat all fastqc summary.txts into one full<em>report.txt and move this to ``~/dc</em>workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we said &#39;cat&#39; is really meant for concatenating text files?</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat <span class="k">*</span>/summary.txt &gt; ~/dc_workshop/docs/fastqc_summaries.txt
+</code></pre></div>
+<h2>How to clean reads using <em>Trimmomatic</em></h2>
+
+<h3>A detailed explanation of features</h3>
+
+<p>Once we have an idea of the quality of our raw data, it is time to trim away adapters and filter out poor quality score reads. To accomplish this task we will use <em>Trimmomatic</em> <a href="http://www.usadellab.org/cms/?page=trimmomatic">http://www.usadellab.org/cms/?page=trimmomatic</a>.</p>
+
+<p><em>Trimmomatic</em> is a java based program that can remove sequencer specific reads and nucleotides that fall below a certain threshold. <em>Trimmomatic</em> can be multithreaded to run quickly. </p>
+
+<p>Because <em>Trimmomatic</em> is java based, it is run using the command:</p>
+
+<p><strong><em>java jar trimmomatic-0.32.jar</em></strong></p>
+
+<p>What follows this are the specific commands that tells the program exactly how you want it to operate. <em>Trimmomatic</em> has a variety of options and parameters:</p>
+
+<ul>
+<li><strong><em>-threds</em></strong> How many processors do you want <em>Trimmomatic</em> to run with?</li>
+<li><strong><em>SE</em></strong> or <strong><em>PE</em></strong> Single End or Paired End reads?</li>
+<li><strong><em>-phred33</em></strong> or <strong><em>-phred64</em></strong> Which quality score do your reads have?</li>
+<li><strong><em>SLIDINGWINDOW</em></strong> Perform sliding window trimming, cutting once the average quality within the window falls below a threshold.</li>
+<li><strong><em>LEADING</em></strong> Cut bases off the start of a read, if below a threshold quality.</li>
+<li><strong><em>TRAILING</em></strong> Cut bases off the end of a read, if below a threshold quality.</li>
+<li><strong><em>CROP</em></strong> Cut the read to a specified length.</li>
+<li><strong><em>HEADCROP</em></strong> Cut the specified number of bases from the start of the read.</li>
+<li><strong><em>MINLEN</em></strong> Drop an entire read if it is below a specified length.</li>
+<li><strong><em>TOPHRED33</em></strong> Convert quality scores to Phred-33.</li>
+<li><strong><em>TOPHRED64</em></strong> Convert quality scores to Phred-64.</li>
+</ul>
+
+<p>A generic command for <em>Trimmomatic</em> looks like this:</p>
+
+<p><strong>java jar trimmomatic-0.32.jar SE -thr</strong></p>
+
+<p>A complete command for <em>Trimmomatic</em> will look something like this:</p>
+
+<p><strong>java jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR<em>1056.fastq SRR</em>1056<em>trimmed.fastq ILLUMINACLIP:SRR</em>adapters.fa SLIDINGWINDOW:4:20</strong></p>
+
+<p>This command tells <em>Trimmomatic</em> to run on a Single End file (<code>SRR_0156.fastq</code>, in this case), the output file will be called <code>SRR_0156_trimmed.fastq</code>,  there is a file with Illumina adapters called <code>SRR_adapters.fa</code>, and we are using a sliding window of size 4 that will remove those bases if their phred score is below 20.</p>
+
+<h2>Exercise - Running Trimmomatic</h2>
+
+<p>Go to the untrimmed fastq data location:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd</span> /home/dcuser/dc_workshop/data/untrimmed_fastq
+</code></pre></div>
+<p>The command line incantation for trimmomatic is more complicated.  This is where what you have been learning about accessing your command line history will start to become important.</p>
+
+<p>The general form of the command is:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar inputfile outputfile OPTION:VALUE...
+</code></pre></div>
+<p>&#39;java -jar&#39; calls the Java program, which is needed to run trimmomargumentstic, which lived in a &#39;jar&#39; file (trimmomatic-0.32.jar), a special kind of java archive that is often used for programs written in the Java programing language.  If you see a new program that ends in &#39;.jar&#39;, you will know it is a java program that is executed &#39;java -jar program name&#39;.  The &#39;SE&#39; argument is a keyword that specifies we are working with single-end reads.</p>
+
+<p>The next two arguments are input file and output file names.  These are then followed by a series of options. The specifics of how options are passed to a program are different depending on the program. You will always have to read the manual of a new program to learn which way it expects its command-line arguments to be composed.</p>
+
+<p>So, for the single fastq input file &#39;SRR098283.fastq&#39;, the command would be:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ java -jar /home/dcuser/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq \
+SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+
+TrimmomaticSE: Started with arguments: SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+Automatically using 2 threads
+Quality encoding detected as phred33
+Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
+TrimmomaticSE: Completed successfully
+</code></pre></div>
+<p>So that worked and we have a new fastq file.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">$ ls SRR098283*
+SRR098283.fastq  SRR098283.fastq_trim.fastq
+</code></pre></div>
+<p>Now we know how to run trimmomatic but there is some good news and bad news.<br>
+One should always ask for the bad news first.  Trimmomatic only operates on 
+one input file at a time and we have more than one input file.  The good news?
+We already know how to use a for loop to deal with this situation.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    <span class="nv">$ </span><span class="k">for </span>infile <span class="k">in</span> <span class="k">*</span>.fastq
+    &gt;do
+    &gt;outfile<span class="o">=</span><span class="nv">$infile</span><span class="se">\_</span>trim.fastq
+    &gt;java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE <span class="nv">$infile</span> <span class="nv">$outfile</span> SLIDINGWINDOW:4:20 MINLEN:20
+    &gt;done
+</code></pre></div>
+<p>Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called infile.  Note that the third line of this for loop is creating a second variable called outfile.  We assign it the value of $infile with &#39;_trim.fastq&#39; appended to it.  The &#39;\&#39; escape character is used so the shell knows that whatever follows \ is not part of the variable name $infile.  There are no spaces before or after the &#39;=&#39;.</p>
+
+	  <!-- end content -->
+	</div>
+      </div>
+
+      <div class="footer">
+  <a class="label swc-blue-bg" href="">Facebook</a>
+  <a class="label swc-blue-bg" href="">Google+</a>
+  <a class="label swc-blue-bg" href="">Twitter</a>
+  <a class="label swc-blue-bg" href="">GitHub</a>
+  <a class="label swc-blue-bg" href="./LICENSE.html">License</a>
+  <a class="bugreport label swc-blue-bg" href="mailto:?subject=bug%20in%2000-readQC.md">Bug Report</a>
+</div>
+
+    </div>
+    <!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/jquery-1.9.1.min.js"></script>
+<script src="./js/bootstrap/bootstrap.min.js"></script>
+
+  </body>
+</html>

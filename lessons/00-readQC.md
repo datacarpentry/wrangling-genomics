@@ -131,6 +131,7 @@ Now, let's create a home for our results
     $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
     ```
 
+
 ### C. Results
 
 Let's examine the results in detail
