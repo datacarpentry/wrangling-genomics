@@ -32,7 +32,7 @@ done
 
 This looks a lot like the for loops we saw earlier.  In fact, it is no different, apart from using indentation and the lack of the '>' prompts; it's just saved in a text file. The line at the top ('#!/bin/bash') is commonly called the shebang line, which is a special kind of comment that tells the shell which program is to be used as the 'intepreter' that executes the code.  
 
-In this case, the interpreter is bash, which is the shell environment we are working in. The same approach is also used for other scripting languages such as perl and python.  The shebang line is actually optionally unless you want to
+In this case, the interpreter is bash, which is the shell environment we are working in. The same approach is also used for other scripting languages such as perl and python.  The shebang line is actually optional unless you want to
 make the script executable like a 'real' program.
 
 ## How to run a shell script
