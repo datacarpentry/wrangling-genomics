@@ -4,14 +4,14 @@
 ## Genome Assembly Hands-on
 Authors: Dana Brunson <dana.brunson@okstate.edu>, Peter Hoyt <peter.r.hoyt@okstate.edu> and Haibao Tang <tanghaibao@gmail.com>  
 
-__Learning Outcomes:__ Get familiar with genome assemblers, pre-processing, reporting and validation. Exercise will be based on chromosomes of a mutant genotype of bakersí yeast, as a practice of _de-novo_ genome assembly. Here we have the benefits of a reference genome to validate our assembly.
+__Learning Outcomes:__ Get familiar with genome assemblers, pre-processing, reporting and validation. Exercise will be based on chromosomes of a mutant genotype of bakers‚Äô yeast, as a practice of _de-novo_ genome assembly. Here we have the benefits of a reference genome to validate our assembly.
 
 #### Data and directory structure ####
 
 Log into the Cowboy Supercomputer (picture here):
 https://hpcc.okstate.edu/content/logging-cowboy
 
-Make a copy of all the data into your ì/scratch/usernameî directory.
+Make a copy of all the data into your ‚Äú/scratch/username‚Äù directory.
 ```
 $ cd /scratch/username
 $ cp /scratch/bioworkshop/mcbios.tar.gz .
@@ -61,10 +61,10 @@ Directory of folders you now have:
 We will dive into each directory for each task:  fastqc, velvet, soap, abyss and nucmer in that order. Most folders contain a __submission script__ which includes the commands that we use for each task. It is always a good idea to use a script so you can modify parameters, and the script also serves as  a reminder to yourself later.
 ___
 ### Important notes before hands-on ###
-Since we are using the Cowboy cluster, only very small tasks can be done directly on the login nodes.  For each longer activity, we will submit the jobs to the scheduler using ìpbs scriptsî.  These scripts include information for the scheduler as well as the commands to execute your job.
+Since we are using the Cowboy cluster, only very small tasks can be done directly on the login nodes.  For each longer activity, we will submit the jobs to the scheduler using ‚Äúpbs scripts‚Äù.  These scripts include information for the scheduler as well as the commands to execute your job.
 ___
 ### Read processing ###
-__Please Note: Those who have successfully completed ìmodule2î of the Bioinformatics Applications/File Formats session (on Monday) can skip the Read Processing section.__
+__Please Note: Those who have successfully completed ‚Äúmodule2‚Äù of the Bioinformatics Applications/File Formats session (on Monday) can skip the Read Processing section.__
 
 
 The data
@@ -81,7 +81,7 @@ $ ls
 ref.fasta  PE-350.1.fastq  PE-350.2.fastq
 $ head PE-350.1.fastq
 ```
-Our assembly will start using one Illumina library, PE-350, which is a paired end (fragment) library, divided into two datasets: .1.fastq and .2.fastq,  which are paired reads very close to 350 bp apart. Also, ìref.fastaî is the included reference sequence for comparison with your assembly.
+Our assembly will start using one Illumina library, PE-350, which is a paired end (fragment) library, divided into two datasets: .1.fastq and .2.fastq,  which are paired reads very close to 350 bp apart. Also, ‚Äúref.fasta‚Äù is the included reference sequence for comparison with your assembly.
 
 #### Understand FASTQ format ####
 __Learning objectives:__ 
@@ -104,7 +104,7 @@ $ expr $(cat PE-350.1.fastq |wc -l) / 4
 Each individual base in a sequence read has quality identifier called PHRED score, typically between value 0-40 for Illumina.  The FASTQ file converts the numeric value to a character because they use less space (fewer bits). There are also two systems of such conversion, PHRED+33 and PHRED+64. PHRED+33 is used in new Illumina protocols. PHRED+64 is used also so be aware!
 
 How does this work? 
-ìPhred quality scores  are defined as a property which is logarithmically related to the base-calling error probabilities .î -Wikipedia.
+‚ÄúPhred quality scores  are defined as a property which is logarithmically related to the base-calling error probabilities .‚Äù -Wikipedia.
 Or you can just use this chart: 
 |Phred Quality Score |Probability of incorrect base call |Base call accuracy|
 |:-------------------|:---------------------------------:|-----------------:|
@@ -170,7 +170,7 @@ Use [WinSCP](https://winscp.net/eng/download.php) to transfer the PE-350.1_fastq
 
 #### Report on Library PE-350 fastQC stats: #### 
 Read count_____, Read length ___ 
-Duplication level _____, Adapters? _____ (hint: look forìover-represented sequencesî in report)
+Duplication level _____, Adapters? _____ (hint: look for‚Äúover-represented sequences‚Äù in report)
 
 Answer the same questions for PE-350.2.fastq
 
@@ -186,7 +186,7 @@ It is (in general) a good idea to run several assemblers and compare. We are usi
 ```
 $ cd ../../velvet/
 ```
-Understand the script file: `velvetk31.pbs` - We will use the text-file editor ìnanoî to examine this file, which submits our data to the assemblers. 
+Understand the script file: `velvetk31.pbs` - We will use the text-file editor ‚Äúnano‚Äù to examine this file, which submits our data to the assemblers. 
 ```
 $ nano -w velvetk31.pbs
 ```
@@ -200,7 +200,7 @@ The first section of our `velvetk31.pbs` script sets up the scheduler requests (
 
 What do these commands do?  See the [velvet website here.](https://www.ebi.ac.uk/~zerbino/velvet/)  
 
-If you understand the script and have changed the groupnumber, press `ctrl-x`, then save the file and __submit it to the queue__ with the ëqsubí command as follows.
+If you understand the script and have changed the groupnumber, press `ctrl-x`, then save the file and __submit it to the queue__ with the ‚Äòqsub‚Äô command as follows.
 ```
 $ qsub velvetk31.pbs 
 ```
@@ -262,7 +262,7 @@ $ cd ../soap/soap31
 $ ls 
 soap.config  soapk31.pbs
 ```
-SOAPdenovo is different as it uses a configuration file ìsoap.configî, where we tell SOAP what our data are. We include detailed info below so we can move ahead with the computation step.
+SOAPdenovo is different as it uses a configuration file ‚Äúsoap.config‚Äù, where we tell SOAP what our data are. We include detailed info below so we can move ahead with the computation step.
 
 
 
@@ -302,9 +302,9 @@ Change these two lines from group1 to your group:
 q1=../../data/group1/PE-350.1.fastq
 q2=../../data/group1/PE-350.2.fastq
 ```
-Understand `soapk31.pbs`, it is important to know SOAPdenovo has 4 steps: __pregraph__, __contig__, __map__, and __scaff__ are ëstep 1í and correspond to making a K-mer graph, contigging, mapping the reads back, and scaffolding are steps 2-4 respectively.  These steps can be run separately or all together as we are doing here.  See the command line options section of the manual for more information. 
+Understand `soapk31.pbs`, it is important to know SOAPdenovo has 4 steps: __pregraph__, __contig__, __map__, and __scaff__ are ‚Äòstep 1‚Äô and correspond to making a K-mer graph, contigging, mapping the reads back, and scaffolding are steps 2-4 respectively.  These steps can be run separately or all together as we are doing here.  See the command line options section of the manual for more information. 
 
-At this point you donít need to change the submit script, if you want to look at it:
+At this point you don‚Äôt need to change the submit script, if you want to look at it:
 ```
 $ more soapk31.pbs
 ```
@@ -315,9 +315,9 @@ $ qsub soapk31.pbs
 What printed on the screen? 
 ans: <jobid>.mgmt1
 
-The __ësoapk31.pbs.o<jobid>í__ is very useful. 
+The __‚Äòsoapk31.pbs.o<jobid>‚Äô__ is very useful. 
 
-Challenge: Use the ëmoreí command to find these information from the log file:
+Challenge: Use the ‚Äòmore‚Äô command to find these information from the log file:
 + Paired end library insert size: _____________   
 + Standard deviation ______________
 + contig stats: n50 ________  max length contig _______ total __________ 
@@ -331,10 +331,10 @@ $ cp soap31.scafSeq ../../results/soap31.fasta
 ```
 Does the assembly get better  if I use a different K-mer size?
 
-To run a different kmer e.g ë21í, create a new soap directory and copy the submit and config files into it. Notice that we are changing the names of the files while copying them to reflect the new kmer we are testing:
+To run a different kmer e.g ‚Äò21‚Äô, create a new soap directory and copy the submit and config files into it. Notice that we are changing the names of the files while copying them to reflect the new kmer we are testing:
 ```
 $ cd ..
-$ pwd (make sure youíre in the soap directory)
+$ pwd (make sure you‚Äôre in the soap directory)
 $ mkdir soap21
 $ cp soap31/soapk31.pbs soap21/soapk21.pbs
 $ cp soap31/soap.config soap21/.      (that dot at the end is necessary)
@@ -349,7 +349,7 @@ Be sure to copy the result to your appropriate results folder.
 ```
 $ cp soap21.scafSeq ../../results/soap21.fasta
 ```
-Using what youíve learned, ___do the 25 kmer value___. 
+Using what you‚Äôve learned, ___do the 25 kmer value___. 
 ___
 
 #### ABYSS ####
@@ -357,7 +357,7 @@ ___
 $ cd ../../abyss/abyss31
 ```
 
-We change to a subdirectory because abyss puts all itís output into the current working directory.
+We change to a subdirectory because abyss puts all it‚Äôs output into the current working directory.
 
 Understand `abyssk31.pbs`. ABYSS is simple as it has just one command to run the entire pipeline. First edit the `abyssk31.pbs` to change GROUPNUMBER to __your__ group number.
 ```
@@ -379,7 +379,7 @@ To create a new file that only includes these first 50 lines. :
 $ head -50 coverage.hist >short.hist
 ```
 
-EMAIL the ëshort.histí file to yourself to look at it in a spreadsheet.
+EMAIL the ‚Äòshort.hist‚Äô file to yourself to look at it in a spreadsheet.
 ```
 $ mail -a short.hist -r youremail@wherever.com  youremail@wherever.com
 (enter subject, enter, ctrl-d to send)
@@ -418,13 +418,13 @@ $ cp abyss31-scaffolds.fa ../../results/abyss31.fasta
 ```
 Does the assembly get better  if I use a different K-mer size? 
 
-__Changing the K-mer option for assemblies:__  Luckily assemblers run fast, run two different additional K-mer options using Abyss. Why? Because the current value K=31 may not be the best! Try 21, and 25 for most assemblers, they need odd numbers, so 24 wonít work.  
+__Changing the K-mer option for assemblies:__  Luckily assemblers run fast, run two different additional K-mer options using Abyss. Why? Because the current value K=31 may not be the best! Try 21, and 25 for most assemblers, they need odd numbers, so 24 won‚Äôt work.  
 
 First create a new directory:
 ```
 $ cd ..
 ```
-(you should be in the ëabyss directory now, to check use ìprint working directoryî)
+(you should be in the ‚Äòabyss directory now, to check use ‚Äúprint working directory‚Äù)
 ```
 $ pwd  
 /scratch/username/mcbios/abyss
@@ -437,7 +437,7 @@ $ nano -w abyssk21.pbs
 ```
 $ qsub abyssk21.pbs
 ```
-Whan itís done, your output files will automatically have the new K-mer in their names. Copy the result to your results folder
+Whan it‚Äôs done, your output files will automatically have the new K-mer in their names. Copy the result to your results folder
 ```
 $ cp abyss21-scaffolds.fa ../../results/abyss21.fasta
 ```
@@ -447,6 +447,8 @@ __Reporting:__
 A _contig_ is a contiguous length of genomic sequence. A _scaffold_ is composed of ordered contigs and gaps. By far the most widely used statistics for describing the quality of a genome assembly are its scaffold and contig N50s. 
 
 A contig N50 is calculated by first ordering every contig by length from longest to shortest. Next, starting from the longest contig, the lengths of each contig are summed, until this running sum equals one-half of the total length of all contigs in the assembly. The contig N50 of the assembly is the length of the shortest contig in this list. 
+
+(Insert image here)
 
 The scaffold N50 is calculated in the same fashion but uses scaffolds rather than contigs. The longer the scaffold N50 is, the better the assembly is. However, it is important to keep in mind that a poor assembly that has forced unrelated reads and contigs into scaffolds can have an erroneously large N50.
 
@@ -499,9 +501,9 @@ $ qsub quast.pbs
 ```
 when finished look at the output file to check for errors
 ```
-$ less quast.pbs.o<jobid>  (protip: TAB autocomplete so you donít have to type in the jobid)
+$ less quast.pbs.o<jobid>  (protip: TAB autocomplete so you don‚Äôt have to type in the jobid)
 ```
-press ìqî to exit 
+press ‚Äúq‚Äù to exit 
 
 options:  zip the quast directory and mail the whole thing to yourself
 ```
@@ -518,9 +520,9 @@ Other useful output from QUAST:
 `alignment.svg`: contains the contig alignment plot (double-click to open)
 
 + Blue blocks: correctly aligned. Boundaries agree (within 2 kbp on each side, contigs are larger than 10 kbp) in at least half of the assemblies
-+ Green blocks: correctly aligned. Boundaries donít agree. 
++ Green blocks: correctly aligned. Boundaries don‚Äôt agree. 
 + Orange blocks: misassembled. Boundaries agree in at least half of the assemblies.
-+ Red blocks: misassembled. Boundaries donít agree. 
++ Red blocks: misassembled. Boundaries don‚Äôt agree. 
 
 #### Challenge ####
 Which assembly has better length statistics? 
@@ -563,11 +565,11 @@ The data (we partitioned the reads to chromosomes so that assembly ran faster in
 http://www.ncbi.nlm.nih.gov/sra/DRX001304
 
 
-This concludes the exercise. Weíll continue SNP analysis with this dataset in another module.
+This concludes the exercise. We‚Äôll continue SNP analysis with this dataset in another module.
 
 
 EXTRAS:
-http://kmergenie.bx.psu.edu/  ìkmergenieî
+http://kmergenie.bx.psu.edu/  ‚Äúkmergenie‚Äù
 See some slides here: http://ged.msu.edu/angus/tutorials-2013/files/2013-june-18-msu.pdf
 Another de novo assembly tutorial: http://www.cbs.dtu.dk/courses/27626/Exercises/denovo_exercise.php
 (uses quake & jellyfish)
