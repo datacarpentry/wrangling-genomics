@@ -158,7 +158,7 @@ $ for zip in *.zip
 > done
 ```
 
-  Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax $zip.  $zip is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
+  Note that, in the first line, we create a variable named 'zip'.  After that, we call that variable with the syntax `$zip`.  `$zip` is assigned the value of each item (file) in the list *.zip, once for each iteration of the loop.
 
 This loop is basically a simple program.  When it runs, it will run unzip once for each file (whose name is stored in the $zip variable). The contents of each file will be unpacked into a separate directory by the unzip program.
 
@@ -216,7 +216,7 @@ This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``
 
 ## Exercise - Running Trimmomatic
 
-1. Go to the untrimmed fastq data location:
+To begin, go to the untrimmed fastq data location:
 
    ```bash
 $ cd /home/dcuser/dc_workshop/data/untrimmed_fastq
@@ -262,7 +262,7 @@ $ for infile in *.fastq
     >done
 ```
 
-Do you remember how the first word after "for" in the loop specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called infile.  Note that the third line of this for loop is creating a second variable called outfile.  We assign it the value of $infile with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.
+Do you remember how the first word after "for" in the loop specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called `infile`.  Note that the third line of this for loop is creating a second variable called `outfile`.  We assign it the value of `$infile` with '_trim.fastq' appended to it.  The '\' escape character is used so the shell knows that whatever follows `\` is not part of the variable name `$infile`.  There are no spaces before or after the '='.
 
 
 
