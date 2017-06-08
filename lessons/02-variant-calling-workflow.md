@@ -7,9 +7,11 @@ Learning Objectives:
 -------------------
 #### What's the goal for this lesson?
 
-* Use a series of command line tools to perform a variant calling workflow
-* Use a For loop from the previous lesson to help automate repetitive tasks
-* Group a series of sequential commands into a script to automate a workflow
+* Automate an analytical workflow.	
+* Employ command line tools to perform a variant calling workflow.
+* Employ For Loops from the previous lesson to automate repetitive tasks.
+* Group a series of sequential commands into a script to automate a workflow.
+
 
 To get started with this lesson, we will need to grab some data from an outside
 server using `wget` on the command line.
