@@ -469,10 +469,10 @@ Use can use the command `abyss-fac`, which scans the contigs lengths and outputs
 $ module load abyss
 $ abyss-fac velvet31.fasta
 ```
-
-#### Validation ####
+___
+### Validation ###
 Make sure that you validate the results before releasing it. Some assemblies may appear to have large contigs and scaffolds, but are wrong. ___Check the assembly!___
-
+#### QUAST ###
 One software package for evaluating assemblies is quast.py [website](http://quast.sourceforge.net/quast)
 Make sure you are in `results` directory (otherwise, `cd results`)
 ```
