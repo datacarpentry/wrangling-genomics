@@ -105,7 +105,9 @@ Each individual base in a sequence read has quality identifier called PHRED scor
 
 How does this work? 
 “Phred quality scores  are defined as a property which is logarithmically related to the base-calling error probabilities .” -Wikipedia.
+
 Or you can just use this chart: 
+
 |Phred Quality Score |Probability of incorrect base call |Base call accuracy|
 |:-------------------|:---------------------------------:|-----------------:|
 |10	|1 in 10 |	90%|
