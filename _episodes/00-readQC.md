@@ -5,10 +5,10 @@ exercises: 0
 questions:
 - "Key question"
 objectives:
-- "Understand how the FastQ format encodes quality."   
-- "Be able to evaluate a FastQC report."
-- "Use Trimmommatic to clean FastQ reads."
-- "Use a For loop to automate operations on multiple files."
+- "Describe how the FastQ format encodes quality."
+- "Evaluate a FastQC report."
+- "Clean FastQ reads using Trimmommatic."
+- "Employ for loops to automate operations on multiple files."
 keypoints:
 - "First key point."
 ---
