@@ -1,7 +1,5 @@
 # Wrangling Genomics
 
-[![Gitter chat](https://badges.gitter.im/data-lessons/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
-
 Lesson for quality control and wrangling genomics data. This repository is maintained by [Luis Avila](https://github.com/lmavila), and [Niel Infante](https://github.com/NielInfante). 
 
 Amazon public AMI for this tutorial is "dataCgen-qc". 
@@ -17,7 +15,7 @@ It builds on the work of [Software Carpentry](http://software-carpentry.org/) an
 
 There are many ways of contributing to Library Carpentry:
 
-- Join our *soon to be active* [Gitter discussion forum](https://gitter.im/WranglingGenomics/).
+- Join our [![Gitter chat](https://badges.gitter.im/data-lessons/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
 - Follow updates on are *soon to be active* [Twitter](https://twitter.com/WranglingGenomics).
 - Make a suggestion or correct an error by [raising an Issue](https://github.com/data-lessons/wrangling-genomics/issues).
 
