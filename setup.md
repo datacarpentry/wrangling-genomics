@@ -20,7 +20,7 @@ permalink: /setup/
 
 Most of the genomics lessons from data carpentry currently use amazon cloud.
 
-We don't currently know if we'll keel using amazon cloud or not.
+We don't currently know if we'll keep using amazon cloud or not.
 
 ## Required software
 
