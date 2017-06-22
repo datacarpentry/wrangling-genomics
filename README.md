@@ -1,7 +1,11 @@
 # Wrangling Genomics
-Lesson for quality control and wrangling genomics data. This repository is maintained by Hadrien Gourlé, Luis Avila, Niel Infante, and Kate Crosby. 
+Lesson for quality control and wrangling genomics data. This repository is maintained by [Hadrien Gourlé](https://github.com/HadrienG), [Luis Avila](https://github.com/lmavila), [Niel Infante](NielInfante), and [Kate Crosby](https://github.com/kate-crosby). 
 
 Amazon public AMI for this tutorial is "dataCgen-qc". 
+
+## Background
+
+Wrangling genomics trains novice learners **Niel please fill in**
 
 ## Contribution
 
