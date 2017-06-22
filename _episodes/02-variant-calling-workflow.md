@@ -3,9 +3,9 @@ title: "Variant Calling Workflow"
 teaching: 0
 exercises: 0
 questions:
-- "Key question"
+- "How do I find variants in my data?"
 objectives:
-- "Use a series of command line tools to perform a variant calling workflow"
+- "Use command line tools to perform a variant calling workflow"
 - "Use a For loop from the previous lesson to help automate repetitive tasks"
 -  "Group a series of sequential commands into a script to automate a workflow"
 keypoints:
