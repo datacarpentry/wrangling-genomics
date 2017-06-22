@@ -12,8 +12,6 @@ objectives:
 keypoints:
 - "First key point."
 ---
-
-
 # Setting up
 
 To get started with this lesson, make sure you are in `dc_workshop`. Now let's copy over the reference data required for alignment:
