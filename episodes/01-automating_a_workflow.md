@@ -145,7 +145,7 @@ You will also need to create directories for the results that will be generated 
 
 We have already trimmed our reads so now the next step is alignment of our quality reads to the reference genome.
 
-![workflow_align](./img/variant_calling_workflow_align.png)
+![workflow_align](../img/variant_calling_workflow_align.png)
 
 We perform read alignment or mapping to determine where in the genome our reads originated from. There are a number of tools to
 choose from and while there is no gold standard there are some tools that are better suited for particular NGS analyses. We will be
@@ -196,7 +196,7 @@ and try to understand the options.*
 
 ## Alignment cleanup
 
-![workflow_clean](./img/variant_calling_workflow_cleanup.png)
+![workflow_clean](../img/variant_calling_workflow_cleanup.png)
 
 Post-alignment processing of the alignment file includes:
 
@@ -221,10 +221,10 @@ that follows corresponds to alignment information for a single read. Each alignm
 mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is 
 displayed below with the different fields highlighted.
 
-![sam_bam1](./img/sam_bam.png)
+![sam_bam1](../img/sam_bam.png)
 
 
-![sam_bam2](./img/sam_bam3.png)
+![sam_bam2](../img/sam_bam3.png)
 
 First we will use the `bwa samse` command to convert the .sai file to SAM format:
 
@@ -264,7 +264,7 @@ variant frequency and some measure of confidence. Similar to other steps in this
 variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the 
 variants.
 
-![workflow](./img/variant_calling_workflow.png)
+![workflow](../img/variant_calling_workflow.png)
 
 ### Step 1: Calculate the read coverage of positions in the genome
 
@@ -385,7 +385,7 @@ Using FileZilla, transfer the following 4 files to your local machine:
 
 Your IGV browser should look like the screenshot below:
 
-![IGV](./img/igv-screenshot.png)
+![IGV](../img/igv-screenshot.png)
 
 There should be two tracks: one coresponding to your BAM file and the other for your VCF file. 
 
