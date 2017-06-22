@@ -2,7 +2,7 @@
 
 [![Gitter chat](https://badges.gitter.im/data-lessons/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
 
-Lesson for quality control and wrangling genomics data. This repository is maintained by [Hadrien Gourlé](https://github.com/HadrienG), [Luis Avila](https://github.com/lmavila), [Niel Infante](NielInfante), and [Kate Crosby](https://github.com/kate-crosby). 
+Lesson for quality control and wrangling genomics data. This repository is maintained by [Luis Avila](https://github.com/lmavila), [Niel Infante](NielInfante), and [Kate Crosby](https://github.com/kate-crosby). 
 
 Amazon public AMI for this tutorial is "dataCgen-qc". 
 
