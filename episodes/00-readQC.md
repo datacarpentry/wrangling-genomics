@@ -43,7 +43,7 @@ built under the assumption that the data will be provided in a specific format.
 The first step in the variant calling work flow is to take the FASTQ files received from the sequencing facility
 and assess the quality of the sequence reads. 
 
-![workflow_qc](./img/var_calling_workflow_qc.png)
+![workflow_qc](../img/var_calling_workflow_qc.png)
 ## Details on the FASTQ format
 
 Although it looks complicated (and maybe it is), its easy to understand the
