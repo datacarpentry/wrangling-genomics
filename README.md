@@ -2,13 +2,16 @@
 
 [![Gitter chat](https://badges.gitter.im/data-lessons/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
 
-Lesson for quality control and wrangling genomics data. This repository is maintained by [Luis Avila](https://github.com/lmavila), [Niel Infante](NielInfante), and [Kate Crosby](https://github.com/kate-crosby). 
+Lesson for quality control and wrangling genomics data. This repository is maintained by [Luis Avila](https://github.com/lmavila), and [Niel Infante](https://github.com/NielInfante). 
 
 Amazon public AMI for this tutorial is "dataCgen-qc". 
 
 ## Background
 
-Wrangling genomics trains novice learners **Niel please fill in**
+Wrangling genomics trains novice learners on a variant calling workflow. Participants will learn how to evaluate sequence quality and what to do if it is not good. We will then cover aligning reads to a genome, and calling variants, as well as discussing different file formats. Results will be visualized. Finally, we will cover how to automate the process by building a shell script.
+
+It builds on the work of [Software Carpentry](http://software-carpentry.org/) and [Data Carpentry](http://www.datacarpentry.org/).
+
 
 ## Contribution
 
