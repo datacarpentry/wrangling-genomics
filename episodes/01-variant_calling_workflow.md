@@ -9,9 +9,7 @@ objectives:
 - "Use a For loop from the previous lesson to help automate repetitive tasks"
 - "Understand the different steps involved in variant calling" 
 - "Becoming familiar with data formats encountered during variant calling"
-
-
-
+keypoints:
 - "First key point."
 ---
 
