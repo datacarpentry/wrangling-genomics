@@ -3,7 +3,7 @@ title: "Quality Control"
 teaching: 0
 exercises: 0
 questions:
-- "Key question"
+- "Is my data good enough?"
 objectives:
 - "Describe how the FastQ format encodes quality."
 - "Evaluate a FastQC report."
