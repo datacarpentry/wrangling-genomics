@@ -3,10 +3,10 @@ title: "Automating with Shell Scripting"
 teaching: 0
 exercises: 0
 questions:
-- "Key question"
+- "How can I automate this?"
 objectives:
 - "Understand what a shell script is"
-- "Learn how automate an analytical workflow"
+- "Automate an analytical workflow"
 - "Understand the different steps involved in variant calling" 
 - "Use a series of command line tools to execute a variant calling workflow"
 - "Becoming familiar with data formats encountered during variant calling"
