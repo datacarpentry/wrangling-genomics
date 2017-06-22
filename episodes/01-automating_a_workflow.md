@@ -385,7 +385,7 @@ Using FileZilla, transfer the following 4 files to your local machine:
 
 Your IGV browser should look like the screenshot below:
 
-![IGV](./img/igv-screenshot.png)
+![IGV](../img/igv-screenshot.png)
 
 There should be two tracks: one coresponding to your BAM file and the other for your VCF file. 
 
