@@ -158,7 +158,7 @@ The main functions of FastQC are:
 Rather than looking at quality scores for each individual read, FastQC looks at quality collectively across all reads within a sample. The image below is a plot that indicates a (very) good
 quality sample:
 
-![good_quality](./img/good_quality.png)
+![good_quality](../img/good_quality.png)
 
 On the x-axis you have the base position in the read, and on the y-axis you have quality scores. In this example, the sample contains reads that are 40 bp long. For each position, there is a box
 plotted to illustrate the distribution of values (with the whiskers indicating the 90th and 10th percentile scores). For every position here, the quality values do not drop much lower than 32 --
@@ -166,7 +166,7 @@ which if you refer to the table above is a pretty good quality score. The plot b
 
 Now let's take a look at a quality plot on the other end of the spectrum. 
 
-![bad_quality](./img/bad_quality.png)
+![bad_quality](../img/bad_quality.png)
 
 Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the 'bad' range, particularly on the tail end of the reads. When you 
 encounter a quality plot such as this one, the first step is to troubleshoot. Why might we be seeing something like this? 
