@@ -1,5 +1,5 @@
 ---
-title: "Automating Variant Calling Workflow"
+title: "Automating a Variant Calling Workflow"
 teaching: 0
 exercises: 0
 questions:
