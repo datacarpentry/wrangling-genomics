@@ -16,7 +16,7 @@ It builds on the work of [Software Carpentry](http://software-carpentry.org/) an
 There are many ways of contributing to Library Carpentry:
 
 - Join our [![Gitter chat](https://badges.gitter.im/data-lessons/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
-- Follow updates on are *soon to be active* [Twitter](https://twitter.com/WranglingGenomics).
+- Follow updates on our *soon to be active* [Twitter](https://twitter.com/WranglingGenomics).
 - Make a suggestion or correct an error by [raising an Issue](https://github.com/data-lessons/wrangling-genomics/issues).
 
 ## Code of Conduct
