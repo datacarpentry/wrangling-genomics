@@ -63,7 +63,7 @@ IGV is available for Linux, MacOS and Windows.
 
 ## Required Data
 
-You also need to download some files to follow this lesson
+You will also need to download a data tarball of a reference genome and fastq files for *E. coli*:
 
-* Download [variant_calling.tar.gz](./variant_calling.tar.gz)
-* Unpack it with `tar xzf variant_calling.tar.gz`
+* Download [variant_calling.tar.gz](./variant_calling.tar.gz), you can also use the unix command 'wget' to obtain the copied link.
+* Once downloaded unpack it with `tar xzf variant_calling.tar.gz`
