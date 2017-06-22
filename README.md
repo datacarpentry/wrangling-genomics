@@ -7,3 +7,6 @@ Amazon public AMI for this tutorial is "dataCgen-qc".
 
 All participants should agree to abide by the [Software Carpentry Code of Conduct](http://software-carpentry.org/conduct/).
 
+## Authors
+
+Library Carpentry is authored and maintained by the [community](https://github.com/data-lessons/wrangling-genomics/network/members).
