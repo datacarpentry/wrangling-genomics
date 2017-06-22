@@ -10,3 +10,9 @@ All participants should agree to abide by the [Software Carpentry Code of Conduc
 ## Authors
 
 Library Carpentry is authored and maintained by the [community](https://github.com/data-lessons/wrangling-genomics/network/members).
+
+## Citation
+
+Please cite as:
+
+Wrangling Genomics. June 2017. http://data-lessons.github.io/wrangling-genomics/.
