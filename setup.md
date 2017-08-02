@@ -42,6 +42,33 @@ Trimmomatic is available for Linux, MacOS and Windows.
 
 Bwa is available for Linux and MacOS.
 
+#### Installation instructions:
+Reference: The Biostars Handbook
+
+```brew install bwa```
+or
+
+```conda install -y bwa```
+All other platforms:
+```
+cd ~/src
+curl -OL http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.15.tar.bz2
+tar jxvf bwa-0.7.15.tar.bz2
+cd bwa-0.7.15
+make
+export PATH=~/src/bwa-0.7.15:$PATH
+```
+
+#### Test installation:
+
+Run:
+```
+bwa
+```
+BWA has a nicely formatted manual:
+
+```man ~/src/bwa-0.7.12/bwa.1 ```
+
 ### SAMtools
 
 [SAMtools](https://github.com/samtools/samtools) is a suite of programs for interacting with high-throughput sequencing data. Samtools can read/write/edit/index/view SAM/BAM/CRAM format.
