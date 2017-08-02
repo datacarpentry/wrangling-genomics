@@ -4,7 +4,7 @@ title: Setup
 permalink: /setup/
 ---
 
-## Table of Content
+## Table of Contents
 
 * [Amazon Cloud](#amazon-cloud)
 * [Required software](#required-software)
@@ -18,9 +18,9 @@ permalink: /setup/
 
 ## Amazon Cloud
 
-Most of the genomics lessons from data carpentry currently use amazon cloud.
+Most of the genomics lessons from Data Carpentry currently use Amazon Cloud.
 
-We don't currently know if we'll keep using amazon cloud or not.
+We don't currently know if we'll keep using Amazon Cloud or not.
 
 ## Required software
 
@@ -113,7 +113,8 @@ Reference: The Biostars Handbook
 or
 
 ```conda install -y bwa```
-All other platforms:
+
+##### Installation from source:
 ```
 cd ~/src
 curl -OL http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.15.tar.bz2
@@ -135,7 +136,7 @@ BWA has a nicely formatted manual:
 
 ### SAMtools
 
-[SAMtools](https://github.com/samtools/samtools) is a suite of programs for interacting with high-throughput sequencing data. Samtools can read/write/edit/index/view SAM/BAM/CRAM format.
+[SAMtools](https://github.com/samtools/samtools) is a suite of programs for interacting with high-throughput sequencing data. SAMtools can read/write/edit/index/view SAM/BAM/CRAM format.
 
 SAMtools is available for Linux and MacOS.
 
@@ -146,9 +147,9 @@ Reference: The Biostars Handbook
 or
 ```conda install -y samtools```
 Note:
-Samtools has changed the command line invocation (for the better). But this means that most of the tutorials on the web indicate an older and obsolete usage.
+SAMtools has changed the command line invocation (for the better). But this means that most of the tutorials on the web indicate an older and obsolete usage.
 
-Use only samtools 1.3 or later.
+Use only SAMtools 1.3 or later.
 
 #### Source code installation
 ```
@@ -165,12 +166,12 @@ source ~/.bashrc
 #### Test that the installation succeeded:
 
 ```samtools```
-Samtools has a nicely formatted manual:
+SAMtools has a nicely formatted manual:
 ```
 man ~/src/samtools-1.3/samtools.1 
 ```
 
-### bcftools
+### BCFtools
 
 [BCFtools](https://github.com/samtools/bcftools) is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF.
 
@@ -186,7 +187,6 @@ conda install bcftools```
 #### Install from source
 
 ```
-
 cd ~/src
 curl -OkL https://github.com/samtools/bcftools/releases/download/1.5/bcftools-1.5.tar.bz2
 tar jxvf bcftools-1.5.tar.bz2
