@@ -177,12 +177,26 @@ man ~/src/samtools-1.3/samtools.1
 BCFtools is available for Linux and MacOS
 
 #### Installation Instructions
-Reference: The Biostars Handbook
 
 ```brew install bcftools```
 or
 ```
 conda install bcftools```
+
+#### Install from source
+
+```
+
+cd ~/src
+curl -OkL https://github.com/samtools/bcftools/releases/download/1.5/bcftools-1.5.tar.bz2
+tar jxvf bcftools-1.5.tar.bz2
+cd bcftools-1.5
+make
+
+# Add directory to the path if necessary
+echo export `PATH=~/src/bcftools-1.5:$PATH` >> ~/.bashrc
+source ~/.bashrc
+```
 
 #### Test that the installation succeeded:
 
