@@ -96,7 +96,7 @@ echo '#!/bin/bash' > ~/bin/trimmomatic
 echo 'java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar $@' >> ~/bin/trimmomatic
 chmod +x ~/bin/trimmomatic
 ```
-Test installation by running:
+#### Test installation by running:
 
 ```trimmomatic```
 
@@ -162,7 +162,7 @@ make
 echo export `PATH=~/src/samtools-1.3:$PATH` >> ~/.bashrc
 source ~/.bashrc
 ```
-Test that the installation succeeded:
+#### Test that the installation succeeded:
 
 ```samtools```
 Samtools has a nicely formatted manual:
@@ -174,7 +174,19 @@ man ~/src/samtools-1.3/samtools.1
 
 [BCFtools](https://github.com/samtools/bcftools) is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF.
 
-BCFtools is available for Linuc and MacOS
+BCFtools is available for Linux and MacOS
+
+#### Installation Instructions
+Reference: The Biostars Handbook
+
+```brew install bcftools```
+or
+```
+conda install bcftools```
+
+#### Test that the installation succeeded:
+
+```bcftools```
 
 ### IGV
 
