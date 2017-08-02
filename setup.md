@@ -30,6 +30,35 @@ We don't currently know if we'll keep using amazon cloud or not.
 
 FastQC is available for Linux, MacOS and Windows.
 
+#### Install Instructions:
+Reference: The Biostars Handbook
+
+```brew install fastqc```
+or
+
+```conda install -y fastqc```
+
+#### Source code installation
+
+This is helpful when one wants to understand what type of files come with fastqc
+````
+cd ~/src
+curl -O http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
+unzip fastqc_v0.11.5.zip
+
+# Link the fastqc executable to the ~/bin folder that
+# you have already added to the path.
+ln -sf ~/src/FastQC/fastqc ~/bin/fastqc
+
+# Due to what seems a packaging error
+# the executable flag on the fastqc program is not set.
+# We need to set it ourselves.
+chmod +x ~/bin/fastqc
+```
+Test installation by running:
+
+```fastqc -h```
+
 ### Trimmomatic
 
 [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) is a java based program that can remove sequencer specific reads and nucleotides that fall below a certain threshold. Trimmomatic can be multithreaded to run quickly.
