@@ -65,6 +65,41 @@ Test installation by running:
 
 Trimmomatic is available for Linux, MacOS and Windows.
 
+#### Installation Instructions:
+Reference: The Biostars Handbook
+
+```brew install trimmomatic```
+or
+```conda install -y trimmomatic```
+Installation from source
+```
+cd ~/src
+curl -O http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
+unzip Trimmomatic-0.36.zip
+
+# The program can be invoked via
+java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar
+
+# The ~/src/Trimmomatic-0.36/adapters/ directory contains
+# Illumina specific adapter sequences.
+ls ~/src/Trimmomatic-0.36/adapters/
+```
+#### How to run trimmomatic
+
+Unfortunately running trimmomatic is as user unfriendly as it gets. To run it we "simply" type:
+
+```java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar```
+That gets old very quickly. To simplify the invocation create a script in the ~/bin folder:
+
+```
+echo '#!/bin/bash' > ~/bin/trimmomatic
+echo 'java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar $@' >> ~/bin/trimmomatic
+chmod +x ~/bin/trimmomatic
+```
+Test installation by running:
+
+```trimmomatic```
+
 ### BWA
 
 [Bwa](https://github.com/lh3/bwa) is a software package for mapping DNA sequences against a large reference genome, such as the human genome.
