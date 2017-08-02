@@ -71,7 +71,7 @@ Reference: The Biostars Handbook
 ```brew install trimmomatic```
 or
 ```conda install -y trimmomatic```
-Installation from source
+#### Source Code Installation
 ```
 cd ~/src
 curl -O http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
@@ -139,6 +139,36 @@ BWA has a nicely formatted manual:
 
 SAMtools is available for Linux and MacOS.
 
+#### Installation Instructions
+Reference: The Biostars Handbook
+
+```brew install samtools```
+or
+```conda install -y samtools```
+Note:
+Samtools has changed the command line invocation (for the better). But this means that most of the tutorials on the web indicate an older and obsolete usage.
+
+Use only samtools 1.3 or later.
+
+#### Source code installation
+```
+cd ~/src
+curl -OkL https://github.com/samtools/samtools/releases/download/1.3/samtools-1.3.tar.bz2
+tar jxvf samtools-1.3.tar.bz2
+cd samtools-1.3
+make
+
+# Add directory to the path if necessary
+echo export `PATH=~/src/samtools-1.3:$PATH` >> ~/.bashrc
+source ~/.bashrc
+```
+Test that the installation succeeded:
+
+```samtools```
+Samtools has a nicely formatted manual:
+```
+man ~/src/samtools-1.3/samtools.1 
+```
 
 ### bcftools
 
