@@ -263,10 +263,9 @@ The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=126
 
 ## Assess the alignment (visualization) - optional step
 
-It is often instructive to look at your data in a genome browser. You could use
-something like [IGV](http://www.broadinstitute.org/igv/), a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They do not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few. As such, they are useful tools for exploratory analysis. Visualisation will allow you to get a "feel" for the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you ideas for further analyses.
+It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you ideas for further analyses.  As such, visualization tools are useful for exploratory analysis. In this lesson we will describe two different tools for visualisation; a light-weight command-line based one and IGV which requires software installation and transfer of files.
 
-In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
+In any case, and in order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
 
     $ samtools index results/bam/SRR097977.aligned.sorted.bam
 
@@ -293,6 +292,8 @@ samtools tview -p chr1:173389928 results/bam/SRR097977.aligned.sorted.bam data/r
 ```
 
 ### Viewing with `IGV`
+
+[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They do not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
 **Transfer files to your laptop**
 
