@@ -5,10 +5,9 @@ exercises: 0
 questions:
 - "How do I find variants in my data?"
 objectives:
-- "Use command line tools to perform a variant calling workflow"
-- "Use a For loop from the previous lesson to help automate repetitive tasks"
+- "Be able to use command line tools to perform a variant calling workflow"
 - "Understand the different steps involved in variant calling" 
-- "Becoming familiar with data formats encountered during variant calling"
+- "Be familiar with data formats encountered during variant calling"
 keypoints:
 - "First key point."
 ---
@@ -16,8 +15,8 @@ keypoints:
 
 To get started with this lesson, make sure you are in `dc_workshop`. Now let's copy over the reference data required for alignment:
 
-$ cd ~/dc_workshop
-$ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
+    $ cd ~/dc_workshop
+    $ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
 
 Your directory structure should now look like this:
 
@@ -60,10 +59,12 @@ sequences against a large reference genome. The alignment process consists of tw
 2. Aligning the reads to the reference genome
 
 ### Index the reference genome
-Our first step is to index the reference genome for use by BWA. *NOTE: This only has to be run once*. The only reason you would
-want to create a new index is if you are working with a different reference  genome or you are using a different tool for 
-alignment.
+Our first step is to index the reference genome for use by BWA. 
 
+> Indexing the reference only has to be run once. The only reason you would
+> want to create a new index is if you are working with a different reference  
+> genome or you are using a different tool for alignment.
+{: .callout}
    
     $ bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the speed of alignment
 
@@ -192,7 +193,7 @@ Identify SNPs using bcftools:
 
 ### Step 3: Filter and report the SNP variants in VCF (variant calling format)
 
-Filter the SNPs for the final output in VCF format, using vcfutils.pl:
+Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
     $ bcftools view results/bcf/SRR097977_variants.bcf \ | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR097977_final_variants.vcf
 
