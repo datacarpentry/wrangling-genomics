@@ -263,9 +263,36 @@ The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=126
 
 ## Assess the alignment (visualization) - optional step
 
-In order for us to look at the alignment files in a genome browser, we will need to index the BAM file using `samtools`:
+It is often instructive to look at your data in a genome browser. You could use
+something like [IGV](http://www.broadinstitute.org/igv/), a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They do not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few. As such, they are useful tools for exploratory analysis. Visualisation will allow you to get a "feel" for the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you ideas for further analyses.
+
+In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
 
     $ samtools index results/bam/SRR097977.aligned.sorted.bam
+
+### Viewing with `tview`
+
+SAMTools implements a very simple text alignment viewer based on the GNU `ncurses` library, called `tview`. This alignment viewer works with short indels and shows MAQ consensus. It uses different colors to display mapping quality or base quality, subjected to users' choice. SAMTools viewer is known to work with an 130GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
+
+In order to visualize our mapped reads with `tview`, run the following command:
+
+```
+samtools tview results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
+```
+
+`tview` commands of relevance:
+
+* left and right arrows scroll
+* `q` to quit
+* CTRL-h and CTRL-l do "big" scrolls
+
+Alternatively, you can guide `tview` to start in a particular position, as follows:
+
+```
+samtools tview -p chr1:173389928 results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
+```
+
+### Viewing with `IGV`
 
 **Transfer files to your laptop**
 
@@ -279,13 +306,10 @@ Using FileZilla, transfer the following 4 files to your local machine:
 
     results/vcf/SRR097977_final_variants.vcf
 
-## **Visualize**	
-
 1. Start [IGV](https://www.broadinstitute.org/software/igv/download)
 2.  Load the genome file into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
 3.  Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. *IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, but there is no direct use for that file.*
 4.  Load in the VCF file using the **"Load from File..."** option under the **"File"** pull-down menu
-
 
 Your IGV browser should look like the screenshot below:
 
@@ -299,6 +323,4 @@ heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are
 
 Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information 
 corresponds to alignment information at those loci.
-
-
 
