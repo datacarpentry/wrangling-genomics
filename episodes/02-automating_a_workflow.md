@@ -74,8 +74,7 @@ in the same directory.
 
 # A real shell script
 
-Now, let's do something real.  First, recall the code from our our fastqc
-workflow from this morning, with a few extra "echo" statements.
+Now, let's do something real. First, recall the code from our our quality control workflow, with a few extra “echo” statements.
 
     cd ~/dc_workshop/data/untrimmed_fastq/
 
@@ -101,7 +100,7 @@ workflow from this morning, with a few extra "echo" statements.
 > ## Exercise
 > 1) Use nano to create a shell script using with the code above (you can copy/paste), named read_qc.sh  
 > 2) Run the script  
-> 3) Bonus points: Use something you learned yesterday to save the output of the script to a file while it is running.  
+> 3) Bonus points: Save the output of the script to a file while it is running (hint: redirection).  
 {: .challenge}
 
 
