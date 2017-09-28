@@ -94,7 +94,7 @@ chart from wikipedia:
                                     3.....9.............................40 
   0.2......................26...31........41                              
 
-S - Sanger        Phred+33,  raw reads typically (0, 40)  
+ S - Sanger        Phred+33,  raw reads typically (0, 40)  
  X - Solexa        Solexa+64, raw reads typically (-5, 40)  
  I - Illumina 1.3+ Phred+64,  raw reads typically (0, 40)  
  J - Illumina 1.5+ Phred+64,  raw reads typically (3, 40)  
@@ -136,9 +136,9 @@ characters. ***Different quality encoding scales exist (differing by offset in t
 Using the quality encoding character legend, the first nucleotide in the read (C) is called with a quality score of 31 and our Ns are called with a score of 2. **As you can tell by now, this is a bad read.** 
 
 Each quality score represents the probability that the corresponding nucleotide call is incorrect. This quality score is logarithmically based and is calculated as:
-
-	Q = -10 x log10(P), where P is the probability that a base call is erroneous
-
+___
+   Q = -10 x log10(P), where P is the probability that a base call is erroneous
+___
 These probability values are the results from the base calling algorithm and dependent on how much signal was captured for the base incorporation. 
 
 
@@ -204,7 +204,7 @@ Navigate to the initial fastq dataset
 
     $ cd ~/dc_workshop/data/untrimmed_fastq/
 
-To run the fastqc program, we call it from its location in ``~/FastQC``.  fastqc will accept multiple file names as input, so we can use the *.fastq wildcard.
+To run the fastqc program, we call it from its location in `~/FastQC`.  fastqc will accept multiple file names as input, so we can use the *.fastq wildcard.
 
 Run FastQC on all fastq files in the directory
 
@@ -238,7 +238,8 @@ Use unzip to unzip the FastQC results:
     $ unzip *.zip
 
 Did it work? No, because 'unzip' expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can
-save time by using a simple shell 'for loop' to iterate through the list of files in *.zip. After you type the first line, you will get a special '>' prompt to type next next lines. You start with
+save time by using a simple shell 'for loop' to iterate through the list of files in `*.zip`. 
+After you type the first line, you will get a special '>' prompt to type next next lines. You start with
 'do', then enter your commands, then end with 'done' to execute the loop.
 
 Build a `for` loop to unzip the files
@@ -263,7 +264,7 @@ When you check your history later, it will help your remember what you did!
 
 ## D. Document your work
 
-To save a record, let's cat all fastqc summary.txts into one full_report.txt and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we
+To save a record, let's cat all fastqc summary.txts into one full_report.txt and move this to `~/dc_workshop/docs`. You can use wildcards in paths as well as file names.  Do you remember how we
 said 'cat' is really meant for concatenating text files?
 
     cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
@@ -282,31 +283,31 @@ Once we have an idea of the quality of our raw data, it is time to trim away ada
 
 Because *Trimmomatic* is java based, it is run using the command:
 
-    **_java jar trimmomatic-0.32.jar_**
+    java jar trimmomatic-0.32.jar
 
 What follows this are the specific commands that tells the program exactly how you want it to operate. *Trimmomatic* has a variety of options and parameters:
 
-* **_-threds_** How many processors do you want *Trimmomatic* to run with?
-* **_SE_** or **_PE_** Single End or Paired End reads?
-* **_-phred33_** or **_-phred64_** Which quality score do your reads have?
-* **_SLIDINGWINDOW_** Perform sliding window trimming, cutting once the average quality within the window falls below a threshold.
-* **_LEADING_** Cut bases off the start of a read, if below a threshold quality.
-* **_TRAILING_** Cut bases off the end of a read, if below a threshold quality.
-* **_CROP_** Cut the read to a specified length.
-* **_HEADCROP_** Cut the specified number of bases from the start of the read.
-* **_MINLEN_** Drop an entire read if it is below a specified length.
-* **_TOPHRED33_** Convert quality scores to Phred-33.
-* **_TOPHRED64_** Convert quality scores to Phred-64.
+* `-threads` How many processors do you want *Trimmomatic* to run with?
+* `SE` or `PE` Single End or Paired End reads?
+* `-phred33` or `-phred64` Which quality score do your reads have?
+* `SLIDINGWINDOW` Perform sliding window trimming, cutting once the average quality within the window falls below a threshold.
+* `LEADING` Cut bases off the start of a read, if below a threshold quality.
+* `TRAILING` Cut bases off the end of a read, if below a threshold quality.
+* `CROP` Cut the read to a specified length.
+* `HEADCROP` Cut the specified number of bases from the start of the read.
+* `MINLEN` Drop an entire read if it is below a specified length.
+* `TOPHRED33` Convert quality scores to Phred-33.
+* `TOPHRED64` Convert quality scores to Phred-64.
 
 A generic command for *Trimmomatic* looks like this:
 
-    java jar trimmomatic-0.32.jar SE -thr
+    java -jar trimmomatic-0.32.jar SE
 
 A complete command for *Trimmomatic* will look something like this:
 
-    java jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+    java -jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
 
-This command tells *Trimmomatic* to run on a Single End file (``SRR_0156.fastq``, in this case), the output file will be called ``SRR_0156_trimmed.fastq``,  there is a file with Illumina adapters called ``SRR_adapters.fa``, and we are using a sliding window of size 4 that will remove those bases if their phred score is below 20.
+This command tells *Trimmomatic* to run on a Single End file (`SRR_0156.fastq`, in this case), the output file will be called `SRR_0156_trimmed.fastq`,  there is a file with Illumina adapters called `SRR_adapters.fa`, and we are using a sliding window of size 4 that will remove those bases if their phred score is below 20.
 
 
 ## Exercise - Running Trimmomatic
@@ -322,7 +323,7 @@ The general form of the command is:
     $ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar inputfile outputfile OPTION:VALUE...
 
 `java -jar` calls the Java program, which is needed to run trimmomargumentstic, which lived in a 'jar' file (trimmomatic-0.32.jar), a special kind of java archive that is often used for programs
-written in the Java programing language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed 'java -jar program name'.  The 'SE' argument is a 
+written in the Java programing language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed `java -jar program name`.  The 'SE' argument is a 
 keyword that specifies we are working with single-end reads.
 
 The next two arguments are input file and output file names.  These are then followed by a series of options. The specifics of how options are passed to a program are different depending on the 
