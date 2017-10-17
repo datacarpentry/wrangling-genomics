@@ -310,7 +310,7 @@ This command tells Trimmomatic to run on a Single End file (``SRR_0156.fastq``, 
 
 ## Exercise - Running Trimmomatic
 
-Go to the untrimmed fastq data location:
+To begin, go to the untrimmed fastq data location:
 
     $ cd /home/dcuser/dc_workshop/data/untrimmed_fastq
 
