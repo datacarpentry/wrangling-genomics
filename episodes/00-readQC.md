@@ -59,7 +59,6 @@ include...
 
 so for example in our data set, one complete read is:
 
-
     $ head -n4 SRR098281.fastq 
     @SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
     CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
@@ -80,7 +79,7 @@ As mentioned above, line 4 is a encoding of the quality. In this case, the code 
 are actually several historical differences in how Illumina and other players have encoded the scores. Heres the 
 chart from wikipedia:
 
-
+```
     SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS.....................................................
     ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX......................
     ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII......................
@@ -102,7 +101,7 @@ S - Sanger        Phred+33,  raw reads typically (0, 40)
      with 0=unused, 1=unused, 2=Read Segment Quality Control Indicator (bold)   
      (Note: See discussion above).  
  L - Illumina 1.8+ Phred+33,  raw reads typically (0, 41)  
-
+```
 
 So using the Illumina 1.8 encoding, which is what you will mostly see from now on, our first c is called with a Phred score of 0 and our Ns are called with a score of 2. 
 Read quality is assessed using the Phred Quality Score.  This score is logarithmically based and the score values can be interpreted as follows:
@@ -127,7 +126,7 @@ Let's use the following read as an example:
 
 As mentioned previously, line 4 has characters encoding the quality of each nucleotide in the read. The legend below provides the mapping of quality scores (Phred-33) 
 to the quality encoding
-characters. ** *Different quality encoding scales exist (differing by offset in the ASCII table), but note the most commonly used one is fastqsanger* **
+characters. ***Different quality encoding scales exist (differing by offset in the ASCII table), but note the most commonly used one is fastqsanger***
 
 
     Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI
@@ -320,8 +319,7 @@ The command line incantation for trimmomatic is more complicated.  This is where
 
 The general form of the command is:
 
-
-    java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar inputfile outputfile OPTION:VALUE...
+    $ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar inputfile outputfile OPTION:VALUE...
 
 `java -jar` calls the Java program, which is needed to run trimmomargumentstic, which lived in a 'jar' file (trimmomatic-0.32.jar), a special kind of java archive that is often used for programs
 written in the Java programing language.  If you see a new program that ends in '.jar', you will know it is a java program that is executed 'java -jar program name'.  The 'SE' argument is a 
@@ -341,18 +339,15 @@ So, for the single fastq input file 'SRR098283.fastq', the command would be:
     Input Reads: 21564058 Surviving: 17030985 (78.98%) Dropped: 4533073 (21.02%)
     TrimmomaticSE: Completed successfully
 
-
 So that worked and we have a new fastq file.
 
     $ ls SRR098283*
     SRR098283.fastq  SRR098283.fastq_trim.fastq
 
-
 Now we know how to run trimmomatic but there is some good news and bad news.  
 One should always ask for the bad news first.  Trimmomatic only operates on 
 one input file at a time and we have more than one input file.  The good news?
 We already know how to use a for loop to deal with this situation.
-
 
     $ for infile in *.fastq
     >do
@@ -360,10 +355,9 @@ We already know how to use a for loop to deal with this situation.
     >java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
     >done
 
-
 Do you remember how the first specifies a variable that is assigned the value of each item in the list in turn?  We can call it whatever we like.  This time it is called infile. 
-Note that the third line of this for loop is creating a second variable called outfile.  We assign it the value of $infile with '_trim.fastq' appended to it. The '\' escape character is used so
-the shell knows that whatever follows \ is not part of the variable name $infile.  There are no spaces before or after the '='.  
+Note that the third line of this for loop is creating a second variable called outfile.  We assign it the value of '$infile' with '_trim.fastq' appended to it.
+The `\` escape character is used so the shell knows that whatever follows `\` is not part of the variable name '$infile'.  There are no spaces before or after the `=`.
 
 
 

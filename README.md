@@ -15,9 +15,9 @@ It builds on the work of [Software Carpentry](http://software-carpentry.org/) an
 
 There are many ways of contributing to Library Carpentry:
 
-- Join our [![Gitter chat](https://badges.gitter.im/data-lessons/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
+- Join our [![Gitter chat](https://badges.gitter.im/datacarpentry/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
 - Follow updates on our *soon to be active* [Twitter](https://twitter.com/WranglingGenomics).
-- Make a suggestion or correct an error by [raising an Issue](https://github.com/data-lessons/wrangling-genomics/issues).
+- Make a suggestion or correct an error by [raising an Issue](https://github.com/datacarpentry/wrangling-genomics/issues).
 
 ## Code of Conduct
 
@@ -25,10 +25,10 @@ All participants should agree to abide by the [Software Carpentry Code of Conduc
 
 ## Authors
 
-Wrangling genomics is authored and maintained by the [community](https://github.com/data-lessons/wrangling-genomics/network/members).
+Wrangling genomics is authored and maintained by the [community](https://github.com/datacarpentry/wrangling-genomics/network/members).
 
 ## Citation
 
 Please cite as:
 
-Wrangling Genomics. June 2017. http://data-lessons.github.io/wrangling-genomics/.
+Wrangling Genomics. June 2017. http://datacarpentry.github.io/wrangling-genomics/.
