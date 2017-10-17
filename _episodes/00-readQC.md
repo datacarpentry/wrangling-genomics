@@ -267,8 +267,10 @@ When you check your history later, it will help your remember what you did!
 To save a record, let's `cat` all fastqc `summary.txt`s into one file `full_report.txt` and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we
 said `cat` is really meant for concatenating text files?
 
-    cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+    cat */summary.txt > ~/dc_workshop/docs/full_report.txt
 
+We can now use this concatenated report, which contains the summary results for each of our `.fastq` files, to see how many of our 
+samples generated good data. 
 
 # How to clean reads using Trimmomatic
 
