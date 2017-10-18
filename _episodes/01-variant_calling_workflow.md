@@ -118,7 +118,8 @@ The [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pag
 is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not 
 have time to go in detail of the features of the SAM format, the paper by 
 [Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full) provides a lot more detail on the specification.
-**The binary version of SAM is called a BAM file.**
+
+**The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
 
 The file begins with a **header**, which is optional. The header is used to describe source of data, reference sequence, method of
 alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
