@@ -41,7 +41,7 @@ or
 #### Source code installation
 
 **A note on `curl` and `wget`**  
-In these instructions, the command `curl` is used to download files from the internet. This command supports downloading files from FTP and HTTP(s). The `-O` paremeter ensures that the downloaded file gets saved on disk with the same filename as the original. There are other command line tools that can also be used to download data, for example `wget` (which you should use without the `-O` flag. `wget` also supports recursive download (with the parameter `-r`), allowing you to download content from a directory or folder. Not all computers have both tools installed.
+In these instructions, the command `curl` is used to download files from the internet. This command supports downloading files from FTP and HTTP(s). The `-O` paremeter ensures that the downloaded file gets saved on disk with the same filename as the original. There are other commandline tools that can also be used to download data, for example `wget` (which you should use without the `-O` flag). `wget` also supports recursive download (with the parameter `-r`), allowing you to download content from a directory or folder. Not all computers have both tools installed, though.
 
 This is helpful when one wants to understand what type of files come with fastqc
 ````
