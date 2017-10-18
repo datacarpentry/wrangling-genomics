@@ -311,7 +311,7 @@ Using FileZilla, transfer the following 4 files to your local machine:
 1. Start [IGV](https://www.broadinstitute.org/software/igv/download)
 2.  Load the genome file into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
 3.  Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. 
-3. Do the same with the .boi file. IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, and uses it for faster access to the data in the bam file.
+3. Do the same with the .bai file. IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, and uses it for faster access to the data in the bam file.
 4.  Load in the VCF file using the **"Load from File..."** option under the **"File"** pull-down menu
 
 Your IGV browser should look like the screenshot below:
