@@ -229,7 +229,7 @@ After getting the file, a good practice is to make sure that we actually got the
 55936b1e819246236535798d8a36c134  variant_calling.tar.gz
 ```
 
-The 32-character string on the left is the checksum of the file listed on the right. Let's download this file as well with wget (`wget http://www.datacarpentry.org/wrangling-genomics/variant_calling.md5`) and check if everything is ok with the following command (**Important note**: _both data file and checksum file should be in the same directory_):
+The 32-character string on the left is the checksum of the file listed on the right. Let's download this file as well with wget (`curl -O http://www.datacarpentry.org/wrangling-genomics/variant_calling.md5`) and check if everything is ok with the following command (**Important note**: _both data file and checksum file should be in the same directory_):
 
 ```
 md5sum -c variant_calling.md5
