@@ -325,4 +325,5 @@ heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are
 
 Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information 
 corresponds to alignment information at those loci.
+Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
