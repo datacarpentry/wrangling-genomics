@@ -131,8 +131,12 @@ displayed below with the different fields highlighted.
 
 ![sam_bam2](../img/sam_bam3.png)
 
-First we will use the `bwa samse` command to convert the .sai file to SAM format:
+First we will use the `bwa samse` command to convert the .sai file to SAM format. The usage for `bwa samse` is 
 
+
+    $ bwa samse path/to/ref_genome.fasta path/to/SAIfile path/to/fastq > SAMfile
+
+So in our case we need to run:
 
     $ bwa samse data/ref_genome/ecoli_rel606.fasta \
         results/sai/SRR097977.aligned.sai \
@@ -144,13 +148,13 @@ Explore the information within your SAM file:
 
     $ head results/sam/SRR097977.aligned.sam
 
-Now convert the SAM file to BAM format for use by downstream tools: 
+Now convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
     $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.aligned.bam
 
 ### Sort BAM file by coordinates
 
-Sort the BAM file:
+Sort the BAM file using the `sort` command from `samtools`, note that as second parameter, we give the filenamne of the desired output file *without* the `.bam` part:
 
 
     $ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted
@@ -274,7 +278,7 @@ In any case, and in order for us to visualize the alignment files, we will need 
 
 SAMTools implements a very simple text alignment viewer based on the GNU `ncurses` library, called `tview`. This alignment viewer works with short indels and shows MAQ consensus. It uses different colors to display mapping quality or base quality, subjected to users' choice. SAMTools viewer is known to work with an 130GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
 
-In order to visualize our mapped reads with `tview`, run the following command:
+In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file. We thus run the following command:
 
 ```
 samtools tview results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
