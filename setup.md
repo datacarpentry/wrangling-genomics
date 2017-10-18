@@ -40,6 +40,9 @@ or
 
 #### Source code installation
 
+**A note on `curl` and `wget`**  
+In these instructions, the command `curl` is used to download files from the internet. This command supports downloading files from FTP and HTTP(s). The `-O` paremeter ensures that the downloaded file gets saved on disk with the same filename as the original. There are other commandline tools that can also be used to download data, for example `wget` (which you should use without the `-O` flag). `wget` also supports recursive download (with the parameter `-r`), allowing you to download content from a directory or folder. Not all computers have both tools installed, though.
+
 This is helpful when one wants to understand what type of files come with fastqc
 ````
 cd ~/src
@@ -213,14 +216,12 @@ IGV is available for Linux, MacOS and Windows.
 
 ## Required Data
 
-You will also need to download a data tarball of a reference genome and fastq files for *E. coli*, available here  [variant_calling.tar.gz](./variant_calling.tar.gz). In order to do that, we will be using the `wget` command line tool.
+You will also need to download a data tarball of a reference genome and fastq files for *E. coli*, available here  [variant_calling.tar.gz](./variant_calling.tar.gz):
 
 ```
-wget http://www.datacarpentry.org/wrangling-genomics/variant_calling.tar.gz
+curl -O http://www.datacarpentry.org/wrangling-genomics/variant_calling.tar.gz
 
 ```
-
-This command supports downloading files from FTP and HTTP(s). The tool `wget` also supports recursive download (with the parameter `-r`), allowing you to download content from a directory or folder. For your information, there are other command line tools that can also be used to download data (e.g., `curl`), but `wget` should serve you well for this lesson and general bioinformatic analysis.
 
 After getting the file, a good practice is to make sure that we actually got the correct file, and it's not for example corrupted or a different version than the one originally intended. The use of **checksums** is one of the most commonly used methods for ensuring that. A checksum is a 32-character string that is the unique signature of a file. In order to facilitate this check, the providers of datasets also give a file with the checksum number so that the check can be performed. In our case, the checksum is available in the file [variant_calling.md5](./variant_calling.md5), and it contains the following line:
 
@@ -228,7 +229,7 @@ After getting the file, a good practice is to make sure that we actually got the
 55936b1e819246236535798d8a36c134  variant_calling.tar.gz
 ```
 
-The 32-character string on the left is the checksum of the file listed on the right. Let's download this file as well with wget (`wget http://www.datacarpentry.org/wrangling-genomics/variant_calling.md5`) and check if everything is ok with the following command (**Important note**: _both data file and checksum file should be in the same directory_):
+The 32-character string on the left is the checksum of the file listed on the right. Let's download this file as well with wget (`curl -O http://www.datacarpentry.org/wrangling-genomics/variant_calling.md5`) and check if everything is ok with the following command (**Important note**: _both data file and checksum file should be in the same directory_):
 
 ```
 md5sum -c variant_calling.md5
