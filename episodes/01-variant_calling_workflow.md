@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "How do I find variants in my data?"
 objectives:
-- "Be able to use command line tools to perform a variant calling workflow"
-- "Understand the different steps involved in variant calling" 
-- "Be familiar with data formats encountered during variant calling"
+- "Make use of command line tools to perform a variant calling workflow."
+- "Describe the steps involved in variant calling."
+- "Describe the types of data formats encountered during variant calling."
 keypoints:
 - "First key point."
 ---
