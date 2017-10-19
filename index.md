@@ -23,7 +23,7 @@ use a variety of bioinformatic tools with confidence and greatly enhance your re
 >
 > This lesson assumes a working understanding of the bash shell. If you haven't already completed the [Shell Genomics](http://www.datacarpentry.org/shell-genomics/) lesson, and aren't familiar with the bash shell, please review those materials
 > before starting this lesson.
-
+>
 > This lesson also assumes some familiarity with biological concepts, including the structure of DNA, nucleotide abbreviations, and the 
 > concept of genomic variation within a population. 
 {: .prereq}
