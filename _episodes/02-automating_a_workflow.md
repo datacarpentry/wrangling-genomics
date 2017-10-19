@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "How can I automate this?"
 objectives:
-- "Understand what a shell script is"
-- "Automate an analytical workflow"
--  "Group a series of sequential commands into a script to automate a workflow"
+- "Describe what a shell script is."
+- "Automate an analytical workflow."
+- "Group a series of sequential commands into a script to automate a workflow."
 keypoints:
 ---
 # What is a shell script?
