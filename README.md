@@ -1,6 +1,6 @@
 # Wrangling Genomics
 
-Lesson for quality control and wrangling genomics data. This repository is maintained by [Luis Avila](https://github.com/lmavila), and [Niel Infante](https://github.com/NielInfante). 
+Lesson for quality control and wrangling genomics data. This repository is maintained by [Josh Herr](https://github.com/jrherr), [Ming Tang](https://github.com/crazyhottommy), [Lex Nederbragt](https://github.com/lexnederbragt), and [Fotis Psomopoulos](https://github.com/fpsom).
 
 Amazon public AMI for this tutorial is "dataCgen-qc". 
 
@@ -8,20 +8,15 @@ Amazon public AMI for this tutorial is "dataCgen-qc".
 
 Wrangling genomics trains novice learners on a variant calling workflow. Participants will learn how to evaluate sequence quality and what to do if it is not good. We will then cover aligning reads to a genome, and calling variants, as well as discussing different file formats. Results will be visualized. Finally, we will cover how to automate the process by building a shell script.
 
-It builds on the work of [Software Carpentry](http://software-carpentry.org/) and [Data Carpentry](http://www.datacarpentry.org/).
-
+This lesson is part of the [Data Carpentry](http://www.datacarpentry.org/) [Genomics Workshop](http://www.datacarpentry.org/genomics-workshop/).
 
 ## Contribution
 
-There are many ways of contributing to Library Carpentry:
-
-- Join our [![Gitter chat](https://badges.gitter.im/datacarpentry/wrangling-genomics.png)](https://gitter.im/wrangling-genomics/Lobby)
-- Follow updates on our *soon to be active* [Twitter](https://twitter.com/WranglingGenomics).
 - Make a suggestion or correct an error by [raising an Issue](https://github.com/datacarpentry/wrangling-genomics/issues).
 
 ## Code of Conduct
 
-All participants should agree to abide by the [Software Carpentry Code of Conduct](http://software-carpentry.org/conduct/).
+All participants should agree to abide by the [Data Carpentry Code of Conduct](http://www.datacarpentry.org/code-of-conduct/).
 
 ## Authors
 
