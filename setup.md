@@ -40,6 +40,9 @@ or
 
 #### Source code installation
 
+**A note on `curl` and `wget`**  
+In these instructions, the command `curl` is used to download files from the internet. This command supports downloading files from FTP and HTTP(s). The `-O` paremeter ensures that the downloaded file gets saved on disk with the same filename as the original. There are other commandline tools that can also be used to download data, for example `wget` (which you should use without the `-O` flag). `wget` also supports recursive download (with the parameter `-r`), allowing you to download content from a directory or folder. Not all computers have both tools installed, though.
+
 This is helpful when one wants to understand what type of files come with fastqc
 ````
 cd ~/src
@@ -72,7 +75,7 @@ Reference: The Biostars Handbook
 or
 ```conda install -y trimmomatic```
 #### Source Code Installation
-```
+
 cd ~/src
 curl -O http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
 unzip Trimmomatic-0.36.zip
@@ -152,6 +155,7 @@ SAMtools has changed the command line invocation (for the better). But this mean
 Use only SAMtools 1.3 or later.
 
 #### Source code installation
+
 ```
 cd ~/src
 curl -OkL https://github.com/samtools/samtools/releases/download/1.3/samtools-1.3.tar.bz2
@@ -163,12 +167,14 @@ make
 echo export `PATH=~/src/samtools-1.3:$PATH` >> ~/.bashrc
 source ~/.bashrc
 ```
+
 #### Test that the installation succeeded:
 
-```samtools```
+`samtools`
+
 SAMtools has a nicely formatted manual:
 ```
-man ~/src/samtools-1.3/samtools.1 
+man ~/src/samtools-1.3/samtools.1
 ```
 
 ### BCFtools
@@ -200,7 +206,7 @@ source ~/.bashrc
 
 #### Test that the installation succeeded:
 
-```bcftools```
+`bcftools`
 
 ### IGV
 
@@ -210,7 +216,25 @@ IGV is available for Linux, MacOS and Windows.
 
 ## Required Data
 
-You will also need to download a data tarball of a reference genome and fastq files for *E. coli*:
+You will also need to download a data tarball of a reference genome and fastq files for *E. coli*, available here  [variant_calling.tar.gz](./variant_calling.tar.gz):
 
-* Download [variant_calling.tar.gz](./variant_calling.tar.gz), you can also use the unix command 'wget' to obtain the copied link.
-* Once downloaded unpack it with `tar xzf variant_calling.tar.gz`
+```
+curl -O http://www.datacarpentry.org/wrangling-genomics/variant_calling.tar.gz
+
+```
+
+After getting the file, a good practice is to make sure that we actually got the correct file, and it's not for example corrupted or a different version than the one originally intended. The use of **checksums** is one of the most commonly used methods for ensuring that. A checksum is a 32-character string that is the unique signature of a file. In order to facilitate this check, the providers of datasets also give a file with the checksum number so that the check can be performed. In our case, the checksum is available in the file [variant_calling.md5](./variant_calling.md5), and it contains the following line:
+
+```
+55936b1e819246236535798d8a36c134  variant_calling.tar.gz
+```
+
+The 32-character string on the left is the checksum of the file listed on the right. Let's download this file as well with wget (`curl -O http://www.datacarpentry.org/wrangling-genomics/variant_calling.md5`) and check if everything is ok with the following command (**Important note**: _both data file and checksum file should be in the same directory_):
+
+```
+md5sum -c variant_calling.md5
+```
+
+This command should print out a single line, stating `variant_calling.tar.gz: OK`. If that is not true, this means that we have downloaded either the incorrect data file or the md5 file does not correspond to the file we currently have.
+
+Finally, once we are sure that we downloaded the correct file, we can unpack it with `tar xzf variant_calling.tar.gz`.

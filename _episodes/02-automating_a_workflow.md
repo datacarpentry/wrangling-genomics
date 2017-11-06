@@ -20,7 +20,7 @@ can automate the process with a script.
 The basic anatomy of a shell script is a file with a list of commands.
 That is also the definition of pretty much any computer program.
 
-
+```
     #!/bin/bash
 
     cd ~/dc_sample_data
@@ -29,7 +29,7 @@ That is also the definition of pretty much any computer program.
     do
         echo "My file name is $file"
     done
-
+```
 
 This looks a lot like the for loops we saw earlier. In fact, it is no different, apart from using indentation and the lack of the
 '>' prompts; it's just saved in a text file. The line at the top ('#!/bin/bash') is commonly called the shebang line, which is a
@@ -76,6 +76,7 @@ in the same directory.
 
 Now, let's do something real. First, recall the code from our our quality control workflow, with a few extra “echo” statements.
 
+```
     cd ~/dc_workshop/data/untrimmed_fastq/
 
     echo "Running fastqc..."
@@ -96,6 +97,7 @@ Now, let's do something real. First, recall the code from our our quality contro
 
     echo "saving..."
     cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+```
 
 > ## Exercise
 > 1) Use nano to create a shell script using with the code above (you can copy/paste), named read_qc.sh  
@@ -172,7 +174,7 @@ and samtools are programs that are pre-installed on our server.
     bwa index $genome
     samtools faidx $genome
 
-Create output paths for various intermediate and result files The -p option means mkdir will create the whole path if it does not exist (no error or message will give given if it does exist)
+Create output paths for various intermediate and result files. The -p option means mkdir will create the whole path if it does not exist (no error or message will give given if it does exist)
 
     $ mkdir -p results/sai
     $ mkdir -p results/sam
@@ -184,10 +186,11 @@ We will now use a loop to run the variant calling work flow of each of our fastq
 
 We would start the loop like this, so the name of each fastq file will by assigned to $fq
 
+```
     $ for fq in data/trimmed_fastq/*.fastq
     > do
     > # etc...
-
+```
 
 In the script, it is a good idea to use echo for debugging/reporting to the screen
 
@@ -248,14 +251,44 @@ Filter the SNPs for the final output
 
     $ bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
 
+> # Using `bwa mem` instead of `bwa aln`
+> BWA is a software package for mapping low-divergent sequences against a large reference genome, such as the human genome, and it's freely available [here](http://bio-bwa.sourceforge.net). It consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM, each being invoked with different sub-commands: `aln + samse + sampe` for BWA-backtrack, `bwasw` for BWA-SW and `mem` for the BWA-MEM algorithm. BWA-backtrack is designed for Illumina sequence reads up to 100bp, while the rest two are better fitted for longer sequences ranged from 70bp to 1Mbp. A general rule of thump is to use `bwa mem` for reads longer than 70 bp, whereas `bwa aln` has a moderately higher mapping rate and a shorter run time for short reads (~36bp). You can find a more indepth discussion in the [bwa doc page](http://bio-bwa.sourceforge.net/bwa.shtml) as well as in this [blog post](http://crazyhottommy.blogspot.ca/2017/06/bwa-aln-or-bwa-mem-for-short-reads-36bp.html).
+> In this lesson we have been using the `aln` for performing the alignment, but the same process can be performed with `bwa mem` which doesn't require the creation of the index files. The process is modified starting from `mkdir` step, and omitting all directories relevant to the `.sai` index files, i.e.:
+> 
+> *Create output paths for various intermediate and result files.*
+>
+>    $ mkdir -p results/sam
+>    $ mkdir -p results/bam
+>    $ mkdir -p results/bcf
+>    $ mkdir -p results/vcf
+>
+>
+> *Assign file names to variables*
+>
+> $ fq=data/trimmed_fastq/$base\.fastq
+> $ sam=results/sam/$base\_aligned.sam
+> $ bam=results/bam/$base\_aligned.bam
+> $ sorted_bam=results/bam/$base\_aligned_sorted.bam
+> $ raw_bcf=results/bcf/$base\_raw.bcf
+> $ variants=results/bcf/$base\_variants.bcf
+> $ final_variants=results/vcf/$base\_final_variants.vcf  
+>
+> *Run the alignment*
+> 
+> bwa mem -M $genome $fq > $sam
+> 
+> As an exercise, try and change your existing script file, from using the `aln` method to the `mem` method.
+
+
+
+ 
+>
+{: .callout}
+
+
+
 > ## Exercise
 > Run the script: dcuser/dc_sample_data/variant_calling/run_variant_calling.sh
 > 
 > $ bash run_variant_calling.sh
 {: .challenge}
-
-
-
-
-
-

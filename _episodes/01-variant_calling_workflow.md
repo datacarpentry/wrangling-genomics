@@ -5,9 +5,9 @@ exercises: 0
 questions:
 - "How do I find variants in my data?"
 objectives:
-- "Be able to use command line tools to perform a variant calling workflow"
-- "Understand the different steps involved in variant calling" 
-- "Be familiar with data formats encountered during variant calling"
+- "Make use of command line tools to perform a variant calling workflow."
+- "Describe the steps involved in variant calling."
+- "Describe the types of data formats encountered during variant calling."
 keypoints:
 - "First key point."
 ---
@@ -118,7 +118,8 @@ The [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pag
 is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not 
 have time to go in detail of the features of the SAM format, the paper by 
 [Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full) provides a lot more detail on the specification.
-**The binary version of SAM is called a BAM file.**
+
+**The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
 
 The file begins with a **header**, which is optional. The header is used to describe source of data, reference sequence, method of
 alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
@@ -131,8 +132,12 @@ displayed below with the different fields highlighted.
 
 ![sam_bam2](../img/sam_bam3.png)
 
-First we will use the `bwa samse` command to convert the .sai file to SAM format:
+First we will use the `bwa samse` command to convert the .sai file to SAM format. The usage for `bwa samse` is 
 
+
+    $ bwa samse path/to/ref_genome.fasta path/to/SAIfile path/to/fastq > SAMfile
+
+So in our case we need to run:
 
     $ bwa samse data/ref_genome/ecoli_rel606.fasta \
         results/sai/SRR097977.aligned.sai \
@@ -144,13 +149,13 @@ Explore the information within your SAM file:
 
     $ head results/sam/SRR097977.aligned.sam
 
-Now convert the SAM file to BAM format for use by downstream tools: 
+Now convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
     $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.aligned.bam
 
 ### Sort BAM file by coordinates
 
-Sort the BAM file:
+Sort the BAM file using the `sort` command from `samtools`, note that as second parameter, we give the filenamne of the desired output file *without* the `.bam` part:
 
 
     $ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted
@@ -274,7 +279,7 @@ In any case, and in order for us to visualize the alignment files, we will need 
 
 SAMTools implements a very simple text alignment viewer based on the GNU `ncurses` library, called `tview`. This alignment viewer works with short indels and shows MAQ consensus. It uses different colors to display mapping quality or base quality, subjected to users' choice. SAMTools viewer is known to work with an 130GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
 
-In order to visualize our mapped reads with `tview`, run the following command:
+In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file. We thus run the following command:
 
 ```
 samtools tview results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
@@ -310,7 +315,8 @@ Using FileZilla, transfer the following 4 files to your local machine:
 
 1. Start [IGV](https://www.broadinstitute.org/software/igv/download)
 2.  Load the genome file into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
-3.  Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. *IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, but there is no direct use for that file.*
+3.  Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. 
+3. Do the same with the .bai file. IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, and uses it for faster access to the data in the bam file.
 4.  Load in the VCF file using the **"Load from File..."** option under the **"File"** pull-down menu
 
 Your IGV browser should look like the screenshot below:
@@ -325,4 +331,5 @@ heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are
 
 Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information 
 corresponds to alignment information at those loci.
+Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
