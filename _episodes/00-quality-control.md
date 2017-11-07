@@ -1,7 +1,7 @@
 ---
 title: "Assessing Read Quality"
-teaching: 25
-exercises: 15
+teaching: 30
+exercises: 20
 questions:
 - "How can I describe the quality of my data?"
 objectives:
@@ -368,7 +368,7 @@ $ mkdir ~/Desktop/fastqc_html
 Now we can transfer our HTML files to our local computer using `scp`.
 
 ~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/untrimmed_fastq/*.html ~/Desktop/fastqc_html
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
 {: .bash}
 
@@ -422,11 +422,13 @@ tabs in a single window or six separate browser windows.
 > {: .solution}
 {: .challenge}
 
-## Results
+## Unziping Compressed Files
 
-Let's examine the results in detail
-
-Navigate to the results and view the directory contents
+Now that we've looked at our HTML reports to get a feel for the data,
+let's look more closely at the other output files. Go back to the tab
+in your terminal program that is connected to your AWS instance
+(the tab lab will start with `dcuser@ip`) and make sure you're in
+our results subdirectory.   
 
 ~~~
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
@@ -434,44 +436,136 @@ $ ls
 ~~~
 {: .bash}
 
-The zip files need to be unpacked with the `unzip` program. 
+~~~
+SRR097977_fastqc.html  SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098281_fastqc.zip
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR098026_fastqc.html  SRR098027_fastqc.zip   SRR098281_fastqc.html  SRR098283_fastqc.zip
+~~~
+{: .output}
 
-Use `unzip` to unzip the FastQC results: 
+Our `.zip` files are compressed files. They each contain multiple 
+different types of output files for a single input FASTQ file. To
+view the contents of a `.zip` file, we can use the program `unzip` 
+to decompress these files. Let's try doing them all at once using a
+wildcard.
 
 ~~~
 $ unzip *.zip
 ~~~
 {: .bash}
 
-Did it work? No, because `unzip` expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can
-save time by using a simple shell `for` loop to iterate through the list of files in `*.zip`. After you type the first line, you will get a special `>` prompt to type next next lines. You start with
-`do`, then enter your commands, then end with `done` to execute the loop.
-
-
-Build a `for` loop to unzip the files
-    
 ~~~
-$ for zip in *.zip
+Archive:  SRR097977_fastqc.zip
+caution: filename not matched:  SRR098026_fastqc.zip
+caution: filename not matched:  SRR098027_fastqc.zip
+caution: filename not matched:  SRR098028_fastqc.zip
+caution: filename not matched:  SRR098281_fastqc.zip
+caution: filename not matched:  SRR098283_fastqc.zip
+~~~
+{: .output}
+
+This didn't work. We unziped the first file and then got a warning
+message for each of the other `.zip` files. This is because `unzip` 
+expects to get only one zip file as input. We could go through and 
+unzip each file one at a time, but this is very time consuming and 
+error-prone. Someday you may have 500 files to unzip!
+
+A more efficient way is to use a `for` loop to iterate through all of
+our `.zip` files. Let's see what that looks like and then we'll 
+discuss what we're doing with each line of our loop.
+
+~~~
+$ for filename in *.zip
 > do
-> unzip $zip
+> unzip $filename
 > done
 ~~~
 {: .bash}
 
-Note that, in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`.  `$zip` is assigned the value of each item (file) in the list `*.zip`, once for
-each iteration of the loop.
+When the shell sees the keyword `for`,
+it knows to repeat a command (or group of commands) once for each item in a list.
+Each time the loop runs (called an iteration), an item in the list is assigned in sequence to
+the **variable**, and the commands inside the loop are executed, before moving on to 
+the next item in the list.
 
-This loop is basically a simple program.  When it runs, it will run `unzip` once for each file (whose name is stored in the `$zip` variable). The contents of each file will be unpacked into a separate
-directory by the `unzip` program.
+Inside the loop,
+we call for the variable's value by putting `$` in front of it.
+The `$` tells the shell interpreter to treat
+the **variable** as a variable name and substitute its value in its place,
+rather than treat it as text or an external command. 
 
-The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
+In this example, the list is six filenames (one filename for each of our `.zip` files).
+Each time the loop iterates, it will assign a file name to the variable `filename`
+and run the `unzip` command.
+The first time through the loop,
+`$filename` is `SRR097977_fastqc.zip`. 
+The interpreter runs the command `unzip` on `SRR097977_fastqc.zip`.
+For the second iteration, `$filename` becomes 
+`SRR098026_fastqc.zip`. This time, the shell runs `unzip` on `SRR098026_fastqc.zip`.
+It then repeats this process for the four other `.zip` files in our directory.
 
-~~~   
-$ for zip in *.zip; do echo File $zip; unzip $zip; done
+> ## Follow the Prompt
+>
+> The shell prompt changes from `$` to `>` and back again as we were
+> typing in our loop. The second prompt, `>`, is different to remind
+> us that we haven't finished typing a complete command yet. A semicolon, `;`,
+> can be used to separate two commands written on a single line.
+{: .callout}
+
+> ## Same Symbols, Different Meanings
+>
+> Here we see `>` being used a shell prompt, whereas `>` is also
+> used to redirect output.
+> Similarly, `$` is used as a shell prompt, but, as we saw earlier,
+> it is also used to ask the shell to get the value of a variable.
+>
+> If the *shell* prints `>` or `$` then it expects you to type something,
+> and the symbol is a prompt.
+>
+> If *you* type `>` or `$` yourself, it is an instruction from you that
+> the shell to redirect output or get the value of a variable.
+{: .callout}
+
+We have called the variable in this loop `filename`
+in order to make its purpose clearer to human readers.
+The shell itself doesn't care what the variable is called;
+if we wrote this loop as:
+
+~~~
+$ for x in *.zip
+> do
+> unzip $x
+> done
 ~~~
 {: .bash}
 
-When you check your history later, it will help your remember what you did!
+or:
+
+~~~
+$ for temperature in *.zip
+> do
+> unzip $temperature
+> done
+~~~
+{: .bash}
+
+it would work exactly the same way.
+*Don't do this.*
+Programs are only useful if people can understand them,
+so meaningless names (like `x`) or misleading names (like `termperature`)
+increase the odds that the program won't do what its readers think it does.
+
+> ## Multipart commands
+> The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
+>
+> ~~~   
+> $ for zip in *.zip; do echo File $zip; unzip $zip; done
+> ~~~
+> {: .bash}
+> 
+> When you check your history later, it will help your remember what you did!
+>
+{: .callout}
 
 ## D. Document your work
 
