@@ -1,14 +1,16 @@
 ---
 title: "Assessing Read Quality"
-teaching: 0
-exercises: 0
+teaching: 25
+exercises: 15
 questions:
-- "Is my data good enough?"
+- "How can I describe the quality of my data?"
 objectives:
-- "Describe how the FASTQ format encodes quality."
-- "Evaluate a FastQC report."
+- "Explain how a FASTQ file encodes per-base quality scores."
+- "Interpret a FastQC plot summarizing per-base quality across all reads."
+- "Use `for` loops to automate operations on multiple files."
 keypoints:
-- "First key point."
+- "Quality encodings vary across sequencing platforms."
+- "`for` loops let you perform the same set of operations on multiple files with a single command."
 ---
 
 # Bioinformatics workflows
@@ -233,15 +235,20 @@ Let's examine the results in detail
 
 Navigate to the results and view the directory contents
 
-
-    $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
-    $ ls
+~~~
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ ls
+~~~
+{: .bash}
 
 The zip files need to be unpacked with the `unzip` program. 
 
 Use `unzip` to unzip the FastQC results: 
 
-    $ unzip *.zip
+~~~
+$ unzip *.zip
+~~~
+{: .bash}
 
 Did it work? No, because `unzip` expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can
 save time by using a simple shell `for` loop to iterate through the list of files in `*.zip`. After you type the first line, you will get a special `>` prompt to type next next lines. You start with
@@ -250,11 +257,13 @@ save time by using a simple shell `for` loop to iterate through the list of file
 
 Build a `for` loop to unzip the files
     
-
-    $ for zip in *.zip
-    > do
-    > unzip $zip
-    > done
+~~~
+$ for zip in *.zip
+> do
+> unzip $zip
+> done
+~~~
+{: .bash}
 
 Note that, in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`.  `$zip` is assigned the value of each item (file) in the list `*.zip`, once for
 each iteration of the loop.
@@ -263,8 +272,11 @@ This loop is basically a simple program.  When it runs, it will run `unzip` once
 directory by the `unzip` program.
 
 The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
-   
-    $ for zip in *.zip; do echo File $zip; unzip $zip; done
+
+~~~   
+$ for zip in *.zip; do echo File $zip; unzip $zip; done
+~~~
+{: .bash}
 
 When you check your history later, it will help your remember what you did!
 
@@ -273,8 +285,10 @@ When you check your history later, it will help your remember what you did!
 To save a record, let's `cat` all fastqc `summary.txt`s into one file `full_report.txt` and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we
 said `cat` is really meant for concatenating text files?
 
-    cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
-
+~~~
+$ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+~~~
+{: .bash}
 
 
 
