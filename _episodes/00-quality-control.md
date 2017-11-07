@@ -253,7 +253,40 @@ $ ~/FastQC/fastqc *.fastq
 ~~~
 {: .bash}
 
-This command created several new files within our `/data/untrimmed_fastq/` directory.
+You will see an automatically updating output message telling you the 
+progress of the analysis. It will start like this: 
+
+~~~
+Started analysis of SRR097977.fastq
+Approx 5% complete for SRR097977.fastq
+Approx 10% complete for SRR097977.fastq
+Approx 15% complete for SRR097977.fastq
+Approx 20% complete for SRR097977.fastq
+Approx 25% complete for SRR097977.fastq
+Approx 30% complete for SRR097977.fastq
+Approx 35% complete for SRR097977.fastq
+Approx 40% complete for SRR097977.fastq
+Approx 45% complete for SRR097977.fastq
+Approx 50% complete for SRR097977.fastq
+~~~
+{: .output}
+
+In total, it should take about five minutes for FastQC to run on all
+six of our FASTQ files. When the analysis completes, your prompt
+will return. So your screen will look something like this:
+
+~~~
+Approx 80% complete for SRR098283.fastq
+Approx 85% complete for SRR098283.fastq
+Approx 90% complete for SRR098283.fastq
+Approx 95% complete for SRR098283.fastq
+Analysis complete for SRR098283.fastq
+dcuser@ip-172-31-58-54:~/dc_workshop/data/untrimmed_fastq$
+~~~
+{: .output}
+
+The FastQC program has created several new files within our
+`/data/untrimmed_fastq/` directory. 
 
 ~~~
 $ ls
@@ -261,16 +294,22 @@ $ ls
 {: .bash}
 
 ~~~
+SRR097977.fastq        SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283.fastq
+SRR097977_fastqc.html  SRR098027.fastq	      SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281.fastq	     SRR098283_fastqc.zip
+SRR098026.fastq        SRR098027_fastqc.zip   SRR098281_fastqc.html
+SRR098026_fastqc.html  SRR098028.fastq	      SRR098281_fastqc.zip
 ~~~
 {: .output}
 
-> ## HTML and Zip files
->
->
->
-{: .callout}
+For each input FASTQ file, FastQC has created a `.zip` file and a
+`.html` file. The `.zip` file extension indicates that this is 
+actually a compressed set of multiple output files. We'll be working
+with these output files soon. The `.html` file is a stable webpage
+displaying the summary report for each of our samples.
 
-However, we want to keep our data files and our results files separate, so we will move these
+We want to keep our data files and our results files separate, so we
+will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
@@ -280,6 +319,116 @@ $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
+Now we can navigate into this results directory and do some closer
+inspection of our output files.
+
+~~~
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+~~~
+{: .bash}
+
+## Viewing HTML files
+
+If we were working on our local computers, we'd be able to display each of these 
+HTML files as a webpage: 
+ 
+~~~
+$ open SRR097977_fastqc.html
+~~~
+{: .bash}
+
+However, if you try this on our AWS instance, you'll get an error: 
+
+~~~
+Couldn't get a file descriptor referring to the console
+~~~
+{: .output}
+
+This is because the AWS instance we're using doesn't have any web
+browsers installed on it, so the remote computer doesn't know how to 
+open the file. We want to look at the webpage summary reports, so 
+let's transfer them to our local computers (i.e. your laptop).
+
+To transfer a file from a remote server to our own machines, we will
+use a variant of the `cp` command called `scp`. The `s` stands for
+"secure" - this is a secure version of copying. 
+
+For the `cp` command, the syntax was:
+
+~~~
+$ cp my_file new_location
+~~~
+{: .bash}
+
+The syntax for `scp` is the same, but now `my_file` and
+`new_location` are on separate computers, so we need to give an 
+absolute path, including the name of our remote computer. First we
+will make a new directory on our computer to store the HTML files
+we're transfering. Let's put it on our desktop for now. Open a new
+tab in your terminal program (you can use the pull down menu at the
+top of your screen or the Cmd+t keyboard shortcut) and type: 
+
+~~~
+$ mkdir ~/Desktop/fastqc_html
+~~~
+{: .bash}
+
+Now we can transfer our HTML files to our local computer using `scp`.
+
+~~~
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/untrimmed_fastq/*.html ~/Desktop/fastqc_html
+~~~
+{: .bash}
+
+This looks really complicated, so let's break it down. The first part
+of the command `dcuser@ec2-34-203-203-131.compute-1.amazonaws.com` is
+the address for your remote computer. Make sure you replace everything
+after `dcuser@` with your instance number (the one you used to log in). 
+
+The second part starts with a `:` and then gives the absolute path
+of the files you want to transfer from your remote computer. Don't
+forget the `:`. We used a wildcard (`*.html`) to indicate that we want all of
+the HTML files. 
+
+The third part of the command gives the absolute path of the location
+you want to put the files. This is on your local computer and is the 
+directory we just created `~/Desktop/fastqc_html`. 
+
+You should see a status output like this:
+
+~~~
+SRR097977_fastqc.html                                    100%  318KB 317.8KB/s   00:01    
+SRR098026_fastqc.html                                    100%  330KB 329.8KB/s   00:00    
+SRR098027_fastqc.html                                    100%  369KB 369.5KB/s   00:00    
+SRR098028_fastqc.html                                    100%  323KB 323.4KB/s   00:01    
+SRR098281_fastqc.html                                    100%  329KB 329.1KB/s   00:00    
+SRR098283_fastqc.html                                    100%  324KB 323.5KB/s   00:00 
+~~~
+{: .output}
+
+Now we can go to our new directory and open the HTML files. 
+
+~~~
+$ cd ~/Desktop/fastqc_html/
+$ open *.html
+~~~
+{: .bash}
+
+Your computer will open each of the HTML files in your default web
+browser. Depending on your settings, this might be as six separate
+tabs in a single window or six separate browser windows.
+
+> ## Exercise
+> 
+> Discuss your results with a neighbor. Which sample(s) looks the best
+> in terms of per base sequence quality? Which sample(s) look the
+> worst?
+> 
+>> ## Solution
+>> `SRR097977` and `SRR098027` are the best. The other four four 
+>> samples are all pretty bad.
+> {: .solution}
+{: .challenge}
 
 ## Results
 
