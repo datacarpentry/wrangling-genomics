@@ -6,7 +6,6 @@ questions:
 - "Is my data good enough?"
 objectives:
 - "Clean FASTQ reads using Trimmommatic."
-- "Employ `for` loops to automate operations on multiple files."
 keypoints:
 - "First key point."
 ---
