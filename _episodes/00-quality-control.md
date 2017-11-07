@@ -146,7 +146,6 @@ bad read.
 > {: .solution}
 {: .challenge}
 
-
 > ## Quality Encodings Vary
 >
 > Although we've used a particular quality encoding system to demonstrate interpretation of 
@@ -212,12 +211,39 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 
 > ## Exercise
 > 
-> How many FASTQ files are in this dataset? How big are the files?  
+> How many FASTQ files are in this dataset? How big are the files?
+> (Hint: Look at the options for the `ls` command to see how to show
+> file sizes.)
 >
 >> ## Solution
 >>  
+>> ~~~
+>> $ ls -l -h
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> -rw-r--r-- 1 dcuser dcuser 840M Jul 30  2015 SRR097977.fastq
+>> -rw-r--r-- 1 dcuser dcuser 3.4G Jul 30  2015 SRR098026.fastq
+>> -rw-r--r-- 1 dcuser dcuser 875M Jul 30  2015 SRR098027.fastq
+>> -rw-r--r-- 1 dcuser dcuser 3.4G Jul 30  2015 SRR098028.fastq
+>> -rw-r--r-- 1 dcuser dcuser 4.0G Jul 30  2015 SRR098281.fastq
+>> -rw-r--r-- 1 dcuser dcuser 3.9G Jul 30  2015 SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> There are six FASTQ files ranging from 840M to 4.0G. 
+>> 
 > {: .solution}
 {: .challenge}
+
+> ## A note about timing
+> 
+> Add a note here about how long it should take to run FastQC and 
+> why we're using subsampled data files for this demonstration.
+> 
+{: .callout}
+
 
 To run the FastQC program, we need to tell our computer where the program is located 
 (in `~/FastQC`).  FastQC can accept multiple file names as input, so we can use the *.fastq wildcard to run FastQC on all of the FASTQ files in this directory.
