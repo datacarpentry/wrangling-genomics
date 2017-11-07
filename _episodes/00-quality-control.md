@@ -120,6 +120,32 @@ we can now see that the quality of each of the `N`s is 0 and the quality of the 
 nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
 bad read. 
 
+> ## Exercise
+> 
+> What is the last read in the `SRR098283.fastq` file? How confident
+> are you in this read? 
+> 
+>> ## Solution
+>> ~~~
+>> $ tail -n4 SRR098283.fastq
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> @SRR098283.21564058 HWUSI-EAS1599_1:4:120:1793:1981 length=35
+>> NNNNNNNNNGACGNNNNNNNNNNNNNNNAACTNNN
+>> +SRR098283.21564058 HWUSI-EAS1599_1:4:120:1793:1981 length=35
+>> !!!!!!!!!####!!!!!!!!!!!!!!!####!!!
+>> ~~~
+>> {: .output}
+>> 
+>> This is also a very poor read. Most of the nucleotides are unknown
+>> (`N`s) and the few that we do have guesses for are of very poor
+>> quality. 
+>> 
+> {: .solution}
+{: .challenge}
+
 
 > ## Quality Encodings Vary
 >
