@@ -567,16 +567,193 @@ increase the odds that the program won't do what its readers think it does.
 >
 {: .callout}
 
-## D. Document your work
+When we run our `for` loop, you will see output that starts like this:
 
-To save a record, let's `cat` all fastqc `summary.txt`s into one file `full_report.txt` and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we
-said `cat` is really meant for concatenating text files?
+~~~
+Archive:  SRR097977_fastqc.zip
+creating: SRR097977_fastqc/
+creating: SRR097977_fastqc/Icons/
+creating: SRR097977_fastqc/Images/
+inflating: SRR097977_fastqc/Icons/fastqc_icon.png  
+inflating: SRR097977_fastqc/Icons/warning.png  
+inflating: SRR097977_fastqc/Icons/error.png  
+inflating: SRR097977_fastqc/Icons/tick.png  
+inflating: SRR097977_fastqc/summary.txt  
+inflating: SRR097977_fastqc/Images/per_base_quality.png  
+inflating: SRR097977_fastqc/Images/per_tile_quality.png  
+inflating: SRR097977_fastqc/Images/per_sequence_quality.png  
+inflating: SRR097977_fastqc/Images/per_base_sequence_content.png  
+inflating: SRR097977_fastqc/Images/per_sequence_gc_content.png  
+inflating: SRR097977_fastqc/Images/per_base_n_content.png  
+inflating: SRR097977_fastqc/Images/sequence_length_distribution.png  
+inflating: SRR097977_fastqc/Images/duplication_levels.png  
+inflating: SRR097977_fastqc/Images/adapter_content.png  
+inflating: SRR097977_fastqc/Images/kmer_profiles.png  
+inflating: SRR097977_fastqc/fastqc_report.html  
+inflating: SRR097977_fastqc/fastqc_data.txt  
+inflating: SRR097977_fastqc/fastqc.fo  
+~~~
+{: .output}
+
+The `unzip` program is decompressing the `.zip` files and creating
+a new directory (with subdirectories) for each of our samples, to 
+store all of the different output that is produced by FastQC. There
+are a lot of files here. The one we're going to focus on is the 
+`summary.txt` file. 
+
+## Understanding FastQC Output
+
+If you list the files in our directory now you will see: 
+
+~~~
+SRR097977_fastqc       SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283_fastqc
+SRR097977_fastqc.html  SRR098027_fastqc       SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281_fastqc	     SRR098283_fastqc.zip
+SRR098026_fastqc       SRR098027_fastqc.zip   SRR098281_fastqc.html
+SRR098026_fastqc.html  SRR098028_fastqc       SRR098281_fastqc.zip
+~~~
+{:. output}
+
+The `.html` files and the uncompressed `.zip` files are still present,
+but now we also have a new directory for each of our samples. We can 
+see for sure that it's a directory if we use the `-F` flag for `ls`. 
+
+~~~
+$ ls -F
+~~~
+{: .bash}
+
+
+~~~
+SRR097977_fastqc/      SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283_fastqc/
+SRR097977_fastqc.html  SRR098027_fastqc/      SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281_fastqc/      SRR098283_fastqc.zip
+SRR098026_fastqc/      SRR098027_fastqc.zip   SRR098281_fastqc.html
+SRR098026_fastqc.html  SRR098028_fastqc/      SRR098281_fastqc.zip
+~~~
+{: .output}
+
+Let's see what files are present within one of these output directories.
+
+~~~
+$ ls -F SRR097977_fastqc/
+~~~
+{: .bash}
+
+~~~
+fastqc_data.txt  fastqc.fo  fastqc_report.html	Icons/	Images/  summary.txt
+~~~
+{: .output}
+
+Use `less` to preview the `summary.txt` file for this sample. 
+
+~~~
+$ less SRR097977_fastqc/summary.txt
+~~~
+{: .bash}
+
+~~~
+PASS    Basic Statistics        SRR097977.fastq
+WARN    Per base sequence quality       SRR097977.fastq
+FAIL    Per tile sequence quality       SRR097977.fastq
+PASS    Per sequence quality scores     SRR097977.fastq
+PASS    Per base sequence content       SRR097977.fastq
+PASS    Per sequence GC content SRR097977.fastq
+PASS    Per base N content      SRR097977.fastq
+PASS    Sequence Length Distribution    SRR097977.fastq
+PASS    Sequence Duplication Levels     SRR097977.fastq
+PASS    Overrepresented sequences       SRR097977.fastq
+PASS    Adapter Content SRR097977.fastq
+WARN    Kmer Content    SRR097977.fastq
+~~~
+{: .output}
+
+The summary file gives us a list of tests that FastQC ran, and tells
+us whether this sample passed, failed, or is borderline (`WARN`).
+
+## Documenting Our Work
+
+We can make a record of the results we obtained for all our samples
+by concatenating all of our `summary.txt` files into a single file 
+using the `cat` command. We'll call this `full_report.txt` and move
+it to `~/dc_workshop/docs`.
 
 ~~~
 $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 ~~~
 {: .bash}
 
+> ## Exercise
+> 
+> Which samples failed at least one of FastQC's quality tests? What
+> test(s) did those samples fail?
+>
+>> ## Solution
+>> 
+>> We can get the list of all failed tests using `grep`. 
+>> 
+>> ~~~ 
+>> $ cd ~/dc_workshop/docs
+>> $ grep grep FAIL fastqc_summaries.txt
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> FAIL	Per tile sequence quality	SRR097977.fastq
+>> FAIL	Per tile sequence quality	SRR098026.fastq
+>> FAIL	Overrepresented sequences	SRR098026.fastq
+>> FAIL	Kmer Content	SRR098026.fastq
+>> FAIL	Per base sequence quality	SRR098027.fastq
+>> FAIL	Per tile sequence quality	SRR098027.fastq
+>> FAIL	Kmer Content	SRR098027.fastq
+>> FAIL	Per tile sequence quality	SRR098028.fastq
+>> FAIL	Overrepresented sequences	SRR098028.fastq
+>> FAIL	Kmer Content	SRR098028.fastq
+>> FAIL	Overrepresented sequences	SRR098281.fastq
+>> FAIL	Kmer Content	SRR098281.fastq
+>> FAIL	Overrepresented sequences	SRR098283.fastq
+>> FAIL	Kmer Content	SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> If we want to see all the files that failed at least one test, we
+>> can use a combination of `grep`, `cut`, `sort` and `uniq`. 
+>> 
+>> ~~~
+>> $ grep FAIL fastqc_summaries.txt | cut -f 3 | sort | uniq
+>> ~~~
+>> {: .bash}
+>>
+>> ~~~
+>> SRR097977.fastq
+>> SRR098026.fastq
+>> SRR098027.fastq
+>> SRR098028.fastq
+>> SRR098281.fastq
+>> SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> All of our samples failed at least one test. If we want to see a table showing which tests failed, we can 
+>> use the same command we used above, but this time extract the 
+>> second field with `cut` (instead of the third) and add the `-c` 
+>> option to `uniq` to count the number of times each unique value
+>> appears.
+>>
+>> ~~~
+>> $ grep FAIL fastqc_summaries.txt | cut -f 2 | sort | uniq -c
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> 5 Kmer Content
+>> 4 Overrepresented sequences
+>> 1 Per base sequence quality
+>> 4 Per tile sequence quality
+>> ~~~
+>> {: .output}
+> {: .solution}
+{: .challenge}
 
 
 
