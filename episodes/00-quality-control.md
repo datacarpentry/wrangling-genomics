@@ -1,14 +1,16 @@
 ---
 title: "Assessing Read Quality"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 20
 questions:
-- "Is my data good enough?"
+- "How can I describe the quality of my data?"
 objectives:
-- "Describe how the FASTQ format encodes quality."
-- "Evaluate a FastQC report."
+- "Explain how a FASTQ file encodes per-base quality scores."
+- "Interpret a FastQC plot summarizing per-base quality across all reads."
+- "Use `for` loops to automate operations on multiple files."
 keypoints:
-- "First key point."
+- "Quality encodings vary across sequencing platforms."
+- "`for` loops let you perform the same set of operations on multiple files with a single command."
 ---
 
 # Bioinformatics workflows
@@ -118,6 +120,31 @@ we can now see that the quality of each of the `N`s is 0 and the quality of the 
 nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
 bad read. 
 
+> ## Exercise
+> 
+> What is the last read in the `SRR098283.fastq` file? How confident
+> are you in this read? 
+> 
+>> ## Solution
+>> ~~~
+>> $ tail -n4 SRR098283.fastq
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> @SRR098283.21564058 HWUSI-EAS1599_1:4:120:1793:1981 length=35
+>> NNNNNNNNNGACGNNNNNNNNNNNNNNNAACTNNN
+>> +SRR098283.21564058 HWUSI-EAS1599_1:4:120:1793:1981 length=35
+>> !!!!!!!!!####!!!!!!!!!!!!!!!####!!!
+>> ~~~
+>> {: .output}
+>> 
+>> This is also a very poor read. Most of the nucleotides are unknown
+>> (`N`s) and the few that we do have guesses for are of very poor
+>> quality. 
+>> 
+> {: .solution}
+{: .challenge}
 
 > ## Quality Encodings Vary
 >
@@ -184,10 +211,29 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 
 > ## Exercise
 > 
-> How many FASTQ files are in this dataset? How big are the files?  
+> How many FASTQ files are in this dataset? How big are the files?
+> (Hint: Look at the options for the `ls` command to see how to show
+> file sizes.)
 >
 >> ## Solution
 >>  
+>> ~~~
+>> $ ls -l -h
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> -rw-r--r-- 1 dcuser dcuser 840M Jul 30  2015 SRR097977.fastq
+>> -rw-r--r-- 1 dcuser dcuser 3.4G Jul 30  2015 SRR098026.fastq
+>> -rw-r--r-- 1 dcuser dcuser 875M Jul 30  2015 SRR098027.fastq
+>> -rw-r--r-- 1 dcuser dcuser 3.4G Jul 30  2015 SRR098028.fastq
+>> -rw-r--r-- 1 dcuser dcuser 4.0G Jul 30  2015 SRR098281.fastq
+>> -rw-r--r-- 1 dcuser dcuser 3.9G Jul 30  2015 SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> There are six FASTQ files ranging from 840M to 4.0G. 
+>> 
 > {: .solution}
 {: .challenge}
 
@@ -199,7 +245,40 @@ $ ~/FastQC/fastqc *.fastq
 ~~~
 {: .bash}
 
-This command created several new files within our `/data/untrimmed_fastq/` directory.
+You will see an automatically updating output message telling you the 
+progress of the analysis. It will start like this: 
+
+~~~
+Started analysis of SRR097977.fastq
+Approx 5% complete for SRR097977.fastq
+Approx 10% complete for SRR097977.fastq
+Approx 15% complete for SRR097977.fastq
+Approx 20% complete for SRR097977.fastq
+Approx 25% complete for SRR097977.fastq
+Approx 30% complete for SRR097977.fastq
+Approx 35% complete for SRR097977.fastq
+Approx 40% complete for SRR097977.fastq
+Approx 45% complete for SRR097977.fastq
+Approx 50% complete for SRR097977.fastq
+~~~
+{: .output}
+
+In total, it should take about five minutes for FastQC to run on all
+six of our FASTQ files. When the analysis completes, your prompt
+will return. So your screen will look something like this:
+
+~~~
+Approx 80% complete for SRR098283.fastq
+Approx 85% complete for SRR098283.fastq
+Approx 90% complete for SRR098283.fastq
+Approx 95% complete for SRR098283.fastq
+Analysis complete for SRR098283.fastq
+dcuser@ip-172-31-58-54:~/dc_workshop/data/untrimmed_fastq$
+~~~
+{: .output}
+
+The FastQC program has created several new files within our
+`/data/untrimmed_fastq/` directory. 
 
 ~~~
 $ ls
@@ -207,16 +286,22 @@ $ ls
 {: .bash}
 
 ~~~
+SRR097977.fastq        SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283.fastq
+SRR097977_fastqc.html  SRR098027.fastq	      SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281.fastq	     SRR098283_fastqc.zip
+SRR098026.fastq        SRR098027_fastqc.zip   SRR098281_fastqc.html
+SRR098026_fastqc.html  SRR098028.fastq	      SRR098281_fastqc.zip
 ~~~
 {: .output}
 
-> ## HTML and Zip files
->
->
->
-{: .callout}
+For each input FASTQ file, FastQC has created a `.zip` file and a
+`.html` file. The `.zip` file extension indicates that this is 
+actually a compressed set of multiple output files. We'll be working
+with these output files soon. The `.html` file is a stable webpage
+displaying the summary report for each of our samples.
 
-However, we want to keep our data files and our results files separate, so we will move these
+We want to keep our data files and our results files separate, so we
+will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
@@ -226,56 +311,449 @@ $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
 {: .bash}
 
+Now we can navigate into this results directory and do some closer
+inspection of our output files.
 
-## Results
+~~~
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+~~~
+{: .bash}
 
-Let's examine the results in detail
+## Viewing HTML files
 
-Navigate to the results and view the directory contents
+If we were working on our local computers, we'd be able to display each of these 
+HTML files as a webpage: 
+ 
+~~~
+$ open SRR097977_fastqc.html
+~~~
+{: .bash}
+
+However, if you try this on our AWS instance, you'll get an error: 
+
+~~~
+Couldn't get a file descriptor referring to the console
+~~~
+{: .output}
+
+This is because the AWS instance we're using doesn't have any web
+browsers installed on it, so the remote computer doesn't know how to 
+open the file. We want to look at the webpage summary reports, so 
+let's transfer them to our local computers (i.e. your laptop).
+
+To transfer a file from a remote server to our own machines, we will
+use a variant of the `cp` command called `scp`. The `s` stands for
+"secure" - this is a secure version of copying. 
+
+For the `cp` command, the syntax was:
+
+~~~
+$ cp my_file new_location
+~~~
+{: .bash}
+
+The syntax for `scp` is the same, but now `my_file` and
+`new_location` are on separate computers, so we need to give an 
+absolute path, including the name of our remote computer. First we
+will make a new directory on our computer to store the HTML files
+we're transfering. Let's put it on our desktop for now. Open a new
+tab in your terminal program (you can use the pull down menu at the
+top of your screen or the Cmd+t keyboard shortcut) and type: 
+
+~~~
+$ mkdir ~/Desktop/fastqc_html
+~~~
+{: .bash}
+
+Now we can transfer our HTML files to our local computer using `scp`.
+
+~~~
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+~~~
+{: .bash}
+
+This looks really complicated, so let's break it down. The first part
+of the command `dcuser@ec2-34-203-203-131.compute-1.amazonaws.com` is
+the address for your remote computer. Make sure you replace everything
+after `dcuser@` with your instance number (the one you used to log in). 
+
+The second part starts with a `:` and then gives the absolute path
+of the files you want to transfer from your remote computer. Don't
+forget the `:`. We used a wildcard (`*.html`) to indicate that we want all of
+the HTML files. 
+
+The third part of the command gives the absolute path of the location
+you want to put the files. This is on your local computer and is the 
+directory we just created `~/Desktop/fastqc_html`. 
+
+You should see a status output like this:
+
+~~~
+SRR097977_fastqc.html                                    100%  318KB 317.8KB/s   00:01    
+SRR098026_fastqc.html                                    100%  330KB 329.8KB/s   00:00    
+SRR098027_fastqc.html                                    100%  369KB 369.5KB/s   00:00    
+SRR098028_fastqc.html                                    100%  323KB 323.4KB/s   00:01    
+SRR098281_fastqc.html                                    100%  329KB 329.1KB/s   00:00    
+SRR098283_fastqc.html                                    100%  324KB 323.5KB/s   00:00 
+~~~
+{: .output}
+
+Now we can go to our new directory and open the HTML files. 
+
+~~~
+$ cd ~/Desktop/fastqc_html/
+$ open *.html
+~~~
+{: .bash}
+
+Your computer will open each of the HTML files in your default web
+browser. Depending on your settings, this might be as six separate
+tabs in a single window or six separate browser windows.
+
+> ## Exercise
+> 
+> Discuss your results with a neighbor. Which sample(s) looks the best
+> in terms of per base sequence quality? Which sample(s) look the
+> worst?
+> 
+>> ## Solution
+>> `SRR097977` and `SRR098027` are the best. The other four four 
+>> samples are all pretty bad.
+> {: .solution}
+{: .challenge}
+
+## Unziping Compressed Files
+
+Now that we've looked at our HTML reports to get a feel for the data,
+let's look more closely at the other output files. Go back to the tab
+in your terminal program that is connected to your AWS instance
+(the tab lab will start with `dcuser@ip`) and make sure you're in
+our results subdirectory.   
+
+~~~
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ ls
+~~~
+{: .bash}
+
+~~~
+SRR097977_fastqc.html  SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098281_fastqc.zip
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR098026_fastqc.html  SRR098027_fastqc.zip   SRR098281_fastqc.html  SRR098283_fastqc.zip
+~~~
+{: .output}
+
+Our `.zip` files are compressed files. They each contain multiple 
+different types of output files for a single input FASTQ file. To
+view the contents of a `.zip` file, we can use the program `unzip` 
+to decompress these files. Let's try doing them all at once using a
+wildcard.
+
+~~~
+$ unzip *.zip
+~~~
+{: .bash}
+
+~~~
+Archive:  SRR097977_fastqc.zip
+caution: filename not matched:  SRR098026_fastqc.zip
+caution: filename not matched:  SRR098027_fastqc.zip
+caution: filename not matched:  SRR098028_fastqc.zip
+caution: filename not matched:  SRR098281_fastqc.zip
+caution: filename not matched:  SRR098283_fastqc.zip
+~~~
+{: .output}
+
+This didn't work. We unziped the first file and then got a warning
+message for each of the other `.zip` files. This is because `unzip` 
+expects to get only one zip file as input. We could go through and 
+unzip each file one at a time, but this is very time consuming and 
+error-prone. Someday you may have 500 files to unzip!
+
+A more efficient way is to use a `for` loop to iterate through all of
+our `.zip` files. Let's see what that looks like and then we'll 
+discuss what we're doing with each line of our loop.
+
+~~~
+$ for filename in *.zip
+> do
+> unzip $filename
+> done
+~~~
+{: .bash}
+
+When the shell sees the keyword `for`,
+it knows to repeat a command (or group of commands) once for each item in a list.
+Each time the loop runs (called an iteration), an item in the list is assigned in sequence to
+the **variable**, and the commands inside the loop are executed, before moving on to 
+the next item in the list.
+
+Inside the loop,
+we call for the variable's value by putting `$` in front of it.
+The `$` tells the shell interpreter to treat
+the **variable** as a variable name and substitute its value in its place,
+rather than treat it as text or an external command. 
+
+In this example, the list is six filenames (one filename for each of our `.zip` files).
+Each time the loop iterates, it will assign a file name to the variable `filename`
+and run the `unzip` command.
+The first time through the loop,
+`$filename` is `SRR097977_fastqc.zip`. 
+The interpreter runs the command `unzip` on `SRR097977_fastqc.zip`.
+For the second iteration, `$filename` becomes 
+`SRR098026_fastqc.zip`. This time, the shell runs `unzip` on `SRR098026_fastqc.zip`.
+It then repeats this process for the four other `.zip` files in our directory.
+
+> ## Follow the Prompt
+>
+> The shell prompt changes from `$` to `>` and back again as we were
+> typing in our loop. The second prompt, `>`, is different to remind
+> us that we haven't finished typing a complete command yet. A semicolon, `;`,
+> can be used to separate two commands written on a single line.
+{: .callout}
+
+> ## Same Symbols, Different Meanings
+>
+> Here we see `>` being used a shell prompt, whereas `>` is also
+> used to redirect output.
+> Similarly, `$` is used as a shell prompt, but, as we saw earlier,
+> it is also used to ask the shell to get the value of a variable.
+>
+> If the *shell* prints `>` or `$` then it expects you to type something,
+> and the symbol is a prompt.
+>
+> If *you* type `>` or `$` yourself, it is an instruction from you that
+> the shell to redirect output or get the value of a variable.
+{: .callout}
+
+We have called the variable in this loop `filename`
+in order to make its purpose clearer to human readers.
+The shell itself doesn't care what the variable is called;
+if we wrote this loop as:
+
+~~~
+$ for x in *.zip
+> do
+> unzip $x
+> done
+~~~
+{: .bash}
+
+or:
+
+~~~
+$ for temperature in *.zip
+> do
+> unzip $temperature
+> done
+~~~
+{: .bash}
+
+it would work exactly the same way.
+*Don't do this.*
+Programs are only useful if people can understand them,
+so meaningless names (like `x`) or misleading names (like `termperature`)
+increase the odds that the program won't do what its readers think it does.
+
+> ## Multipart commands
+> The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
+>
+> ~~~   
+> $ for zip in *.zip; do echo File $zip; unzip $zip; done
+> ~~~
+> {: .bash}
+> 
+> When you check your history later, it will help your remember what you did!
+>
+{: .callout}
+
+When we run our `for` loop, you will see output that starts like this:
+
+~~~
+Archive:  SRR097977_fastqc.zip
+creating: SRR097977_fastqc/
+creating: SRR097977_fastqc/Icons/
+creating: SRR097977_fastqc/Images/
+inflating: SRR097977_fastqc/Icons/fastqc_icon.png  
+inflating: SRR097977_fastqc/Icons/warning.png  
+inflating: SRR097977_fastqc/Icons/error.png  
+inflating: SRR097977_fastqc/Icons/tick.png  
+inflating: SRR097977_fastqc/summary.txt  
+inflating: SRR097977_fastqc/Images/per_base_quality.png  
+inflating: SRR097977_fastqc/Images/per_tile_quality.png  
+inflating: SRR097977_fastqc/Images/per_sequence_quality.png  
+inflating: SRR097977_fastqc/Images/per_base_sequence_content.png  
+inflating: SRR097977_fastqc/Images/per_sequence_gc_content.png  
+inflating: SRR097977_fastqc/Images/per_base_n_content.png  
+inflating: SRR097977_fastqc/Images/sequence_length_distribution.png  
+inflating: SRR097977_fastqc/Images/duplication_levels.png  
+inflating: SRR097977_fastqc/Images/adapter_content.png  
+inflating: SRR097977_fastqc/Images/kmer_profiles.png  
+inflating: SRR097977_fastqc/fastqc_report.html  
+inflating: SRR097977_fastqc/fastqc_data.txt  
+inflating: SRR097977_fastqc/fastqc.fo  
+~~~
+{: .output}
+
+The `unzip` program is decompressing the `.zip` files and creating
+a new directory (with subdirectories) for each of our samples, to 
+store all of the different output that is produced by FastQC. There
+are a lot of files here. The one we're going to focus on is the 
+`summary.txt` file. 
+
+## Understanding FastQC Output
+
+If you list the files in our directory now you will see: 
+
+~~~
+SRR097977_fastqc       SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283_fastqc
+SRR097977_fastqc.html  SRR098027_fastqc       SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281_fastqc	     SRR098283_fastqc.zip
+SRR098026_fastqc       SRR098027_fastqc.zip   SRR098281_fastqc.html
+SRR098026_fastqc.html  SRR098028_fastqc       SRR098281_fastqc.zip
+~~~
+{:. output}
+
+The `.html` files and the uncompressed `.zip` files are still present,
+but now we also have a new directory for each of our samples. We can 
+see for sure that it's a directory if we use the `-F` flag for `ls`. 
+
+~~~
+$ ls -F
+~~~
+{: .bash}
 
 
-    $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
-    $ ls
+~~~
+SRR097977_fastqc/      SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283_fastqc/
+SRR097977_fastqc.html  SRR098027_fastqc/      SRR098028_fastqc.zip   SRR098283_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281_fastqc/      SRR098283_fastqc.zip
+SRR098026_fastqc/      SRR098027_fastqc.zip   SRR098281_fastqc.html
+SRR098026_fastqc.html  SRR098028_fastqc/      SRR098281_fastqc.zip
+~~~
+{: .output}
 
-The zip files need to be unpacked with the `unzip` program. 
+Let's see what files are present within one of these output directories.
 
-Use `unzip` to unzip the FastQC results: 
+~~~
+$ ls -F SRR097977_fastqc/
+~~~
+{: .bash}
 
-    $ unzip *.zip
+~~~
+fastqc_data.txt  fastqc.fo  fastqc_report.html	Icons/	Images/  summary.txt
+~~~
+{: .output}
 
-Did it work? No, because `unzip` expects to get only one zip file.  Welcome to the real world. We *could* do each file, one by one, but what if we have 500 files?  There is a smarter way. We can
-save time by using a simple shell `for` loop to iterate through the list of files in `*.zip`. After you type the first line, you will get a special `>` prompt to type next next lines. You start with
-`do`, then enter your commands, then end with `done` to execute the loop.
+Use `less` to preview the `summary.txt` file for this sample. 
 
+~~~
+$ less SRR097977_fastqc/summary.txt
+~~~
+{: .bash}
 
-Build a `for` loop to unzip the files
-    
+~~~
+PASS    Basic Statistics        SRR097977.fastq
+WARN    Per base sequence quality       SRR097977.fastq
+FAIL    Per tile sequence quality       SRR097977.fastq
+PASS    Per sequence quality scores     SRR097977.fastq
+PASS    Per base sequence content       SRR097977.fastq
+PASS    Per sequence GC content SRR097977.fastq
+PASS    Per base N content      SRR097977.fastq
+PASS    Sequence Length Distribution    SRR097977.fastq
+PASS    Sequence Duplication Levels     SRR097977.fastq
+PASS    Overrepresented sequences       SRR097977.fastq
+PASS    Adapter Content SRR097977.fastq
+WARN    Kmer Content    SRR097977.fastq
+~~~
+{: .output}
 
-    $ for zip in *.zip
-    > do
-    > unzip $zip
-    > done
+The summary file gives us a list of tests that FastQC ran, and tells
+us whether this sample passed, failed, or is borderline (`WARN`).
 
-Note that, in the first line, we create a variable named `zip`.  After that, we call that variable with the syntax `$zip`.  `$zip` is assigned the value of each item (file) in the list `*.zip`, once for
-each iteration of the loop.
+## Documenting Our Work
 
-This loop is basically a simple program.  When it runs, it will run `unzip` once for each file (whose name is stored in the `$zip` variable). The contents of each file will be unpacked into a separate
-directory by the `unzip` program.
+We can make a record of the results we obtained for all our samples
+by concatenating all of our `summary.txt` files into a single file 
+using the `cat` command. We'll call this `full_report.txt` and move
+it to `~/dc_workshop/docs`.
 
-The `for` loop is interpreted as a multipart command.  If you press the up arrow on your keyboard to recall the command, it will be shown like so:
-   
-    $ for zip in *.zip; do echo File $zip; unzip $zip; done
+~~~
+$ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+~~~
+{: .bash}
 
-When you check your history later, it will help your remember what you did!
-
-## D. Document your work
-
-To save a record, let's `cat` all fastqc `summary.txt`s into one file `full_report.txt` and move this to ``~/dc_workshop/docs``. You can use wildcards in paths as well as file names.  Do you remember how we
-said `cat` is really meant for concatenating text files?
-
-    cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
-
-
+> ## Exercise
+> 
+> Which samples failed at least one of FastQC's quality tests? What
+> test(s) did those samples fail?
+>
+>> ## Solution
+>> 
+>> We can get the list of all failed tests using `grep`. 
+>> 
+>> ~~~ 
+>> $ cd ~/dc_workshop/docs
+>> $ grep grep FAIL fastqc_summaries.txt
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> FAIL	Per tile sequence quality	SRR097977.fastq
+>> FAIL	Per tile sequence quality	SRR098026.fastq
+>> FAIL	Overrepresented sequences	SRR098026.fastq
+>> FAIL	Kmer Content	SRR098026.fastq
+>> FAIL	Per base sequence quality	SRR098027.fastq
+>> FAIL	Per tile sequence quality	SRR098027.fastq
+>> FAIL	Kmer Content	SRR098027.fastq
+>> FAIL	Per tile sequence quality	SRR098028.fastq
+>> FAIL	Overrepresented sequences	SRR098028.fastq
+>> FAIL	Kmer Content	SRR098028.fastq
+>> FAIL	Overrepresented sequences	SRR098281.fastq
+>> FAIL	Kmer Content	SRR098281.fastq
+>> FAIL	Overrepresented sequences	SRR098283.fastq
+>> FAIL	Kmer Content	SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> If we want to see all the files that failed at least one test, we
+>> can use a combination of `grep`, `cut`, `sort` and `uniq`. 
+>> 
+>> ~~~
+>> $ grep FAIL fastqc_summaries.txt | cut -f 3 | sort | uniq
+>> ~~~
+>> {: .bash}
+>>
+>> ~~~
+>> SRR097977.fastq
+>> SRR098026.fastq
+>> SRR098027.fastq
+>> SRR098028.fastq
+>> SRR098281.fastq
+>> SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> All of our samples failed at least one test. If we want to see a table showing which tests failed, we can 
+>> use the same command we used above, but this time extract the 
+>> second field with `cut` (instead of the third) and add the `-c` 
+>> option to `uniq` to count the number of times each unique value
+>> appears.
+>>
+>> ~~~
+>> $ grep FAIL fastqc_summaries.txt | cut -f 2 | sort | uniq -c
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> 5 Kmer Content
+>> 4 Overrepresented sequences
+>> 1 Per base sequence quality
+>> 4 Per tile sequence quality
+>> ~~~
+>> {: .output}
+> {: .solution}
+{: .challenge}
 
 
 
