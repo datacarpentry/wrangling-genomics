@@ -291,3 +291,25 @@ dropped. This is a good thing!
 > {: .solution}
 {: .challenge}
 
+We've now completed the trimming and filtering steps of our quality
+control process! Before we move on, let's move our trimmed FASTQ files
+to a new subdirectory within our `data/` directory. We can also remove
+our extra, double-trimmed file for the `SRR098283` sample.
+
+~~~
+$ cd ~/dc_workshop/data/untrimmed_fastq
+$ mkdir ../trimmed_fastq
+$ rm SRR098283.fastq_trim.fastq_trim.fastq
+$ mv *_trim* ../trimmed_fastq
+$ cd ../trimmed_fastq
+$ ls
+~~~
+{: .bash}
+
+~~~
+SRR097977.fastq_trim.fastq  SRR098028.fastq_trim.fastq
+SRR098026.fastq_trim.fastq  SRR098281.fastq_trim.fastq
+SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
+~~~
+{: .output}
+
