@@ -11,44 +11,6 @@ objectives:
 keypoints:
 - "First key point."
 ---
-# Setting up
-
-To get started with this lesson, make sure you are in `dc_workshop`. Now let's copy over the reference data required for alignment:
-
-~~~
-$ cd ~/dc_workshop
-$ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
-~~~
-{: .bash}
-
-Your directory structure should now look like this:
-
-<pre>
-dc_workshop
-├── data
-    ├── ref_genome
-        └── ecoli_rel606.fasta
-    ├── untrimmed_fastq
-    └── trimmed_fastq
-        ├── SRR097977.fastq
-        ├── SRR098026.fastq
-        ├── SRR098027.fastq
-        ├── SRR098028.fastq
-        ├── SRR098281.fastq
-        └── SRR098283.fastq
- ├── results
- └── docs
-
-</pre>
-
-You will also need to create directories for the results that will be generated as part of the workflow: 
-
-~~~
-$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
-~~~
-{: .bash}
-
-> *NOTE: All of the tools that we will be using in this workflow have been pre-installed on our remote computer*
 
 # Alignment to a reference genome
 
@@ -57,45 +19,89 @@ We have already trimmed our reads so now the next step is alignment of our quali
 ![workflow_align](../img/variant_calling_workflow_align.png)
 
 We perform read alignment or mapping to determine where in the genome our reads originated from. There are a number of tools to
-choose from and while there is no gold standard there are some tools that are better suited for particular NGS analyses. We will be
+choose from and, while there is no gold standard, there are some tools that are better suited for particular NGS analyses. We will be
 using the [Burrows Wheeler Aligner (BWA)](http://bio-bwa.sourceforge.net/), which is a software package for mapping low-divergent
 sequences against a large reference genome. The alignment process consists of two steps:
 
 1. Indexing the reference genome
 2. Aligning the reads to the reference genome
 
-### Index the reference genome
-Our first step is to index the reference genome for use by BWA. 
+# Setting up
 
+First we will copy over the reference genome data into our `data/` directory. The `-r` tag used with `cp` means "recursive". This
+allows you to copy over all of the files in a directory in a single 
+line of code.
+
+~~~
+$ cd ~/dc_workshop
+$ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
+~~~
+{: .bash}
+
+You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single
+line of code because `mkdir` can accept multiple new directory
+names as input.
+
+~~~
+$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
+~~~
+{: .bash}
+
+
+> ## Installing Software
+> 
+> It's worth noting here that all of the software we are using for
+> this workshop has been pre-installed on our remote computer. 
+> This saves us a lot of time - installing software can be a 
+> time-consuming and frustrating task - however, this does mean that
+> you won't be able to walk out the door and start doing these
+> analyses on your own computer. You'll need to install 
+> the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup/) for more information on installing these software packages.
+> 
+{: .callout}
+
+### Index the reference genome
+Our first step is to index the reference genome for use by BWA. This 
+helps speed up our alignment.
+
+> ## To Index or Not To Index
 > Indexing the reference only has to be run once. The only reason you would
 > want to create a new index is if you are working with a different reference  
 > genome or you are using a different tool for alignment.
 {: .callout}
 
 ~~~
-$ bwa index data/ref_genome/ecoli_rel606.fasta     # This step helps with the speed of alignment
+$ bwa index data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
-Eventually we will loop over all of our files to run this workflow on all of our samples, but for now we're going to work on just one sample in our dataset `SRR098283.fastq`:
+While the index is created, you will see output something like this:
 
 ~~~
-$ ls -alh ~/dc_workshop/data/trimmed_fastq/SRR097977.fastq_trim.fastq 
+[bwa_index] Pack FASTA... 0.04 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 1.05 seconds elapse.
+[bwa_index] Update BWT... 0.03 sec
+[bwa_index] Pack forward-only FASTA... 0.02 sec
+[bwa_index] Construct SA from BWT and Occ... 0.54 sec
+[main] Version: 0.7.5a-r405
+[main] CMD: bwa index data/ref_genome/ecoli_rel606.fasta
+[main] Real time: 1.736 sec; CPU: 1.688 sec
 ~~~
-{: .bash}
+{: .output}
 
 ### Align reads to reference genome
 
 The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an 
 aligner. BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
-reads up to 100bp, while the rest two for longer sequences ranged from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
+reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
 as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it 
 is faster and more accurate.
 
-Since we are working with short reads we will be using BWA-backtrack. The usage for BWA-backtrack is 
+Since we are working with short reads we will be using BWA-backtrack. The general usage for BWA-backtrack is: 
 
 ~~~
-$ bwa aln path/to/ref_genome.fasta path/to/fastq > SAIfile
+$ bwa aln ref_genome.fasta input_file.fastq > output_file.sai
 ~~~
 {: .bash}
 
@@ -103,14 +109,32 @@ This will create a `.sai` file which is an intermediate file containing the suff
     
 Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default 
 parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using 
-and try to understand the options.*
+and make sure the options you use are appropriate for your data.*
+
+We're going to start by aligning the reads from just one of the 
+samples in our dataset (`SRR098283.fastq`). Later, we'll be 
+iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa aln data/ref_genome/ecoli_rel606.fasta \
-    data/trimmed_fastq/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
+$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
 ~~~
 {: .bash}
 
+You will see output that starts like this: 
+
+~~~
+[bwa_aln] 17bp reads: max_diff = 2
+[bwa_aln] 38bp reads: max_diff = 3
+[bwa_aln] 64bp reads: max_diff = 4
+[bwa_aln] 93bp reads: max_diff = 5
+[bwa_aln] 124bp reads: max_diff = 6
+[bwa_aln] 157bp reads: max_diff = 7
+[bwa_aln] 190bp reads: max_diff = 8
+[bwa_aln] 225bp reads: max_diff = 9
+[bwa_aln_core] calculate SA coordinate... 5.10 sec
+[bwa_aln_core] write to the disk... 0.02 sec
+~~~
+{: .output}
 
 ## Alignment cleanup
 
@@ -148,11 +172,11 @@ displayed below with the different fields highlighted.
 First we will use the `bwa samse` command to convert the .sai file to SAM format. The usage for `bwa samse` is 
 
 ~~~
-$ bwa samse path/to/ref_genome.fasta path/to/SAIfile path/to/fastq > SAMfile
+$ bwa samse ref_genome.fasta input_file.sai input_file.fastq > output_file.sam
 ~~~
 {: .bash}
 
-So in our case we need to run:
+The code in our case will look like: 
 
 ~~~
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
@@ -162,33 +186,58 @@ $ bwa samse data/ref_genome/ecoli_rel606.fasta \
 ~~~
 {: .bash}
 
+Your output will start out something like this: 
+
+~~~
+[bwa_aln_core] convert to sequence coordinate... 0.70 sec
+[bwa_aln_core] refine gapped alignments... 0.09 sec
+[bwa_aln_core] print alignments... 0.37 sec
+[bwa_aln_core] 262144 sequences have been processed.
+~~~
+{: .output}
+
+
+> ## Multiple line commands
+> 
+> When typing a long command into your terminal, you can use the `\` character
+> to separate code chunks onto separate lines. This can make your code more readable.
+>
+{: .callout}
+
 Explore the information within your SAM file:
 
-~~~
-$ head results/sam/SRR097977.aligned.sam
-~~~
-{: .bash}
-
-Now convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
+Next we convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
 ~~~
 $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.aligned.bam
 ~~~
 {: .bash}
 
+~~~
+[samopen] SAM header is present: 1 sequences.
+~~~
+{: .output}
+
+
 ### Sort BAM file by coordinates
 
-Sort the BAM file using the `sort` command from `samtools`, note that as second parameter, we give the filenamne of the desired output file *without* the `.bam` part:
+Next we sort the BAM file using the `sort` command from `samtools`. Note that as second parameter, we give the filename of the desired output file *without* the `.bam` part:
 
 ~~~
 $ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted
 ~~~
 {: .bash}
 
-*SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important
-to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require 
-differently sorted alignment files as input.*
+~~~
+[bam_sort_core] merging from 2 files...
+~~~
+{: .output}
 
+> ## More Than One Way to . . . sort a SAM/BAM File
+> SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important
+> to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require 
+> differently sorted alignment files as input.*
+{: .callout}
 
 ## Variant calling
 
@@ -211,8 +260,13 @@ $ samtools mpileup -g -f data/ref_genome/ecoli_rel606.fasta \
 ~~~
 {: .bash}
 
-***We have only generated a file with coverage information for every base with the above command; to actually identify variants, we
-have to use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).***
+~~~
+[fai_load] build FASTA index.
+[mpileup] 1 samples in 1 input files
+~~~
+{: .output}
+
+We have now generated a file with coverage information for every base. To identify variants, we now will use a different tool from the samtools suite called [bcftools](https://samtools.github.io/bcftools/bcftools.html).
 
 ### Step 2: Detect the single nucleotide polymorphisms (SNPs)
 
