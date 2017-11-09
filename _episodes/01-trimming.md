@@ -1,13 +1,16 @@
 ---
 title: "Trimming and Filtering"
-teaching: 0
-exercises: 0
+teaching: 30
+exercises: 15
 questions:
 - "How can I get rid of sequence data that doesn't meet my quality standards?"
 objectives:
 - "Clean FASTQ reads using Trimmommatic."
+- "Select and set multiple options for command-line bioinformatics tools."
+- "Write `for` loops with two variables."
 keypoints:
-- "First key point."
+- "The options you set for the command-line tools you use are important!"
+- "Data cleaning is an essential step in a genomics workflow."
 ---
 
 # Cleaning Reads
@@ -290,4 +293,66 @@ dropped. This is a good thing!
 >> pretty good. 
 > {: .solution}
 {: .challenge}
+
+We've now completed the trimming and filtering steps of our quality
+control process! Before we move on, let's move our trimmed FASTQ files
+to a new subdirectory within our `data/` directory. We can also remove
+our extra, double-trimmed file for the `SRR098283` sample.
+
+~~~
+$ cd ~/dc_workshop/data/untrimmed_fastq
+$ mkdir ../trimmed_fastq
+$ rm SRR098283.fastq_trim.fastq_trim.fastq
+$ mv *_trim* ../trimmed_fastq
+$ cd ../trimmed_fastq
+$ ls
+~~~
+{: .bash}
+
+~~~
+SRR097977.fastq_trim.fastq  SRR098028.fastq_trim.fastq
+SRR098026.fastq_trim.fastq  SRR098281.fastq_trim.fastq
+SRR098027.fastq_trim.fastq  SRR098283.fastq_trim.fastq
+~~~
+{: .output}
+
+> ## Bonus Exercise (Advanced)
+> 
+> Now that we've quality controled our samples, they should perform
+> better on the quality tests run by FastQC. Go ahead and re-run 
+> FastQC on your trimmed FASTQ files and visualize the HTML files
+> to see whether your per base sequence quality is higher after 
+> trimming. 
+> 
+>> ## Solution 
+>> 
+>> In your AWS terminal window do: 
+>> 
+>> ~~~
+>> $ ~/FastQC/fastqc ~/dc_workshop/data/trimmed_fastq
+>> ~~~
+>> {: .bash}
+>> 
+>> In a new tab in your terminal do:
+>> 
+>> ~~~ 
+>> $ mkdir ~/Desktop/fastqc_html/trimmed
+>> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
+>> $ open ~/Desktop/fastqc_html/trimmed/*.html
+>> ~~~
+>> {: .bash}
+>>
+>> Remember to replace everything between the `@` and `:` in your scp 
+>> command with your AWS instance number. 
+>> 
+>> Before trimming, one of the sequences gave a warning and another
+>> failed the per base sequence quality test. After filtering, all 
+>> sequences pass that test. 
+> {: .solution}
+{: .challenge}
+
+
+
+
+
 
