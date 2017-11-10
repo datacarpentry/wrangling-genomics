@@ -1,7 +1,7 @@
 ---
 title: "Variant Calling Workflow"
-teaching: 0
-exercises: 0
+teaching: 35
+exercises: 25
 questions:
 - "How do I find variants in my data?"
 objectives:
@@ -277,7 +277,14 @@ $ bcftools view -bvcg results/bcf/SRR097977_raw.bcf > results/bcf/SRR097977_vari
 ~~~
 {: .bash}
 
-### Step 3: Filter and report the SNP variants in VCF (variant calling format)
+~~~
+[bcfview] 100000 sites processed.
+[afs] 0:99941.647 1:28.786 2:29.568
+[afs] 0:56680.981 1:14.316 2:18.702
+~~~
+{: .output}
+
+### Step 3: Filter and report the SNP variants in variant calling format (VCF)
 
 Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
@@ -286,8 +293,8 @@ $ bcftools view results/bcf/SRR097977_variants.bcf \ | /usr/share/samtools/vcfut
 ~~~
 {: .bash}
 
-*`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform
-the filtering. Note that the output is in VCF format, which is a text format.*
+`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform
+the filtering. Note that the output is in VCF format, which is a text format.
 
 ## Explore the VCF format:
 
@@ -296,16 +303,21 @@ $ less results/vcf/SRR097977_final_variants.vcf
 ~~~
 {: .bash}
 
-You will see the **header** which describes the format, when the file was created, the tools version along with the command line parameters used and some additional column information:
+You will see the header (which describes the format), the time and date the file was
+created, the version of bcftools that was used, the command line parameters used, and 
+some additional information:
 
 ~~~
+##fileformat=VCFv4.1
+##samtoolsVersion=0.1.19-96b5f2294a
 ##reference=file://data/ref_genome/ecoli_rel606.fasta
 ##contig=<ID=NC_012967.1,length=4629812>
-##ALT=<ID=X,Description="Represents allele(s) other than observed.">
-##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
-##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of reads supporting an indel">
-##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of reads supporting an indel">
 ##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="# high-quality ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=MQ,Number=1,Type=Integer,Description="Root-mean-square mapping quality of covering reads">
+##INFO=<ID=FQ,Number=1,Type=Float,Description="Phred probability of all samples being the same">
+##INFO=<ID=AF1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele frequency (assuming HWE)">
+##INFO=<ID=AC1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele count (no HWE assumption)">
 .
 .
 .
@@ -320,49 +332,100 @@ You will see the **header** which describes the format, when the file was create
 ~~~
 {: .output}
 
-Followed by the **variant information**:
+Followed by information on each of the variations observed: 
 
 ~~~
-#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO   FORMAT  results/bam/SRR097977.aligned.sorted.bam
-NC_012967.1     9972    .       T       G       222     .       DP=28;VDB=8.911920e-02;AF1=1;AC1=2;DP4=0,0,19,7;MQ=36;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR097977.aligned.sorted.bam
+NC_012967.1     9972    .       T       G       222     .       DP=28;VDB=8.911920e-02;AF1=1;AC1=2;DP4=0,0,19,7;MQ=36;FQ=-105   GT:
+PL:GQ        1/1:255,78,0:99
 NC_012967.1     10563   .       G       A       222     .       DP=27;VDB=6.399241e-02;AF1=1;AC1=2;DP4=0,0,8,18;MQ=36;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
 NC_012967.1     81158   .       A       C       222     .       DP=37;VDB=2.579489e-02;AF1=1;AC1=2;DP4=0,0,15,21;MQ=37;FQ=-135  GT:PL:GQ        1/1:255,108,0:99
 NC_012967.1     216480  .       C       T       222     .       DP=39;VDB=2.356774e-01;AF1=1;AC1=2;DP4=0,0,19,17;MQ=36;FQ=-135  GT:PL:GQ        1/1:255,108,0:99
-	NC_012967.1     247796  .       T       C       221     .       DP=18;VDB=1.887634e-01;AF1=1;AC1=2;DP4=0,0,7,11;MQ=35;FQ=-81    GT:PL:GQ        1/1:254,54,0:99
+NC_012967.1     247796  .       T       C       221     .       DP=18;VDB=1.887634e-01;AF1=1;AC1=2;DP4=0,0,7,11;MQ=35;FQ=-81    GT:PL:GQ        1/1:254,54,0:99
+NC_012967.1     281923  .       G       T       222     .       DP=27;VDB=9.694360e-02;AF1=1;AC1=2;DP4=0,0,8,18;MQ=37;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
+NC_012967.1     295604  .       T       G       4.77    .       DP=15;VDB=5.094834e-02;RPB=1.240303e+00;AF1=0.4999;AC1=1;DP4=2,9,4,0;MQ=36;FQ=6.99;PV4=0.011,0.084,0.0043,0.14  GT:PL:GQ        0/1:33,0,171:33
 ~~~
 {: .output}
 
-The first columns represent the information we have about a predicted variation. 
+This is a lot of information, so let's take some time to make sure we understand our output.
 
-CHROM and POS provide the config information and position where the variation occurs. 
+The first few columns represent the information we have about a predicted variation. 
 
-ID is a `.` until we add annotation information. 
+| column | info |
+| ------- | ---------- |
+| CHROM | contig location where the variation occurs | 
+| POS | position within the contig where the variation occurs | 
+| ID | a `.` until we add annotation information | 
+| REF | reference genotype (forward strand) | 
+| ALT | sample genotype (forward strand) | 
+| QUAL | Phred-scaled probablity that the observed variant exists at this site (higher is better) |
+| FILTER | a `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed | 
 
-REF and ALT represent the genotype at the reference and in the sample, always on the foward strand. 
+In an ideal world, the information in the `QUAL` column would be all we needed to filter out bad variant calls.
+However, in reality we need to filter on multiple other metrics. 
 
-QUAL then is the Phred scaled probablity that the observed variant exists at this site. Ideally you would need nothing else to filter out bad variant calls, but in reality we still need to filter on multiple other metrics. 
+The last two columns contain the genotypes and can be tricky to decode. 
 
-The FILTER field is a `.`, i.e. no filter has been applied, otherwise it will be set to either PASS or show the (quality) filters this variant failed. 
+| column | info |
+| ------- | ---------- |
+| FORMAT | lists in order the metrics presented in the final column | 
+| results | lists the values associated with those metrics in order | 
 
+For our file, the metrics presented are GT:PL:GQ. 
 
-The last columns contains the genotypes and can be a bit more tricky to decode. In brief, we have:
+| metric | definition | 
+| ------- | ---------- |
+| GT | the genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc. |
+| PL | the likelihoods of the given genotypes |
+| GQ | the Phred-scaled confidence for the genotype | 
+| AD, DP | the depth per allele by sample and coverage |
 
-* GT: The genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc.
+The Broad Institute's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=1268) is an excellent place
+to learn more about VCF file format.
 
-* GQ: the Phred-scaled confidence for the genotype
-
-* AD, DP: Reflect the depth per allele by sample and coverage
-
-* PL: the likelihoods of the given genotypes
-
-The BROAD's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=1268) is an excellent place to learn more about VCF file format.
-
+> ## Exercise
+> 
+> Use the `grep`, `cut`, and `less` commands you've learned to extract the `POS` and `QUAL` columns from your 
+> output file (without the header lines). What is the position of the first variant to be called with a `QUAL` 
+> value of less than 4?
+>
+>> ## Solution
+>> 
+>> ~~~
+>> $ cut results/vcf/SRR097977_final_variants.vcf -f 6,2 | grep -v "##" | less
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~ 
+>> POS     QUAL
+>> 9972    222
+>> 10563   222
+>> 81158   222
+>> 216480  222
+>> 247796  221
+>> 281923  222
+>> .
+>> .
+>> .
+>> 1004106 7.8
+>> 1019082 3.01
+>> ~~~
+>> {: .output}
+>>
+>> Position 1019082 has a score of 3.01.
+> {: .solution}
+{: .challenge}
 
 ## Assess the alignment (visualization) - optional step
 
-It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you ideas for further analyses.  As such, visualization tools are useful for exploratory analysis. In this lesson we will describe two different tools for visualisation; a light-weight command-line based one and IGV which requires software installation and transfer of files.
+It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for 
+the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you 
+ideas for further analyses.  As such, visualization tools are useful for exploratory analysis. In this lesson we 
+will describe two different tools for visualisation; a light-weight command-line based one and the Broad
+Institute's Integrative Genomics Viewer (IGV) which requires
+software installation and transfer of files.
 
-In any case, and in order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
+In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
 
 ~~~
 $ samtools index results/bam/SRR097977.aligned.sorted.bam
@@ -371,60 +434,99 @@ $ samtools index results/bam/SRR097977.aligned.sorted.bam
 
 ### Viewing with `tview`
 
-SAMTools implements a very simple text alignment viewer based on the GNU `ncurses` library, called `tview`. This alignment viewer works with short indels and shows MAQ consensus. It uses different colors to display mapping quality or base quality, subjected to users' choice. SAMTools viewer is known to work with an 130GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
+[Samtools](http://www.htslib.org/) implements a very simple text alignment viewer based on the GNU
+`ncurses` library, called `tview`. This alignment viewer works with short indels and shows [MAQ](http://maq.sourceforge.net/) consensus. 
+It uses different colors to display mapping quality or base quality, subjected to users' choice. Samtools viewer is known to work with an 130 GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
 
-In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file. We thus run the following command:
+In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file: 
 
 ~~~
 $ samtools tview results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
-`tview` commands of relevance:
-
-* left and right arrows scroll
-* `q` to quit
-* CTRL-h and CTRL-l do "big" scrolls
-
-Alternatively, you can guide `tview` to start in a particular position, as follows:
-
 ~~~
-$ samtools tview -p chr1:173389928 results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
-~~~
-{: .bash}
-
-### Viewing with `IGV`
-
-[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They do not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
-
-**Transfer files to your laptop**
-
-Using FileZilla, transfer the following 4 files to your local machine:
-
-~~~
-results/bam/SRR097977.aligned.sorted.bam
-
-results/bam/SRR097977.aligned.sorted.bam.bai
-
-data/ref_genome/ecoli_rel606.fasta
-
-results/vcf/SRR097977_final_variants.vcf
+1         11        21        31        41        51        61        71        81        91        101       111       121
+AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATAC
+..................................................................................................................................
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ..................N................. ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,........................
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ..................N................. ,,,,,,,,,,,,,,,,,,,,,,,,,,,.............................
+...................................,g,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ....................................   ................
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,....................................   ....................................      ,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ....................................  ,,a,,,,,,,,,,,,,,,,,,,,,,,,,,,,,     .......
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, .............................  ,,,,,,,,,,,,,,,,,g,,,,,    ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ...........................T.......   ,,,,,,,,,,,,,,,,,,,,,,,c,          ......
+......................... ................................   ,g,,,,,,,,,,,,,,,,,,,      ...........................
+,,,,,,,,,,,,,,,,,,,,, ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ,,,,,,,,,,,,,,,,,,,,,,,,,,,       ..........................
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,   ................................T..  ..............................   ,,,,,,
+...........................       ,,,,,,g,,,,,,,,,,,,,,,,,   ....................................         ,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,, ....................................  ...................................        ....
+....................................  ........................  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,      ....
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,   ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+........................            .................................. .............................     ....
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,   ....................................        ..........................
+...............................       ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ....................................
+...................................  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ..................................
+.................................... ,,,,,,,,,,,,,,,,,,a,,,,,,,,,,,,,,,,,        ,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,  ............................ ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ~~~
 {: .output}
 
-1. Start [IGV](https://www.broadinstitute.org/software/igv/download)
-2.  Load the genome file into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
-3.  Load the .bam file using the **"Load from File..."** option under the **"File"** pull-down menu. 
-3. Do the same with the .bai file. IGV requires the .bai file to be in the same location as the .bam file that is loaded into IGV, and uses it for faster access to the data in the bam file.
-4.  Load in the VCF file using the **"Load from File..."** option under the **"File"** pull-down menu
+The first line of output shows the genome coordinates in our reference genome. The second line shows the reference
+genome sequence. The third lines shows the consensus sequence determined from the sequence reads. A `.` indicates
+a match to the reference sequence, so we can see that the consensus from our sample matches the reference in most
+locations. That is good! If that wasn't the case, we should probably reconsider our choice of reference.
+
+Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only 
+positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
+to scroll or type `?` for a help menu. Type `Ctrl^C` to exit `tview`. 
+
+
+### Viewing with IGV
+
+[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
+
+In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`. 
+Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for 
+demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and 
+instead organize files within a directory structure like we've been using in our `dc_workshop` directory.
+
+~~~
+$ mkdir ~/Desktop/files_for_igv
+$ cd ~/Desktop/files_for_igv
+~~~
+{: .bash}
+
+Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:` 
+with your AWS instance number. The commands to `scp` always go in the terminal window that is connected to your
+local computer (not your AWS instance).
+
+~~~
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR097977_final_variants.vcf ~/Desktop/files_for_igv
+~~~
+{: .bash}
+
+You will need to type the password for your AWS instance each time you call `scp`. 
+
+Next we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
+to unzip it, and then drag the program into your Applications folder. 
+
+1. Open IGV.
+2. Load our reference genome file (`ecoli_rel606.fasta`) into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
+3. Load our BAM file (`SRR097977.aligned.sorted.bam`) using the **"Load from File..."** option under the **"File"** pull-down menu. 
+4.  Do the same with our VCF file (`SRR097977_final_variants.vcf`).
 
 Your IGV browser should look like the screenshot below:
 
 ![IGV](../img/igv-screenshot.png)
 
-There should be two tracks: one coresponding to your BAM file and the other for your VCF file. 
+There should be two tracks: one coresponding to our BAM file and the other for our VCF file. 
 
-In the **VCF track**, each bar across the top of the plot shows the allele fraction for a single locus. The second bar will show 
+In the **VCF track**, each bar across the top of the plot shows the allele fraction for a single locus. The second bar shows
 the genotypes for each locus in each *sample*. We only have one sample called here so we only see a single line. Dark blue = 
 heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are transparent.
 
@@ -432,3 +534,16 @@ Zoom in to inspect variants you see in your filtered VCF file to become more fam
 corresponds to alignment information at those loci.
 Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
+> ## Exercise
+> 
+>
+>
+>
+{: .challenge}
+
+Now that we've run through our workflow for a single sample, we want to repeat this workflow for our other five
+samples. However, we don't want to type each of these individual steps again five more times. That would be very
+time consuming and error-prone, and would become impossible as we gathered more and more samples. Luckily, we
+already know the tools we need to use to automate this workflow and run it on as many files as we want using a
+single line of code. Those tools are: wildcards, for loops, and bash scripts. We'll use all three in the next 
+lesson. 
