@@ -217,7 +217,7 @@ Approx 25% complete for SRR097977.fastq
 
 For each of your sample files, FastQC will ask if you want to replace the existing version with a new version. This is 
 because we have already run FastQC on this samples files and generated all of the outputs. We are now doing this again using
-out scripts. Go ahead and select `A` each time this message appears. It will appear once per sample file (six times total).
+our scripts. Go ahead and select `A` each time this message appears. It will appear once per sample file (six times total).
 
 ~~~
 replace SRR097977_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]ename:
