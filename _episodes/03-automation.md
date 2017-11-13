@@ -3,12 +3,14 @@ title: "Automating a Variant Calling Workflow"
 teaching: 30
 exercises: 15
 questions:
-- "How can I automate this?"
+- "How can I make my workflow more efficient and less error-prone?"
 objectives:
-- "Understand what a shell script is"
-- "Automate an analytical workflow"
--  "Group a series of sequential commands into a script to automate a workflow"
+- "Write a shell script with multiple variables."
+- "Incorporate a `for` loop into a shell script."
+- ""
 keypoints:
+- "We can combine multiple commands into a shell script to automate a workflow."
+- "Use `echo` statements within your scripts to get an automated progress update."
 ---
 # What is a shell script?
 
@@ -38,7 +40,7 @@ We've also used `for` loops in previous lessons to iterate one or two commands o
 In these `for` loops you used variables to enable you to run the loop on multiple files. We will be using variable 
 assignments like this in our new shell scripts.
 
-Here's the for loop you wrote for for unzipping `.zip` files: 
+Here's the `for` loop you wrote for unzipping `.zip` files: 
 
 ~~~
 $ for filename in *.zip
@@ -261,7 +263,15 @@ Our variant calling workflow will do the following steps
 6. Filter and report the SNP variants in VCF (variant calling format)
 
 
-We will be recreating this script together. The version provided is for your reference. First, we will create a new script in our `scripts/` directory using `touch`. 
+We will be recreating this script together. The version provided is for your reference. First, we will move our 
+`variant_calling/` directory to our `dc_workshop/` directory.
+
+~~~
+mv ~/dc_sample_data/variant_calling ~/dc_workshop/
+~~~
+{: .bash}
+
+Next, we will create a new script in our `scripts/` directory using `touch`. 
 
 ~~~
 $ cd ~/dc_workshop/scripts
@@ -315,7 +325,7 @@ bwa index $genome
 ~~~
 {: .output}
 
-And create the directory structure to store our results in. 
+And create the directory structure to store our results in: 
 
 ~~~
 mkdir -p results/sai results/sam results/bam results/bcf results/vcf
@@ -333,23 +343,94 @@ tell the script to `echo` the filename back to us so we can check which file we'
 for fq in data/trimmed_fastq/*.fastq
     do
     echo "working with file $fq"
+    done
 ~~~
 {: .bash}
 
 
-The next step in our loop will extract the base name of the file
+> ## Indentation
+> 
+> All of the statements within your `for` loop (i.e. everything after the `for` line and including the `done` line) 
+> need to be indented. This indicates to the shell interpretor that these statements are all part of the `for` loop
+> and should be done once per input.
+> 
+{: .callout}
+
+
+> ## Exercise
+> 
+> This is a good time to check that our script is assigning the FASTQ filename variables correctly. Save your script and run
+> it. What output do you see?
+>
+>> ## Solution 
+>> 
+>> ~~~
+>> $ bash run_variant_calling_2.sh
+>> ~~~
+>> {: .bash}
+>> 
+>> ~~~
+>> [bwa_index] Pack FASTA... 0.04 sec
+>> [bwa_index] Construct BWT for the packed sequence...
+>> [bwa_index] 1.06 seconds elapse.
+>> [bwa_index] Update BWT... 0.03 sec
+>> [bwa_index] Pack forward-only FASTA... 0.02 sec
+>> [bwa_index] Construct SA from BWT and Occ... 0.57 sec
+>> [main] Version: 0.7.5a-r405
+>> [main] CMD: bwa index data/ref_genome/ecoli_rel606.fasta
+>> [main] Real time: 1.801 sec; CPU: 1.724 sec
+>> working with file data/trimmed_fastq/SRR097977.fastq
+>> working with file data/trimmed_fastq/SRR098026.fastq
+>> working with file data/trimmed_fastq/SRR098027.fastq
+>> working with file data/trimmed_fastq/SRR098028.fastq
+>> working with file data/trimmed_fastq/SRR098281.fastq
+>> working with file data/trimmed_fastq/SRR098283.fastq
+>> ~~~
+>> {: .output}
+>> 
+>> You should see "working with file . . . " for each of the six FASTQ files in our `trimmed_fastq/` directory.
+>> If you don't see this output, then you'll need to troubleshoot your script. A common problem is that your directory might not
+>> be specified correctly. Ask for help if you get stuck here! 
+> {: .solution}
+{: .challenge}
+
+Now that we've tested the components of our loops so far, we will add our next few steps. Remove the line `done` from the end of
+your script and add the next two lines. These lines extract the base name of the file
 (excluding the path and `.fastq` extension) and assign it
-to a new variable called `base` variable.
+to a new variable called `base` variable. Add `done` again at the end so we can test our script.
 
 ~~~
     base=$(basename $fq .fastq)
     echo "base name is $base"
+    done
 ~~~
 {: .output}
 
-Next we will assign various file names to variables
-for convenience and to make it easier to read the commands
-in the rest of our script.
+Now if you save and run your script, the final lines of your output should look like this: 
+
+~~~
+working with file data/trimmed_fastq/SRR097977.fastq
+base name is SRR097977
+working with file data/trimmed_fastq/SRR098026.fastq
+base name is SRR098026
+working with file data/trimmed_fastq/SRR098027.fastq
+base name is SRR098027
+working with file data/trimmed_fastq/SRR098028.fastq
+base name is SRR098028
+working with file data/trimmed_fastq/SRR098281.fastq
+base name is SRR098281
+working with file data/trimmed_fastq/SRR098283.fastq
+base name is SRR098283
+~~~
+{: .output}
+
+For each file, you see two statements printed to the terminal window. This is because we have two `echo` statements. The first
+tells you which file the loop is currently working with. The second tells you the base name of the file. This base name is going
+to be used to create our output files.
+
+Next we will create variables to store the names of our output files. This will make your script easier
+to read because you won't need to type out the full name of each of the files. We're using the `base` variable that we just
+defined, and adding different file name extensions to represent the files that will come out of each step in our workflow.
 
 ~~~
     fq=data/trimmed_fastq/$base\.fastq
@@ -363,64 +444,126 @@ in the rest of our script.
 ~~~
 {: .output}
 
-Our data are now staged.  The series of command below will run the steps of the analytical workflow
+Now that we've created our variables, we can start doing the steps of our workflow. Remove the `done` line from the end of
+your script and add the following lines. 
 
-Align the reads to the reference genome
-
-~~~
-$ bwa aln $genome $fq > $sai
-~~~
-{: .bash}
-
-Convert the output to the SAM format
+1) align the reads to the reference genome and output a `.sai` file:
 
 ~~~
-$ bwa samse $genome $sai $fq > $sam
+    bwa aln $genome $fq > $sai
 ~~~
-{: .bash}
+{: .output}
 
-Convert the SAM file to BAM format
-
-~~~
-$ samtools view -S -b $sam > $bam
-~~~
-{: .bash}
-
-Sort the BAM file
+2) convert the output to SAM format:
 
 ~~~
-$ samtools sort -f $bam $sorted_bam
+    bwa samse $genome $sai $fq > $sam
 ~~~
-{: .bash}
+{: .output}
 
-Index the BAM file for display purposes
+3) convert the SAM file to BAM format:
 
 ~~~
-$ samtools index $sorted_bam
+    samtools view -S -b $sam > $bam
 ~~~
-{: .bash}
+{: .output}
 
-Do the first pass on variant calling by counting
+4) sort the BAM file:
+
+~~~
+    samtools sort -f $bam $sorted_bam
+~~~
+{: .output}
+
+5) index the BAM file for display purposes:
+
+~~~
+    samtools index $sorted_bam
+~~~
+{: .output}
+
+6) do the first pass on variant calling by counting
 read coverage
 
 ~~~
-$ samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
+    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
+~~~
+{: .output}
+
+7) call SNPs with bcftools:
+
+~~~
+    bcftools view -bvcg $raw_bcf > $variants
+~~~
+{: .output}
+
+8) filter the SNPs for the final output:
+
+~~~
+    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    done
+~~~
+{: .output}
+
+We added a `done` line after the SNP filtering step because this is the last step in our `for` loop.
+
+Your script should now look like this:
+
+~~~
+cd ~/dc_workshop/variant_calling
+
+genome=data/ref_genome/ecoli_rel606.fasta
+
+bwa index $genome
+
+mkdir -p results/sai results/sam results/bam results/bcf results/vcf
+
+for fq in data/trimmed_fastq/*.fastq
+    do
+    echo "working with file $fq"
+    base=$(basename $fq .fastq)
+    echo "base name is $base"
+
+    fq=data/trimmed_fastq/$base\.fastq
+    sai=results/sai/$base\_aligned.sai
+    sam=results/sam/$base\_aligned.sam
+    bam=results/bam/$base\_aligned.bam
+    sorted_bam=results/bam/$base\_aligned_sorted.bam
+    raw_bcf=results/bcf/$base\_raw.bcf
+    variants=results/bcf/$base\_variants.bcf
+    final_variants=results/vcf/$base\_final_variants.vcf  
+
+    bwa aln $genome $fq > $sai
+    bwa samse $genome $sai $fq > $sam
+    samtools view -S -b $sam > $bam
+    samtools sort -f $bam $sorted_bam
+    samtools index $sorted_bam
+    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
+    bcftools view -bvcg $raw_bcf > $variants
+    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    done
+~~~
+{: .output}
+
+> ## Exercise
+> It's a good idea to add comments to your code so that you (or a collaborator) can make sense of what you did later. 
+> Look through your existing script. Discuss with a neighbor where you should add comments. Add comments (anything following
+> a `#` character will be interpreted as a comment, bash will not try to run these comments as code). 
+{: .challenge}
+
+Now we can run our script:
+
+~~~
+$ bash run_variant_calling_2.sh
 ~~~
 {: .bash}
 
-Do the SNP calling with bcftools
+> ## Exercise
+> 
+>
+>
+{: .challenge}
 
-~~~
-$ bcftools view -bvcg $raw_bcf > $variants
-~~~
-{: .bash}
-
-Filter the SNPs for the final output
-
-~~~
-$ bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
-~~~
-{: .bash}
 
 > ## BWA variations
 > BWA is a software package for mapping low-divergent sequences 
@@ -463,19 +606,6 @@ $ bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final
 {: .callout}
 
 
-
-> ## Exercise
-> Run the script: dcuser/dc_sample_data/variant_calling/run_variant_calling.sh
-> 
-> $ bash run_variant_calling.sh
-{: .challenge}
-
-This looks a lot like the for loops we saw earlier. In fact, it is no different, apart from using indentation and the lack of the
-'>' prompts; it's just saved in a text file. The line at the top ('#!/bin/bash') is commonly called the shebang line, which is a
-special kind of comment that tells the shell which program is to be used as the 'intepreter' that executes the code.  
-
-In this case, the interpreter is bash, which is the shell environment we are working in. The same approach is also used for other
-scripting languages such as perl and python. 
 
 
 
