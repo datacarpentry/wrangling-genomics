@@ -46,7 +46,7 @@ and assess the quality of the sequence reads.
 ![workflow_qc](../img/var_calling_workflow_qc.png)
 ## Details on the FASTQ format
 
-Although it looks complicated (and maybe it is), its easy to understand the
+Although it looks complicated (and it is), its easy to understand the
 [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
 include...
 
