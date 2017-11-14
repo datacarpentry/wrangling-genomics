@@ -3,13 +3,15 @@ title: "Variant Calling Workflow"
 teaching: 35
 exercises: 25
 questions:
-- "How do I find variants in my data?"
+- "How do I find sequence variants between my samples and a reference genome?"
 objectives:
-- "Make use of command line tools to perform a variant calling workflow."
 - "Describe the steps involved in variant calling."
 - "Describe the types of data formats encountered during variant calling."
+- "Use command line tools to perform variant calling."
 keypoints:
-- "First key point."
+- "Bioinformatics command line tools are collections of commands that can be used to carry out bioinformatics analyses."
+- "To use most powerful bioinformatics tools, you'll need to use the command line."
+- "There are many different file formats for storing genomics data. It's important to understand these file formats and know how to convert among them."
 ---
 
 # Alignment to a reference genome
@@ -203,8 +205,6 @@ Your output will start out something like this:
 > to separate code chunks onto separate lines. This can make your code more readable.
 >
 {: .callout}
-
-Explore the information within your SAM file:
 
 Next we convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
