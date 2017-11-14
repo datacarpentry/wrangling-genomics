@@ -205,10 +205,9 @@ The new part in our `for` loop is the line:
 `infile` is the first variable in our loop and takes the value
 of each of the FASTQ files in our directory. `outfile` is the
 second variable in our loop and is defined by adding `_trim.fastq` to
-the end of our input file name. Use `{}` to wrap the varialbe so that `_trim.fastq` will
+the end of our input file name. Use `{}` to wrap the variable so that `_trim.fastq` will
 not be interpreted as part of the variable name. In addition, quoting the shell variables is
-a good practice. If you do not want to use `{}`, you have to use `\` to escape: `outfile=$infile\_trim.fastq`
-`\` character is used so the shell knows that whatever follows `\` is not part of the variable name `$infile`.
+a good practice AND necessary if your variables have spaces in them. For more, check [Bash Pitfalls](http://mywiki.wooledge.org/BashPitfalls).
 There are no spaces before or after the `=`.
 
 Go ahead and run the for loop. It should take a few minutes for
