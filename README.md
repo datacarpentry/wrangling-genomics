@@ -13,6 +13,7 @@ This lesson is part of the [Data Carpentry](http://www.datacarpentry.org/) [Geno
 If you want to go through this lesson on your own, there are several options:
 - using a [cloud platform](http://www.datacarpentry.org/cloud-genomics/discuss/), there is an Amazon Machine Image (AMI) available with the data and software pre-installed on Amazon Web Services, [see the instructions](http://www.datacarpentry.org/cloud-genomics/discuss/#launching-an-instance-on-amazon-web-services)
 - The trimmed fastq files, the corresponding reference genome and the shell script for variant analysis are available [from here](https://github.com/datacarpentry/wrangling-genomics/blob/gh-pages/variant_calling.tar.gz)
+- software instalaltion instructions can be found [here](setup.md)
 
 ## Contribution
 
