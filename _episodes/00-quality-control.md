@@ -40,13 +40,13 @@ built under the assumption that the data will be provided in a specific format.
 
 # Quality Control
 
-The first step in the variant calling work flow is to take the FASTQ files received from the sequencing facility
+The first step in the variant calling workflow is to take the FASTQ files received from the sequencing facility
 and assess the quality of the sequence reads. 
 
 ![workflow_qc](../img/var_calling_workflow_qc.png)
 ## Details on the FASTQ format
 
-Although it looks complicated (and maybe it is), its easy to understand the
+Although it looks complicated (and it is), its easy to understand the
 [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
 include...
 

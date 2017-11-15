@@ -31,7 +31,7 @@ We don't currently know if we'll keep using Amazon Cloud or not.
 FastQC is available for Linux, MacOS and Windows.
 
 #### Install Instructions:
-Reference: The Biostars Handbook
+Reference: [The Biostars Handbook](https://www.biostarhandbook.com/)
 
 ```brew install fastqc```
 or
@@ -44,7 +44,8 @@ or
 In these instructions, the command `curl` is used to download files from the internet. This command supports downloading files from FTP and HTTP(s). The `-O` paremeter ensures that the downloaded file gets saved on disk with the same filename as the original. There are other commandline tools that can also be used to download data, for example `wget` (which you should use without the `-O` flag). `wget` also supports recursive download (with the parameter `-r`), allowing you to download content from a directory or folder. Not all computers have both tools installed, though.
 
 This is helpful when one wants to understand what type of files come with fastqc
-````
+
+```
 cd ~/src
 curl -O http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.5.zip
 unzip fastqc_v0.11.5.zip
@@ -58,9 +59,12 @@ ln -sf ~/src/FastQC/fastqc ~/bin/fastqc
 # We need to set it ourselves.
 chmod +x ~/bin/fastqc
 ```
+
 Test installation by running:
 
-```fastqc -h```
+```
+fastqc -h
+```
 
 ### Trimmomatic
 
@@ -71,11 +75,19 @@ Trimmomatic is available for Linux, MacOS and Windows.
 #### Installation Instructions:
 Reference: The Biostars Handbook
 
-```brew install trimmomatic```
+```
+brew install trimmomatic
+```
+
 or
-```conda install -y trimmomatic```
+
+```
+conda install -y trimmomatic
+```
+
 #### Source Code Installation
 
+```
 cd ~/src
 curl -O http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip
 unzip Trimmomatic-0.36.zip
@@ -87,21 +99,28 @@ java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar
 # Illumina specific adapter sequences.
 ls ~/src/Trimmomatic-0.36/adapters/
 ```
+
 #### How to run trimmomatic
 
-Unfortunately running trimmomatic is as user unfriendly as it gets. To run it we "simply" type:
+Unfortunately running trimmomatic is as user unfriendly as it gets. To run it we type:
 
-```java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar```
-That gets old very quickly. To simplify the invocation create a script in the ~/bin folder:
+```
+java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar
+```
+
+To simplify the invocation you could also create a script in the ~/bin folder:
 
 ```
 echo '#!/bin/bash' > ~/bin/trimmomatic
 echo 'java -jar ~/src/Trimmomatic-0.36/trimmomatic-0.36.jar $@' >> ~/bin/trimmomatic
 chmod +x ~/bin/trimmomatic
 ```
-#### Test installation by running:
 
-```trimmomatic```
+Test your script by running:
+
+```
+trimmomatic
+```
 
 ### BWA
 
@@ -112,12 +131,18 @@ Bwa is available for Linux and MacOS.
 #### Installation instructions:
 Reference: The Biostars Handbook
 
-```brew install bwa```
+```
+brew install bwa
+```
+
 or
 
-```conda install -y bwa```
+```
+conda install -y bwa
+```
 
 ##### Installation from source:
+
 ```
 cd ~/src
 curl -OL http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.15.tar.bz2
@@ -130,12 +155,16 @@ export PATH=~/src/bwa-0.7.15:$PATH
 #### Test installation:
 
 Run:
+
 ```
 bwa
 ```
+
 BWA has a nicely formatted manual:
 
-```man ~/src/bwa-0.7.12/bwa.1 ```
+```
+man ~/src/bwa-0.7.12/bwa.1
+```
 
 ### SAMtools
 
@@ -146,10 +175,17 @@ SAMtools is available for Linux and MacOS.
 #### Installation Instructions
 Reference: The Biostars Handbook
 
-```brew install samtools```
+```
+brew install samtools
+```
+
 or
-```conda install -y samtools```
-Note:
+
+```
+conda install -y samtools
+```
+
+Note:  
 SAMtools has changed the command line invocation (for the better). But this means that most of the tutorials on the web indicate an older and obsolete usage.
 
 Use only SAMtools 1.3 or later.
@@ -170,9 +206,12 @@ source ~/.bashrc
 
 #### Test that the installation succeeded:
 
-`samtools`
+```
+samtools
+```
 
 SAMtools has a nicely formatted manual:
+
 ```
 man ~/src/samtools-1.3/samtools.1
 ```
@@ -185,10 +224,15 @@ BCFtools is available for Linux and MacOS
 
 #### Installation Instructions
 
-```brew install bcftools```
-or
 ```
-conda install bcftools```
+brew install bcftools
+```
+
+or
+
+```
+conda install bcftools
+```
 
 #### Install from source
 
@@ -206,7 +250,9 @@ source ~/.bashrc
 
 #### Test that the installation succeeded:
 
-`bcftools`
+```
+bcftools
+```
 
 ### IGV
 
