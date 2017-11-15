@@ -31,7 +31,7 @@ We don't currently know if we'll keep using Amazon Cloud or not.
 FastQC is available for Linux, MacOS and Windows.
 
 #### Install Instructions:
-Reference: The Biostars Handbook
+Reference: [The Biostars Handbook](https://www.biostarhandbook.com/)
 
 ```brew install fastqc```
 or
