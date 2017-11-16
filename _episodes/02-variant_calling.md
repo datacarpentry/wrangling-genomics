@@ -534,13 +534,6 @@ Zoom in to inspect variants you see in your filtered VCF file to become more fam
 corresponds to alignment information at those loci.
 Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
-> ## Exercise
-> 
->
->
->
-{: .challenge}
-
 Now that we've run through our workflow for a single sample, we want to repeat this workflow for our other five
 samples. However, we don't want to type each of these individual steps again five more times. That would be very
 time consuming and error-prone, and would become impossible as we gathered more and more samples. Luckily, we
