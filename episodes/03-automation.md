@@ -267,7 +267,15 @@ $ nano run_variant_calling.sh
 
 Enter the following pieces of code into your shell script (not into your terminal prompt).
 
-First we tell our script where to find the reference genome by assigning the `genome` variable to 
+First we will change our working directory so that we can create new results subdirectories
+in the right location. 
+
+~~~
+cd ~/dc_workshop/results
+~~~
+{: .output}
+
+Next we tell our script where to find the reference genome by assigning the `genome` variable to 
 the path to our reference genome: 
 
 ~~~
@@ -475,6 +483,8 @@ We added a `done` line after the SNP filtering step because this is the last ste
 Your script should now look like this:
 
 ~~~
+cd ~/dc_workshop/results
+
 genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 
 bwa index $genome
