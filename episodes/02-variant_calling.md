@@ -40,6 +40,14 @@ $ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
 ~~~
 {: .bash}
 
+We will also copy over a set of trimmed FASTQ files to work with. These are small subsets of our real trimmed data, 
+and will enable us to run our variant calling workflow quite quickly. 
+
+~~~
+$ cp -r ~/.dc_sampledata_lite/trimmed_fastq_small/ data/
+~~~
+{: .bash}
+
 You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single
 line of code because `mkdir` can accept multiple new directory
 names as input.
@@ -118,7 +126,7 @@ samples in our dataset (`SRR098283.fastq`). Later, we'll be
 iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
+$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
 ~~~
 {: .bash}
 
@@ -183,7 +191,7 @@ The code in our case will look like:
 ~~~
 $ bwa samse data/ref_genome/ecoli_rel606.fasta \
         results/sai/SRR097977.aligned.sai \
-        data/trimmed_fastq/SRR097977.fastq_trim.fastq > \
+        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > \
         results/sam/SRR097977.aligned.sam
 ~~~
 {: .bash}
