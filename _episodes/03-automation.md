@@ -312,7 +312,7 @@ The first thing we do is assign the name of the FASTQ file we're currently worki
 tell the script to `echo` the filename back to us so we can check which file we're on.
 
 ~~~
-for fq in ~/dc_workshop/data/trimmed_fastq/*.fastq
+for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
     echo "working with file $fq"
     done
@@ -344,19 +344,19 @@ for fq in ~/dc_workshop/data/trimmed_fastq/*.fastq
 >> ~~~
 >> [bwa_index] Pack FASTA... 0.04 sec
 >> [bwa_index] Construct BWT for the packed sequence...
->> [bwa_index] 1.13 seconds elapse.
+>> [bwa_index] 1.10 seconds elapse.
 >> [bwa_index] Update BWT... 0.03 sec
 >> [bwa_index] Pack forward-only FASTA... 0.02 sec
->> [bwa_index] Construct SA from BWT and Occ... 0.56 sec
+>> [bwa_index] Construct SA from BWT and Occ... 0.64 sec
 >> [main] Version: 0.7.5a-r405
 >> [main] CMD: bwa index /home/dcuser/dc_workshop/data/ref_genome/ecoli_rel606.fasta
->> [main] Real time: 1.839 sec; CPU: 1.778 sec
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR097977.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098026.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098027.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098028.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098281.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq
+>> [main] Real time: 1.892 sec; CPU: 1.829 sec
+>> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
+>> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
+>> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
+>> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
+>> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
+>> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
 >> ~~~
 >> {: .output}
 >> 
@@ -372,7 +372,7 @@ your script and add the next two lines. These lines extract the base name of the
 to a new variable called `base` variable. Add `done` again at the end so we can test our script.
 
 ~~~
-    base=$(basename $fq .fastq)
+    base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
     done
 ~~~
@@ -381,18 +381,18 @@ to a new variable called `base` variable. Add `done` again at the end so we can 
 Now if you save and run your script, the final lines of your output should look like this: 
 
 ~~~
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR097977.fastq_trim.fastq
-base name is SRR097977.fastq_trim
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098026.fastq_trim.fastq
-base name is SRR098026.fastq_trim
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098027.fastq_trim.fastq
-base name is SRR098027.fastq_trim
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098028.fastq_trim.fastq
-base name is SRR098028.fastq_trim
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098281.fastq_trim.fastq
-base name is SRR098281.fastq_trim
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq/SRR098283.fastq_trim.fastq
-base name is SRR098283.fastq_trim
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
+base name is SRR097977
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
+base name is SRR098026
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
+base name is SRR098027
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
+base name is SRR098028
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
+base name is SRR098281
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
+base name is SRR098283
 ~~~
 {: .output}
 
@@ -406,7 +406,7 @@ defined, and adding different file name extensions to represent the files that w
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
-    fq=~/dc_workshop/data/trimmed_fastq/$base\.fastq
+    fq=~/dc_workshop/data/trimmed_fastq_small/$base\.fastq_trim.fastq
     sai=~/dc_workshop/results/sai/$base\_aligned.sai
     sam=~/dc_workshop/results/sam/$base\_aligned.sam
     bam=~/dc_workshop/results/bam/$base\_aligned.bam
@@ -491,21 +491,21 @@ bwa index $genome
 
 mkdir -p sai sam bam bcf vcf
 
-for fq in ~/dc_workshop/data/trimmed_fastq/*.fastq
+for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
     echo "working with file $fq"
 
-    base=$(basename $fq .fastq)
+    base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=~/dc_workshop/data/trimmed_fastq/$base\.fastq
+    fq=~/dc_workshop/data/trimmed_fastq_small/$base\.fastq_trim.fastq
     sai=~/dc_workshop/results/sai/$base\_aligned.sai
     sam=~/dc_workshop/results/sam/$base\_aligned.sam
     bam=~/dc_workshop/results/bam/$base\_aligned.bam
     sorted_bam=~/dc_workshop/results/bam/$base\_aligned_sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/$base\_raw.bcf
     variants=~/dc_workshop/results/bcf/$base\_variants.bcf
-    final_variants=~/dc_workshop/results/vcf/$base\_final_variants.vcf   
+    final_variants=~/dc_workshop/results/vcf/$base\_final_variants.vcf 
 
     bwa aln $genome $fq > $sai
     bwa samse $genome $sai $fq > $sam
