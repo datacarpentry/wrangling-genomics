@@ -1,7 +1,7 @@
 ---
 title: "Trimming and Filtering"
 teaching: 30
-exercises: 15
+exercises: 25
 questions:
 - "How can I get rid of sequence data that doesn't meet my quality standards?"
 objectives:
@@ -87,7 +87,7 @@ $ java -jar trimmomatic-0.32.jar SE
 However, a complete command for Trimmomatic will look something like this:
 
 ~~~
-java -jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+$ java -jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
 ~~~
 {: .bash}
 
@@ -248,19 +248,19 @@ This shows that when we re-trimmed our trimmed file, no new reads were
 dropped. This is a good thing!
 
 > ## Exercise
-> Earlier we looked at the first read in our `SRR098281.fastq` file and
+> Earlier we looked at the first read in our `SRR098026.fastq` file and
 > saw that it was very poor quality.
 >
 > ~~~
-> $ head -n4 SRR098281.fastq
+> $ head -n4 SRR098026.fastq
 > ~~~
 > {: .bash}
 >
 > ~~~
-> @SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
-> CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-> +SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
-> #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+> @SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+> NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
+> +SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+> !!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
 > ~~~
 > {: .output}
 >
@@ -269,15 +269,15 @@ dropped. This is a good thing!
 >
 >> ## Solution
 >> ~~~
->> $ head -n4 SRR098281.fastq_trim.fastq
+>> $ head -n4 SRR098026.fastq_trim.fastq
 >> ~~~
 >> {: .bash}
 >>
 >> ~~~
->> @SRR098281.256 HWUSI-EAS1599_1:2:1:1:315 length=35
->> CTGGTGGTACTNTCTGTGGCG
->> +SRR098281.256 HWUSI-EAS1599_1:2:1:1:315 length=35
->> BA@A;?==B>=!BABA=3@AA
+>> @SRR098026.342 HWUSI-EAS1599_1:2:1:3:655 length=35
+>> GGATNGGCCTTGTATTTATGATTCTCNGAGTCTGT
+>> +SRR098026.342 HWUSI-EAS1599_1:2:1:3:655 length=35
+>> BB@B!B@AACBBABCCCCBBBBBB@@!B?B<ABB@
 >> ~~~
 >> {: .output}
 >>
