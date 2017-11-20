@@ -547,16 +547,16 @@ $ bash run_variant_calling.sh
 > alignment, but the same process can be performed with `bwa mem` which doesn't require the creation of the index files. The 
 > process is modified starting from `mkdir` step, and omitting all directories relevant to the `.sai` index files, i.e.:
 > 
-> *Create output paths for various intermediate and result files.*
+> Create output paths for various intermediate and result files.
 >
->    $ mkdir -p results/sam
->    $ mkdir -p results/bam
->    $ mkdir -p results/bcf
->    $ mkdir -p results/vcf
+> ~~~
+> $ mkdir -p results/sam results/bam results/bcf results/vcf
+> ~~~
+> {: .bash}
 >
+> Assign file names to variables
 >
-> *Assign file names to variables*
->
+> ~~~
 > $ fq=data/trimmed_fastq/$base\.fastq
 > $ sam=results/sam/$base\_aligned.sam
 > $ bam=results/bam/$base\_aligned.bam
@@ -564,10 +564,15 @@ $ bash run_variant_calling.sh
 > $ raw_bcf=results/bcf/$base\_raw.bcf
 > $ variants=results/bcf/$base\_variants.bcf
 > $ final_variants=results/vcf/$base\_final_variants.vcf  
+> ~~~
+> {: .bash}
 >
-> *Run the alignment*
+> Run the alignment
 > 
-> bwa mem -M $genome $fq > $sam
+> ~~~
+> $ bwa mem -M $genome $fq > $sam
+> ~~~
+> {: .bash}
 > 
 > As an exercise, try and change your existing script file, from using the `aln` method to the `mem` method.
 {: .callout}
