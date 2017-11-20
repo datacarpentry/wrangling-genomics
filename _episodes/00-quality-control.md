@@ -61,15 +61,15 @@ We can view the first complete read in one of the files our dataset by using `he
 the first four lines.
 
 ~~~
-$ head -n4 SRR098281.fastq 
+$ head -n4 SRR098026.fastq
 ~~~
 {: .bash}
 
 ~~~
-@SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
-CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-+SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
++SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
 ~~~
 {: .output}
 
@@ -83,7 +83,7 @@ represents the numerical quality score for an individual nucleotide. For example
 above, the quality score line is: 
 
 ~~~
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
 ~~~
 {: .output}
 
@@ -109,39 +109,41 @@ much signal was captured for the base incorporation.
 Looking back at our read: 
 
 ~~~
-@SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
-CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-+SRR098281.1 HWUSI-EAS1599_1:2:1:0:318 length=35
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
++SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
 ~~~
 {: .output}
 
-we can now see that the quality of each of the `N`s is 0 and the quality of the first 
+we can now see that the quality of each of the `N`s is 0 and the quality of the only
 nucleotide call (`C`) is also very poor (`#` = a quality score of 2). This is indeed a very
 bad read. 
 
 > ## Exercise
 > 
-> What is the last read in the `SRR098283.fastq` file? How confident
+> What is the last read in the `SRR098026.fastq` file? How confident
 > are you in this read? 
 > 
 >> ## Solution
 >> ~~~
->> $ tail -n4 SRR098283.fastq
+>> $ tail -n4 SRR098026.fastq
 >> ~~~
 >> {: .bash}
 >> 
 >> ~~~
->> @SRR098283.21564058 HWUSI-EAS1599_1:4:120:1793:1981 length=35
->> NNNNNNNNNGACGNNNNNNNNNNNNNNNAACTNNN
->> +SRR098283.21564058 HWUSI-EAS1599_1:4:120:1793:1981 length=35
->> !!!!!!!!!####!!!!!!!!!!!!!!!####!!!
+>> @SRR098026.249 HWUSI-EAS1599_1:2:1:2:1057 length=35
+>> CNCTNTATGCGTACGGCAGTGANNNNNNNGGAGAT
+>> +SRR098026.249 HWUSI-EAS1599_1:2:1:2:1057 length=35
+>> A!@B!BBB@ABAB#########!!!!!!!######
 >> ~~~
 >> {: .output}
 >> 
->> This is also a very poor read. Most of the nucleotides are unknown
->> (`N`s) and the few that we do have guesses for are of very poor
->> quality. 
+>> The second half of this read is poor quality. Many of the positions are unknown
+>> (`N`s) and the bases that we do have guesses for are of very poor
+>> quality (`#`). However, the begining of the read is fairly high 
+>> quality. We will look at variations in position-based quality
+>> in just a moment.
 >> 
 > {: .solution}
 {: .challenge}
@@ -286,11 +288,12 @@ $ ls
 {: .bash}
 
 ~~~
-SRR097977.fastq        SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283.fastq
-SRR097977_fastqc.html  SRR098027.fastq	      SRR098028_fastqc.zip   SRR098283_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281.fastq	     SRR098283_fastqc.zip
-SRR098026.fastq        SRR098027_fastqc.zip   SRR098281_fastqc.html
-SRR098026_fastqc.html  SRR098028.fastq	      SRR098281_fastqc.zip
+SRR097977.fastq        SRR098027.fastq	      SRR098281.fastq
+SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
+SRR098026.fastq        SRR098028.fastq	      SRR098283.fastq
+SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
+SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 ~~~
 {: .output}
 
@@ -368,12 +371,12 @@ $ mkdir ~/Desktop/fastqc_html
 Now we can transfer our HTML files to our local computer using `scp`.
 
 ~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+$ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
 {: .bash}
 
 This looks really complicated, so let's break it down. The first part
-of the command `dcuser@ec2-34-203-203-131.compute-1.amazonaws.com` is
+of the command `dcuser@ec2-34-238-162-94.compute-1.amazonaws.com` is
 the address for your remote computer. Make sure you replace everything
 after `dcuser@` with your instance number (the one you used to log in). 
 
@@ -437,9 +440,10 @@ $ ls
 {: .bash}
 
 ~~~
-SRR097977_fastqc.html  SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098281_fastqc.zip
-SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098028_fastqc.zip   SRR098283_fastqc.html
-SRR098026_fastqc.html  SRR098027_fastqc.zip   SRR098281_fastqc.html  SRR098283_fastqc.zip
+SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
+SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
+SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 ~~~
 {: .output}
 
@@ -606,11 +610,12 @@ are a lot of files here. The one we're going to focus on is the
 If you list the files in our directory now you will see: 
 
 ~~~
-SRR097977_fastqc       SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283_fastqc
-SRR097977_fastqc.html  SRR098027_fastqc       SRR098028_fastqc.zip   SRR098283_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281_fastqc	     SRR098283_fastqc.zip
-SRR098026_fastqc       SRR098027_fastqc.zip   SRR098281_fastqc.html
-SRR098026_fastqc.html  SRR098028_fastqc       SRR098281_fastqc.zip
+SRR097977_fastqc       SRR098027_fastqc       SRR098281_fastqc
+SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
+SRR098026_fastqc       SRR098028_fastqc       SRR098283_fastqc
+SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
+SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 ~~~
 {:. output}
 
@@ -623,13 +628,13 @@ $ ls -F
 ~~~
 {: .bash}
 
-
 ~~~
-SRR097977_fastqc/      SRR098026_fastqc.zip   SRR098028_fastqc.html  SRR098283_fastqc/
-SRR097977_fastqc.html  SRR098027_fastqc/      SRR098028_fastqc.zip   SRR098283_fastqc.html
-SRR097977_fastqc.zip   SRR098027_fastqc.html  SRR098281_fastqc/      SRR098283_fastqc.zip
-SRR098026_fastqc/      SRR098027_fastqc.zip   SRR098281_fastqc.html
-SRR098026_fastqc.html  SRR098028_fastqc/      SRR098281_fastqc.zip
+SRR097977_fastqc/      SRR098027_fastqc/      SRR098281_fastqc/
+SRR097977_fastqc.html  SRR098027_fastqc.html  SRR098281_fastqc.html
+SRR097977_fastqc.zip   SRR098027_fastqc.zip   SRR098281_fastqc.zip
+SRR098026_fastqc/      SRR098028_fastqc/      SRR098283_fastqc/
+SRR098026_fastqc.html  SRR098028_fastqc.html  SRR098283_fastqc.html
+SRR098026_fastqc.zip   SRR098028_fastqc.zip   SRR098283_fastqc.zip
 ~~~
 {: .output}
 
@@ -694,7 +699,7 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 >> 
 >> ~~~ 
 >> $ cd ~/dc_workshop/docs
->> $ grep grep FAIL fastqc_summaries.txt
+>> $ grep FAIL fastqc_summaries.txt
 >> ~~~
 >> {: .bash}
 >> 
