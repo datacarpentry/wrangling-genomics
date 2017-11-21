@@ -235,7 +235,7 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 >> ~~~
 >> {: .output}
 >> 
->> There are six FASTQ files ranging from 840M to 4.0G. 
+>> There are six FASTQ files ranging from 840M (840MB) to 4.0G (4.0GB)
 >> 
 > {: .solution}
 {: .challenge}
