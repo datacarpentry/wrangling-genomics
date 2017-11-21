@@ -577,7 +577,84 @@ $ bash run_variant_calling.sh
 > As an exercise, try and change your existing script file, from using the `aln` method to the `mem` method.
 {: .callout}
 
+In the [previous lesson](http://www.datacarpentry.org/wrangling-genomics/02-variant_calling/) we mentioned that we were using small subsets of our
+trimmed FASTQ files to run our variant calling workflow, in the interests of time. The output files you now have in your 
+`dc_workshop/results` directory are based on the small sample FASTQ files (data from the `trimmed_fastq_small` directory). 
+We've also provided the result files from running the `run_variant_calling.sh` script on the full-sized trimmed FASTQ files. 
+Let's do a few comparisons.
 
+
+> ## Exercise (Novice)
+> 
+> How much larger are the full-sized trimmed FASTQ files than the small trimmed FASTQ files we just ran our variant calling
+> script on?
+>
+> Hint: You can find a copy of the full-sized trimmed 
+> FASTQ files in the `~/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq` directory.
+> 
+> > ## Solution
+> > 
+> > ~~~
+> > $ ls -lh ~/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq
+> > ~~~
+> > {: .bash}
+> > 
+> > ~~~
+> > total 13G
+> > ~~~
+> > {: .output}
+> > 
+> > ~~~
+> > $ ls -lh ~/dc_workshop/data/trimmed_fastq_small
+> > ~~~
+> > {: .bash}
+> > 
+> > ~~~ 
+> > total 430M
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+> ## Exercise (Intermediate)
+> 
+> Vizualize the alignment of the reads for our `SRR098281.fastq_trim.fastq_small` sample. What variant is present at 
+> position 145? What is the canonical nucleotide in that position? 
+> 
+>> ## Solution
+>> 
+>> ~~~
+>> $ samtools tview ~/dc_workshop/results/bam/SRR098281_aligned_sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> ~~~
+>> {: .bash}
+>> 
+>> `T` is the variant. `G` is canonical. 
+> {: .solution}
+> 
+> Now vizualize the alignment of the reads for the full-length trimmed FASTQ file for the SRR098281 sample. What 
+variants are present in position 145? 
+> 
+> Hint: You can find a copy of the output files for the full-length trimmed FASTQ file variant calling in the 
+> `~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/` directory.
+> 
+>> ## Solution
+>> 
+>> ~~~
+>> $ samtools tview ~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281_aligned_sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> ~~~
+>> {: .bash}
+>> 
+>> In the full-length file, `T` is still the only variant present at this location. 
+> {: .solution}
+{: .challenge}
+
+
+> ## Bonus Exercise (Advanced)
+> 
+> If you have time after completing the previous two exercises, use `run_variant_calling.sh` to run the variant calling pipeline 
+> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq` but if 
+> you dont, there is a copy in `~/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq`.
+{: .challenge} 
 
 
 
