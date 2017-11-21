@@ -90,8 +90,8 @@ above, the quality score line is:
 The `#` character and each of the `!` characters represent the encoded quality for an 
 individual nucleotide. The numerical value assigned to each of these characters depends on the 
 sequencing platform that generated the reads. The sequencing machine used to generate our data 
-uses a version of this encoding called Illumina 1.8 encoding. Each character is assigned a
-quality score between 0 and 40 as shown in the chart below.
+uses the standard Sanger quality PHRED score encoding, using by Illumina version 1.8 onwards.
+Each character is assigned a quality score between 0 and 40 as shown in the chart below.
 
 ~~~
 Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI
@@ -153,9 +153,10 @@ bad read.
 > Although we've used a particular quality encoding system to demonstrate interpretation of 
 > read quality, different sequencing machines use different encoding systems. This means that, 
 > depending on which sequencer you use to generate your data, a `#` may not be an indicator of 
-> a poor quality base call. 
-> 
-> It's essential that you know which sequencing platform was
+> a poor quality base call.
+
+> This mainly relates to older Solexa/Illumina data,
+> but it's essential that you know which sequencing platform was
 > used to generate your data, so that you can tell your quality control program which encoding
 > to use. If you choose the wrong encoding, you run the risk of throwing away good reads or 
 > (even worse) not throwing away bad reads!
