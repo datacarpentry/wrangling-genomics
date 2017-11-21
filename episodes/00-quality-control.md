@@ -469,7 +469,7 @@ caution: filename not matched:  SRR098283_fastqc.zip
 ~~~
 {: .output}
 
-This didn't work. We unziped the first file and then got a warning
+This didn't work. We unzipped the first file and then got a warning
 message for each of the other `.zip` files. This is because `unzip` 
 expects to get only one zip file as input. We could go through and 
 unzip each file one at a time, but this is very time consuming and 
