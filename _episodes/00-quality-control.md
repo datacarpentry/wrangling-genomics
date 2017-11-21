@@ -46,7 +46,7 @@ and assess the quality of the sequence reads.
 ![workflow_qc](../img/var_calling_workflow_qc.png)
 ## Details on the FASTQ format
 
-Although it looks complicated (and it is), its easy to understand the
+Although it looks complicated (and it is), it's easy to understand the
 [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
 include...
 
@@ -76,7 +76,7 @@ NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
 All but one of the nucleotides in this read are unknown (`N`). This is a pretty bad read!
 
 Line 4 shows the quality for each nucleotide in the read. Quality is interpreted as the 
-probability of an incorrect base call (eg 1 in 10) or, equivalently, the base call 
+probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call 
 accuracy (eg 90%). To make it possible to line up each individual nucleotide with its quality
 score, the numerical score is converted into a code where each individual character 
 represents the numerical quality score for an individual nucleotide. For example, in the line
@@ -141,7 +141,7 @@ bad read.
 >> 
 >> The second half of this read is poor quality. Many of the positions are unknown
 >> (`N`s) and the bases that we do have guesses for are of very poor
->> quality (`#`). However, the begining of the read is fairly high 
+>> quality (`#`). However, the beginning of the read is fairly high 
 >> quality. We will look at variations in position-based quality
 >> in just a moment.
 >> 
@@ -421,12 +421,12 @@ tabs in a single window or six separate browser windows.
 > worst?
 > 
 >> ## Solution
->> `SRR097977` and `SRR098027` are the best. The other four four 
+>> `SRR097977` and `SRR098027` are the best. The other four 
 >> samples are all pretty bad.
 > {: .solution}
 {: .challenge}
 
-## Unziping Compressed Files
+## Unzipping Compressed Files
 
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
@@ -557,7 +557,7 @@ $ for temperature in *.zip
 it would work exactly the same way.
 *Don't do this.*
 Programs are only useful if people can understand them,
-so meaningless names (like `x`) or misleading names (like `termperature`)
+so meaningless names (like `x`) or misleading names (like `temperature`)
 increase the odds that the program won't do what its readers think it does.
 
 > ## Multipart commands
