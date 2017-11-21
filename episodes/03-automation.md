@@ -572,7 +572,7 @@ $ bash run_variant_calling.sh
 > As an exercise, try and change your existing script file, from using the `aln` method to the `mem` method.
 {: .callout}
 
-In the [previous lesson](http://127.0.0.1:4000/02-variant_calling/) we mentioned that we were using small subsets of our
+In the [previous lesson](http://www.datacarpentry.org/wrangling-genomics/02-variant_calling/) we mentioned that we were using small subsets of our
 trimmed FASTQ files to run our variant calling workflow, in the interests of time. The output files you now have in your 
 `dc_workshop/results` directory are based on the small sample FASTQ files (data from the `trimmed_fastq_small` directory). 
 We've also provided the result files from running the `run_variant_calling.sh` script on the full-sized trimmed FASTQ files. 
