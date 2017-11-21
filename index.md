@@ -3,10 +3,13 @@ layout: lesson
 root: .
 ---
 
-A lot of genomics analysis is done using command-line tools for three reasons: 1) you will often be working with a large number of files,
-and working through the command-line rather than through a graphical user interface (GUI) allows you to automate repetitive tasks, 2) you
+A lot of genomics analysis is done using command-line tools for three reasons: 
+1) you will often be working with a large number of files,
+and working through the command-line rather than through a graphical user interface (GUI) allows you to automate repetitive tasks, 
+2) you
 will often need more compute power than is available on your personal computer, and connecting to and interacting with remote computers
-requires a command-line interface, and 3) you will often need to customize your analyses and command-line tools often enable more 
+requires a command-line interface, and 
+3) you will often need to customize your analyses and command-line tools often enable more 
 customization than the corresponding GUI tools (if in fact a GUI tool even exists). 
 
 In a [previous lesson](http://www.datacarpentry.org/shell-genomics/), you learned how to use the bash shell to interact with your computer through a command line interface. In this 
@@ -26,4 +29,8 @@ use a variety of bioinformatic tools with confidence and greatly enhance your re
 >
 > This lesson also assumes some familiarity with biological concepts, including the structure of DNA, nucleotide abbreviations, and the 
 > concept of genomic variation within a population. 
+>
+> This lesson uses data hosted on an Amazon Machine Instance (AMI). Workshop participants will be given information on how
+> to log-in to the AMI during the workshop. Learners using these materials for self-directed study will need to set up their own
+> AMI. Information on setting up an AMI and accessing the required data is provided on the [Genomics Workshop setup page](http://www.datacarpentry.org/genomics-workshop/setup/).
 {: .prereq}
