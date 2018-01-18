@@ -45,7 +45,7 @@ Here's the `for` loop you wrote for unzipping `.zip` files:
 ~~~
 $ for filename in *.zip
 > do
-> unzip ${filename}
+> unzip $filename
 > done
 ~~~
 {: .bash}
@@ -56,7 +56,7 @@ And here's the one you wrote for running Trimmomatic on all of our `.fastq` samp
 $ for infile in *.fastq
 > do
 > outfile=${infile}_trim.fastq
-> java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE ${infile} ${outfile} SLIDINGWINDOW:4:20 MINLEN:20
+> java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
 > done
 ~~~
 {: .bash}
@@ -146,7 +146,7 @@ files. Then we run our for loop to unzip all of the `.zip` files in this directo
 echo "Unzipping..."
 for filename in *.zip
     do
-    unzip ${filename}
+    unzip $filename
     done
 ~~~
 {: .output}
@@ -186,7 +186,7 @@ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 echo "Unzipping..."
 for filename in *.zip
     do
-    unzip ${filename}
+    unzip $filename
     done
 
 echo "Saving summary..."
@@ -372,8 +372,8 @@ your script and add the next two lines. These lines extract the base name of the
 to a new variable called `base` variable. Add `done` again at the end so we can test our script.
 
 ~~~
-    base=$(basename ${fq} .fastq_trim.fastq)
-    echo "base name is ${base}"
+    base=$(basename $fq .fastq_trim.fastq)
+    echo "base name is $base"
     done
 ~~~
 {: .output}
@@ -423,35 +423,35 @@ your script and add the following lines.
 1) align the reads to the reference genome and output a `.sai` file:
 
 ~~~
-    bwa aln ${genome} ${fq} > ${sai}
+    bwa aln $genome $fq > $sai
 ~~~
 {: .output}
 
 2) convert the output to SAM format:
 
 ~~~
-    bwa samse ${genome} ${sai} ${fq} > ${sam}
+    bwa samse $genome $sai $fq > $sam
 ~~~
 {: .output}
 
 3) convert the SAM file to BAM format:
 
 ~~~
-    samtools view -S -b ${sam} > ${bam}
+    samtools view -S -b $sam > $bam
 ~~~
 {: .output}
 
 4) sort the BAM file:
 
 ~~~
-    samtools sort -f ${bam} ${sorted_bam}
+    samtools sort -f $bam $sorted_bam
 ~~~
 {: .output}
 
 5) index the BAM file for display purposes:
 
 ~~~
-    samtools index ${sorted_bam}
+    samtools index $sorted_bam
 ~~~
 {: .output}
 
@@ -459,21 +459,21 @@ your script and add the following lines.
 read coverage
 
 ~~~
-    samtools mpileup -g -f ${genome} ${sorted_bam} > ${raw_bcf}
+    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
 ~~~
 {: .output}
 
 7) call SNPs with bcftools:
 
 ~~~
-    bcftools view -bvcg ${raw_bcf} > ${variants}
+    bcftools view -bvcg $raw_bcf > $variants
 ~~~
 {: .output}
 
 8) filter the SNPs for the final output:
 
 ~~~
-    bcftools view ${variants} | /usr/share/samtools/vcfutils.pl varFilter - > ${final_variants}
+    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
     done
 ~~~
 {: .output}
@@ -487,7 +487,7 @@ cd ~/dc_workshop/results
 
 genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 
-bwa index ${genome}
+bwa index $genome
 
 mkdir -p sai sam bam bcf vcf
 
@@ -498,23 +498,23 @@ for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     base=$(basename ${fq} .fastq_trim.fastq)
     echo "base name is ${base}"
 
-    fq=~/dc_workshop/data/trimmed_fastq_small/{$base}.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/{$base}_aligned.sai
-    sam=~/dc_workshop/results/sam/{$base}_aligned.sam
-    bam=~/dc_workshop/results/bam/{$base}_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/{$base}_aligned_sorted.bam
-    raw_bcf=~/dc_workshop/results/bcf/{$base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/{$base}_variants.bcf
-    final_variants=~/dc_workshop/results/vcf/{$base}_final_variants.vcf 
+    fq=~/dc_workshop/data/trimmed_fastq_small/$base.fastq_trim.fastq
+    sai=~/dc_workshop/results/sai/${base}_aligned.sai
+    sam=~/dc_workshop/results/sam/${base}_aligned.sam
+    bam=~/dc_workshop/results/bam/${base}_aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
 
-    bwa aln ${genome} ${fq} > ${sai}
-    bwa samse ${genome ${sai} ${fq} > ${sam}
-    samtools view -S -b ${sam} > ${bam}
-    samtools sort -f ${bam} ${sorted_bam}
-    samtools index ${sorted_bam}
-    samtools mpileup -g -f ${genome} ${sorted_bam} > ${raw_bcf}
-    bcftools view -bvcg ${raw_bcf} > ${variants}
-    bcftools view ${variants} | /usr/share/samtools/vcfutils.pl varFilter - > ${final_variants}
+    bwa aln $genome $fq > $sai
+    bwa samse $genome $sai $fq > $sam
+    samtools view -S -b $sam > $bam
+    samtools sort -f $bam $sorted_bam
+    samtools index $sorted_bam
+    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
+    bcftools view -bvcg $raw_bcf > $variants
+    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
     done
 ~~~
 {: .output}
