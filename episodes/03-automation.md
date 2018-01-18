@@ -73,7 +73,7 @@ directory called `scripts/`. Previously, we used
 `nano` to create and open a new file. The command `touch` allows us to create a new file without opening that file.
 
 ~~~
-cd ~/dc_workshop
+$ cd ~/dc_workshop
 $ mkdir scripts
 $ cd scripts
 $ touch read_qc.sh
@@ -314,7 +314,7 @@ tell the script to `echo` the filename back to us so we can check which file we'
 ~~~
 for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
-    echo "working with file ${fq}"
+    echo "working with file $fq"
     done
 ~~~
 {: .bash}
@@ -493,10 +493,10 @@ mkdir -p sai sam bam bcf vcf
 
 for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
-    echo "working with file ${fq}"
+    echo "working with file $fq"
 
-    base=$(basename ${fq} .fastq_trim.fastq)
-    echo "base name is ${base}"
+    base=$(basename $fq .fastq_trim.fastq)
+    echo "base name is $base"
 
     fq=~/dc_workshop/data/trimmed_fastq_small/$base.fastq_trim.fastq
     sai=~/dc_workshop/results/sai/${base}_aligned.sai
