@@ -30,21 +30,19 @@ sequences against a large reference genome. The alignment process consists of tw
 
 # Setting up
 
-First we will copy over the reference genome data into our `data/` directory. The `-r` tag used with `cp` means "recursive". This
-allows you to copy over all of the files in a directory in a single 
-line of code.
+First we will link in the reference genome data into our `data/` directory. `ln` stands for link, while `-s` indicates symbolic. Although copying our data would accomplish something similar, this way, the data only lives in one place on our hard drive, thereby taking up less space. This becomes important when your files become very large. Symbolic links allow you to have the data in one location on your hard drive, but call it from many. 
 
 ~~~
 $ cd ~/dc_workshop
-$ cp -r ~/.dc_sampledata_lite/ref_genome/ data/
+$ ln -s ~/.dc_sampledata_lite/ref_genome/ data/
 ~~~
 {: .bash}
 
-We will also copy over a set of trimmed FASTQ files to work with. These are small subsets of our real trimmed data, 
+We will also link in a set of trimmed FASTQ files to work with. These are small subsets of our real trimmed data, 
 and will enable us to run our variant calling workflow quite quickly. 
 
 ~~~
-$ cp -r ~/.dc_sampledata_lite/trimmed_fastq_small/ data/
+$ ln -s ~/.dc_sampledata_lite/trimmed_fastq_small/ data/
 ~~~
 {: .bash}
 
@@ -53,7 +51,7 @@ line of code because `mkdir` can accept multiple new directory
 names as input.
 
 ~~~
-$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
+$ mkdir results/sam results/bam results/bcf results/vcf
 ~~~
 {: .bash}
 
@@ -102,49 +100,25 @@ While the index is created, you will see output something like this:
 
 ### Align reads to reference genome
 
-The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an 
-aligner. BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
-reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
-as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it 
-is faster and more accurate.
+The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence  reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it is faster and more accurate.
 
-Since we are working with short reads we will be using BWA-backtrack. The general usage for BWA-backtrack is: 
+Even though our data are shorter reads, we will show you BWA MEM today, as this is likely the workflow you will follow with your own data. 
 
 ~~~
-$ bwa aln ref_genome.fasta input_file.fastq > output_file.sai
+$ bwa mem ref_genome.fasta input_file.fastq > output_file.sam
 ~~~
 {: .bash}
-
-This will create a `.sai` file which is an intermediate file containing the suffix array indexes. 
     
-Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default 
-parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using 
+Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml). While we are running bwa with the default parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using 
 and make sure the options you use are appropriate for your data.*
 
-We're going to start by aligning the reads from just one of the 
-samples in our dataset (`SRR098283.fastq`). Later, we'll be 
-iterating this whole process on all of our sample files.
+We're going to start by aligning the reads from just one of the samples in our dataset (`SRR098283.fastq`). Later, we'll be iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa aln data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sai
+$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sam/SRR097977.aligned.sam
 ~~~
-{: .bash}
+{: .bash} 
 
-You will see output that starts like this: 
-
-~~~
-[bwa_aln] 17bp reads: max_diff = 2
-[bwa_aln] 38bp reads: max_diff = 3
-[bwa_aln] 64bp reads: max_diff = 4
-[bwa_aln] 93bp reads: max_diff = 5
-[bwa_aln] 124bp reads: max_diff = 6
-[bwa_aln] 157bp reads: max_diff = 7
-[bwa_aln] 190bp reads: max_diff = 8
-[bwa_aln] 225bp reads: max_diff = 9
-[bwa_aln_core] calculate SA coordinate... 5.10 sec
-[bwa_aln_core] write to the disk... 0.02 sec
-~~~
-{: .output}
 
 ## Alignment cleanup
 
@@ -152,26 +126,17 @@ You will see output that starts like this:
 
 Post-alignment processing of the alignment file includes:
 
-1. Converting output SAI alignment file to a BAM file
+1. Converting output SAM alignment file to a BAM file
 2. Sorting the BAM file by coordinate
-
-### Convert the format of the alignment to SAM/BAM
-
-The SAI file is not a standard alignment output file and will need to be converted into a SAM file before we can do any downstream
-processing. 
 
 #### SAM/BAM format
 The [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam),
-is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not 
-have time to go in detail of the features of the SAM format, the paper by 
-[Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full) provides a lot more detail on the specification.
+is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not have time to go in detail of the features of the SAM format, the paper by [Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full) provides a lot more detail on the specification.
 
 **The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
 
-The file begins with a **header**, which is optional. The header is used to describe source of data, reference sequence, method of
-alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
-that follows corresponds to alignment information for a single read. Each alignment line has **11 mandatory fields** for essential
-mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is 
+The file begins with a **header**, which is optional. The header is used to describe source of data, reference sequence, method of alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
+that follows corresponds to alignment information for a single read. Each alignment line has **11 mandatory fields** for essential mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is 
 displayed below with the different fields highlighted.
 
 ![sam_bam1](../img/sam_bam.png)
@@ -179,32 +144,6 @@ displayed below with the different fields highlighted.
 
 ![sam_bam2](../img/sam_bam3.png)
 
-First we will use the `bwa samse` command to convert the .sai file to SAM format. The usage for `bwa samse` is 
-
-~~~
-$ bwa samse ref_genome.fasta input_file.sai input_file.fastq > output_file.sam
-~~~
-{: .bash}
-
-The code in our case will look like: 
-
-~~~
-$ bwa samse data/ref_genome/ecoli_rel606.fasta \
-        results/sai/SRR097977.aligned.sai \
-        data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > \
-        results/sam/SRR097977.aligned.sam
-~~~
-{: .bash}
-
-Your output will start out something like this: 
-
-~~~
-[bwa_aln_core] convert to sequence coordinate... 0.70 sec
-[bwa_aln_core] refine gapped alignments... 0.09 sec
-[bwa_aln_core] print alignments... 0.37 sec
-[bwa_aln_core] 262144 sequences have been processed.
-~~~
-{: .output}
 
 
 > ## Multiple line commands
@@ -214,7 +153,7 @@ Your output will start out something like this:
 >
 {: .callout}
 
-Next we convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
+We need to convert the SAM file to BAM format for use by downstream tools. We use the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
 ~~~
 $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.aligned.bam
@@ -229,7 +168,7 @@ $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.
 
 ### Sort BAM file by coordinates
 
-Next we sort the BAM file using the `sort` command from `samtools`. Note that as second parameter, we give the filename of the desired output file *without* the `.bam` part:
+Next we sort the BAM file using the `sort` command from `samtools`. Note that as second parameter, we give the filename of the desired output file *without* the `.bam` part. This depends on the version of `samtools` you are running! Today we are using `samtools version Version: 0.1.19-96b5f2294a`:
 
 ~~~
 $ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.sorted
@@ -249,10 +188,7 @@ $ samtools sort results/bam/SRR097977.aligned.bam results/bam/SRR097977.aligned.
 
 ## Variant calling
 
-A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome
-or transcriptome, often referred to as a Single Nucleotide Polymorphism (SNP). The call is usually accompanied by an estimate of 
-variant frequency and some measure of confidence. Similar to other steps in this workflow, there are number of tools available for 
-variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the 
+A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome or transcriptome, often referred to as a Single Nucleotide Polymorphism (SNP). The call is usually accompanied by an estimate of variant frequency and some measure of confidence. Similar to other steps in this workflow, there are number of tools available for variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the 
 variants.
 
 ![workflow](../img/variant_calling_workflow.png)
