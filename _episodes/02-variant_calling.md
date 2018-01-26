@@ -53,7 +53,7 @@ line of code because `mkdir` can accept multiple new directory
 names as input.
 
 ~~~
-$ mkdir  results/sai results/sam results/bam results/bcf results/vcf
+$ mkdir -p results/sai results/sam results/bam results/bcf results/vcf
 ~~~
 {: .bash}
 
