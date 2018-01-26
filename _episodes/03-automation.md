@@ -55,7 +55,7 @@ And here's the one you wrote for running Trimmomatic on all of our `.fastq` samp
 ~~~
 $ for infile in *.fastq
 > do
-> outfile=$infile\_trim.fastq
+> outfile=${infile}_trim.fastq
 > java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
 > done
 ~~~
@@ -406,14 +406,14 @@ defined, and adding different file name extensions to represent the files that w
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
-    fq=~/dc_workshop/data/trimmed_fastq_small/$base\.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/$base\_aligned.sai
-    sam=~/dc_workshop/results/sam/$base\_aligned.sam
-    bam=~/dc_workshop/results/bam/$base\_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/$base\_aligned_sorted.bam
-    raw_bcf=~/dc_workshop/results/bcf/$base\_raw.bcf
-    variants=~/dc_workshop/results/bcf/$base\_variants.bcf
-    final_variants=~/dc_workshop/results/vcf/$base\_final_variants.vcf     
+    fq=~/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
+    sai=~/dc_workshop/results/sai/${base}_aligned.sai
+    sam=~/dc_workshop/results/sam/${base}_aligned.sam
+    bam=~/dc_workshop/results/bam/${base}_aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
 ~~~
 {: .output}
 
@@ -498,14 +498,14 @@ for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=~/dc_workshop/data/trimmed_fastq_small/$base\.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/$base\_aligned.sai
-    sam=~/dc_workshop/results/sam/$base\_aligned.sam
-    bam=~/dc_workshop/results/bam/$base\_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/$base\_aligned_sorted.bam
-    raw_bcf=~/dc_workshop/results/bcf/$base\_raw.bcf
-    variants=~/dc_workshop/results/bcf/$base\_variants.bcf
-    final_variants=~/dc_workshop/results/vcf/$base\_final_variants.vcf 
+    fq=~/dc_workshop/data/trimmed_fastq_small/$base.fastq_trim.fastq
+    sai=~/dc_workshop/results/sai/${base}_aligned.sai
+    sam=~/dc_workshop/results/sam/${base}_aligned.sam
+    bam=~/dc_workshop/results/bam/${base}_aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
 
     bwa aln $genome $fq > $sai
     bwa samse $genome $sai $fq > $sam
@@ -557,13 +557,13 @@ $ bash run_variant_calling.sh
 > Assign file names to variables
 >
 > ~~~
-> $ fq=data/trimmed_fastq/$base\.fastq
-> $ sam=results/sam/$base\_aligned.sam
-> $ bam=results/bam/$base\_aligned.bam
-> $ sorted_bam=results/bam/$base\_aligned_sorted.bam
-> $ raw_bcf=results/bcf/$base\_raw.bcf
-> $ variants=results/bcf/$base\_variants.bcf
-> $ final_variants=results/vcf/$base\_final_variants.vcf  
+> $ fq=data/trimmed_fastq/${base}.fastq
+> $ sam=results/sam/${base}_aligned.sam
+> $ bam=results/bam/${base}_aligned.bam
+> $ sorted_bam=results/bam/${base}_aligned_sorted.bam
+> $ raw_bcf=results/bcf/${base}_raw.bcf
+> $ variants=results/bcf/${base}_variants.bcf
+> $ final_variants=results/vcf/${base}_final_variants.vcf  
 > ~~~
 > {: .bash}
 >
