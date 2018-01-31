@@ -30,8 +30,6 @@ sequences against a large reference genome. The alignment process consists of tw
 
 # Setting up
 
-# Setting up
-
 First we will link in the reference genome data into our `data/` directory. `ln` stands for link. Hardlinks typically only work for files (not directories), and they basically act as another name for the same data that is stored on your harddrive. However here, we use the `-s` flag, which stands for a symbolic link (symlink). A symlink creates a file that stores the path of another file. This allows you to access the information in that file with a new path without moving the data on your hard drive.  
 
 Although copying our data would accomplish something similar, this way, the data only lives in one place on our hard drive, thereby taking up less space. This becomes important when your files become very large. Symbolic links allow you to have the data in one location on your hard drive, but call it from many. 
@@ -55,7 +53,7 @@ line of code because `mkdir` can accept multiple new directory
 names as input.
 
 ~~~
-$ mkdir -p results/sai results/sam results/bam results/bcf results/vcf
+$ mkdir results/sai results/sam results/bam results/bcf results/vcf
 ~~~
 {: .bash}
 
