@@ -7,7 +7,6 @@ questions:
 objectives:
 - "Write a shell script with multiple variables."
 - "Incorporate a `for` loop into a shell script."
-- ""
 keypoints:
 - "We can combine multiple commands into a shell script to automate a workflow."
 - "Use `echo` statements within your scripts to get an automated progress update."
