@@ -31,38 +31,45 @@ filter poor quality reads and trim poor quality bases from our samples.
 
 ## Trimmomatic Options
 
-Trimmomatic is a program written in the Java programming language.
-You don't need to learn Java to use Trimmomatic (FastQC is also
-written in Java), but the fact that it's a Java program helps
-explain the syntax that is used to run Trimmomatic. The basic
-command to run Trimmomatic starts like this:
+Trimmomatic has a variety of options to trim your reads. If we run the commands, we can see some of our options.
 
 ~~~
-$ java -jar trimmomatic-0.32.jar
+$ trimmomatic
 ~~~
 {: .bash}
 
-`java` tells our computer that we're running a Java program. `-jar`
-is an option specifying that we're going to specify the location of
-the Java program we want to run. The Java program itself will have
-a `.jar` file extension.
+Which will give you the following output:
+~~~
+Usage: 
+       PE [-version] [-threads <threads>] [-phred33|-phred64] [-trimlog <trimLogFile>] [-summary <statsSummaryFile>] [-quiet] [-validatePairs] [-basein <inputBase> | <inputFile1> <inputFile2>] [-baseout <outputBase> | <outputFile1P> <outputFile1U> <outputFile2P> <outputFile2U>] <trimmer1>...
+   or: 
+       SE [-version] [-threads <threads>] [-phred33|-phred64] [-trimlog <trimLogFile>] [-summary <statsSummaryFile>] [-quiet] <inputFile> <outputFile> <trimmer1>...
+   or: 
+       -version
+~~~
+{: .output}
 
-That's just the basic command, however. Trimmomatic has a variety of
-options and parameters. We will need to specify what options we want
-to use for our analysis. Here are some of the options:
-
+This output shows us that we must first specify whether we have paired end (`PE`) or single end (`SE`) reads.
+Next, we specify what flag we would like to run. For example, you can specify `threads` to indicate the number
+processors on your computer that you want Trimmomatic to use. These flags are not necessary, but they can give
+you more control over the command. The flags are followed by positional arguments, meaning the order in which you 
+specify them is important. In paired end mode, Trimmomatic expects the two input files, and then the names of the
+output files. These files are described below.
 
 | option    | meaning |
 | ------- | ---------- |
-| `-threads` | Specify the number of processors you want Trimmomatic to use. |
-|  `SE` or `PE`   | Specify whether your reads are single or paired end. |
-|  `-phred33` or `-phred64` | Specify the encoding system for your quality scores. |
+|  <inputFile1>  | Input reads to be trimmed. Typically the file name will contain an `_1` or `_R1` in the name.|
+| <inputFile2> | Input reads to be trimmed. Typically the file name will contain an `_2` or `_R2` in the name.|
+|  <outputFile1P> | Output file that contains surviving pairs from the `_1` file. |
+|  <outputFile1U> | Output file that contains orphaned reads from the `_1` file. |
+|  <outputFile2P> | Output file that contains surviving pairs from the `_2` file.|
+|  <outputFile2U> | Output file that contains orphaned reads from the `_2` file.|
 
-In addition to these options, there are various trimming steps
-available:
+The last thing trimmomatic expects to see is the trimming parameters:
 
 | step   | meaning |
 | ------- | ---------- |
+| `ILLUMINACLIP` | Perform adapter removal |
 | `SLIDINGWINDOW` | Perform sliding window trimming, cutting once the average quality within the window falls below a threshold. |
 | `LEADING`  | Cut bases off the start of a read, if below a threshold quality.  |
 |  `TRAILING` |  Cut bases off the end of a read, if below a threshold quality. |
@@ -77,17 +84,14 @@ analysis. It is important to understand the steps you are using to
 clean your data. For more information about the Trimmomatic arguments
 and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
-We said above that a basic command for Trimmomatic looks like this:
-
-~~~
-$ java -jar trimmomatic-0.32.jar SE
-~~~
-{: .bash}
 
 However, a complete command for Trimmomatic will look something like this:
 
 ~~~
-$ java -jar trimmomatic-0.32.jar SE -threads 4 -phred64 SRR_1056.fastq SRR_1056_trimmed.fastq ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+$ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+              SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq
+              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
 ~~~
 {: .bash}
 
@@ -95,11 +99,14 @@ In this example, we've told Trimmomatic:
 
 | code   | meaning |
 | ------- | ---------- |
-| `SE` | that it will be taking a single end file as input |
+| `PE` | that it will be taking a single end file as input |
 | `-threads 4` | to use four computing threads to run (this will spead up our run) |
-| `-phred64` | that the input file uses phred-64 encoding for quality scores |
-| `SRR_1056.fastq` | the input file name |
-|  `SRR_1056_trimmed.fastq` | the output file to create |
+| `SRR_1056_1.fastq` | the first input file name |
+| `SRR_1056_2.fastq` | the second input file name |
+| `SRR_1056_1.trimmed.fastq` | the output file for surviving pairs from the `_1` file |
+| `SRR_1056_1un.trimmed.fastq` | the output file for orphaned reads from the `_1` file |
+| `SRR_1056_2.trimmed.fastq` | the output file for surviving pairs from the `_2` file |
+| `SRR_1056_2un.trimmed.fastq` | the output file for orphaned reads from the `_2` file |
 | `ILLUMINACLIP:SRR_adapters.fa`| to clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
 |`SLIDINGWINDOW:4:20` | to use a sliding window of size 4 that will remove bases if their phred score is below 20 |
 
@@ -112,19 +119,18 @@ $ cd ~/dc_workshop/data/untrimmed_fastq
 ~~~
 {: .bash}
 
-We are going to run Trimmomatic on one of our single-end samples. We
+We are going to run Trimmomatic on one of our paired-end samples. We
 will use a sliding window of size 4 that will remove bases if their
 phred score is below 20 (like in our example above). We will also
 discard any reads that do not have at least 20 bases remaining after
 this trimming step.
 
 ~~~
-$ java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
+$ trimmomatic PE SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:25
 ~~~
 {: .bash}
 
-Notice that we needed to give the absolute path to our copy of the
-Trimmomatic program.
+
 
 ~~~
 TrimmomaticSE: Started with arguments: SRR098283.fastq SRR098283.fastq_trim.fastq SLIDINGWINDOW:4:20 MINLEN:20
@@ -190,7 +196,7 @@ quickly!
 $ for infile in *.fastq
 > do
 > outfile="${infile}"_trim.fastq
-> java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE "${infile}" "${outfile}" SLIDINGWINDOW:4:20 MINLEN:20
+> trimmomatic PE "${infile}" "${outfile}" SLIDINGWINDOW:4:20 MINLEN:20
 > done
 ~~~
 {: .bash}
