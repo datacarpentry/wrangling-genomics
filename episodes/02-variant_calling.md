@@ -37,7 +37,9 @@ First we download the reference genome for *E. coli* REL606. Although we could c
 
 ~~~
 $ cd ~/dc_workshop
-$ curl -L -O data/ref_genome/ecoli_rel606.fasta ftp://dummy.fa
+$ mkdir data/ref_genome
+$ curl -L -o data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+$ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 ~~~
 {: .bash}
 
@@ -45,7 +47,7 @@ We will also download a set of trimmed FASTQ files to work with. These are small
 and will enable us to run our variant calling workflow quite quickly. 
 
 ~~~
-$ $ curl -L -O data/trimmed-fastq-small/ ftp://dummy.fa 
+$ curl -L -O data/trimmed-fastq-small/ ftp://dummy.fa 
 ~~~
 {: .bash}
 
@@ -71,15 +73,15 @@ $ bwa index data/ref_genome/ecoli_rel606.fasta
 While the index is created, you will see output something like this:
 
 ~~~
-[bwa_index] Pack FASTA... 0.04 sec
+[bwa_index] Pack FASTA... 0.09 sec
 [bwa_index] Construct BWT for the packed sequence...
 [bwa_index] 1.05 seconds elapse.
 [bwa_index] Update BWT... 0.03 sec
-[bwa_index] Pack forward-only FASTA... 0.02 sec
-[bwa_index] Construct SA from BWT and Occ... 0.54 sec
-[main] Version: 0.7.5a-r405
+[bwa_index] Pack forward-only FASTA... 0.07 sec
+[bwa_index] Construct SA from BWT and Occ... 0.55 sec
+[main] Version: 0.7.17-r1188
 [main] CMD: bwa index data/ref_genome/ecoli_rel606.fasta
-[main] Real time: 1.736 sec; CPU: 1.688 sec
+[main] Real time: 2.066 sec; CPU: 1.791 sec
 ~~~
 {: .output}
 
@@ -103,14 +105,23 @@ samples in our dataset (`SRRXXXXXXX.fastq`). Later, we'll be
 iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sai/SRR097977.aligned.sam
+$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sam/SRR097977.aligned.sam
 ~~~
 {: .bash}
 
 You will see output that starts like this: 
 
 ~~~
-PASTE OUTPUT
+[M::bwa_idx_load_from_disk] read 0 ALT contigs
+[M::process] read 77306 sequences (10000019 bp)...
+[M::process] read 74782 sequences (10000171 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (190, 36660, 10, 167)
+[M::mem_pestat] analyzing insert size distribution for orientation FF...
+[M::mem_pestat] (25, 50, 75) percentile: (388, 713, 1646)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4162)
+[M::mem_pestat] mean and std.dev: (961.98, 966.38)
+[M::mem_pestat] low and high boundaries for proper pairs: (1, 5420)
+[M::mem_pestat] analyzing insert size distribution for orientation FR...
 ~~~
 {: .output}
 
@@ -179,7 +190,7 @@ variants.
 Do the first pass on variant calling by counting read coverage with [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will use the command `mpileup`. The flag `-g` tells samtools to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 
 ~~~
-$ bcftools mpileup -g -o results/bcf/SRR097977_raw.bcf \
+$ bcftools mpileup -O b -o results/bcf/SRR097977_raw.bcf \
 -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR097977.aligned.sorted.bam 
 ~~~
 {: .bash}
