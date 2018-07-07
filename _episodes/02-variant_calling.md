@@ -14,9 +14,9 @@ keypoints:
 - "There are many different file formats for storing genomics data. It's important to understand what type of information is contained in each file, and how it was derived."
 ---
 
-# Alignment to a reference genome
+We mentioned before that we are working with files from a long-term evolution study of an *E. coli* population (designated Ara-3). Now that we have looked at our data to make sure that it is high quality, and removed low-quality base calls, we can perform variant calling to see how the population changed over time. We care how this population changed relative to the original population, *E. coli* strain REL606. Therefore, we will align each of our samples to the *E. coli* REL606 reference genome, and see what difference exist in our reads versus the genome.
 
-We have already trimmed our reads so now the next step is alignment of our quality reads to the reference genome.
+# Alignment to a reference genome
 
 ![workflow_align](../img/variant_calling_workflow_align.png)
 
@@ -47,7 +47,10 @@ We will also download a set of trimmed FASTQ files to work with. These are small
 and will enable us to run our variant calling workflow quite quickly. 
 
 ~~~
-$ curl -L -O data/trimmed-fastq-small/ ftp://dummy.fa 
+# This is a place holder so the workflow will work. This will be updated with figshare links later
+$ curl -L -o sub.tar.gz https://osf.io/ckf6w/download
+$ tar xvf sub.tar.gz
+$ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 ~~~
 {: .bash}
 
@@ -61,7 +64,6 @@ $ mkdir -p results/sam results/bam results/bcf results/vcf
 {: .bash}
 
 
-
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 
@@ -73,15 +75,15 @@ $ bwa index data/ref_genome/ecoli_rel606.fasta
 While the index is created, you will see output something like this:
 
 ~~~
-[bwa_index] Pack FASTA... 0.09 sec
+[bwa_index] Pack FASTA... 0.04 sec
 [bwa_index] Construct BWT for the packed sequence...
 [bwa_index] 1.05 seconds elapse.
 [bwa_index] Update BWT... 0.03 sec
-[bwa_index] Pack forward-only FASTA... 0.07 sec
-[bwa_index] Construct SA from BWT and Occ... 0.55 sec
+[bwa_index] Pack forward-only FASTA... 0.02 sec
+[bwa_index] Construct SA from BWT and Occ... 0.57 sec
 [main] Version: 0.7.17-r1188
 [main] CMD: bwa index data/ref_genome/ecoli_rel606.fasta
-[main] Real time: 2.066 sec; CPU: 1.791 sec
+[main] Real time: 1.765 sec; CPU: 1.715 sec
 ~~~
 {: .output}
 
@@ -105,7 +107,7 @@ samples in our dataset (`SRRXXXXXXX.fastq`). Later, we'll be
 iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR097977.fastq_trim.fastq > results/sam/SRR097977.aligned.sam
+$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584863_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584863_2.trim.sub.fastq > results/sam/SRR2584863.aligned.sam
 ~~~
 {: .bash}
 
@@ -113,14 +115,14 @@ You will see output that starts like this:
 
 ~~~
 [M::bwa_idx_load_from_disk] read 0 ALT contigs
-[M::process] read 77306 sequences (10000019 bp)...
-[M::process] read 74782 sequences (10000171 bp)...
-[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (190, 36660, 10, 167)
+[M::process] read 78970 sequences (10000278 bp)...
+[M::process] read 75986 sequences (10000157 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (191, 37018, 12, 189)
 [M::mem_pestat] analyzing insert size distribution for orientation FF...
-[M::mem_pestat] (25, 50, 75) percentile: (388, 713, 1646)
-[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4162)
-[M::mem_pestat] mean and std.dev: (961.98, 966.38)
-[M::mem_pestat] low and high boundaries for proper pairs: (1, 5420)
+[M::mem_pestat] (25, 50, 75) percentile: (428, 797, 1804)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4556)
+[M::mem_pestat] mean and std.dev: (1087.05, 1032.12)
+[M::mem_pestat] low and high boundaries for proper pairs: (1, 5932)
 [M::mem_pestat] analyzing insert size distribution for orientation FR...
 ~~~
 {: .output}
@@ -148,7 +150,7 @@ displayed below with the different fields highlighted.
 We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
 ~~~
-$ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.aligned.bam
+$ samtools view -S -b results/sam/SRR2584863.aligned.sam > results/bam/SRR2584863.aligned.bam
 ~~~
 {: .bash}
 
@@ -163,10 +165,11 @@ $ samtools view -S -b results/sam/SRR097977.aligned.sam > results/bam/SRR097977.
 Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
 
 ~~~
-$ samtools sort -o results/bam/SRR097977.aligned.sorted.bam results/bam/SRR097977.aligned.bam 
+$ samtools sort -o results/bam/SRR2584863.aligned.sorted.bam results/bam/SRR2584863.aligned.bam 
 ~~~
 {: .bash}
 
+Our files are pretty small, so we won't see this output. If you run the workflow with larger files, you will see something like this:
 ~~~
 [bam_sort_core] merging from 2 files...
 ~~~
@@ -187,16 +190,16 @@ variants.
 
 ### Step 1: Calculate the read coverage of positions in the genome
 
-Do the first pass on variant calling by counting read coverage with [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will use the command `mpileup`. The flag `-g` tells samtools to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
+Do the first pass on variant calling by counting read coverage with [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will use the command `mpileup`. The flag `-O b` tells samtools to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 
 ~~~
-$ bcftools mpileup -O b -o results/bcf/SRR097977_raw.bcf \
--f data/ref_genome/ecoli_rel606.fasta results/bam/SRR097977.aligned.sorted.bam 
+$ bcftools mpileup -O b -o results/bcf/SRR2584863_raw.bcf \
+-f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584863.aligned.sorted.bam 
 ~~~
 {: .bash}
 
 ~~~
-PASTE OUTPUT
+[mpileup] 1 samples in 1 input files
 ~~~
 {: .output}
 
@@ -207,31 +210,24 @@ We have now generated a file with coverage information for every base.
 Identify SNPs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
 
 ~~~
-$ bcftools call --ploidy 1 -m -v -o results/bcf/SRR097977_variants.bcf results/bcf/SRR097977_raw.bcf 
+$ bcftools call --ploidy 1 -m -v -o results/bcf/SRR2584863_variants.vcf results/bcf/SRR2584863_raw.bcf 
 ~~~
 {: .bash}
-
-~~~
-PASTE OUTPUT
-~~~
-{: .output}
 
 ### Step 3: Filter and report the SNP variants in variant calling format (VCF)
 
 Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
-$ bcftools view results/bcf/SRR097977_variants.bcf \ | /usr/share/samtools/vcfutils.pl varFilter - > results/vcf/SRR097977_final_variants.vcf
+$ vcfutils.pl varFilter results/bcf/SRR2584863_variants.bcf  > results/vcf/SRR2584863_final_variants.vcf
 ~~~
 {: .bash}
 
-`bcftools view` converts the binary format of bcf files into human readable format (tab-delimited) for `vcfutils.pl` to perform
-the filtering. Note that the output is in VCF format, which is a text format.
 
 ## Explore the VCF format:
 
 ~~~
-$ less results/vcf/SRR097977_final_variants.vcf
+$ less results/vcf/SRR2584863_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -240,42 +236,51 @@ created, the version of bcftools that was used, the command line parameters used
 some additional information:
 
 ~~~
-##fileformat=VCFv4.1
-##samtoolsVersion=0.1.19-96b5f2294a
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##bcftoolsVersion=1.8+htslib-1.8
+##bcftoolsCommand=mpileup -O b -o results/bcf/SRR2584863_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584863.aligned.sorted.bam
 ##reference=file://data/ref_genome/ecoli_rel606.fasta
-##contig=<ID=NC_012967.1,length=4629812>
+##contig=<ID=CP000819.1,length=4629812>
+##ALT=<ID=*,Description="Represents allele(s) other than observed.">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of reads supporting an indel">
+##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of reads supporting an indel">
 ##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
-##INFO=<ID=DP4,Number=4,Type=Integer,Description="# high-quality ref-forward bases, ref-reverse, alt-forward and alt-reverse bases">
-##INFO=<ID=MQ,Number=1,Type=Integer,Description="Root-mean-square mapping quality of covering reads">
-##INFO=<ID=FQ,Number=1,Type=Float,Description="Phred probability of all samples being the same">
-##INFO=<ID=AF1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele frequency (assuming HWE)">
-##INFO=<ID=AC1,Number=1,Type=Float,Description="Max-likelihood estimate of the first ALT allele count (no HWE assumption)">
-.
-.
-.
-.
-##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
-##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
-##FORMAT=<ID=GL,Number=3,Type=Float,Description="Likelihoods for RR,RA,AA genotypes (R=ref,A=alt)">
-##FORMAT=<ID=DP,Number=1,Type=Integer,Description="# high-quality bases">
-##FORMAT=<ID=DV,Number=1,Type=Integer,Description="# high-quality non-reference bases">
-##FORMAT=<ID=SP,Number=1,Type=Integer,Description="Phred-scaled strand bias P-value">
+##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3">
+##INFO=<ID=RPB,Number=1,Type=Float,Description="Mann-Whitney U test of Read Position Bias (bigger is better)">
+##INFO=<ID=MQB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality Bias (bigger is better)">
+##INFO=<ID=BQB,Number=1,Type=Float,Description="Mann-Whitney U test of Base Quality Bias (bigger is better)">
+##INFO=<ID=MQSB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality vs Strand Bias (bigger is better)">
+##INFO=<ID=SGB,Number=1,Type=Float,Description="Segregation based metric.">
+##INFO=<ID=MQ0F,Number=1,Type=Float,Description="Fraction of MQ0 reads (smaller is better)">
 ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##INFO=<ID=ICB,Number=1,Type=Float,Description="Inbreeding Coefficient Binomial test (bigger is better)">
+##INFO=<ID=HOB,Number=1,Type=Float,Description="Bias in the number of HOMs number (smaller is better)">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
+##bcftools_callVersion=1.8+htslib-1.8
+##bcftools_callCommand=call --ploidy 1 -m -v -o results/bcf/SRR2584863_variants.bcf results/bcf/SRR2584863_raw.bcf; Date=Sat Jul  7 00:05:04 2018
 ~~~
 {: .output}
 
 Followed by information on each of the variations observed: 
 
 ~~~
-#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR097977.aligned.sorted.bam
-NC_012967.1     9972    .       T       G       222     .       DP=28;VDB=8.911920e-02;AF1=1;AC1=2;DP4=0,0,19,7;MQ=36;FQ=-105   GT:
-PL:GQ        1/1:255,78,0:99
-NC_012967.1     10563   .       G       A       222     .       DP=27;VDB=6.399241e-02;AF1=1;AC1=2;DP4=0,0,8,18;MQ=36;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
-NC_012967.1     81158   .       A       C       222     .       DP=37;VDB=2.579489e-02;AF1=1;AC1=2;DP4=0,0,15,21;MQ=37;FQ=-135  GT:PL:GQ        1/1:255,108,0:99
-NC_012967.1     216480  .       C       T       222     .       DP=39;VDB=2.356774e-01;AF1=1;AC1=2;DP4=0,0,19,17;MQ=36;FQ=-135  GT:PL:GQ        1/1:255,108,0:99
-NC_012967.1     247796  .       T       C       221     .       DP=18;VDB=1.887634e-01;AF1=1;AC1=2;DP4=0,0,7,11;MQ=35;FQ=-81    GT:PL:GQ        1/1:254,54,0:99
-NC_012967.1     281923  .       G       T       222     .       DP=27;VDB=9.694360e-02;AF1=1;AC1=2;DP4=0,0,8,18;MQ=37;FQ=-105   GT:PL:GQ        1/1:255,78,0:99
-NC_012967.1     295604  .       T       G       4.77    .       DP=15;VDB=5.094834e-02;RPB=1.240303e+00;AF1=0.4999;AC1=1;DP4=2,9,4,0;MQ=36;FQ=6.99;PV4=0.011,0.084,0.0043,0.14  GT:PL:GQ        0/1:33,0,171:33
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584863.aligned.sorted.bam
+CP000819.1      9972    .       T       G       91      .       DP=4;VDB=0.0257451;SGB=-0.556411;MQ0F=0;AC=1;AN=1;DP4=0,0,0,4;MQ=60     GT:PL   1:121,0
+CP000819.1      263235  .       G       T       85      .       DP=6;VDB=0.096133;SGB=-0.590765;RPB=1;MQB=1;BQB=1;MQ0F=0.166667;AC=1;AN=1;DP4=0,1,0,5;MQ=33     GT:PL   1:112,0
+CP000819.1      281923  .       G       T       217     .       DP=10;VDB=0.774083;SGB=-0.662043;MQSB=0.974597;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60       GT:PL   1:247,0
+CP000819.1      433359  .       CTTTTTTT        CTTTTTTTT       64      .       INDEL;IDV=12;IMF=1;DP=12;VDB=0.477704;SGB=-0.676189;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,1,3,8;MQ=60   G
+CP000819.1      473901  .       CCGC    CCGCGC  228     .       INDEL;IDV=9;IMF=0.9;DP=10;VDB=0.659505;SGB=-0.662043;MQSB=0.916482;MQ0F=0;AC=1;AN=1;DP4=1,0,2,7;MQ=60   GT:PL   1
+CP000819.1      648692  .       C       T       210     .       DP=10;VDB=0.268014;SGB=-0.670168;MQSB=0.916482;MQ0F=0;AC=1;AN=1;DP4=0,0,7,3;MQ=60       GT:PL   1:240,0
+CP000819.1      1331794 .       C       A       178     .       DP=8;VDB=0.624078;SGB=-0.651104;MQSB=0.900802;MQ0F=0;AC=1;AN=1;DP4=0,0,3,5;MQ=60        GT:PL   1:208,0
+CP000819.1      1733343 .       G       A       225     .       DP=11;VDB=0.992403;SGB=-0.670168;MQSB=1.00775;MQ0F=0;AC=1;AN=1;DP4=0,0,4,6;MQ=60        GT:PL   1:255,0
+CP000819.1      2103887 .       ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG        ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG        56      .       INDEL;IDV=2;IMF=0.666667;
+CP000819.1      2333538 .       AT      ATT     167     .       INDEL;IDV=7;IMF=1;DP=7;VDB=0.568173;SGB=-0.616816;MQSB=1.01283;MQ0F=0;
 ~~~
 {: .output}
 
@@ -317,34 +322,21 @@ to learn more about VCF file format.
 
 > ## Exercise
 > 
-> Use the `grep`, `cut`, and `less` commands you've learned to extract the `POS` and `QUAL` columns from your 
-> output file (without the header lines). What is the position of the first variant to be called with a `QUAL` 
-> value of less than 4?
+> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. 
 >
 >> ## Solution
 >> 
 >> ~~~
->> $ cut results/vcf/SRR097977_final_variants.vcf -f 6,2 | grep -v "##" | less
+>> $ grep -v "##" results/vcf/SRR2584863_final_variants.vcf | wc -l
 >> ~~~
 >> {: .bash}
 >> 
 >> ~~~ 
->> POS     QUAL
->> 9972    222
->> 10563   222
->> 81158   222
->> 216480  222
->> 247796  221
->> 281923  222
->> .
->> .
->> .
->> 1004106 7.8
->> 1019082 3.01
+>> 26
 >> ~~~
 >> {: .output}
 >>
->> Position 1019082 has a score of 3.01.
+>> There are 26 variants in this file.
 > {: .solution}
 {: .challenge}
 
@@ -360,7 +352,7 @@ software installation and transfer of files.
 In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
 
 ~~~
-$ samtools index results/bam/SRR097977.aligned.sorted.bam
+$ samtools index results/bam/SRR2584863.aligned.sorted.bam
 ~~~
 {: .bash}
 
@@ -373,7 +365,7 @@ It uses different colors to display mapping quality or base quality, subjected t
 In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file: 
 
 ~~~
-$ samtools tview results/bam/SRR097977.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
+$ samtools tview results/bam/SRR2584863.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
@@ -435,10 +427,10 @@ with your AWS instance number. The commands to `scp` always go in the terminal w
 local computer (not your AWS instance).
 
 ~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR097977.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR097977.aligned.sorted.bam.bai ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam.bai ~/Desktop/files_for_igv
 $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR097977_final_variants.vcf ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584863_final_variants.vcf ~/Desktop/files_for_igv
 ~~~
 {: .bash}
 
