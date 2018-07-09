@@ -45,9 +45,9 @@ We are studying a population of *Escherichia coli* (designated Ara-3), which wer
 
 The data are paired-end, so we will download two files for each sample. We will use the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) to get our data. The ENA "provides a comprehensive record of the world's nucleotide sequencing information, covering raw sequencing data, sequence assembly information and functional annotation." The ENA also provides sequencing data in the fastq format, an important format for sequencing reads that we will be learning about today. 
 
-To download the data, run the following commands:
+To download the data, run the commands below. It will take about 10 minutes to download the files.
 ~~~
-mkdir ~/dc_workshop/data/untrimmed_fastq/
+mkdir -p ~/dc_workshop/data/untrimmed_fastq/
 cd ~/dc_workshop/data/untrimmed_fastq
 
 curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz
