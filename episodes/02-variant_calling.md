@@ -93,6 +93,8 @@ The alignment process consists of choosing an appropriate reference genome to ma
 aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it 
 is faster and more accurate.
 
+An example of what a `bwa` command looks like is below. This command will not run, as we do not have the files `ref_genome.fa`, `input_file_R1.fastq`, or `input_file_R2.fastq`.
+
 ~~~
 $ bwa mem ref_genome.fasta input_file_R1.fastq input_file_R2.fastq > output.sam
 ~~~
@@ -178,6 +180,31 @@ Our files are pretty small, so we won't see this output. If you run the workflow
 
 SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on the chromosome, by read name, etc. It is important to be aware that different alignment tools will output differently sorted SAM/BAM, and different downstream tools require differently sorted alignment files as input.
 
+You can use samtools to learn more about this bam file as well.
+
+~~~
+samtools flagstat results/bam/SRR2584863.aligned.sorted.bam
+~~~
+{: .bash}
+
+This will give you the following statistics about your sorted bam file:
+
+~~~
+352019 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+2019 + 0 supplementary
+0 + 0 duplicates
+351867 + 0 mapped (99.96% : N/A)
+350000 + 0 paired in sequencing
+175000 + 0 read1
+175000 + 0 read2
+343112 + 0 properly paired (98.03% : N/A)
+349706 + 0 with itself and mate mapped
+142 + 0 singletons (0.04% : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ>=5)
+~~~
+{: .output}
 ## Variant calling
 
 A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome
@@ -219,7 +246,7 @@ $ bcftools call --ploidy 1 -m -v -o results/bcf/SRR2584863_variants.vcf results/
 Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
-$ vcfutils.pl varFilter results/bcf/SRR2584863_variants.bcf  > results/vcf/SRR2584863_final_variants.vcf
+$ vcfutils.pl varFilter results/bcf/SRR2584863_variants.vcf  > results/vcf/SRR2584863_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -327,16 +354,16 @@ to learn more about VCF file format.
 >> ## Solution
 >> 
 >> ~~~
->> $ grep -v "##" results/vcf/SRR2584863_final_variants.vcf | wc -l
+>> $ grep -v "#" results/vcf/SRR2584863_final_variants.vcf | wc -l
 >> ~~~
 >> {: .bash}
 >> 
 >> ~~~ 
->> 26
+>> 25
 >> ~~~
 >> {: .output}
 >>
->> There are 26 variants in this file.
+>> There are 25 variants in this file.
 > {: .solution}
 {: .challenge}
 
