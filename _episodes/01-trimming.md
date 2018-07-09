@@ -81,12 +81,12 @@ analysis. It is important to understand the steps you are using to
 clean your data. For more information about the Trimmomatic arguments
 and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
-However, a complete command for Trimmomatic will look something like this:
+However, a complete command for Trimmomatic will look something like the command below. This command is an example and will not work as we do not have the files it refers to:
 
 ~~~
 $ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
               SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
-              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
               ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
 ~~~
 {: .bash}
@@ -120,7 +120,7 @@ We saw using FastQC that Nextera adapters were present in our samples.
 The adapter sequences came with the installation of trimmomatic, so we will first copy these sequences into our current directory.
 
 ~~~
-$ cp ~/miniconda3/share/trimmomatic-0.38-0/adapters/NexteraPE-PE.fa .
+$ cp ~/miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/NexteraPE-PE.fa .
 ~~~
 {: .bash}
 
@@ -259,12 +259,13 @@ SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz
 >
 >> ## Solution
 >> ~~~
->> $ ls ~/miniconda3/share/trimmomatic-0.38-0/adapters
+>> $ ls ~/miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/
 >> ~~~
 >> {: .bash}
 >>
 >> ~~~
->> TruSeq2-PE.fa  TruSeq2-SE.fa  TruSeq3-PE-2.fa  TruSeq3-PE.fa  TruSeq3-SE.fa
+>> NexteraPE-PE.fa  TruSeq2-SE.fa    TruSeq3-PE.fa
+>> TruSeq2-PE.fa    TruSeq3-PE-2.fa  TruSeq3-SE.fa
 >> ~~~
 >> {: .output}
 >>
