@@ -308,7 +308,7 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-$ mkdir ~/dc_workshop/results/fastqc_untrimmed_reads
+$ mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
 $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
 $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
 ~~~
