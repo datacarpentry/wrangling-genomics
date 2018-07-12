@@ -66,7 +66,7 @@ $ mkdir -p results/sai results/sam results/bam results/bcf results/vcf
 > time-consuming and frustrating task - however, this does mean that
 > you won't be able to walk out the door and start doing these
 > analyses on your own computer. You'll need to install 
-> the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup/) for more information on installing these software packages.
+> the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup.html) for more information on installing these software packages.
 > 
 {: .callout}
 
