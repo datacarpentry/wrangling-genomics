@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Setup
-permalink: /setup/
 ---
 
 This workshop is designed to be run on pre-imaged Amazon Web Services 
