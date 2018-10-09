@@ -62,7 +62,7 @@ curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fa
 The data comes in a compressed format, which is why there is a `.gz` at the end of the file names. This makes it faster to transfer, and allows it to take up less space on our computer. Let's unzip one of the files so that we can look at the fastq format.
 
 ~~~
-gunzip SRR2584863_1.fastq.gz
+gunzip SRR2584863_1.fastq.gz 
 ~~~
 {: .bash}
 
@@ -88,7 +88,7 @@ We can view the first complete read in one of the files our dataset by using `he
 the first four lines. 
 
 ~~~
-$ head -n 4 SRR2584863_1.fastq
+$ head -n 4 SRR2584863_1.fastq 
 ~~~
 {: .bash}
 
@@ -209,7 +209,7 @@ Here, we see positions within the read in which the boxes span a much wider rang
 We will now assess the quality of the reads that we downloaded. First, make sure you're still in the `untrimmed_fastq` directory
 
 ~~~
-$ cd ~/dc_workshop/data/untrimmed_fastq/
+$ cd ~/dc_workshop/data/untrimmed_fastq/ 
 ~~~
 {: .bash}
 
@@ -310,7 +310,7 @@ output files into a new directory within our `results/` directory.
 ~~~
 $ mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
 $ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
-$ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/ 
 ~~~
 {: .bash}
 
@@ -318,7 +318,7 @@ Now we can navigate into this results directory and do some closer
 inspection of our output files.
 
 ~~~
-$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/ 
 ~~~
 {: .bash}
 
@@ -328,7 +328,7 @@ If we were working on our local computers, we'd be able to display each of these
 HTML files as a webpage: 
  
 ~~~
-$ open SRR2584863_1_fastqc.html
+$ open SRR2584863_1_fastqc.html 
 ~~~
 {: .bash}
 
@@ -354,7 +354,7 @@ tab in your terminal program (you can use the pull down menu at the
 top of your screen or the Cmd+t keyboard shortcut) and type: 
 
 ~~~
-$ mkdir ~/Desktop/fastqc_html
+$ mkdir ~/Desktop/fastqc_html 
 ~~~
 {: .bash}
 
@@ -394,8 +394,8 @@ SRR2589044_2_fastqc.html                      100%  251KB 592.2KB/s   00:00
 Now we can go to our new directory and open the HTML files. 
 
 ~~~
-$ cd ~/Desktop/fastqc_html/
-$ open *.html
+$ cd ~/Desktop/fastqc_html/ 
+$ open *.html 
 ~~~
 {: .bash}
 
