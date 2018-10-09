@@ -299,7 +299,7 @@ bwa index $genome
 And create the directory structure to store our results in: 
 
 ~~~
-mkdir -p sai sam bam bcf vcf
+mkdir -p sam bam bcf vcf
 ~~~
 {: .output}
 
@@ -406,12 +406,11 @@ Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
     fq=~/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/${base}_aligned.sai
     sam=~/dc_workshop/results/sam/${base}_aligned.sam
     bam=~/dc_workshop/results/bam/${base}_aligned.bam
     sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
 ~~~
 {: .output}
@@ -419,60 +418,52 @@ Remember to delete the `done` line from your script before adding these lines.
 Now that we've created our variables, we can start doing the steps of our workflow. Remove the `done` line from the end of
 your script and add the following lines. 
 
-1) align the reads to the reference genome and output a `.sai` file:
+1) align the reads to the reference genome and output a `.sam ` file:
 
 ~~~
-    bwa aln $genome $fq > $sai
-~~~
-{: .output}
-
-2) convert the output to SAM format:
-
-~~~
-    bwa samse $genome $sai $fq > $sam
+    bwa mem $genome $fq > $sam
 ~~~
 {: .output}
 
-3) convert the SAM file to BAM format:
+2) convert the SAM file to BAM format:
 
 ~~~
     samtools view -S -b $sam > $bam
 ~~~
 {: .output}
 
-4) sort the BAM file:
+3) sort the BAM file:
 
 ~~~
     samtools sort -f $bam $sorted_bam
 ~~~
 {: .output}
 
-5) index the BAM file for display purposes:
+4) index the BAM file for display purposes:
 
 ~~~
     samtools index $sorted_bam
 ~~~
 {: .output}
 
-6) do the first pass on variant calling by counting
-read coverage
+5) calculate the read coverage of positions in the genome
 
 ~~~
-    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
-~~~
-{: .output}
-
-7) call SNPs with bcftools:
-
-~~~
-    bcftools view -bvcg $raw_bcf > $variants
+    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam 
 ~~~
 {: .output}
 
-8) filter the SNPs for the final output:
+6) call SNPs with bcftools:
 
 ~~~
-    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
+~~~
+{: .output}
+
+7) filter and report the SNP variants in variant calling format (VCF)
+
+~~~
+    vcfutils.pl varFilter $variants  > $final_variants
     done
 ~~~
 {: .output}
@@ -488,7 +479,7 @@ genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 
 bwa index $genome
 
-mkdir -p sai sam bam bcf vcf
+mkdir -p sam bam bcf vcf
 
 for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     do
@@ -497,23 +488,22 @@ for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=~/dc_workshop/data/trimmed_fastq_small/$base.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/${base}_aligned.sai
+    fq=~/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
     sam=~/dc_workshop/results/sam/${base}_aligned.sam
     bam=~/dc_workshop/results/bam/${base}_aligned.bam
     sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
 
-    bwa aln $genome $fq > $sai
-    bwa samse $genome $sai $fq > $sam
+    bwa mem $genome $fq > $sam
     samtools view -S -b $sam > $bam
     samtools sort -f $bam $sorted_bam
     samtools index $sorted_bam
-    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
-    bcftools view -bvcg $raw_bcf > $variants
-    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
+    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
+    vcfutils.pl varFilter $variants > $final_variants
+   
     done
 ~~~
 {: .output}
@@ -561,7 +551,7 @@ $ bash run_variant_calling.sh
 > $ bam=results/bam/${base}_aligned.bam
 > $ sorted_bam=results/bam/${base}_aligned_sorted.bam
 > $ raw_bcf=results/bcf/${base}_raw.bcf
-> $ variants=results/bcf/${base}_variants.bcf
+> $ variants=results/bcf/${base}_variants.vcf
 > $ final_variants=results/vcf/${base}_final_variants.vcf  
 > ~~~
 > {: .bash}
