@@ -283,7 +283,7 @@ The FastQC program has created several new files within our
 `data/untrimmed_fastq/` directory. 
 
 ~~~
-$ ls
+$ ls 
 ~~~
 {: .bash}
 
@@ -308,8 +308,8 @@ will move these
 output files into a new directory within our `results/` directory.
 
 ~~~
-$ mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
-$ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/
+$ mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads 
+$ mv *.zip ~/dc_workshop/results/fastqc_untrimmed_reads/ 
 $ mv *.html ~/dc_workshop/results/fastqc_untrimmed_reads/ 
 ~~~
 {: .bash}
@@ -354,7 +354,7 @@ tab in your terminal program (you can use the pull down menu at the
 top of your screen or the Cmd+t keyboard shortcut) and type: 
 
 ~~~
-$ mkdir ~/Desktop/fastqc_html 
+$ mkdir -p ~/Desktop/fastqc_html 
 ~~~
 {: .bash}
 
@@ -437,8 +437,8 @@ in your terminal program that is connected to your AWS instance
 our results subdirectory.   
 
 ~~~
-$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
-$ ls
+$ cd ~/dc_workshop/results/fastqc_untrimmed_reads/ 
+$ ls 
 ~~~
 {: .bash}
 
@@ -457,7 +457,7 @@ to decompress these files. Let's try doing them all at once using a
 wildcard.
 
 ~~~
-$ unzip *.zip
+$ unzip *.zip 
 ~~~
 {: .bash}
 
@@ -550,7 +550,7 @@ but now we also have a new directory for each of our samples. We can
 see for sure that it's a directory if we use the `-F` flag for `ls`. 
 
 ~~~
-$ ls -F
+$ ls -F 
 ~~~
 {: .bash}
 
@@ -567,7 +567,7 @@ SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.zip
 Let's see what files are present within one of these output directories.
 
 ~~~
-$ ls -F SRR2584863_1_fastqc/
+$ ls -F SRR2584863_1_fastqc/ 
 ~~~
 {: .bash}
 
@@ -579,7 +579,7 @@ fastqc_data.txt  fastqc.fo  fastqc_report.html	Icons/	Images/  summary.txt
 Use `less` to preview the `summary.txt` file for this sample. 
 
 ~~~
-$ less SRR2584863_1_fastqc/summary.txt
+$ less SRR2584863_1_fastqc/summary.txt 
 ~~~
 {: .bash}
 
@@ -599,7 +599,7 @@ WARN    Adapter Content SRR2584863_1.fastq
 {: .output}
 
 The summary file gives us a list of tests that FastQC ran, and tells
-us whether this sample passed, failed, or is borderline (`WARN`).
+us whether this sample passed, failed, or is borderline (`WARN`). Remember to quit from `less` you enter `q`.
 
 ## Documenting Our Work
 
