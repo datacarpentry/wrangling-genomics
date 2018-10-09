@@ -3,7 +3,7 @@ layout: page
 title: "Instructor Notes"
 permalink: /guide/
 ---
-# Instructor Notes for Wrangling Genomics
+# Instructor Notes for 00-Quality-Control
 
 ## Issues with Macs vs Windows
 This episode currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
@@ -17,6 +17,7 @@ The fastq files take about 15 minutes to download. This would be a good time to 
 The FastQC analysis on all raw reads takes about 10 minutes to run. It is a good idea to have learners start this command and cover the FastQC background material and images while FastQC runs.
 
 ## Commands That Must be Modified to Run Correctly
+
 There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly (if you can remember!).
 
 #### scp Command to Download FastQC to local machines
@@ -31,6 +32,18 @@ Command for learners to use:
 ~~~
 scp dcuser@<Public_DNS>:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
+#### The unzip for loop
+
+The for loop to unzip FastQC output will not work as directly copied pasted as:
+
+~~~
+$ for filename in *.zip
+> do
+> unzip $filename
+> done
+~~~
+
+Because the `>` symbol will cause a syntax error when copied. This command will work correctly when typed at the command line! Learners may be surprised that a for loop takes multiple lines on the terminal.
 
 bwamem
 trimmomatic
