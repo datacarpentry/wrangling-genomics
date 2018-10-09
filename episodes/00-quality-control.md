@@ -244,7 +244,7 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 FastQC can accept multiple file names as input, and on both zipped and unzipped files, so we can use the \*.fastq* wildcard to run FastQC on all of the FASTQ files in this directory.
 
 ~~~
-$ fastqc *.fastq*
+$ fastqc *.fastq* 
 ~~~
 {: .bash}
 
