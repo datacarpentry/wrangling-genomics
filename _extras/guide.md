@@ -5,6 +5,8 @@ permalink: /guide/
 ---
 # Instructor Notes for Wrangling Genomics
 
+## Setting Up AWS
+
 What to do during long command waits:
 
 ### File Downloads
@@ -17,14 +19,17 @@ The FastQC analysis on all raw reads takes about 10 minutes to run. It is a good
 There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly (if you can remember!).
 
 #### scp Command to Download FastQC to local machines
-In the FastQC section, learners will download FastQC output files in order to open '.html `.html` summary files on their local machines in a web browser. The scp command currently contains an AWS identifier, but this will need to be replaced with the ID of the machine used by each learner.
+In the FastQC section, learners will download FastQC output files in order to open '.html `.html` summary files on their local machines in a web browser. The scp command currently contains a public DNS (for example, `ec2-34-238-162-94.compute-1.amazonaws.com`), but this will need to be replaced with the public DNS of the machine used by each learner. The Public DNS for each learner will be the same one they use to log in. The password is again `data4Carp`. 
 
 Command as is: 
 ~~~
 scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
 ~~~
 
+Command for learners to use:
+~~~
+scp dcuser@<Public_DNS>:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+~~~
 
 bwamem
 trimmomatic
-scp
