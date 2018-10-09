@@ -3,7 +3,7 @@ layout: page
 title: "Instructor Notes"
 permalink: /guide/
 ---
-# Instructor Notes for 00-Quality-Control
+# Instructor Notes for Wrangling Genomics
 
 ## Issues with Macs vs Windows
 This lesson currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
@@ -15,6 +15,17 @@ The fastq files take about 15 minutes to download. This would be a good time to 
 
 #### Running FastQC
 The FastQC analysis on all raw reads takes about 10 minutes to run. It is a good idea to have learners start this command and cover the FastQC background material and images while FastQC runs.
+
+#### Trimmomatic
+The trimmomatic for loop will take about 10 minutes to run. Perhaps this would be a good time for a coffee break or a discussion about trimming.
+
+#### bcftools mpileup
+The bcftools mpileup command will take about 5 minutes to run. It is:
+
+~~~
+bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf \
+-f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam 
+~~~
 
 ## Commands that must be modified
 There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly.
@@ -50,15 +61,6 @@ The command `open SRR2584863_1_fastqc.html` will present an error in the lesson 
 #### unzip in Working with FastQC Output
 The command `unzip *.zip` in the Working with FastQC Output section will run successfully for the first file, but fail for subsequent files. This error introduces the need for a for loop.
 
-# Instructor Notes for 01-Trimming
-
-## Commands with Lengthy Run Times
-
-#### Trimmomatic
-The trimmomatic for loop will take about 10 minutes to run. Perhaps this would be a good time for a coffee break or a discussion about trimming.
-
-## Commands that must be modified
-
 #### Example Trimmomatic Command
 The first trimmomatic serves as an explanation for trimmomatic parameters and is not meant to be run. The command is:
 
@@ -86,20 +88,6 @@ $ for infile in *_1.fastq.gz
 >                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
 > done
 ~~~
-
-# Instructor Notes for 02-Variant-Calling
-
-## Commands with Lengthy Run Times
-
-#### bcftools mpileup
-The bcftools mpileup command will take about 5 minutes to run. It is:
-
-~~~
-bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf \
--f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam 
-~~~
-
-## Commands that must be modified
 
 #### bwa mem Example Command
 The first bwa mem command is an example and is not meant to be run. It is:
