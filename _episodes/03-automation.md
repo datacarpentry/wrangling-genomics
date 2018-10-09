@@ -380,18 +380,12 @@ to a new variable called `base` variable. Add `done` again at the end so we can 
 Now if you save and run your script, the final lines of your output should look like this: 
 
 ~~~
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
-base name is SRR097977
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
-base name is SRR098026
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
-base name is SRR098027
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
-base name is SRR098028
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
-base name is SRR098281
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
-base name is SRR098283
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2584863_1.trim.sub.fastq
+base name is SRR2584863
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq
+base name is SRR2584866
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2589044_1.trim.sub.fastq
+base name is SRR2589044
 ~~~
 {: .output}
 
