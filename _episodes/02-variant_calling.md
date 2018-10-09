@@ -37,7 +37,7 @@ First we download the reference genome for *E. coli* REL606. Although we could c
 
 ~~~
 $ cd ~/dc_workshop
-$ mkdir data/ref_genome
+$ mkdir -p data/ref_genome
 $ curl -L -o data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
 $ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 ~~~

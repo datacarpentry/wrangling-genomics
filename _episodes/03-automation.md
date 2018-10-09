@@ -299,7 +299,7 @@ bwa index $genome
 And create the directory structure to store our results in: 
 
 ~~~
-mkdir -p sai sam bam bcf vcf
+mkdir -p sam bam bcf vcf
 ~~~
 {: .output}
 
@@ -311,9 +311,9 @@ The first thing we do is assign the name of the FASTQ file we're currently worki
 tell the script to `echo` the filename back to us so we can check which file we're on.
 
 ~~~
-for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
+for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     do
-    echo "working with file $fq"
+    echo "working with file $fq1"
     done
 ~~~
 {: .bash}
@@ -362,7 +362,7 @@ your script and add the next two lines. These lines extract the base name of the
 to a new variable called `base` variable. Add `done` again at the end so we can test our script.
 
 ~~~
-    base=$(basename $fq .fastq_trim.fastq)
+    base=$(basename $fq1 _1.trim.sub.fastq)
     echo "base name is $base"
     done
 ~~~
@@ -371,18 +371,12 @@ to a new variable called `base` variable. Add `done` again at the end so we can 
 Now if you save and run your script, the final lines of your output should look like this: 
 
 ~~~
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
-base name is SRR097977
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
-base name is SRR098026
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
-base name is SRR098027
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
-base name is SRR098028
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
-base name is SRR098281
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
-base name is SRR098283
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2584863_1.trim.sub.fastq
+base name is SRR2584863
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq
+base name is SRR2584866
+working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2589044_1.trim.sub.fastq
+base name is SRR2589044
 ~~~
 {: .output}
 
@@ -396,13 +390,13 @@ defined, and adding different file name extensions to represent the files that w
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
-    fq=~/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/${base}_aligned.sai
-    sam=~/dc_workshop/results/sam/${base}_aligned.sam
-    bam=~/dc_workshop/results/bam/${base}_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
+    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
+    sam=~/dc_workshop/results/sam/${base}.aligned.sam
+    bam=~/dc_workshop/results/bam/${base}.aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
 ~~~
 {: .output}
@@ -410,60 +404,52 @@ Remember to delete the `done` line from your script before adding these lines.
 Now that we've created our variables, we can start doing the steps of our workflow. Remove the `done` line from the end of
 your script and add the following lines. 
 
-1) align the reads to the reference genome and output a `.sai` file:
+1) align the reads to the reference genome and output a `.sam` file:
 
 ~~~
-    bwa aln $genome $fq > $sai
-~~~
-{: .output}
-
-2) convert the output to SAM format:
-
-~~~
-    bwa samse $genome $sai $fq > $sam
+    bwa mem $genome $fq1 $fq2 > $sam
 ~~~
 {: .output}
 
-3) convert the SAM file to BAM format:
+2) convert the SAM file to BAM format:
 
 ~~~
     samtools view -S -b $sam > $bam
 ~~~
 {: .output}
 
-4) sort the BAM file:
+3) sort the BAM file:
 
 ~~~
-    samtools sort -f $bam $sorted_bam
+    samtools sort -o $sorted_bam $bam 
 ~~~
 {: .output}
 
-5) index the BAM file for display purposes:
+4) index the BAM file for display purposes:
 
 ~~~
     samtools index $sorted_bam
 ~~~
 {: .output}
 
-6) do the first pass on variant calling by counting
-read coverage
+5) calculate the read coverage of positions in the genome
 
 ~~~
-    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
-~~~
-{: .output}
-
-7) call SNPs with bcftools:
-
-~~~
-    bcftools view -bvcg $raw_bcf > $variants
+    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam 
 ~~~
 {: .output}
 
-8) filter the SNPs for the final output:
+6) call SNPs with bcftools:
 
 ~~~
-    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
+~~~
+{: .output}
+
+7) filter and report the SNP variants in variant calling format (VCF)
+
+~~~
+    vcfutils.pl varFilter $variants  > $final_variants
     done
 ~~~
 {: .output}
@@ -479,32 +465,32 @@ genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 
 bwa index $genome
 
-mkdir -p sai sam bam bcf vcf
+mkdir -p sam bam bcf vcf
 
-for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
+for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     do
-    echo "working with file $fq"
+    echo "working with file $fq1"
 
-    base=$(basename $fq .fastq_trim.fastq)
+    base=$(basename $fq1 _1.trim.sub.fastq)
     echo "base name is $base"
 
-    fq=~/dc_workshop/data/trimmed_fastq_small/$base.fastq_trim.fastq
-    sai=~/dc_workshop/results/sai/${base}_aligned.sai
-    sam=~/dc_workshop/results/sam/${base}_aligned.sam
-    bam=~/dc_workshop/results/bam/${base}_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
+    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
+    sam=~/dc_workshop/results/sam/${base}.aligned.sam
+    bam=~/dc_workshop/results/bam/${base}.aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
 
-    bwa aln $genome $fq > $sai
-    bwa samse $genome $sai $fq > $sam
+    bwa mem $genome $fq1 $fq2 > $sam
     samtools view -S -b $sam > $bam
-    samtools sort -f $bam $sorted_bam
+    samtools sort -o $sorted_bam $bam
     samtools index $sorted_bam
-    samtools mpileup -g -f $genome $sorted_bam > $raw_bcf
-    bcftools view -bvcg $raw_bcf > $variants
-    bcftools view $variants | /usr/share/samtools/vcfutils.pl varFilter - > $final_variants
+    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
+    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
+    vcfutils.pl varFilter $variants > $final_variants
+   
     done
 ~~~
 {: .output}
@@ -548,11 +534,11 @@ $ bash run_variant_calling.sh
 >
 > ~~~
 > $ fq=data/trimmed_fastq/${base}.fastq
-> $ sam=results/sam/${base}_aligned.sam
-> $ bam=results/bam/${base}_aligned.bam
-> $ sorted_bam=results/bam/${base}_aligned_sorted.bam
+> $ sam=results/sam/${base}.aligned.sam
+> $ bam=results/bam/${base}.aligned.bam
+> $ sorted_bam=results/bam/${base}.aligned.sorted.bam
 > $ raw_bcf=results/bcf/${base}_raw.bcf
-> $ variants=results/bcf/${base}_variants.bcf
+> $ variants=results/bcf/${base}_variants.vcf
 > $ final_variants=results/vcf/${base}_final_variants.vcf  
 > ~~~
 > {: .bash}
@@ -606,7 +592,7 @@ Let's do a few comparisons.
 > {: .solution}
 {: .challenge}
 
-> ## Exercise (Intermediate)
+> ## Exercise (Intermediate) **To Do: Update exercise with new data**
 > 
 > Vizualize the alignment of the reads for our `SRR098281.fastq_trim.fastq_small` sample. What variant is present at 
 > position 145? What is the canonical nucleotide in that position? 
@@ -614,7 +600,7 @@ Let's do a few comparisons.
 >> ## Solution
 >> 
 >> ~~~
->> $ samtools tview ~/dc_workshop/results/bam/SRR098281_aligned_sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> $ samtools tview ~/dc_workshop/results/bam/SRR098281.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 
@@ -630,7 +616,7 @@ variants are present in position 145?
 >> ## Solution
 >> 
 >> ~~~
->> $ samtools tview ~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281_aligned_sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> $ samtools tview ~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 
