@@ -16,8 +16,8 @@ The fastq files take about 15 minutes to download. This would be a good time to 
 #### Running FastQC
 The FastQC analysis on all raw reads takes about 10 minutes to run. It is a good idea to have learners start this command and cover the FastQC background material and images while FastQC runs.
 
-## Commands That Must be Modified to Run Correctly
-There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly (if you can remember!).
+## Commands that must be modified
+There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly.
 
 #### scp Command to Download FastQC to local machines
 In the FastQC section, learners will download FastQC output files in order to open '.html `.html` summary files on their local machines in a web browser. The scp command currently contains a public DNS (for example, `ec2-34-238-162-94.compute-1.amazonaws.com`), but this will need to be replaced with the public DNS of the machine used by each learner. The Public DNS for each learner will be the same one they use to log in. The password is again `data4Carp`. 
@@ -44,13 +44,10 @@ $ for filename in *.zip
 
 Because the `>` symbol will cause a syntax error when copied. This command will work correctly when typed at the command line! Learners may be surprised that a for loop takes multiple lines on the terminal.
 
-## Commands that Fail on Purpose to Teach Syntax
-These commands will present an error when run as written. The error messages are present in the lesson and failures are intentional. The purpose of these commands are to educate learners about what error messages mean and how to customize commands to run them successfully. These are well documented in the lesson notes, but are included here to give the instructor a heads up to expect the error messages. This section is distinct from the commands that must be modified to run correctly section because the commands in this section and meant to be run so learners can view the error message, whereas the previous section is made up of commands not meant to be run.
-
-### open in View FastQC Results
+#### open in View FastQC Results
 The command `open SRR2584863_1_fastqc.html` will present an error in the lesson to illustrate that the AWS instance cannot run the open command because it has no web browser. There is text around this command explaining this issue.
 
-### unzip in Working with FastQC Output
+#### unzip in Working with FastQC Output
 The command `unzip *.zip` in the Working with FastQC Output section will run successfully for the first file, but fail for subsequent files. This error introduces the need for a for loop.
 
 # Instructor Notes for 01-Trimming
@@ -60,7 +57,7 @@ The command `unzip *.zip` in the Working with FastQC Output section will run suc
 #### Trimmomatic
 The trimmomatic for loop will take about 10 minutes to run. Perhaps this would be a good time for a coffee break or a discussion about trimming.
 
-## Commands That Must be Modified to Run Correctly
+## Commands that must be modified
 
 #### Example Trimmomatic Command
 The first trimmomatic serves as an explanation for trimmomatic parameters and is not meant to be run. The command is:
@@ -96,3 +93,18 @@ $ for infile in *_1.fastq.gz
 
 #### VCF Tools mpileUp
 Fill in here.
+
+## Commands that must be modified
+
+#### bwa mem Example Command
+The first bwa mem command is an example and is not meant to be run. It is:
+
+~~~
+bwa mem ref_genome.fasta input_file_R1.fastq input_file_R2.fastq > output.sam
+~~~
+
+The correct command follows:
+
+~~~
+bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
+~~~
