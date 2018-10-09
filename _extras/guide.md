@@ -12,3 +12,19 @@ The fastq files take about 15 minutes to download. This would be a good time to 
 
 ### Running FastQC
 The FastQC analysis on all raw reads takes about 10 minutes to run. It is a good idea to have learners start this command and cover the FastQC background material and images while FastQC runs.
+
+## Commands That Don't Run When Copied and Pasted
+There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly (if you can remember!).
+
+#### scp Command to Download FastQC to local machines
+In the FastQC section, learners will download FastQC output files in order to open '.html `.html` summary files on their local machines in a web browser. The scp command currently contains an AWS identifier, but this will need to be replaced with the ID of the machine used by each learner.
+
+Command as is: 
+~~~
+scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/Desktop/fastqc_html
+~~~
+
+
+bwamem
+trimmomatic
+scp
