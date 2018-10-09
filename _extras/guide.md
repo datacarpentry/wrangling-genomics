@@ -5,7 +5,10 @@ permalink: /guide/
 ---
 # Instructor Notes for Wrangling Genomics
 
-What to do during long command waits:
+## Issues with Macs vs Windows
+This episode currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
+
+## What to do during long command waits
 
 ### File Downloads
 The fastq files take about 15 minutes to download. This would be a good time to discuss the overall workflow of this lesson as illustrated by the graphic integrated on the page. It is recommended to start this lesson with the commmands to make and move to the /data/untrimmed-fastq directory and begin the download, and while files download, cover the "Bioinformatics Workflows" and "Starting with Data" texts. Beware that the last fastq file in the list takes the longest to download (~6-8 mins).
@@ -13,7 +16,7 @@ The fastq files take about 15 minutes to download. This would be a good time to 
 ### Running FastQC
 The FastQC analysis on all raw reads takes about 10 minutes to run. It is a good idea to have learners start this command and cover the FastQC background material and images while FastQC runs.
 
-## Commands That Don't Run When Copied and Pasted
+## Commands That Must be Modified to Run Correctly
 There are several commands that are example commands that will not run correctly if copy and pasted directly to the terminal. These commands serve as example commands and will need to be modified to fit each user. There is text around the commands outlining how they need to be changed, but it's helpful to be aware of them ahead of time as an instructor so you can set them up properly (if you can remember!).
 
 #### scp Command to Download FastQC to local machines
@@ -31,3 +34,13 @@ scp dcuser@<Public_DNS>:~/dc_workshop/results/fastqc_untrimmed_reads/*.html ~/De
 
 bwamem
 trimmomatic
+
+## Commands that Fail on Purpose to Teach Syntax
+
+These commands will present an error when run as written. The error messages are present in the lesson and failures are intentional. The purpose of these commands are to educate learners about what error messages mean and how to customize commands to run them successfully. These are well documented in the lesson notes, but are included here to give the instructor a heads up to expect the error messages.
+
+### open in View FastQC Results
+The command `open SRR2584863_1_fastqc.html` will present an error in the lesson to illustrate that the AWS instance cannot run the open command because it has no web browser. There is text around this command explaining this issue.
+
+### unzip in Working with FastQC Output
+The command `unzip *.zip` in the Working with FastQC Output section will run successfully for the first file, but fail for subsequent files. This error introduces the need for a for loop.
