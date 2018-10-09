@@ -202,12 +202,12 @@ $ bash read_qc.sh
 
 ~~~
 Running FastQC ...
-Started analysis of SRR097977.fastq
-Approx 5% complete for SRR097977.fastq
-Approx 10% complete for SRR097977.fastq
-Approx 15% complete for SRR097977.fastq
-Approx 20% complete for SRR097977.fastq
-Approx 25% complete for SRR097977.fastq
+Started analysis of SRR2584866.fastq
+Approx 5% complete for SRR2584866.fastq
+Approx 10% complete for SRR2584866.fastq
+Approx 15% complete for SRR2584866.fastq
+Approx 20% complete for SRR2584866.fastq
+Approx 25% complete for SRR2584866.fastq
 . 
 . 
 . 
@@ -219,94 +219,12 @@ because we have already run FastQC on this samples files and generated all of th
 our scripts. Go ahead and select `A` each time this message appears. It will appear once per sample file (six times total).
 
 ~~~
-replace SRR097977_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]ename:
+replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]ename:
 ~~~
 {: .output}
 
-# Automating the Rest of our Variant Calling Workflow
-
-Now we will create a second shell script to complete the other steps of our variant calling
-workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, 
-add variables so that
-the script knows to iterate through our input files and do a few other formatting that
-we'll explain as we go. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
-
-Our variant calling workflow will do the following steps
-
-1. Index the reference genome for use by bwa and samtools
-2. Align reads to reference genome
-3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
-4. Calculate the read coverage of positions in the genome
-5. Detect the single nucleotide polymorphisms (SNPs)
-6. Filter and report the SNP variants in VCF (variant calling format)
-
-We will be creating a script together to do all of these steps. 
-
-First, we will create a new script in our `scripts/` directory using `touch`. 
-
-~~~
-$ cd ~/dc_workshop/scripts
-$ touch run_variant_calling.sh
-$ ls 
-~~~
-{: .bash}
-
-~~~
-read_qc.sh  run_variant_calling.sh
-~~~
-{: .output}
-
-We now have a new empty file called `run_variant_calling.sh` in our `scripts/` directory. We will open this file in `nano` and start
-building our script, like we did before.
-
-~~~
-$ nano run_variant_calling.sh
-~~~
-{: .bash}
-
-Enter the following pieces of code into your shell script (not into your terminal prompt).
-
-First we will change our working directory so that we can create new results subdirectories
-in the right location. 
-
-~~~
-cd ~/dc_workshop/results
-~~~
-{: .output}
-
-Next we tell our script where to find the reference genome by assigning the `genome` variable to 
-the path to our reference genome: 
-
-~~~
-genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
-~~~
-{: .output}
-
-> ## Creating Variables
-> Within the Bash shell you can create variables at any time (as we did
-> above, and during the 'for' loop lesson). Assign any name and the 
-> value using the assignment operator: '='. You can check the current
-> definition of your variable by typing into your script: echo $variable_name. 
-{: .callout}
-
-Next we index our reference genome for BWA.
-
-~~~
-bwa index $genome
-~~~
-{: .output}
-
-And create the directory structure to store our results in: 
-
-~~~
-mkdir -p sam bam bcf vcf
-~~~
-{: .output}
-
-We will now use a loop to run the variant calling workflow on each of our FASTQ files. The full list of commands
-within the loop will be executed once for each of the FASTQ files in the `data/trimmed_fastq/` directory. 
-We will include a few `echo` statements to give us status updates on our progress.
-
+# to do: add variable example here
+Could use fq for loop?:
 The first thing we do is assign the name of the FASTQ file we're currently working with to a variable called `fq` and
 tell the script to `echo` the filename back to us so we can check which file we're on.
 
@@ -317,6 +235,13 @@ for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     done
 ~~~
 {: .bash}
+
+> ## Creating Variables
+> Within the Bash shell you can create variables at any time (as we did
+> above, and during the 'for' loop lesson). Assign any name and the 
+> value using the assignment operator: '='. You can check the current
+> definition of your variable by typing into your script: echo $variable_name. 
+{: .callout}
 
 
 > ## Exercise
@@ -356,40 +281,47 @@ for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
 > {: .solution}
 {: .challenge}
 
-Now that we've tested the components of our loops so far, we will add our next few steps. Remove the line `done` from the end of
-your script and add the next two lines. These lines extract the base name of the file
-(excluding the path and `.fastq` extension) and assign it
-to a new variable called `base` variable. Add `done` again at the end so we can test our script.
+# Automating the Rest of our Variant Calling Workflow
+
+We can extend these principles to the entire variant calling workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, add variables so that the script knows to iterate through our input files and write to the appropriate output files. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
+
+Download the script from **ADD DOWNLOAD LINK** (download to ~/dc_workshop/scripts)
+
+Our variant calling workflow has the following steps:
+
+1. Index the reference genome for use by bwa and samtools
+2. Align reads to reference genome
+3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
+4. Calculate the read coverage of positions in the genome
+5. Detect the single nucleotide polymorphisms (SNPs)
+6. Filter and report the SNP variants in VCF (variant calling format)
+
+Let's look go through this script together:
 
 ~~~
+$ cd ~/dc_workshop/scripts
+$ less run_variant_calling.sh
+~~~
+{: .bash}
+
+The script should look like this:
+
+~~~
+cd ~/dc_workshop/results
+
+genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+
+bwa index $genome
+
+mkdir -p sam bam bcf vcf
+
+for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
+    do
+    echo "working with file $fq1"
+
     base=$(basename $fq1 _1.trim.sub.fastq)
     echo "base name is $base"
-    done
-~~~
-{: .output}
 
-Now if you save and run your script, the final lines of your output should look like this: 
-
-~~~
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2584863_1.trim.sub.fastq
-base name is SRR2584863
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq
-base name is SRR2584866
-working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR2589044_1.trim.sub.fastq
-base name is SRR2589044
-~~~
-{: .output}
-
-For each file, you see two statements printed to the terminal window. This is because we have two `echo` statements. The first
-tells you which file the loop is currently working with. The second tells you the base name of the file. This base name is going
-to be used to create our output files.
-
-Next we will create variables to store the names of our output files. This will make your script easier
-to read because you won't need to type out the full name of each of the files. We're using the `base` variable that we just
-defined, and adding different file name extensions to represent the files that will come out of each step in our workflow. 
-Remember to delete the `done` line from your script before adding these lines.
-
-~~~
     fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
     fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
     sam=~/dc_workshop/results/sam/${base}.aligned.sam
@@ -397,12 +329,94 @@ Remember to delete the `done` line from your script before adding these lines.
     sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
     variants=~/dc_workshop/results/bcf/${base}_variants.vcf
-    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
+    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
+
+    bwa mem $genome $fq1 $fq2 > $sam
+    samtools view -S -b $sam > $bam
+    samtools sort -o $sorted_bam $bam
+    samtools index $sorted_bam
+    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
+    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
+    vcfutils.pl varFilter $variants > $final_variants
+   
+    done
 ~~~
 {: .output}
 
-Now that we've created our variables, we can start doing the steps of our workflow. Remove the `done` line from the end of
-your script and add the following lines. 
+Now, we'll go through each line in the script before running it.
+
+First, notice that we change our working directory so that we can create new results subdirectories
+in the right location. 
+
+~~~
+cd ~/dc_workshop/results
+~~~
+{: .output}
+
+Next we tell our script where to find the reference genome by assigning the `genome` variable to 
+the path to our reference genome: 
+
+~~~
+genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+~~~
+{: .output}
+
+Next we index our reference genome for BWA: 
+
+~~~
+bwa index $genome
+~~~
+{: .output}
+
+And create the directory structure to store our results in: 
+
+~~~
+mkdir -p sam bam bcf vcf
+~~~
+{: .output}
+
+Then, we use a loop to run the variant calling workflow on each of our FASTQ files. The full list of commands
+within the loop will be executed once for each of the FASTQ files in the `data/trimmed_fastq/` directory. 
+We will include a few `echo` statements to give us status updates on our progress.
+
+The first thing we do is assign the name of the FASTQ file we're currently working with to a variable called `fq1` and
+tell the script to `echo` the filename back to us so we can check which file we're on.
+
+~~~
+for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
+    do
+    echo "working with file $fq1"
+~~~
+{: .bash}
+
+We then extract the base name of the file (excluding the path and `.fastq` extension) and assign it
+to a new variable called `base`. 
+~~~
+    base=$(basename $fq1 _1.trim.sub.fastq)
+    echo "base name is $base"
+~~~
+{: .bash}
+
+We can use the `base` variable to work with both the `base_1.fastq` and `base_2.fastq` input files, and create variables to store the names of our output files. This makes the script easier to read because we don't  need to type out the full name of each of the files. We're using the `base` variable that we justdefined, and adding different file name extensions to represent the files that will come out of each step in our workflow.
+
+
+~~~
+    #input fastq files
+    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
+    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
+    
+    # output files
+    sam=~/dc_workshop/results/sam/${base}.aligned.sam
+    bam=~/dc_workshop/results/bam/${base}.aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
+    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
+    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
+    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
+~~~
+{: .bash}
+
+
+And finally, the actual workflow steps:
 
 1) align the reads to the reference genome and output a `.sam` file:
 
@@ -450,50 +464,10 @@ your script and add the following lines.
 
 ~~~
     vcfutils.pl varFilter $variants  > $final_variants
-    done
 ~~~
 {: .output}
 
-We added a `done` line after the SNP filtering step because this is the last step in our `for` loop.
 
-Your script should now look like this:
-
-~~~
-cd ~/dc_workshop/results
-
-genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
-
-bwa index $genome
-
-mkdir -p sam bam bcf vcf
-
-for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
-    do
-    echo "working with file $fq1"
-
-    base=$(basename $fq1 _1.trim.sub.fastq)
-    echo "base name is $base"
-
-    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
-    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
-    sam=~/dc_workshop/results/sam/${base}.aligned.sam
-    bam=~/dc_workshop/results/bam/${base}.aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
-    raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
-    final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
-
-    bwa mem $genome $fq1 $fq2 > $sam
-    samtools view -S -b $sam > $bam
-    samtools sort -o $sorted_bam $bam
-    samtools index $sorted_bam
-    bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
-    bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
-    vcfutils.pl varFilter $variants > $final_variants
-   
-    done
-~~~
-{: .output}
 
 > ## Exercise
 > It's a good idea to add comments to your code so that you (or a collaborator) can make sense of what you did later. 
@@ -501,12 +475,14 @@ for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
 > a `#` character will be interpreted as a comment, bash will not try to run these comments as code). 
 {: .challenge}
 
+
 Now we can run our script:
 
 ~~~
 $ bash run_variant_calling.sh
 ~~~
 {: .bash}
+
 
 > ## BWA variations
 > BWA is a software package for mapping low-divergent sequences 
