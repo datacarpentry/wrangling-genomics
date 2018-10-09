@@ -93,11 +93,11 @@ $ for infile in *_1.fastq.gz
 The first bwa mem command is an example and is not meant to be run. It is:
 
 ~~~
-bwa mem ref_genome.fasta input_file_R1.fastq input_file_R2.fastq > output.sam
+# bwa mem ref_genome.fasta input_file_R1.fastq input_file_R2.fastq > output.sam
 ~~~
 
 The correct command follows:
 
 ~~~
-bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
+$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 ~~~
