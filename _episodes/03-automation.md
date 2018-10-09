@@ -407,9 +407,9 @@ Remember to delete the `done` line from your script before adding these lines.
 ~~~
     fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
     fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
-    sam=~/dc_workshop/results/sam/${base}_aligned.sam
-    bam=~/dc_workshop/results/bam/${base}_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    sam=~/dc_workshop/results/sam/${base}.aligned.sam
+    bam=~/dc_workshop/results/bam/${base}.aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
     variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf     
@@ -491,9 +491,9 @@ for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
 
     fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
     fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
-    sam=~/dc_workshop/results/sam/${base}_aligned.sam
-    bam=~/dc_workshop/results/bam/${base}_aligned.bam
-    sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
+    sam=~/dc_workshop/results/sam/${base}.aligned.sam
+    bam=~/dc_workshop/results/bam/${base}.aligned.bam
+    sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
     variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
@@ -549,9 +549,9 @@ $ bash run_variant_calling.sh
 >
 > ~~~
 > $ fq=data/trimmed_fastq/${base}.fastq
-> $ sam=results/sam/${base}_aligned.sam
-> $ bam=results/bam/${base}_aligned.bam
-> $ sorted_bam=results/bam/${base}_aligned_sorted.bam
+> $ sam=results/sam/${base}.aligned.sam
+> $ bam=results/bam/${base}.aligned.bam
+> $ sorted_bam=results/bam/${base}.aligned.sorted.bam
 > $ raw_bcf=results/bcf/${base}_raw.bcf
 > $ variants=results/bcf/${base}_variants.vcf
 > $ final_variants=results/vcf/${base}_final_variants.vcf  
@@ -607,7 +607,7 @@ Let's do a few comparisons.
 > {: .solution}
 {: .challenge}
 
-> ## Exercise (Intermediate)
+> ## Exercise (Intermediate) **To Do: Update exercise with new data**
 > 
 > Vizualize the alignment of the reads for our `SRR098281.fastq_trim.fastq_small` sample. What variant is present at 
 > position 145? What is the canonical nucleotide in that position? 
@@ -615,7 +615,7 @@ Let's do a few comparisons.
 >> ## Solution
 >> 
 >> ~~~
->> $ samtools tview ~/dc_workshop/results/bam/SRR098281_aligned_sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> $ samtools tview ~/dc_workshop/results/bam/SRR098281.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 
@@ -631,7 +631,7 @@ variants are present in position 145?
 >> ## Solution
 >> 
 >> ~~~
->> $ samtools tview ~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281_aligned_sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> $ samtools tview ~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/bam/SRR098281.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 
