@@ -109,7 +109,7 @@ samples in our dataset (`SRRXXXXXXX.fastq`). Later, we'll be
 iterating this whole process on all of our sample files.
 
 ~~~
-$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584863_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584863_2.trim.sub.fastq > results/sam/SRR2584863.aligned.sam
+$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 ~~~
 {: .bash}
 
@@ -117,14 +117,14 @@ You will see output that starts like this:
 
 ~~~
 [M::bwa_idx_load_from_disk] read 0 ALT contigs
-[M::process] read 78970 sequences (10000278 bp)...
-[M::process] read 75986 sequences (10000157 bp)...
-[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (191, 37018, 12, 189)
+[M::process] read 77446 sequences (10000033 bp)...
+[M::process] read 77296 sequences (10000182 bp)...
+[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (48, 36728, 21, 61)
 [M::mem_pestat] analyzing insert size distribution for orientation FF...
-[M::mem_pestat] (25, 50, 75) percentile: (428, 797, 1804)
-[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4556)
-[M::mem_pestat] mean and std.dev: (1087.05, 1032.12)
-[M::mem_pestat] low and high boundaries for proper pairs: (1, 5932)
+[M::mem_pestat] (25, 50, 75) percentile: (420, 660, 1774)
+[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 4482)
+[M::mem_pestat] mean and std.dev: (784.68, 700.87)
+[M::mem_pestat] low and high boundaries for proper pairs: (1, 5836)
 [M::mem_pestat] analyzing insert size distribution for orientation FR...
 ~~~
 {: .output}
@@ -152,7 +152,7 @@ displayed below with the different fields highlighted.
 We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`): 
 
 ~~~
-$ samtools view -S -b results/sam/SRR2584863.aligned.sam > results/bam/SRR2584863.aligned.bam
+$ samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
 ~~~
 {: .bash}
 
@@ -167,7 +167,7 @@ $ samtools view -S -b results/sam/SRR2584863.aligned.sam > results/bam/SRR258486
 Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
 
 ~~~
-$ samtools sort -o results/bam/SRR2584863.aligned.sorted.bam results/bam/SRR2584863.aligned.bam 
+$ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam 
 ~~~
 {: .bash}
 
@@ -183,24 +183,24 @@ SAM/BAM files can be sorted in multiple ways, e.g. by location of alignment on t
 You can use samtools to learn more about this bam file as well.
 
 ~~~
-samtools flagstat results/bam/SRR2584863.aligned.sorted.bam
+samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 ~~~
 {: .bash}
 
 This will give you the following statistics about your sorted bam file:
 
 ~~~
-352019 + 0 in total (QC-passed reads + QC-failed reads)
+351169 + 0 in total (QC-passed reads + QC-failed reads)
 0 + 0 secondary
-2019 + 0 supplementary
+1169 + 0 supplementary
 0 + 0 duplicates
-351867 + 0 mapped (99.96% : N/A)
+351103 + 0 mapped (99.98% : N/A)
 350000 + 0 paired in sequencing
 175000 + 0 read1
 175000 + 0 read2
-343112 + 0 properly paired (98.03% : N/A)
-349706 + 0 with itself and mate mapped
-142 + 0 singletons (0.04% : N/A)
+346688 + 0 properly paired (99.05% : N/A)
+349876 + 0 with itself and mate mapped
+58 + 0 singletons (0.02% : N/A)
 0 + 0 with mate mapped to a different chr
 0 + 0 with mate mapped to a different chr (mapQ>=5)
 ~~~
@@ -220,8 +220,8 @@ variants.
 Do the first pass on variant calling by counting read coverage with [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will use the command `mpileup`. The flag `-O b` tells samtools to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 
 ~~~
-$ bcftools mpileup -O b -o results/bcf/SRR2584863_raw.bcf \
--f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584863.aligned.sorted.bam 
+$ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf \
+-f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam 
 ~~~
 {: .bash}
 
@@ -237,7 +237,7 @@ We have now generated a file with coverage information for every base.
 Identify SNPs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
 
 ~~~
-$ bcftools call --ploidy 1 -m -v -o results/bcf/SRR2584863_variants.vcf results/bcf/SRR2584863_raw.bcf 
+$ bcftools call --ploidy 1 -m -v -o results/bcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
 ~~~
 {: .bash}
 
@@ -246,7 +246,7 @@ $ bcftools call --ploidy 1 -m -v -o results/bcf/SRR2584863_variants.vcf results/
 Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
-$ vcfutils.pl varFilter results/bcf/SRR2584863_variants.vcf  > results/vcf/SRR2584863_final_variants.vcf
+$ vcfutils.pl varFilter results/bcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -266,7 +266,7 @@ some additional information:
 ##fileformat=VCFv4.2
 ##FILTER=<ID=PASS,Description="All filters passed">
 ##bcftoolsVersion=1.8+htslib-1.8
-##bcftoolsCommand=mpileup -O b -o results/bcf/SRR2584863_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584863.aligned.sorted.bam
+##bcftoolsCommand=mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 ##reference=file://data/ref_genome/ecoli_rel606.fasta
 ##contig=<ID=CP000819.1,length=4629812>
 ##ALT=<ID=*,Description="Represents allele(s) other than observed.">
@@ -274,7 +274,7 @@ some additional information:
 ##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of reads supporting an indel">
 ##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of reads supporting an indel">
 ##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
-##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3">
+##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version=
 ##INFO=<ID=RPB,Number=1,Type=Float,Description="Mann-Whitney U test of Read Position Bias (bigger is better)">
 ##INFO=<ID=MQB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality Bias (bigger is better)">
 ##INFO=<ID=BQB,Number=1,Type=Float,Description="Mann-Whitney U test of Base Quality Bias (bigger is better)">
@@ -290,24 +290,26 @@ some additional information:
 ##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
 ##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
 ##bcftools_callVersion=1.8+htslib-1.8
-##bcftools_callCommand=call --ploidy 1 -m -v -o results/bcf/SRR2584863_variants.bcf results/bcf/SRR2584863_raw.bcf; Date=Sat Jul  7 00:05:04 2018
+##bcftools_callCommand=call --ploidy 1 -m -v -o results/bcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf; Date=Tue Oct  9 18:48:10 2018
 ~~~
 {: .output}
 
 Followed by information on each of the variations observed: 
 
 ~~~
-#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584863.aligned.sorted.bam
-CP000819.1      9972    .       T       G       91      .       DP=4;VDB=0.0257451;SGB=-0.556411;MQ0F=0;AC=1;AN=1;DP4=0,0,0,4;MQ=60     GT:PL   1:121,0
-CP000819.1      263235  .       G       T       85      .       DP=6;VDB=0.096133;SGB=-0.590765;RPB=1;MQB=1;BQB=1;MQ0F=0.166667;AC=1;AN=1;DP4=0,1,0,5;MQ=33     GT:PL   1:112,0
-CP000819.1      281923  .       G       T       217     .       DP=10;VDB=0.774083;SGB=-0.662043;MQSB=0.974597;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60       GT:PL   1:247,0
-CP000819.1      433359  .       CTTTTTTT        CTTTTTTTT       64      .       INDEL;IDV=12;IMF=1;DP=12;VDB=0.477704;SGB=-0.676189;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,1,3,8;MQ=60   G
-CP000819.1      473901  .       CCGC    CCGCGC  228     .       INDEL;IDV=9;IMF=0.9;DP=10;VDB=0.659505;SGB=-0.662043;MQSB=0.916482;MQ0F=0;AC=1;AN=1;DP4=1,0,2,7;MQ=60   GT:PL   1
-CP000819.1      648692  .       C       T       210     .       DP=10;VDB=0.268014;SGB=-0.670168;MQSB=0.916482;MQ0F=0;AC=1;AN=1;DP4=0,0,7,3;MQ=60       GT:PL   1:240,0
-CP000819.1      1331794 .       C       A       178     .       DP=8;VDB=0.624078;SGB=-0.651104;MQSB=0.900802;MQ0F=0;AC=1;AN=1;DP4=0,0,3,5;MQ=60        GT:PL   1:208,0
-CP000819.1      1733343 .       G       A       225     .       DP=11;VDB=0.992403;SGB=-0.670168;MQSB=1.00775;MQ0F=0;AC=1;AN=1;DP4=0,0,4,6;MQ=60        GT:PL   1:255,0
-CP000819.1      2103887 .       ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG        ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG        56      .       INDEL;IDV=2;IMF=0.666667;
-CP000819.1      2333538 .       AT      ATT     167     .       INDEL;IDV=7;IMF=1;DP=7;VDB=0.568173;SGB=-0.616816;MQSB=1.01283;MQ0F=0;
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584866.aligned.sorted.bam
+CP000819.1      1521    .       C       T       207     .       DP=9;VDB=0.993024;SGB=-0.662043;MQSB=0.974597;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60
+CP000819.1      1612    .       A       G       225     .       DP=13;VDB=0.52194;SGB=-0.676189;MQSB=0.950952;MQ0F=0;AC=1;AN=1;DP4=0,0,6,5;MQ=60
+CP000819.1      9092    .       A       G       225     .       DP=14;VDB=0.717543;SGB=-0.670168;MQSB=0.916482;MQ0F=0;AC=1;AN=1;DP4=0,0,7,3;MQ=60
+CP000819.1      9972    .       T       G       214     .       DP=10;VDB=0.022095;SGB=-0.670168;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,2,8;MQ=60      GT:PL
+CP000819.1      10563   .       G       A       225     .       DP=11;VDB=0.958658;SGB=-0.670168;MQSB=0.952347;MQ0F=0;AC=1;AN=1;DP4=0,0,5,5;MQ=60
+CP000819.1      22257   .       C       T       127     .       DP=5;VDB=0.0765947;SGB=-0.590765;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,2,3;MQ=60      GT:PL
+CP000819.1      38971   .       A       G       225     .       DP=14;VDB=0.872139;SGB=-0.680642;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,4,8;MQ=60      GT:PL
+CP000819.1      42306   .       A       G       225     .       DP=15;VDB=0.969686;SGB=-0.686358;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,5,9;MQ=60      GT:PL
+CP000819.1      45277   .       A       G       225     .       DP=15;VDB=0.470998;SGB=-0.680642;MQSB=0.95494;MQ0F=0;AC=1;AN=1;DP4=0,0,7,5;MQ=60
+CP000819.1      56613   .       C       G       183     .       DP=12;VDB=0.879703;SGB=-0.676189;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,8,3;MQ=60      GT:PL
+CP000819.1      62118   .       A       G       225     .       DP=19;VDB=0.414981;SGB=-0.691153;MQSB=0.906029;MQ0F=0;AC=1;AN=1;DP4=0,0,8,10;MQ=59
+CP000819.1      64042   .       G       A       225     .       DP=18;VDB=0.451328;SGB=-0.689466;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,7,9;MQ=60      GT:PL
 ~~~
 {: .output}
 
@@ -354,7 +356,7 @@ to learn more about VCF file format.
 >> ## Solution
 >> 
 >> ~~~
->> $ grep -v "#" results/vcf/SRR2584863_final_variants.vcf | wc -l
+>> $ grep -v "#" results/vcf/SRR2584866_final_variants.vcf | wc -l
 >> ~~~
 >> {: .bash}
 >> 
@@ -363,7 +365,7 @@ to learn more about VCF file format.
 >> ~~~
 >> {: .output}
 >>
->> There are 25 variants in this file.
+>> There are 766 variants in this file.
 > {: .solution}
 {: .challenge}
 
@@ -379,7 +381,7 @@ software installation and transfer of files.
 In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
 
 ~~~
-$ samtools index results/bam/SRR2584863.aligned.sorted.bam
+$ samtools index results/bam/SRR2584866.aligned.sorted.bam
 ~~~
 {: .bash}
 
@@ -392,7 +394,7 @@ It uses different colors to display mapping quality or base quality, subjected t
 In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file: 
 
 ~~~
-$ samtools tview results/bam/SRR2584863.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
+$ samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
@@ -454,10 +456,10 @@ with your AWS instance number. The commands to `scp` always go in the terminal w
 local computer (not your AWS instance).
 
 ~~~
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam.bai ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv
 $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
-$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584863_final_variants.vcf ~/Desktop/files_for_igv
+$ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv
 ~~~
 {: .bash}
 
@@ -468,8 +470,8 @@ to unzip it, and then drag the program into your Applications folder.
 
 1. Open IGV.
 2. Load our reference genome file (`ecoli_rel606.fasta`) into IGV using the **"Load Genomes from File..."** option under the **"Genomes"** pull-down menu.
-3. Load our BAM file (`SRR097977.aligned.sorted.bam`) using the **"Load from File..."** option under the **"File"** pull-down menu. 
-4.  Do the same with our VCF file (`SRR097977_final_variants.vcf`).
+3. Load our BAM file (`SRR2584866.aligned.sorted.bam`) using the **"Load from File..."** option under the **"File"** pull-down menu. 
+4.  Do the same with our VCF file (`SRR2584866_final_variants.vcf`).
 
 Your IGV browser should look like the screenshot below:
 
