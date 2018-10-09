@@ -91,8 +91,13 @@ $ for infile in *_1.fastq.gz
 
 ## Commands with Lengthy Run Times
 
-#### VCF Tools mpileUp
-Fill in here.
+#### bcftools mpileup
+The bcftools mpileup command will take about 5 minutes to run. It is:
+
+~~~
+bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf \
+-f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam 
+~~~
 
 ## Commands that must be modified
 
