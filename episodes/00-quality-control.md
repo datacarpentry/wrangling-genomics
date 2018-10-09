@@ -609,7 +609,7 @@ using the `cat` command. We'll call this `full_report.txt` and move
 it to `~/dc_workshop/docs`.
 
 ~~~
-$ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+$ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt 
 ~~~
 {: .bash}
 
