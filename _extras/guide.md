@@ -3,7 +3,7 @@ layout: page
 title: "Instructor Notes"
 permalink: /guide/
 ---
-# Instructor Notes for 00-Quality-Control
+# Instructor Notes for 00-Quality-Control and 01-Trimming
 
 ## Issues with Macs vs Windows
 This episode currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
@@ -45,8 +45,20 @@ $ for filename in *.zip
 
 Because the `>` symbol will cause a syntax error when copied. This command will work correctly when typed at the command line! Learners may be surprised that a for loop takes multiple lines on the terminal.
 
+#### Trimmomatic
+
+The first trimmomatic serves as an explanation for trimmomatic parameters and is not meant to be run. The command is:
+
+~~~
+$ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+              SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
+              SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
+              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
+~
+
+The correct syntax is outlined in the next section, Running Trimmomatic.
+
 bwamem
-trimmomatic
 
 ## Commands that Fail on Purpose to Teach Syntax
 
