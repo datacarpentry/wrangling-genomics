@@ -319,15 +319,6 @@ for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
 {: .bash}
 
 
-> ## Indentation
-> 
-> All of the statements within your `for` loop (i.e. everything after the `for` line and including the `done` line) 
-> need to be indented. This indicates to the shell interpretor that these statements are all part of the `for` loop
-> and should be done once per input.
-> 
-{: .callout}
-
-
 > ## Exercise
 > 
 > This is a good time to check that our script is assigning the FASTQ filename variables correctly. Save your script and run
