@@ -405,7 +405,8 @@ defined, and adding different file name extensions to represent the files that w
 Remember to delete the `done` line from your script before adding these lines.
 
 ~~~
-    fq=~/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
+    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
+    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
     sam=~/dc_workshop/results/sam/${base}_aligned.sam
     bam=~/dc_workshop/results/bam/${base}_aligned.bam
     sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
@@ -418,10 +419,10 @@ Remember to delete the `done` line from your script before adding these lines.
 Now that we've created our variables, we can start doing the steps of our workflow. Remove the `done` line from the end of
 your script and add the following lines. 
 
-1) align the reads to the reference genome and output a `.sam ` file:
+1) align the reads to the reference genome and output a `.sam` file:
 
 ~~~
-    bwa mem $genome $fq > $sam
+    bwa mem $genome $fq1 $fq2 > $sam
 ~~~
 {: .output}
 
@@ -488,7 +489,8 @@ for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     base=$(basename $fq .fastq_trim.fastq)
     echo "base name is $base"
 
-    fq=~/dc_workshop/data/trimmed_fastq_small/${base}.fastq_trim.fastq
+    fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
+    fq2=~/dc_workshop/data/trimmed_fastq_small/${base}_2.trim.sub.fastq
     sam=~/dc_workshop/results/sam/${base}_aligned.sam
     bam=~/dc_workshop/results/bam/${base}_aligned.bam
     sorted_bam=~/dc_workshop/results/bam/${base}_aligned_sorted.bam
@@ -496,7 +498,7 @@ for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
     variants=~/dc_workshop/results/bcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
 
-    bwa mem $genome $fq > $sam
+    bwa mem $genome $fq1 $fq2 > $sam
     samtools view -S -b $sam > $bam
     samtools sort -f $bam $sorted_bam
     samtools index $sorted_bam
