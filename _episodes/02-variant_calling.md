@@ -254,7 +254,7 @@ $ vcfutils.pl varFilter results/bcf/SRR2584863_variants.vcf  > results/vcf/SRR25
 ## Explore the VCF format:
 
 ~~~
-$ less results/vcf/SRR2584863_final_variants.vcf
+$ less -S results/vcf/SRR2584866_final_variants.vcf
 ~~~
 {: .bash}
 
