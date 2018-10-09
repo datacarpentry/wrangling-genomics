@@ -6,7 +6,7 @@ permalink: /guide/
 # Instructor Notes for 00-Quality-Control and 01-Trimming
 
 ## Issues with Macs vs Windows
-This episode currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
+This lesson currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
 
 ## What to do during long command waits
 
@@ -45,7 +45,7 @@ $ for filename in *.zip
 
 Because the `>` symbol will cause a syntax error when copied. This command will work correctly when typed at the command line! Learners may be surprised that a for loop takes multiple lines on the terminal.
 
-#### Trimmomatic
+#### Example Trimmomatic Command
 
 The first trimmomatic serves as an explanation for trimmomatic parameters and is not meant to be run. The command is:
 
@@ -54,9 +54,26 @@ $ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
               SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
               SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
               ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
-~
+~~~
 
 The correct syntax is outlined in the next section, Running Trimmomatic.
+
+#### Actual Trimmomatic Command
+
+The actual trimmomatic command is complicated for loop. It will need to be typed out by learners because the `>` symbols will raise an error if copy and pasted.
+
+For reference, this command is:
+
+~~~
+$ for infile in *_1.fastq.gz
+> do
+>   base=$(basename ${infile} _1.fastq.gz)
+>   trimmomatic PE ${infile} ${base}_2.fastq.gz \
+>                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
+>                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
+>                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
+> done
+~~~
 
 bwamem
 
