@@ -313,7 +313,7 @@ tell the script to `echo` the filename back to us so we can check which file we'
 ~~~
 for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     do
-    echo "working with file $fq"
+    echo "working with file $fq1"
     done
 ~~~
 {: .bash}
@@ -436,7 +436,7 @@ your script and add the following lines.
 3) sort the BAM file:
 
 ~~~
-    samtools sort -f $bam $sorted_bam
+    samtools sort -o $sorted_bam $bam 
 ~~~
 {: .output}
 
@@ -500,7 +500,7 @@ for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
 
     bwa mem $genome $fq1 $fq2 > $sam
     samtools view -S -b $sam > $bam
-    samtools sort -f $bam $sorted_bam
+    samtools sort -o $sorted_bam $bam
     samtools index $sorted_bam
     bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam
     bcftools call --ploidy 1 -m -v -o $variants $raw_bcf 
