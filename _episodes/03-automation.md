@@ -311,7 +311,7 @@ The first thing we do is assign the name of the FASTQ file we're currently worki
 tell the script to `echo` the filename back to us so we can check which file we're on.
 
 ~~~
-for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
+for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     do
     echo "working with file $fq"
     done
@@ -371,7 +371,7 @@ your script and add the next two lines. These lines extract the base name of the
 to a new variable called `base` variable. Add `done` again at the end so we can test our script.
 
 ~~~
-    base=$(basename $fq .fastq_trim.fastq)
+    base=$(basename $fq1 _1.trim.sub.fastq)
     echo "base name is $base"
     done
 ~~~
@@ -482,11 +482,11 @@ bwa index $genome
 
 mkdir -p sam bam bcf vcf
 
-for fq in ~/dc_workshop/data/trimmed_fastq_small/*.fastq
+for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     do
-    echo "working with file $fq"
+    echo "working with file $fq1"
 
-    base=$(basename $fq .fastq_trim.fastq)
+    base=$(basename $fq1 _1.trim.sub.fastq)
     echo "base name is $base"
 
     fq1=~/dc_workshop/data/trimmed_fastq_small/${base}_1.trim.sub.fastq
