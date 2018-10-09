@@ -5,8 +5,6 @@ permalink: /guide/
 ---
 # Instructor Notes for Wrangling Genomics
 
-## Setting Up AWS
-
 What to do during long command waits:
 
 ### File Downloads
