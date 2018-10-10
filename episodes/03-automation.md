@@ -69,12 +69,10 @@ Notice that in this `for` loop, we used two variables, `infile`, which was defin
 > above, and during the 'for' loop lesson). Assign any name and the
 > value using the assignment operator: '='. You can check the current
 > definition of your variable by typing into your script: echo $variable_name.
+
 {: .callout}
 
-In this lesson, we'll use shell scripts to automate the entire analysis. First, we will write a script to run our FastQC analysis, 
-including creating our summary file. To do this, we'll take each of the commands we entered to run FastQC and 
-process the output files and put them into a single file with a `.sh` extension. The `.sh` is not essential, but
-serves as a reminder to ourselves and to the computer that this is a shell script.
+In this lesson, we'll use two shell scripts to automate the variant calling analysis: one for FastQC analysis (including creating our summary file), and a second for the remaining variant calling. To write a script to run our FastQC analysis, we'll take each of the commands we entered to run FastQC and process the output files and put them into a single file with a `.sh` extension. The `.sh` is not essential, but serves as a reminder to ourselves and to the computer that this is a shell script.
 
 # Analyzing Quality with FastQC
 
@@ -234,45 +232,6 @@ replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]
 {: .output}
 
 
-** To do: replace exercise **
-
-> ## Exercise
-> 
-> This is a good time to check that our script is assigning the FASTQ filename variables correctly. Save your script and run
-> it. What output do you see?
->
->> ## Solution 
->> 
->> ~~~
->> $ bash run_variant_calling.sh
->> ~~~
->> {: .bash}
->> 
->> ~~~
->> [bwa_index] Pack FASTA... 0.04 sec
->> [bwa_index] Construct BWT for the packed sequence...
->> [bwa_index] 1.10 seconds elapse.
->> [bwa_index] Update BWT... 0.03 sec
->> [bwa_index] Pack forward-only FASTA... 0.02 sec
->> [bwa_index] Construct SA from BWT and Occ... 0.64 sec
->> [main] Version: 0.7.5a-r405
->> [main] CMD: bwa index /home/dcuser/dc_workshop/data/ref_genome/ecoli_rel606.fasta
->> [main] Real time: 1.892 sec; CPU: 1.829 sec
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR097977.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098026.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098027.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098028.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098281.fastq_trim.fastq
->> working with file /home/dcuser/dc_workshop/data/trimmed_fastq_small/SRR098283.fastq_trim.fastq
->> ~~~
->> {: .output}
->> 
->> You should see "working with file . . . " for each of the six FASTQ files in our `trimmed_fastq/` directory.
->> If you don't see this output, then you'll need to troubleshoot your script. A common problem is that your directory might not
->> be specified correctly. Ask for help if you get stuck here! 
-> {: .solution}
-{: .challenge}
-
 # Automating the Rest of our Variant Calling Workflow
 
 We can extend these principles to the entire variant calling workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, add variables so that the script knows to iterate through our input files and write to the appropriate output files. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
@@ -389,7 +348,7 @@ to a new variable called `base`.
 ~~~
 {: .bash}
 
-We can use the `base` variable to work with both the `base_1.fastq` and `base_2.fastq` input files, and create variables to store the names of our output files. This makes the script easier to read because we don't  need to type out the full name of each of the files. We're using the `base` variable that we justdefined, and adding different file name extensions to represent the files that will come out of each step in our workflow.
+We can use the `base` variable to access both the `base_1.fastq` and `base_2.fastq` input files, and create variables to store the names of our output files. This makes the script easier to read because we don't need to type out the full name of each of the files: instead, we use the `base` variable, but add a different extension (e.g. `.sam`, `.bam`) for each file produced by our workflow.
 
 
 ~~~
