@@ -36,8 +36,7 @@ steps. If we had 50 samples (a more realistic number), it would be 400 steps! Yo
 see why we want to automate this.
 
 We've also used `for` loops in previous lessons to iterate one or two commands over multiple input files. 
-In these `for` loops you used variables to enable you to run the loop on multiple files. We will be using variable 
-assignments like this in our new shell scripts.
+In these `for` loops, the filename was defined as a variable in the `for` statement, which enabled you to run the loop on multiple files. We will be using variable assignments like this in our new shell scripts.
 
 Here's the `for` loop you wrote for unzipping `.zip` files: 
 
@@ -52,16 +51,18 @@ $ for filename in *.zip
 And here's the one you wrote for running Trimmomatic on all of our `.fastq` sample files.
 
 ~~~
-$ for infile in *.fastq
+$ for infile in *_1.fastq.gz
 > do
-> outfile=${infile}_trim.fastq
-> java -jar ~/Trimmomatic-0.32/trimmomatic-0.32.jar SE $infile $outfile SLIDINGWINDOW:4:20 MINLEN:20
+>   base=$(basename ${infile} _1.fastq.gz)
+>   trimmomatic PE ${infile} ${base}_2.fastq.gz \
+>                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
+>                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
+>                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
 > done
 ~~~
 {: .bash}
 
-In both of these `for` loops, the filename being run was defined in the `for` statement. This variable allowed
-us to keep track of the fastq file being run, and make sure name corresponded with the input file. 
+Notice that in this `for` loop, we used two variables, `infile`, which was defined in the `for` statement, and `base`, which was created from the filename during each iteration of the loop.
 
 > ## Creating Variables
 > Within the Bash shell you can create variables at any time (as we did
