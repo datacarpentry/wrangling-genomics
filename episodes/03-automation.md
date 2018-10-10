@@ -60,7 +60,17 @@ $ for infile in *.fastq
 ~~~
 {: .bash}
 
-In this lesson, we will create two shell scripts. The first will run our FastQC analysis, 
+In both of these `for` loops, the filename being run was defined in the `for` statement. This variable allowed
+us to keep track of the fastq file being run, and make sure name corresponded with the input file. 
+
+> ## Creating Variables
+> Within the Bash shell you can create variables at any time (as we did
+> above, and during the 'for' loop lesson). Assign any name and the
+> value using the assignment operator: '='. You can check the current
+> definition of your variable by typing into your script: echo $variable_name.
+{: .callout}
+
+In this lesson, we'll use shell scripts to automate the entire analysis. First, we will write a script to run our FastQC analysis, 
 including creating our summary file. To do this, we'll take each of the commands we entered to run FastQC and 
 process the output files and put them into a single file with a `.sh` extension. The `.sh` is not essential, but
 serves as a reminder to ourselves and to the computer that this is a shell script.
@@ -72,9 +82,8 @@ directory called `scripts/`. Previously, we used
 `nano` to create and open a new file. The command `touch` allows us to create a new file without opening that file.
 
 ~~~
-$ cd ~/dc_workshop
-$ mkdir scripts
-$ cd scripts
+$ mkdir -p ~/dc_workshop/scripts
+$ cd ~/dc_workshop/scripts
 $ touch read_qc.sh
 $ ls 
 ~~~
@@ -93,7 +102,7 @@ $ nano read_qc.sh
 ~~~
 {: .bash}
 
-Enter the following pieces of code into your shell script (not into your terminal prompt).
+**Enter the following pieces of code into your shell script (not into your terminal prompt).**
 
 Our first line will move us into the `untrimmed_fastq/` directory when we run our script.
 
@@ -112,9 +121,9 @@ echo "Running FastQC ..."
 {: .output}
 
 Our next line will create a new directory to hold our FastQC output files. Here we are using the `-p` option for `mkdir`. This 
-option forces `mkdir` to create the new directory, even if one of the parent directories doesn't already exist. It is a good
-idea to use this option in your shell scripts to avoid running into errors if you don't have the directory structure you think
-you do.'
+option allows `mkdir` to create the new directory, even if one of the parent directories doesn't already exist. It also supresses
+errors if the directory already exists, without overwriting that directory. It is a good idea to use this option in your shell 
+scripts to avoid running into errors if you don't have the directory structure you think you do.
 
 ~~~
 mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
@@ -223,26 +232,8 @@ replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]
 ~~~
 {: .output}
 
-# to do: add variable example here
-Could use fq for loop?:
-The first thing we do is assign the name of the FASTQ file we're currently working with to a variable called `fq` and
-tell the script to `echo` the filename back to us so we can check which file we're on.
 
-~~~
-for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
-    do
-    echo "working with file $fq1"
-    done
-~~~
-{: .bash}
-
-> ## Creating Variables
-> Within the Bash shell you can create variables at any time (as we did
-> above, and during the 'for' loop lesson). Assign any name and the 
-> value using the assignment operator: '='. You can check the current
-> definition of your variable by typing into your script: echo $variable_name. 
-{: .callout}
-
+** To do: replace exercise **
 
 > ## Exercise
 > 
