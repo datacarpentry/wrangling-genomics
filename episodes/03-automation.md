@@ -435,9 +435,9 @@ $ bash run_variant_calling.sh
 {: .bash}
 
 
-> ## Exerecise
+> ## Exercise
 >
-> The samples we just performed variant calling on are part of the long-term evolution experiment we introduced at the 
+> The samples we just performed variant calling on are part of the long-term evolution experiment introduced at the 
 > beginning of our variant calling workflow. From the metadata table, we know that SRR2589044 was from generation 5000,
 > SRR2584863 was from generation 15000, and SRR2584866 was from generation 50000. How did the number of mutations per sample change
 > over time? Examine the metadata table. What is one reason the number of mutations may have changed the way they did?
@@ -467,7 +467,7 @@ $ bash run_variant_calling.sh
 > 
 > If you have time after completing the previous exercise, use `run_variant_calling.sh` to run the variant calling pipeline 
 > on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq` but if 
-> you dont, there is a copy in `~/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
+> you don't, there is a copy in `~/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
 {: .challenge} 
 
 
