@@ -433,8 +433,27 @@ locations. That is good! If that wasn't the case, we should probably reconsider 
 
 Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only 
 positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
-to scroll or type `?` for a help menu. Type `Ctrl^C` to exit `tview`. 
+to scroll or type `?` for a help menu. To navigate to a specific position, type `g`. A dialogue box will appear. In
+this box, type the name of the "chromosome" followed by a colon and the position of the variant you would like to view
+(e.g. for this sample, type `CP000819.1:50` to view the 50th base. Type `Ctrl^C` or `q` to exit `tview`. 
 
+> ## Exercise 
+> 
+> Visualize the alignment of the reads for our `SRR2584866` sample. What variant is present at 
+> position 4377265? What is the canonical nucleotide in that position? 
+> 
+>> ## Solution
+>> 
+>> ~~~
+>> $ samtools tview ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
+>> ~~~
+>> {: .bash}
+>> 
+>> Then type `g`. In the dialogue box, type `CP000819.1:4377265`. 
+>> `G` is the variant. `A` is canonical. This variant possibly changes the phenotype of this sample to hypermutable. It occurs
+>> in the gene *mutL*, which controls DNA mismatch repair.
+> {: .solution}
+> 
 
 ### Viewing with IGV
 
