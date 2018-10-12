@@ -43,6 +43,23 @@ $ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 ~~~
 {: .bash}
 
+> ## Exercise 
+> 
+> We saved this file as `data/ref_genome/ecoli_rel606.fasta.gz` and then decompressed it. 
+> What is the real name of the genome? 
+> 
+>> ## Solution
+>> 
+>> ~~~
+>> $ head data/ref_genome/ecoli_rel606.fasta.gz
+>> ~~~
+>> {: .bash}
+>> 
+>> The name of the sequence follows the `>` character. The name is `CP000819.1 Escherichia coli B str. REL606, complete genome`.
+>> Keep this chromosome name (`CP000819.1`) in mind, as we will use it later in the lesson. 
+> {: .solution}
+> 
+
 We will also download a set of trimmed FASTQ files to work with. These are small subsets of our real trimmed data, 
 and will enable us to run our variant calling workflow quite quickly. 
 
@@ -517,7 +534,7 @@ lesson.
 
 #### Installing Software
  
-It's worth noting here that all of the software we are using for
+It's worth noting that all of the software we are using for
 this workshop has been pre-installed on our remote computer. 
 This saves us a lot of time - installing software can be a 
 time-consuming and frustrating task - however, this does mean that
@@ -533,10 +550,8 @@ is faster and more accurate.
 {: .callout}
 
 
-> ## Multiple line commands
-> 
-> Some of the commands we ran in this lesson are burly! When typing a long 
-> command into your terminal, you can use the `\` character
-> to separate code chunks onto separate lines. This can make your code more readable.
->
-{: .callout}
+#### Multi-line commands
+ 
+Some of the commands we ran in this lesson are burly! When typing a long 
+command into your terminal, you can use the `\` character
+to separate code chunks onto separate lines. This can make your code more readable.
