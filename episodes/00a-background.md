@@ -35,31 +35,36 @@ We are going to use a long-term sequencing dataset from a population of *Escheri
  
 ## View the Metadata
 
-We will be working with three sample events from the **Ara-3** strain of this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how (the evolution of a **Cit+** mutant) with our variant calling workflow. The metadata file required for this lesson can be [downloaded directly here](ADD LINK) or [viewed in Github](./data/REPLACE.csv).
+We will be working with three sample events from the **Ara-3** strain of this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how (the evolution of a **Cit+** mutant and **hypermutability**) with our variant calling workflow. The metadata file required for this lesson can be [downloaded directly here](https://raw.githubusercontent.com/data-lessons/wrangling-genomics/gh-pages/files/Ecoli_metadata_composite.csv) or [viewed in Github](https://github.com/data-lessons/wrangling-genomics/blob/gh-pages/files/Ecoli_metadata_composite.csv). If you would like to know details of how the file was created, you can look at [some notes and sources here](https://github.com/data-lessons/wrangling-genomics/blob/gh-pages/files/Ecoli_metadata_composite_README.md).
 
-<!-- add link to metadat file above. Add text to state how it was downloaded (via ENA or otherwise. Best to include something that can be manipulated/filtered/subset for either shell or R demos.) See here for an example: https://raw.githubusercontent.com/datacarpentry/R-genomics/gh-pages/data/Ecoli_metadata.csv--> 
+
 
 This metadata describes information on the *Ara-3* clones and the columns represent:
 
 | Column           | Description                                |
 |------------------|--------------------------------------------|
-| sample           | clone name					|
+| strain           | strain name					|
 | generation       | generation when sample frozen		|
 | clade            | based on parsimony-based tree		|
-| strain           | ancestral strain				|
-| cit              | citrate-using mutant status		|
+| reference        | study the samples were originally sequenced for				|
+| population       | ancestral population group |
+| mutator          | hypermutability mutant status |
+| facility         | facility samples were sequenced at |
 | run              | Sequence read archive sample ID		|
-| genome_size      | size in Mbp (made up data for this lesson) |
-
+| read_type        | library type of reads |
+| read_length      | length of reads in sample |
+| sequencing_depth | depth of sequencing |
+| cit              | citrate-using mutant status		|
 
 
 ### Challenge
 
 Based on the metadata, can you answer the following questions?
 
-* How many different **Ara-3** generations exist in the data?
+* How many different generations exist in the data?
 * How many rows and how many columns are in this data?
 * How many citrate+ mutants have been recorded in **Ara-3**?
+* How many hypermutable mutants have been recorded in **Ara-3**?
 
 
 <!-- can add some additional info relevant to interplay of hypermutability and Cit+ adaptations, but keep it simple for now -->
