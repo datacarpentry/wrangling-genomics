@@ -8,6 +8,9 @@ permalink: /guide/
 ## Issues with Macs vs Windows
 This lesson currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
 
+## A Note IGV for Variant Calling
+Many instructors chose to use samtools tview for visualization of variant calling results rather than IGV. Installation of IGV can take up additional instruction time, and samtools tview is sufficient to visualize results. However, episode 02-variant_calling includes instructions for installation and using IGV.
+
 ## Commands with Lengthy Run Times
 
 #### Raw Data Downloads
