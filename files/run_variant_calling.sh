@@ -1,3 +1,4 @@
+set -e
 cd ~/dc_workshop/results
 
 genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
