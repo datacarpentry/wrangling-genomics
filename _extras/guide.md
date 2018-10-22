@@ -8,6 +8,12 @@ permalink: /guide/
 ## Issues with Macs vs Windows
 This lesson currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
 
+## SAMtools or IGV?
+Some instructors chose to use SAMtools tview for visualization of variant calling results while other prefer than IGV. SAMtools is the default because installation of IGV can take up additional instruction time, and SAMtools tview is sufficient to visualize results. However, episode 02-variant_calling includes instructions for installation and using IGV.
+
+## A note on the Shell Scripting Episode
+At the beginning of the section titled "Automating the Rest of our Variant Calling Workflow", a link to download the script referenced is missing. However, this script is present shortly below in the lesson so it can be passed on to learners in an Etherpad or by referencing the lesson materials page. After presenting the variant calling script in full, the lesson goes through the line by line portions of it.
+
 ## Commands with Lengthy Run Times
 
 #### Raw Data Downloads
@@ -101,3 +107,9 @@ The correct command follows:
 ~~~
 $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 ~~~
+
+#### The Automation Episode
+The code blocks at the beginning of the automation episode (03-automation.md) are examples of for loops and scripts and are not meant to be run by learners. The first code chunks that should be run are under Analyzing Quality with FastQC. 
+
+Also, after the first code chunk of code meant to be run, there is a line that reads only `read_qc.sh` and will yield a message saying that this command wasn't found. After the creation of the script, this command will run the script that will be written.
+
