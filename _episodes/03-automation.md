@@ -103,9 +103,10 @@ $ nano read_qc.sh
 
 **Enter the following pieces of code into your shell script (not into your terminal prompt).**
 
-Our first line will move us into the `untrimmed_fastq/` directory when we run our script.
+Our first line will ensure that our script will exit if an error occurs, and is a good idea to include at the beginning of your scripts. The second line will move us into the `untrimmed_fastq/` directory when we run our script.
 
 ~~~
+set -e
 cd ~/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .output}
@@ -177,6 +178,7 @@ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 Your full shell script should now look like this:
 
 ~~~
+set -e
 cd ~/dc_workshop/data/untrimmed_fastq/
 
 echo "Running FastQC ..."
@@ -258,6 +260,7 @@ $ less run_variant_calling.sh
 The script should look like this:
 
 ~~~
+set -e
 cd ~/dc_workshop/results
 
 genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
