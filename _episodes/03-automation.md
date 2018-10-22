@@ -103,9 +103,10 @@ $ nano read_qc.sh
 
 **Enter the following pieces of code into your shell script (not into your terminal prompt).**
 
-Our first line will move us into the `untrimmed_fastq/` directory when we run our script.
+Our first line will ensure that our script will exit if an error occurs, and is a good idea to include at the beginning of your scripts. The second line will move us into the `untrimmed_fastq/` directory when we run our script.
 
 ~~~
+set -e
 cd ~/dc_workshop/data/untrimmed_fastq/
 ~~~
 {: .output}
@@ -177,6 +178,7 @@ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 Your full shell script should now look like this:
 
 ~~~
+set -e
 cd ~/dc_workshop/data/untrimmed_fastq/
 
 echo "Running FastQC ..."
@@ -236,7 +238,7 @@ replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]
 
 We can extend these principles to the entire variant calling workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, add variables so that the script knows to iterate through our input files and write to the appropriate output files. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
 
-Download the script from **ADD DOWNLOAD LINK** (download to ~/dc_workshop/scripts)
+Download the script from (here)[https://github.com/data-lessons/wrangling-genomics/blob/gh-pages/files/run_variant_calling.sh] (download to ~/dc_workshop/scripts).
 
 Our variant calling workflow has the following steps:
 
@@ -258,6 +260,7 @@ $ less run_variant_calling.sh
 The script should look like this:
 
 ~~~
+set -e
 cd ~/dc_workshop/results
 
 genome=~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
