@@ -1,4 +1,4 @@
----
+  ---
 layout: page
 title: "Instructor Notes"
 permalink: /guide/
@@ -9,7 +9,7 @@ permalink: /guide/
 This lesson currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
 
 ## SAMtools or IGV?
-Some instructors chose to use SAMtools tview for visualization of variant calling results while other prefer than IGV. SAMtools is the default because installation of IGV can take up additional instruction time, and SAMtools tview is sufficient to visualize results. However, episode 02-variant_calling includes instructions for installation and using IGV.
+Some instructors chose to use SAMtools tview for visualization of variant calling results while other prefer than IGV. SAMtools is the default because installation of IGV can take up additional instruction time, and SAMtools tview is sufficient to visualize results. However, episode 04-variant_calling includes instructions for installation and using IGV.
 
 ## Commands with Lengthy Run Times
 
@@ -106,7 +106,7 @@ $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866
 ~~~
 
 #### The Automation Episode
-The code blocks at the beginning of the automation episode (03-automation.md) are examples of for loops and scripts and are not meant to be run by learners. The first code chunks that should be run are under Analyzing Quality with FastQC. 
+The code blocks at the beginning of the automation episode (05-automation.md) are examples of for loops and scripts and are not meant to be run by learners. The first code chunks that should be run are under Analyzing Quality with FastQC. 
 
 Also, after the first code chunk of code meant to be run, there is a line that reads only `read_qc.sh` and will yield a message saying that this command wasn't found. After the creation of the script, this command will run the script that will be written.
 
