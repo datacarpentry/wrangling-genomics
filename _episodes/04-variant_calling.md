@@ -122,7 +122,7 @@ parameters here, your use case might require a change of parameters. *NOTE: Alwa
 and make sure the options you use are appropriate for your data.*
 
 We're going to start by aligning the reads from just one of the 
-samples in our dataset (`SRRXXXXXXX.fastq`). Later, we'll be 
+samples in our dataset (`SRR2584866`). Later, we'll be 
 iterating this whole process on all of our sample files.
 
 ~~~
