@@ -642,7 +642,7 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 >> FAIL    Per base sequence content       SRR2589044_2.fastq.gz
 >> FAIL    Adapter Content SRR2589044_2.fastq.gz
 >> ~~~
->> {: .output
+>> {: .output}
 >> 
 > {: .solution}
 {: .challenge}
@@ -656,7 +656,7 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 > read quality, different sequencing machines use different encoding systems. This means that, 
 > depending on which sequencer you use to generate your data, a `#` may not be an indicator of 
 > a poor quality base call.
-
+>
 > This mainly relates to older Solexa/Illumina data,
 > but it's essential that you know which sequencing platform was
 > used to generate your data, so that you can tell your quality control program which encoding
