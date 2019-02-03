@@ -58,7 +58,7 @@ $ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 >> The name of the sequence follows the `>` character. The name is `CP000819.1 Escherichia coli B str. REL606, complete genome`.
 >> Keep this chromosome name (`CP000819.1`) in mind, as we will use it later in the lesson. 
 > {: .solution}
-> 
+{: .challenge}
 
 We will also download a set of trimmed FASTQ files to work with. These are small subsets of our real trimmed data, 
 and will enable us to run our variant calling workflow quite quickly. 
@@ -470,7 +470,7 @@ this box, type the name of the "chromosome" followed by a colon and the position
 >> `G` is the variant. `A` is canonical. This variant possibly changes the phenotype of this sample to hypermutable. It occurs
 >> in the gene *mutL*, which controls DNA mismatch repair.
 > {: .solution}
-> 
+{: .challenge}
 
 ### Viewing with IGV
 
