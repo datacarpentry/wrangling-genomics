@@ -3,7 +3,7 @@
 
 # Wrangling Genomics
 
-Lesson for quality control and wrangling genomics data. This repository is maintained by [Josh Herr](https://github.com/jrherr), [Ming Tang](https://github.com/crazyhottommy) and [Fotis Psomopoulos](https://github.com/fpsom).
+Lesson for quality control and wrangling genomics data. This repository is maintained by [Josh Herr](https://github.com/jrherr), [Ming Tang](https://github.com/crazyhottommy), and [Fotis Psomopoulos](https://github.com/fpsom).
 
 Amazon public AMI for this tutorial is "dataCgen-qc". 
 
