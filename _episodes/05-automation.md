@@ -450,7 +450,7 @@ $ bash run_variant_calling.sh
 > over time? Examine the metadata table. What is one reason the number of mutations may have changed the way they did?
 > 
 > Hint: You can find a copy of the output files for the subsampled trimmed FASTQ file variant calling in the 
-> `~/.solutions/wrangling-solutions/variant_calling/` directory.
+> `~/.solutions/wrangling-solutions/variant_calling_auto/` directory.
 > 
 >> ## Solution
 >> 
