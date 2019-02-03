@@ -449,8 +449,8 @@ $ bash run_variant_calling.sh
 > SRR2584863 was from generation 15000, and SRR2584866 was from generation 50000. How did the number of mutations per sample change
 > over time? Examine the metadata table. What is one reason the number of mutations may have changed the way they did?
 > 
-> Hint: You can find a copy of the output files for the full-length trimmed FASTQ file variant calling in the 
-> `~/.dc_sampledata_lite/solutions/wrangling-solutions/variant_calling/` directory.
+> Hint: You can find a copy of the output files for the subsampled trimmed FASTQ file variant calling in the 
+> `~/.solutions/wrangling-solutions/variant_calling/` directory.
 > 
 >> ## Solution
 >> 
