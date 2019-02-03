@@ -65,7 +65,7 @@ and will enable us to run our variant calling workflow quite quickly.
 
 ~~~
 # This is a place holder so the workflow will work. This will be updated with figshare links later
-$ curl -L -o sub.tar.gz https://osf.io/ckf6w/download
+$ curl -L -o sub.tar.gz https://osf.io/gbt7p/download
 $ tar xvf sub.tar.gz
 $ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 ~~~
