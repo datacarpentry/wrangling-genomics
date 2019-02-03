@@ -58,18 +58,6 @@ $ mkdir -p results/sai results/sam results/bam results/bcf results/vcf
 {: .bash}
 
 
-> ## Installing Software
-> 
-> It's worth noting here that all of the software we are using for
-> this workshop has been pre-installed on our remote computer. 
-> This saves us a lot of time - installing software can be a 
-> time-consuming and frustrating task - however, this does mean that
-> you won't be able to walk out the door and start doing these
-> analyses on your own computer. You'll need to install 
-> the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup.html) for more information on installing these software packages.
-> 
-{: .callout}
-
 ### Index the reference genome
 Our first step is to index the reference genome for use by BWA. This 
 helps speed up our alignment.
