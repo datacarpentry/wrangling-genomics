@@ -540,7 +540,7 @@ This saves us a lot of time - installing software can be a
 time-consuming and frustrating task - however, this does mean that
 you won't be able to walk out the door and start doing these
 analyses on your own computer. You'll need to install 
-the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup/) for more information on installing these software packages.
+the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup.html) for more information on installing these software packages.
 
 #### BWA Alignment options
 BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
