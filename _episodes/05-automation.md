@@ -69,7 +69,6 @@ Notice that in this `for` loop, we used two variables, `infile`, which was defin
 > above, and during the 'for' loop lesson). Assign any name and the
 > value using the assignment operator: '='. You can check the current
 > definition of your variable by typing into your script: echo $variable_name.
-
 {: .callout}
 
 In this lesson, we'll use two shell scripts to automate the variant calling analysis: one for FastQC analysis (including creating our summary file), and a second for the remaining variant calling. To write a script to run our FastQC analysis, we'll take each of the commands we entered to run FastQC and process the output files and put them into a single file with a `.sh` extension. The `.sh` is not essential, but serves as a reminder to ourselves and to the computer that this is a shell script.
@@ -475,7 +474,7 @@ $ bash run_variant_calling.sh
 > 
 > If you have time after completing the previous exercise, use `run_variant_calling.sh` to run the variant calling pipeline 
 > on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq` but if 
-> you don't, there is a copy in `~/.dc_sampledata_lite/solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
+> you don't, there is a copy in `~/.solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
 {: .challenge} 
 
 
