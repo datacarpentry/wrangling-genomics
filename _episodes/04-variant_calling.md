@@ -51,7 +51,7 @@ $ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 >> ## Solution
 >> 
 >> ~~~
->> $ head data/ref_genome/ecoli_rel606.fasta.gz
+>> $ head data/ref_genome/ecoli_rel606.fasta
 >> ~~~
 >> {: .bash}
 >> 
