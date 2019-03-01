@@ -64,8 +64,7 @@ We will also download a set of trimmed FASTQ files to work with. These are small
 and will enable us to run our variant calling workflow quite quickly. 
 
 ~~~
-# This is a place holder so the workflow will work. This will be updated with figshare links later
-$ curl -L -o sub.tar.gz https://osf.io/gbt7p/download
+$ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 $ tar xvf sub.tar.gz
 $ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 ~~~
