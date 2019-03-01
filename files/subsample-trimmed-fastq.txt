@@ -1,5 +1,5 @@
 # sumbsampled fastq files were made with the following code.
-# The sample are available for download here: https://osf.io/ckf6w/download
+# The sample are available for download here: https://ndownloader.figshare.com/files/14418248
 
 mkdir -p ~/dc_workshop/data/untrimmed_fastq/
 cd ~/dc_workshop/data/untrimmed_fastq
