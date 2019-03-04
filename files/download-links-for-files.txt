@@ -11,4 +11,4 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz 
 
 # subsampled fastq:
-https://osf.io/ckf6w/download
+https://ndownloader.figshare.com/files/14418248
