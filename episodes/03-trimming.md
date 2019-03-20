@@ -55,12 +55,12 @@ output files. These files are described below.
 
 | option    | meaning |
 | ------- | ---------- |
-|  <inputFile1>  | Input reads to be trimmed. Typically the file name will contain an `_1` or `_R1` in the name.|
-| <inputFile2> | Input reads to be trimmed. Typically the file name will contain an `_2` or `_R2` in the name.|
-|  <outputFile1P> | Output file that contains surviving pairs from the `_1` file. |
-|  <outputFile1U> | Output file that contains orphaned reads from the `_1` file. |
-|  <outputFile2P> | Output file that contains surviving pairs from the `_2` file.|
-|  <outputFile2U> | Output file that contains orphaned reads from the `_2` file.|
+|  \<inputFile1>  | Input reads to be trimmed. Typically the file name will contain an `_1` or `_R1` in the name.|
+| \<inputFile2> | Input reads to be trimmed. Typically the file name will contain an `_2` or `_R2` in the name.|
+|  \<outputFile1P> | Output file that contains surviving pairs from the `_1` file. |
+|  \<outputFile1U> | Output file that contains orphaned reads from the `_1` file. |
+|  \<outputFile2P> | Output file that contains surviving pairs from the `_2` file.|
+|  \<outputFile2U> | Output file that contains orphaned reads from the `_2` file.|
 
 The last thing trimmomatic expects to see is the trimming parameters:
 
@@ -120,13 +120,13 @@ We saw using FastQC that Nextera adapters were present in our samples.
 The adapter sequences came with the installation of trimmomatic, so we will first copy these sequences into our current directory.
 
 ~~~
-$ cp ~/miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/NexteraPE-PE.fa .
+$ cp ~/.miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/NexteraPE-PE.fa .
 ~~~
 {: .bash}
 
 We will also use a sliding window of size 4 that will remove bases if their
 phred score is below 20 (like in our example above). We will also
-discard any reads that do not have at least 20 bases remaining after
+discard any reads that do not have at least 25 bases remaining after
 this trimming step. This command will take a few minutes to run.
 
 ~~~
@@ -233,7 +233,7 @@ $ for infile in *_1.fastq.gz
 
 Go ahead and run the for loop. It should take a few minutes for
 Trimmomatic to run for each of our six input files. Once it's done
-running, take a look at your directory contents. You'll notice that even though we ran Trimmomatic on file `SRR2589044` before running the for loop, there is only one set of files for it. Because of we matched the ending `_1.fastq.gz`, we re-ran Trimmomatic on this file, overwriting our first results. That's ok, but it's good to be aware that it happened.
+running, take a look at your directory contents. You'll notice that even though we ran Trimmomatic on file `SRR2589044` before running the for loop, there is only one set of files for it. Because we matched the ending `_1.fastq.gz`, we re-ran Trimmomatic on this file, overwriting our first results. That's ok, but it's good to be aware that it happened.
 
 ~~~
 $ ls
@@ -274,8 +274,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz
 
 We've now completed the trimming and filtering steps of our quality
 control process! Before we move on, let's move our trimmed FASTQ files
-to a new subdirectory within our `data/` directory. We can also remove
-our extra, double-trimmed file for the `SRR098283` sample.
+to a new subdirectory within our `data/` directory.
 
 ~~~
 $ cd ~/dc_workshop/data/untrimmed_fastq
@@ -307,7 +306,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 >> In your AWS terminal window do:
 >>
 >> ~~~
->> $ fastqc ~/dc_workshop/data/trimmed_fastq
+>> $ fastqc ~/dc_workshop/data/trimmed_fastq/*.fastq*
 >> ~~~
 >> {: .bash}
 >>
