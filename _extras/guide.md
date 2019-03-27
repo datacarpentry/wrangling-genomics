@@ -1,8 +1,8 @@
-  ---
+---
 layout: page
 title: "Instructor Notes"
-permalink: /guide/
 ---
+
 # Instructor Notes for Wrangling Genomics
 
 ## Issues with Macs vs Windows
