@@ -529,28 +529,27 @@ already know the tools we need to use to automate this workflow and run it on as
 single line of code. Those tools are: wildcards, for loops, and bash scripts. We'll use all three in the next 
 lesson. 
 
-## Other Notes
-
-#### Installing Software
- 
-It's worth noting that all of the software we are using for
-this workshop has been pre-installed on our remote computer. 
-This saves us a lot of time - installing software can be a 
-time-consuming and frustrating task - however, this does mean that
-you won't be able to walk out the door and start doing these
-analyses on your own computer. You'll need to install 
-the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup.html) for more information on installing these software packages.
-
-#### BWA Alignment options
-BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
-reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
-as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it 
-is faster and more accurate. 
+> ## Installing Software
+> 
+> It's worth noting that all of the software we are using for
+> this workshop has been pre-installed on our remote computer. 
+> This saves us a lot of time - installing software can be a 
+> time-consuming and frustrating task - however, this does mean that
+> you won't be able to walk out the door and start doing these
+> analyses on your own computer. You'll need to install 
+> the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup.html) for more information 
+> on installing these software packages.
 {: .callout}
 
+> ## BWA Alignment options
+> BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
+> reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
+> as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it 
+> is faster and more accurate. 
+{: .callout}
 
-#### Multi-line commands
- 
-Some of the commands we ran in this lesson are burly! When typing a long 
-command into your terminal, you can use the `\` character
-to separate code chunks onto separate lines. This can make your code more readable.
+> ## Multi-line commands 
+> Some of the commands we ran in this lesson are long! When typing a long 
+> command into your terminal, you can use the `\` character
+> to separate code chunks onto separate lines. This can make your code more readable.
+{: .callout}
