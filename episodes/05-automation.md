@@ -115,7 +115,7 @@ on all of the files in our current directory with a `.fastq` extension.
 
 ~~~
 echo "Running FastQC ..."
-~/FastQC/fastqc *.fastq
+fastqc *.fastq*
 ~~~
 {: .output}
 
@@ -181,7 +181,7 @@ set -e
 cd ~/dc_workshop/data/untrimmed_fastq/
 
 echo "Running FastQC ..."
-~/FastQC/fastqc *.fastq
+fastqc *.fastq*
 
 mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
 
