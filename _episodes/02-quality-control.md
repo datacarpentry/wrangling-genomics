@@ -59,6 +59,21 @@ curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fa
 ~~~
 {: .bash}
 
+> ## Faster option
+> 
+> If your workshop is short on time or the venue's internet connection is weak or unstable, learners can 
+> avoid needing to download the data and instead use the data files provided in the `.backup/` directory.
+> 
+> ~~~
+> cp ~/.backup/untrimmed_fastq/*fastq.gz .
+> ~~~
+> {: .bash}
+> 
+> This command creates a copy of each of the files in the `.backup/untrimmed_fastq/` directory that end in `fastq.gz` and
+> places the copies in the current working directory (signified by `.`). 
+{: .tip}
+
+
 The data comes in a compressed format, which is why there is a `.gz` at the end of the file names. This makes it faster to transfer, and allows it to take up less space on our computer. Let's unzip one of the files so that we can look at the fastq format.
 
 ~~~
