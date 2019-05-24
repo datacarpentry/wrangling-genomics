@@ -88,3 +88,5 @@ exclude:
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
+
+remote_theme: carpentries/carpentries-theme
