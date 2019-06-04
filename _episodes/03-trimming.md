@@ -95,7 +95,7 @@ In this example, we've told Trimmomatic:
 
 | code   | meaning |
 | ------- | ---------- |
-| `PE` | that it will be taking a single end file as input |
+| `PE` | that it will be taking a paired end file as input |
 | `-threads 4` | to use four computing threads to run (this will spead up our run) |
 | `SRR_1056_1.fastq` | the first input file name |
 | `SRR_1056_2.fastq` | the second input file name |
