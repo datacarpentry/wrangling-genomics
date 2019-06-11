@@ -1,6 +1,7 @@
 ---
 title: "Background and Metadata"
-teaching: 15
+teaching: 10
+exercises: 5
 questions:
 - "What data are we using?"
 - "Why is this experiment important?"
@@ -8,6 +9,8 @@ objectives:
 - "Why study *E. coli*?"
 - "Understand the data set"
 - "What is hypermutability?"
+keypoints:
+- "It's important to record and understand your experiment's metadata."
 ---
 
 # Background
@@ -57,15 +60,22 @@ This metadata describes information on the *Ara-3* clones and the columns repres
 | cit              | citrate-using mutant status		|
 
 
-### Challenge
-
-Based on the metadata, can you answer the following questions?
-
-* How many different generations exist in the data?
-* How many rows and how many columns are in this data?
-* How many citrate+ mutants have been recorded in **Ara-3**?
-* How many hypermutable mutants have been recorded in **Ara-3**?
-
+> ## Challenge
+> 
+> Based on the metadata, can you answer the following questions?
+> 
+> * How many different generations exist in the data?
+> * How many rows and how many columns are in this data?
+> * How many citrate+ mutants have been recorded in **Ara-3**?
+> * How many hypermutable mutants have been recorded in **Ara-3**?
+>> ## Solution
+>> 
+>> * 25 different generations
+>> * 62 rows, 12 columns
+>> * 10 citrate+ mutants
+>> * 6 hypermutable mutants mutants
+> {: .solution}
+{: .challenge}
 
 <!-- can add some additional info relevant to interplay of hypermutability and Cit+ adaptations, but keep it simple for now -->
 
