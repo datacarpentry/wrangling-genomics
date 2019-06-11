@@ -147,7 +147,7 @@ You will see output that starts like this:
 
 
 #### SAM/BAM format
-The [SAM file](https://github.com/adamfreedman/knowyourdata-genomics/blob/gh-pages/lessons/01-know_your_data.md#aligned-reads-sam),
+The [SAM file](https://genome.sph.umich.edu/wiki/SAM),
 is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not 
 have time to go in detail of the features of the SAM format, the paper by 
 [Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full) provides a lot more detail on the specification.
