@@ -7,7 +7,7 @@ questions:
 - "Why is this experiment important?"
 objectives:
 - "Why study *E. coli*?"
-- "Understand the data set"
+- "Understand the data set."
 - "What is hypermutability?"
 keypoints:
 - "It's important to record and understand your experiment's metadata."
@@ -31,7 +31,7 @@ We are going to use a long-term sequencing dataset from a population of *Escheri
 
  - The data we are going to use is part of a long-term evolution experiment led by [Richard Lenski](https://en.wikipedia.org/wiki/E._coli_long-term_evolution_experiment).
  
- - The experiment was designed to assess adaptation in *E. coli*. A population was propagated for more than 40,000 generations in a glucose-limited minimal medium (in most conditions glucose is the best carbon source for *E. coli*, providing faster growth than other sugars). This medium was supplemented with citrate which *E. coli* cannot metabolize in the aerobic conditions of the experiment. Sequencing of the populations at regular time points reveals that spontaneous citrate-using variant (**Cit+**) appeared between 31,000 and 31,500 generations causing an increase in population size and diversity. In addition, this experiment showed hypermutability in certain regions. Hypermutability is important and can help accelerate adaptation to novel environments, but also can be selected against in well-adapted populations.
+ - The experiment was designed to assess adaptation in *E. coli*. A population was propagated for more than 40,000 generations in a glucose-limited minimal medium (in most conditions glucose is the best carbon source for *E. coli*, providing faster growth than other sugars). This medium was supplemented with citrate, which *E. coli* cannot metabolize in the aerobic conditions of the experiment. Sequencing of the populations at regular time points revealed that spontaneous citrate-using variant (**Cit+**) appeared between 31,000 and 31,500 generations, causing an increase in population size and diversity. In addition, this experiment showed hypermutability in certain regions. Hypermutability is important and can help accelerate adaptation to novel environments, but also can be selected against in well-adapted populations.
  
  - To see a timeline of the experiment to date, check out this [figure](https://en.wikipedia.org/wiki/E._coli_long-term_evolution_experiment#/media/File:LTEE_Timeline_as_of_May_28,_2016.png), and this paper [Blount et al. 2008: Historical contingency and the evolution of a key innovation in an experimental population of *Escherichia coli*](http://www.pnas.org/content/105/23/7899).
  
@@ -64,16 +64,17 @@ This metadata describes information on the *Ara-3* clones and the columns repres
 > 
 > Based on the metadata, can you answer the following questions?
 > 
-> * How many different generations exist in the data?
-> * How many rows and how many columns are in this data?
-> * How many citrate+ mutants have been recorded in **Ara-3**?
-> * How many hypermutable mutants have been recorded in **Ara-3**?
->> ## Solution
+> 1. How many different generations exist in the data?
+> 2. How many rows and how many columns are in this data?
+> 3. How many citrate+ mutants have been recorded in **Ara-3**?
+> 4. How many hypermutable mutants have been recorded in **Ara-3**?
+>
+> > ## Solution
 >> 
->> * 25 different generations
->> * 62 rows, 12 columns
->> * 10 citrate+ mutants
->> * 6 hypermutable mutants mutants
+> > 1. 25 different generations
+> > 2. 62 rows, 12 columns
+> > 3. 10 citrate+ mutants
+> > 4. 6 hypermutable mutants
 > {: .solution}
 {: .challenge}
 
