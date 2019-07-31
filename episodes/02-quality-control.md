@@ -13,7 +13,7 @@ keypoints:
 - "`for` loops let you perform the same set of operations on multiple files with a single command."
 ---
 
-# Bioinformatics workflows
+# Bioinformatic workflows
 
 When working with high-throughput sequencing data, the raw reads you get off of the sequencer will need to pass
 through a number of  different tools in order to generate your final desired output. The execution of this set of
@@ -39,7 +39,7 @@ built under the assumption that the data will be provided in a specific format.
 
 # Starting with Data
 
-Often times, the first step in a bioinformatics workflow is getting the data you want to work with onto a computer where you can work with it. If you have sequenced your own data, the sequencing center will usually provide you with a link that you can use to download your data. Today we will be working with publicly available sequencing data.
+Often times, the first step in a bioinformatic workflow is getting the data you want to work with onto a computer where you can work with it. If you have outsourced sequencing of your data, the sequencing center will usually provide you with a link that you can use to download your data. Today we will be working with publicly available sequencing data.
 
 We are studying a population of *Escherichia coli* (designated Ara-3), which were propagated for more than 50,000 generations in a glucose-limited minimal medium. We will be working with three samples from this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how with our variant calling workflow. 
 
@@ -129,7 +129,7 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 
 The numerical value assigned to each of these characters depends on the 
 sequencing platform that generated the reads. The sequencing machine used to generate our data 
-uses the standard Sanger quality PHRED score encoding, using by Illumina version 1.8 onwards.
+uses the standard Sanger quality PHRED score encoding, using Illumina version 1.8 onwards.
 Each character is assigned a quality score between 0 and 40 as shown in the chart below.
 
 ~~~
@@ -142,7 +142,7 @@ Quality score:    0........10........20........30........40
 Each quality score represents the probability that the corresponding nucleotide call is
 incorrect. This quality score is logarithmically based, so a quality score of 10 reflects a
 base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%. 
-These probability values are the results from the base calling algorithm and dependent on how 
+These probability values are the results from the base calling algorithm and depend on how 
 much signal was captured for the base incorporation. 
 
 Looking back at our read: 
@@ -155,7 +155,7 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 ~~~
 {: .output}
 
-we can now see that there are a range of quality score, but that the end of the sequence
+we can now see that there is a range of quality scores, but that the end of the sequence is
 very poor (`#` = a quality score of 2). 
 
 > ## Exercise
@@ -431,7 +431,7 @@ tabs in a single window or six separate browser windows.
 {: .challenge}
 
 ## Decoding the other FastQC outputs
-We've now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we haven't talked about! Below we have provided a brief overview of interpretations for each of these plots. It's important to keep in mind 
+We've now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we haven't talked about! Below we have provided a brief overview of interpretations for each of these plots. 
 
 + **Per tile sequence quality**: the machines that perform sequencing are divided into tiles. This plot displays patterns in base quality along these tiles. Consistently low scores are often found around the edges, but hot spots can also occur in the middle if an air bubble was introduced at some point during the run. 
 + **Per sequence quality scores**: a density plot of quality for all reads at all positions. This plot shows what quality scores are most common. 
@@ -448,7 +448,7 @@ We've now looked at quite a few "Per base sequence quality" FastQC graphs, but t
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 in your terminal program that is connected to your AWS instance
-(the tab lab will start with `dcuser@ip`) and make sure you're in
+(the tab label will start with `dcuser@ip`) and make sure you're in
 our results subdirectory.   
 
 ~~~
@@ -614,7 +614,7 @@ WARN    Adapter Content SRR2584863_1.fastq
 {: .output}
 
 The summary file gives us a list of tests that FastQC ran, and tells
-us whether this sample passed, failed, or is borderline (`WARN`). Remember to quit from `less` you enter `q`.
+us whether this sample passed, failed, or is borderline (`WARN`). Remember, to quit from `less` you must type `q`.
 
 ## Documenting Our Work
 
@@ -682,7 +682,7 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 
 > ## Same Symbols, Different Meanings
 >
-> Here we see `>` being used a shell prompt, whereas `>` is also
+> Here we see `>` being used as a shell prompt, whereas `>` is also
 > used to redirect output.
 > Similarly, `$` is used as a shell prompt, but, as we saw earlier,
 > it is also used to ask the shell to get the value of a variable.
@@ -691,5 +691,5 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 > and the symbol is a prompt.
 >
 > If *you* type `>` or `$` yourself, it is an instruction from you that
-> the shell to redirect output or get the value of a variable.
+> the shell should redirect output or get the value of a variable.
 {: .callout}
