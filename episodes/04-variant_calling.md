@@ -9,8 +9,8 @@ objectives:
 - "Describe the types of data formats encountered during variant calling."
 - "Use command line tools to perform variant calling."
 keypoints:
-- "Bioinformatics command line tools are collections of commands that can be used to carry out bioinformatics analyses."
-- "To use most powerful bioinformatics tools, you'll need to use the command line."
+- "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
+- "To use the most powerful bioinformatic tools, you'll need to use the command line."
 - "There are many different file formats for storing genomics data. It's important to understand what type of information is contained in each file, and how it was derived."
 ---
 
@@ -71,7 +71,7 @@ $ mv sub/ ~/dc_workshop/data/trimmed_fastq_small
 {: .bash}
 
 You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single
-line of code because `mkdir` can accept multiple new directory
+line of code, because `mkdir` can accept multiple new directory
 names as input.
 
 ~~~
@@ -88,7 +88,7 @@ $ bwa index data/ref_genome/ecoli_rel606.fasta
 ~~~
 {: .bash}
 
-While the index is created, you will see output something like this:
+While the index is created, you will see output that looks something like this:
 
 ~~~
 [bwa_index] Pack FASTA... 0.04 sec
@@ -149,12 +149,12 @@ You will see output that starts like this:
 #### SAM/BAM format
 The [SAM file](https://genome.sph.umich.edu/wiki/SAM),
 is a tab-delimited text file that contains information for each individual read and its alignment to the genome. While we do not 
-have time to go in detail of the features of the SAM format, the paper by 
+have time to go into detail about the features of the SAM format, the paper by 
 [Heng Li et al.](http://bioinformatics.oxfordjournals.org/content/25/16/2078.full) provides a lot more detail on the specification.
 
 **The compressed binary version of SAM is called a BAM file.** We use this version to reduce size and to allow for *indexing*, which enables efficient random access of the data contained within the file.
 
-The file begins with a **header**, which is optional. The header is used to describe source of data, reference sequence, method of
+The file begins with a **header**, which is optional. The header is used to describe the source of data, reference sequence, method of
 alignment, etc., this will change depending on the aligner being used. Following the header is the **alignment section**. Each line
 that follows corresponds to alignment information for a single read. Each alignment line has **11 mandatory fields** for essential
 mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is 
@@ -225,7 +225,7 @@ This will give you the following statistics about your sorted bam file:
 
 A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome
 or transcriptome, often referred to as a Single Nucleotide Polymorphism (SNP). The call is usually accompanied by an estimate of 
-variant frequency and some measure of confidence. Similar to other steps in this workflow, there are number of tools available for 
+variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for 
 variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the 
 variants.
 
@@ -340,7 +340,7 @@ The first few columns represent the information we have about a predicted variat
 | ID | a `.` until we add annotation information | 
 | REF | reference genotype (forward strand) | 
 | ALT | sample genotype (forward strand) | 
-| QUAL | Phred-scaled probablity that the observed variant exists at this site (higher is better) |
+| QUAL | Phred-scaled probability that the observed variant exists at this site (higher is better) |
 | FILTER | a `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed | 
 
 In an ideal world, the information in the `QUAL` column would be all we needed to filter out bad variant calls.
@@ -363,7 +363,7 @@ For our file, the metrics presented are GT:PL:GQ.
 | AD, DP | the depth per allele by sample and coverage |
 
 The Broad Institute's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=1268) is an excellent place
-to learn more about VCF file format.
+to learn more about the VCF file format.
 
 > ## Exercise
 > 
@@ -387,10 +387,10 @@ to learn more about VCF file format.
 
 ## Assess the alignment (visualization) - optional step
 
-It is often instructive to look at your data in a genome browser. Visualisation will allow you to get a "feel" for 
+It is often instructive to look at your data in a genome browser. Visualization will allow you to get a "feel" for 
 the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you 
 ideas for further analyses.  As such, visualization tools are useful for exploratory analysis. In this lesson we 
-will describe two different tools for visualisation; a light-weight command-line based one and the Broad
+will describe two different tools for visualization: a light-weight command-line based one and the Broad
 Institute's Integrative Genomics Viewer (IGV) which requires
 software installation and transfer of files.
 
@@ -405,9 +405,9 @@ $ samtools index results/bam/SRR2584866.aligned.sorted.bam
 
 [Samtools](http://www.htslib.org/) implements a very simple text alignment viewer based on the GNU
 `ncurses` library, called `tview`. This alignment viewer works with short indels and shows [MAQ](http://maq.sourceforge.net/) consensus. 
-It uses different colors to display mapping quality or base quality, subjected to users' choice. Samtools viewer is known to work with an 130 GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
+It uses different colors to display mapping quality or base quality, subjected to users' choice. Samtools viewer is known to work with a 130 GB alignment swiftly. Due to its text interface, displaying alignments over network is also very fast.
 
-In order to visualize our mapped reads we use `tview`, giving it the sorted bam file and the reference file: 
+In order to visualize our mapped reads, we use `tview`, giving it the sorted bam file and the reference file: 
 
 ~~~
 $ samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
@@ -443,14 +443,14 @@ AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTG
 {: .output}
 
 The first line of output shows the genome coordinates in our reference genome. The second line shows the reference
-genome sequence. The third lines shows the consensus sequence determined from the sequence reads. A `.` indicates
+genome sequence. The third line shows the consensus sequence determined from the sequence reads. A `.` indicates
 a match to the reference sequence, so we can see that the consensus from our sample matches the reference in most
 locations. That is good! If that wasn't the case, we should probably reconsider our choice of reference.
 
 Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only 
 positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
 to scroll or type `?` for a help menu. To navigate to a specific position, type `g`. A dialogue box will appear. In
-this box, type the name of the "chromosome" followed by a colon and the position of the variant you would like to view
+this box, type the name of the "chromosome", followed by a colon and the position of the variant you would like to view
 (e.g. for this sample, type `NC_012967.1:50` to view the 50th base. Type `Ctrl^C` or `q` to exit `tview`. 
 
 > ## Exercise 
@@ -473,7 +473,7 @@ this box, type the name of the "chromosome" followed by a colon and the position
 
 ### Viewing with IGV
 
-[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualisation, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
+[IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`. 
 Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for 
@@ -500,7 +500,7 @@ $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vc
 
 You will need to type the password for your AWS instance each time you call `scp`. 
 
-Next we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
+Next, we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
 to unzip it, and then drag the program into your Applications folder. 
 
 1. Open IGV.
@@ -515,7 +515,7 @@ Your IGV browser should look like the screenshot below:
 There should be two tracks: one coresponding to our BAM file and the other for our VCF file. 
 
 In the **VCF track**, each bar across the top of the plot shows the allele fraction for a single locus. The second bar shows
-the genotypes for each locus in each *sample*. We only have one sample called here so we only see a single line. Dark blue = 
+the genotypes for each locus in each *sample*. We only have one sample called here, so we only see a single line. Dark blue = 
 heterozygous, Cyan = homozygous variant, Grey = reference.  Filtered entries are transparent.
 
 Zoom in to inspect variants you see in your filtered VCF file to become more familiar with IGV. See how quality information 
