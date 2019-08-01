@@ -10,7 +10,7 @@ objectives:
 - "Use command line tools to perform variant calling."
 keypoints:
 - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
-- "To use the most powerful bioinformatic tools, you'll need to use the command line."
+- "To use most powerful bioinformatic tools, you'll need to use the command line."
 - "There are many different file formats for storing genomics data. It's important to understand what type of information is contained in each file, and how it was derived."
 ---
 
