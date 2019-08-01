@@ -5,8 +5,8 @@ exercises: 25
 questions:
 - "How can I get rid of sequence data that doesn't meet my quality standards?"
 objectives:
-- "Clean FASTQ reads using Trimmommatic."
-- "Select and set multiple options for command-line bioinformatics tools."
+- "Clean FASTQ reads using Trimmomatic."
+- "Select and set multiple options for command-line bioinformatic tools."
 - "Write `for` loops with two variables."
 keypoints:
 - "The options you set for the command-line tools you use are important!"
@@ -16,7 +16,7 @@ keypoints:
 # Cleaning Reads
 
 In the previous episode, we took a high-level look at the quality
-of each of our samples using FastQC. We vizualized per-base quality
+of each of our samples using FastQC. We visualized per-base quality
 graphs showing the distribution of read quality at each base across
 all reads in a sample and extracted information about which samples
 fail which quality checks. Some of our samples failed quite a few quality metrics used by FastQC. This doesn't mean,
@@ -47,7 +47,7 @@ Usage:
 {: .output}
 
 This output shows us that we must first specify whether we have paired end (`PE`) or single end (`SE`) reads.
-Next, we specify what flag we would like to run. For example, you can specify `threads` to indicate the number
+Next, we specify what flag we would like to run. For example, you can specify `threads` to indicate the number of
 processors on your computer that you want Trimmomatic to use. These flags are not necessary, but they can give
 you more control over the command. The flags are followed by positional arguments, meaning the order in which you 
 specify them is important. In paired end mode, Trimmomatic expects the two input files, and then the names of the
@@ -66,7 +66,7 @@ The last thing trimmomatic expects to see is the trimming parameters:
 
 | step   | meaning |
 | ------- | ---------- |
-| `ILLUMINACLIP` | Perform adapter removal |
+| `ILLUMINACLIP` | Perform adapter removal. |
 | `SLIDINGWINDOW` | Perform sliding window trimming, cutting once the average quality within the window falls below a threshold. |
 | `LEADING`  | Cut bases off the start of a read, if below a threshold quality.  |
 |  `TRAILING` |  Cut bases off the end of a read, if below a threshold quality. |
@@ -81,7 +81,7 @@ analysis. It is important to understand the steps you are using to
 clean your data. For more information about the Trimmomatic arguments
 and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf).
 
-However, a complete command for Trimmomatic will look something like the command below. This command is an example and will not work as we do not have the files it refers to:
+However, a complete command for Trimmomatic will look something like the command below. This command is an example and will not work, as we do not have the files it refers to:
 
 ~~~
 $ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
@@ -116,7 +116,7 @@ $ cd ~/dc_workshop/data/untrimmed_fastq
 {: .bash}
 
 We are going to run Trimmomatic on one of our paired-end samples. 
-We saw using FastQC that Nextera adapters were present in our samples. 
+While using FastQC we saw that Nextera adapters were present in our samples. 
 The adapter sequences came with the installation of trimmomatic, so we will first copy these sequences into our current directory.
 
 ~~~
@@ -173,7 +173,7 @@ You may have noticed that Trimmomatic automatically detected the
 quality encoding of our sample. It is always a good idea to
 double-check this or to enter the quality encoding manually.
 
-We can confirm that we have our output file:
+We can confirm that we have our output files:
 
 ~~~
 $ ls SRR2589044*
@@ -186,8 +186,8 @@ SRR2589044_1.trim.fastq.gz  SRR2589044_2.fastq.gz         SRR2589044_2un.trim.fa
 ~~~
 {: .output}
 
-The output file is also a FASTQ file. It should be smaller than our
-input file because we've removed reads. We can confirm this:
+The output files are also FASTQ files. It should be smaller than our
+input file, because we've removed reads. We can confirm this:
 
 ~~~
 $ ls SRR2589044* -l -h
@@ -295,7 +295,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 
 > ## Bonus Exercise (Advanced)
 >
-> Now that we've quality controled our samples, they should perform
+> Now that our samples have gone through quality control, they should perform
 > better on the quality tests run by FastQC. Go ahead and re-run
 > FastQC on your trimmed FASTQ files and visualize the HTML files
 > to see whether your per base sequence quality is higher after

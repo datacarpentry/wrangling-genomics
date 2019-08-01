@@ -48,7 +48,7 @@ $ for filename in *.zip
 ~~~
 {: .bash}
 
-And here's the one you wrote for running Trimmomatic on all of our `.fastq` sample files.
+And here's the one you wrote for running Trimmomatic on all of our `.fastq` sample files:
 
 ~~~
 $ for infile in *_1.fastq.gz
@@ -246,14 +246,14 @@ curl -O https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pa
 
 Our variant calling workflow has the following steps:
 
-1. Index the reference genome for use by bwa and samtools
-2. Align reads to reference genome
+1. Index the reference genome for use by bwa and samtools.
+2. Align reads to reference genome.
 3. Convert the format of the alignment to sorted BAM, with some intermediate steps.
-4. Calculate the read coverage of positions in the genome
-5. Detect the single nucleotide polymorphisms (SNPs)
-6. Filter and report the SNP variants in VCF (variant calling format)
+4. Calculate the read coverage of positions in the genome.
+5. Detect the single nucleotide polymorphisms (SNPs).
+6. Filter and report the SNP variants in VCF (variant calling format).
 
-Let's look go through this script together:
+Let's go through this script together:
 
 ~~~
 $ cd ~/dc_workshop/scripts
@@ -404,7 +404,7 @@ And finally, the actual workflow steps:
 ~~~
 {: .output}
 
-5) calculate the read coverage of positions in the genome
+5) calculate the read coverage of positions in the genome:
 
 ~~~
     bcftools mpileup -O b -o $raw_bcf -f $genome $sorted_bam 
@@ -418,7 +418,7 @@ And finally, the actual workflow steps:
 ~~~
 {: .output}
 
-7) filter and report the SNP variants in variant calling format (VCF)
+7) filter and report the SNP variants in variant calling format (VCF):
 
 ~~~
     vcfutils.pl varFilter $variants  > $final_variants
@@ -473,7 +473,7 @@ $ bash run_variant_calling.sh
 > ## Bonus Exercise
 > 
 > If you have time after completing the previous exercise, use `run_variant_calling.sh` to run the variant calling pipeline 
-> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq` but if 
+> on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq`, but if 
 > you don't, there is a copy in `~/.solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
 {: .challenge} 
 
