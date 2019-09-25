@@ -133,7 +133,7 @@ uses the standard Sanger quality PHRED score encoding, using Illumina version 1.
 Each character is assigned a quality score between 0 and 40 as shown in the chart below.
 
 ~~~
-Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI
+Quality encoding: @ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefgh
                   |         |         |         |         |
 Quality score:    0........10........20........30........40                                
 ~~~
