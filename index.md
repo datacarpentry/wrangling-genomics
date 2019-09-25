@@ -18,7 +18,7 @@ some quality control steps, aligning those reads to a reference genome, and endi
 samples. 
 
 As you progress through this lesson, keep in mind that, even if you aren't going to be doing this same workflow in your research, 
-you will be learning some very important lessons about using command-line bioinformatics tools. What you learn here will enable you to 
+you will be learning some very important lessons about using command-line bioinformatic tools. What you learn here will enable you to 
 use a variety of bioinformatic tools with confidence and greatly enhance your research efficiency and productivity.
 
 > ## Prerequisites

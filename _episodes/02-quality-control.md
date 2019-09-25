@@ -13,7 +13,7 @@ keypoints:
 - "`for` loops let you perform the same set of operations on multiple files with a single command."
 ---
 
-# Bioinformatics workflows
+# Bioinformatic workflows
 
 When working with high-throughput sequencing data, the raw reads you get off of the sequencer will need to pass
 through a number of  different tools in order to generate your final desired output. The execution of this set of
@@ -39,7 +39,7 @@ built under the assumption that the data will be provided in a specific format.
 
 # Starting with Data
 
-Often times, the first step in a bioinformatics workflow is getting the data you want to work with onto a computer where you can work with it. If you have sequenced your own data, the sequencing center will usually provide you with a link that you can use to download your data. Today we will be working with publicly available sequencing data.
+Often times, the first step in a bioinformatic workflow is getting the data you want to work with onto a computer where you can work with it. If you have outsourced sequencing of your data, the sequencing center will usually provide you with a link that you can use to download your data. Today we will be working with publicly available sequencing data.
 
 We are studying a population of *Escherichia coli* (designated Ara-3), which were propagated for more than 50,000 generations in a glucose-limited minimal medium. We will be working with three samples from this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how with our variant calling workflow. 
 
@@ -65,7 +65,7 @@ curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fa
 > avoid needing to download the data and instead use the data files provided in the `.backup/` directory.
 > 
 > ~~~
-> cp ~/.backup/untrimmed_fastq/*fastq.gz .
+> $ cp ~/.backup/untrimmed_fastq/*fastq.gz .
 > ~~~
 > {: .bash}
 > 
@@ -129,20 +129,20 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 
 The numerical value assigned to each of these characters depends on the 
 sequencing platform that generated the reads. The sequencing machine used to generate our data 
-uses the standard Sanger quality PHRED score encoding, using by Illumina version 1.8 onwards.
+uses the standard Sanger quality PHRED score encoding, using Illumina version 1.8 onwards.
 Each character is assigned a quality score between 0 and 40 as shown in the chart below.
 
 ~~~
-Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI
-                  |         |         |         |         |
-Quality score:    0........10........20........30........40                                
+Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
+                   |         |         |         |         |
+Quality score:    01........11........21........31........41                                
 ~~~
 {: .output}
 
 Each quality score represents the probability that the corresponding nucleotide call is
 incorrect. This quality score is logarithmically based, so a quality score of 10 reflects a
 base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%. 
-These probability values are the results from the base calling algorithm and dependent on how 
+These probability values are the results from the base calling algorithm and depend on how 
 much signal was captured for the base incorporation. 
 
 Looking back at our read: 
@@ -155,7 +155,7 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 ~~~
 {: .output}
 
-we can now see that there are a range of quality score, but that the end of the sequence
+we can now see that there is a range of quality scores, but that the end of the sequence is
 very poor (`#` = a quality score of 2). 
 
 > ## Exercise
@@ -431,24 +431,25 @@ tabs in a single window or six separate browser windows.
 {: .challenge}
 
 ## Decoding the other FastQC outputs
-We've now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we haven't talked about! Below we have provided a brief overview of interpretations for each of these plots. It's important to keep in mind 
+We've now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we haven't talked about! Below we have provided a brief overview of interpretations for each of these plots. For more information, please see the FastQC documentation [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) 
 
-+ **Per tile sequence quality**: the machines that perform sequencing are divided into tiles. This plot displays patterns in base quality along these tiles. Consistently low scores are often found around the edges, but hot spots can also occur in the middle if an air bubble was introduced at some point during the run. 
-+ **Per sequence quality scores**: a density plot of quality for all reads at all positions. This plot shows what quality scores are most common. 
-+ **Per base sequence content**: plots the proportion of each base position over all of the reads. Typically, we expect to see each base roughly 25% of the time at each position, but this often fails at the beginning or end of the read due to quality or adapter content.
-+ **Per sequence GC content**: a density plot of average GC content in each of the reads.  
-+ **Per base N content**: the percent of times that 'N' occurs at a position in all reads. If there is an increase at a particular position, this might indicate that something went wrong during sequencing.  
-+ **Sequence Length Distribution**: the distribution of sequence lengths of all reads in the file. If the data is raw, there is often on sharp peak, however if the reads have been trimmed, there may be a distribution of shorter lengths. 
-+ **Sequence Duplication Levels**: A distribution of duplicated sequences. In sequencing, we expect most reads to only occur once. If some sequences are occurring more than once, it might indicate enrichment bias (e.g. from PCR). If the samples are high coverage (or RNA-seq or amplicon), this might not be true.  
-+ **Overrepresented sequences**: A list of sequences that occur more frequently than would be expected by chance. 
-+ **Adapter Content**: a graph indicating where adapater sequences occur in the reads.
++ [**Per tile sequence quality**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/12%20Per%20Tile%20Sequence%20Quality.html): the machines that perform sequencing are divided into tiles. This plot displays patterns in base quality along these tiles. Consistently low scores are often found around the edges, but hot spots can also occur in the middle if an air bubble was introduced at some point during the run. 
++ [**Per sequence quality scores**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/3%20Per%20Sequence%20Quality%20Scores.html): a density plot of quality for all reads at all positions. This plot shows what quality scores are most common. 
++ [**Per base sequence content**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/4%20Per%20Base%20Sequence%20Content.html): plots the proportion of each base position over all of the reads. Typically, we expect to see each base roughly 25% of the time at each position, but this often fails at the beginning or end of the read due to quality or adapter content.
++ [**Per sequence GC content**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/5%20Per%20Sequence%20GC%20Content.html): a density plot of average GC content in each of the reads.  
++ [**Per base N content**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/6%20Per%20Base%20N%20Content.html): the percent of times that 'N' occurs at a position in all reads. If there is an increase at a particular position, this might indicate that something went wrong during sequencing.  
++ [**Sequence Length Distribution**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/7%20Sequence%20Length%20Distribution.html): the distribution of sequence lengths of all reads in the file. If the data is raw, there is often on sharp peak, however if the reads have been trimmed, there may be a distribution of shorter lengths. 
++ [**Sequence Duplication Levels**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/8%20Duplicate%20Sequences.html): A distribution of duplicated sequences. In sequencing, we expect most reads to only occur once. If some sequences are occurring more than once, it might indicate enrichment bias (e.g. from PCR). If the samples are high coverage (or RNA-seq or amplicon), this might not be true.  
++ [**Overrepresented sequences**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/9%20Overrepresented%20Sequences.html): A list of sequences that occur more frequently than would be expected by chance. 
++ [**Adapter Content**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/10%20Adapter%20Content.html): a graph indicating where adapater sequences occur in the reads.
++ [**K-mer Content**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html): a graph showing any sequences which may show a positional bias within the reads.
 
 ## Working with the FastQC text output
 
 Now that we've looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 in your terminal program that is connected to your AWS instance
-(the tab lab will start with `dcuser@ip`) and make sure you're in
+(the tab label will start with `dcuser@ip`) and make sure you're in
 our results subdirectory.   
 
 ~~~
@@ -614,7 +615,7 @@ WARN    Adapter Content SRR2584863_1.fastq
 {: .output}
 
 The summary file gives us a list of tests that FastQC ran, and tells
-us whether this sample passed, failed, or is borderline (`WARN`). Remember to quit from `less` you enter `q`.
+us whether this sample passed, failed, or is borderline (`WARN`). Remember, to quit from `less` you must type `q`.
 
 ## Documenting Our Work
 
@@ -682,7 +683,7 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 
 > ## Same Symbols, Different Meanings
 >
-> Here we see `>` being used a shell prompt, whereas `>` is also
+> Here we see `>` being used as a shell prompt, whereas `>` is also
 > used to redirect output.
 > Similarly, `$` is used as a shell prompt, but, as we saw earlier,
 > it is also used to ask the shell to get the value of a variable.
@@ -691,5 +692,5 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 > and the symbol is a prompt.
 >
 > If *you* type `>` or `$` yourself, it is an instruction from you that
-> the shell to redirect output or get the value of a variable.
+> the shell should redirect output or get the value of a variable.
 {: .callout}
