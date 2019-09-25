@@ -65,7 +65,7 @@ curl -O ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fa
 > avoid needing to download the data and instead use the data files provided in the `.backup/` directory.
 > 
 > ~~~
-> cp ~/.backup/untrimmed_fastq/*fastq.gz .
+> $ cp ~/.backup/untrimmed_fastq/*fastq.gz .
 > ~~~
 > {: .bash}
 > 
