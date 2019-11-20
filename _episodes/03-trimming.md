@@ -104,6 +104,16 @@ In this example, we've told Trimmomatic:
 | `ILLUMINACLIP:SRR_adapters.fa`| to clip the Illumina adapters from the input file using the adapter sequences listed in `SRR_adapters.fa` |
 |`SLIDINGWINDOW:4:20` | to use a sliding window of size 4 that will remove bases if their phred score is below 20 |
 
+
+
+> ## Multi-line commands 
+> Some of the commands we ran in this lesson are long! When typing a long 
+> command into your terminal, you can use the `\` character
+> to separate code chunks onto separate lines. This can make your code more readable.
+{: .callout}
+
+
+
 ## Running Trimmomatic
 
 Now we will run Trimmomatic on our data. To begin, navigate to your `untrimmed_fastq` data directory:
@@ -134,14 +144,6 @@ $ trimmomatic PE SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz \
                 SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
 ~~~
 {: .bash}
-
-
-> ## Multi-line commands 
-> Some of the commands we ran in this lesson are long! When typing a long 
-> command into your terminal, you can use the `\` character
-> to separate code chunks onto separate lines. This can make your code more readable.
-{: .callout}
-
 
 
 ~~~
