@@ -233,7 +233,10 @@ variants.
 
 ### Step 1: Calculate the read coverage of positions in the genome
 
-Do the first pass on variant calling by counting read coverage with [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will use the command `mpileup`. The flag `-O b` tells samtools to generate a bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
+Do the first pass on variant calling by counting read coverage with 
+[bcftools](https://samtools.github.io/bcftools/bcftools.html). We will 
+use the command `mpileup`. The flag `-O b` tells bcftools to generate a 
+bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 
 ~~~
 $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf \
