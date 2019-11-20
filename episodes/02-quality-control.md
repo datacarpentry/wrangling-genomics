@@ -130,7 +130,8 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 The numerical value assigned to each of these characters depends on the 
 sequencing platform that generated the reads. The sequencing machine used to generate our data 
 uses the standard Sanger quality PHRED score encoding, using Illumina version 1.8 onwards.
-Each character is assigned a quality score between 0 and 40 as shown in the chart below.
+Each character is assigned a quality score between 0 and 41 as shown in 
+the chart below.
 
 ~~~
 Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
