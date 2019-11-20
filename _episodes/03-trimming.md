@@ -135,7 +135,11 @@ $ trimmomatic PE SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz \
 ~~~
 {: .bash}
 
-
+> ## Multi-line commands 
+> Some of the commands we ran in this lesson are long! When typing a long 
+> command into your terminal, you can use the `\` character
+> to separate code chunks onto separate lines. This can make your code more readable.
+{: .callout}
 
 ~~~
 TrimmomaticPE: Started with arguments:
