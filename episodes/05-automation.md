@@ -119,10 +119,7 @@ fastqc *.fastq*
 ~~~
 {: .output}
 
-Our next line will create a new directory to hold our FastQC output files. Here we are using the `-p` option for `mkdir`. This 
-option allows `mkdir` to create the new directory, even if one of the parent directories doesn't already exist. It also supresses
-errors if the directory already exists, without overwriting that directory. It is a good idea to use this option in your shell 
-scripts to avoid running into errors if you don't have the directory structure you think you do.
+Our next line will create a new directory to hold our FastQC output files. Here we are using the `-p` option for `mkdir` again. It is a good idea to use this option in your shell scripts to avoid running into errors if you don't have the directory structure you think you do.
 
 ~~~
 mkdir -p ~/dc_workshop/results/fastqc_untrimmed_reads
