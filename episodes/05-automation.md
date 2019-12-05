@@ -331,7 +331,8 @@ mkdir -p sam bam bcf vcf
 {: .output}
 
 Then, we use a loop to run the variant calling workflow on each of our FASTQ files. The full list of commands
-within the loop will be executed once for each of the FASTQ files in the `data/trimmed_fastq/` directory. 
+within the loop will be executed once for each of the FASTQ files in the 
+`data/trimmed_fastq_small/` directory. 
 We will include a few `echo` statements to give us status updates on our progress.
 
 The first thing we do is assign the name of the FASTQ file we're currently working with to a variable called `fq1` and
