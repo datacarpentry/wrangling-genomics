@@ -322,10 +322,11 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 >> ~~~
 >> $ mkdir ~/Desktop/fastqc_html/trimmed
 >> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/trimmed_fastq/*.html ~/Desktop/fastqc_html/trimmed
->> $ open ~/Desktop/fastqc_html/trimmed/*.html
 >> ~~~
 >> {: .bash}
->>
+>> 
+>> Then take a look at the html files in your browser.
+>> 
 >> Remember to replace everything between the `@` and `:` in your scp
 >> command with your AWS instance number.
 >>

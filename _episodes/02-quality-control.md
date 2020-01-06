@@ -344,32 +344,24 @@ $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 
 ## Viewing the FastQC results
 
-If we were working on our local computers, we'd be able to display each of these 
-HTML files as a webpage: 
- 
-~~~
-$ open SRR2584863_1_fastqc.html 
-~~~
-{: .bash}
+If we were working on our local computers, we'd be able to look at 
+each of these HTML files by opening them in a web browser.
 
-However, if you try this on our AWS instance, you'll get an error: 
+However, these files are currently sitting on our remote AWS 
+instance, where our local computer can't see them.
+And, since we are only logging into the AWS instance via the 
+command line - it doesn't have any web browser setup to display 
+these files either.
 
-~~~
-Couldn't get a file descriptor referring to the console
-~~~
-{: .output}
-
-This is because the AWS instance we're using doesn't have any web
-browsers installed on it, so the remote computer doesn't know how to 
-open the file. We want to look at the webpage summary reports, so 
-let's transfer them to our local computers (i.e. your laptop).
+So the easiest way to look at these webpage summary reports will be 
+to transfer them to our local computers (i.e. your laptop).
 
 To transfer a file from a remote server to our own machines, we will
 use `scp`, which we learned yesterday in the Shell Genomics lesson. 
 
 First we
 will make a new directory on our computer to store the HTML files
-we're transfering. Let's put it on our desktop for now. Open a new
+we're transferring. Let's put it on our desktop for now. Open a new
 tab in your terminal program (you can use the pull down menu at the
 top of your screen or the Cmd+t keyboard shortcut) and type: 
 
@@ -411,17 +403,11 @@ SRR2589044_2_fastqc.html                      100%  251KB 592.2KB/s   00:00
 ~~~
 {: .output}
 
-Now we can go to our new directory and open the HTML files. 
+Now we can go to our new directory and open the 6 HTML files. 
 
-~~~
-$ cd ~/Desktop/fastqc_html/ 
-$ open *.html 
-~~~
-{: .bash}
-
-Your computer will open each of the HTML files in your default web
-browser. Depending on your settings, this might be as six separate
-tabs in a single window or six separate browser windows.
+Depending on your system, 
+you should be able to select and open them all at once via a right click menu
+in your file browser.
 
 > ## Exercise
 > 
