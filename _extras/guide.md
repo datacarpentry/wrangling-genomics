@@ -6,7 +6,9 @@ title: "Instructor Notes"
 # Instructor Notes for Wrangling Genomics
 
 ## Issues with Macs vs Windows
-This lesson currently uses the `open` command to view FastQC output on its local browser. The `open` command is great for Macs, but there is currently no command listed in the lesson that works for Macs. The `explore` command may be useful here. If a solution is found, it's worth adding to the lesson.
+
+Users are required to open *multiple* html files locally on their own browser and OS - will vary between users! Probably ctrl-click multiple selection within a file browser and right click will work on most systems?
+
 
 ## SAMtools or IGV?
 Some instructors chose to use SAMtools tview for visualization of variant calling results while other prefer than IGV. SAMtools is the default because installation of IGV can take up additional instruction time, and SAMtools tview is sufficient to visualize results. However, episode 04-variant_calling includes instructions for installation and using IGV.
@@ -57,9 +59,6 @@ $ for filename in *.zip
 ~~~
 
 Because the `>` symbol will cause a syntax error when copied. This command will work correctly when typed at the command line! Learners may be surprised that a for loop takes multiple lines on the terminal.
-
-#### open in View FastQC Results
-The command `open SRR2584863_1_fastqc.html` will present an error in the lesson to illustrate that the AWS instance cannot run the open command because it has no web browser. There is text around this command explaining this issue.
 
 #### unzip in Working with FastQC Output
 The command `unzip *.zip` in the Working with FastQC Output section will run successfully for the first file, but fail for subsequent files. This error introduces the need for a for loop.
