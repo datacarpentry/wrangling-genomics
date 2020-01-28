@@ -190,6 +190,22 @@ very poor (`#` = a quality score of 2).
 > {: .solution}
 {: .challenge}
 
+At this point, lets validate that all the relevant tools are installed. If you are using the AWS AMI then these _should_ be preinstalled. 
+
+~~~
+$ fastqc -h
+~~~
+{: .bash}
+
+if fastqc is not installed then you would expect to see an error like
+
+~~~
+$ fastqc -h 
+The program 'fastqc' is currently not installed. You can install it by typing:
+sudo apt-get install fastqc
+~~~
+
+If this happens check with your instructor before trying to install it. 
 
 ## Assessing Quality using FastQC
 In real life, you won't be assessing the quality of your reads by visually inspecting your 
