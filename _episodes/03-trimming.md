@@ -135,13 +135,18 @@ $ cp ~/.miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/Nex
 We will also use a sliding window of size 4 that will remove bases if their
 phred score is below 20 (like in our example above). We will also
 discard any reads that do not have at least 25 bases remaining after
-this trimming step. This command will take a few minutes to run.
+this trimming step. Three additional pieces of code are also added to the end
+of the ILLUMINACLIP step. These three additional numbers (2:40:15) tell
+Trimmimatic how to handle sequence matches to the Nextera adapters. A detailed 
+explanation of how they work is advanced for this particular lesson. For now we
+will use these numbers as a default and recognize they are needed to for Trimmomatic
+to run properly. This command will take a few minutes to run.
 
 ~~~
 $ trimmomatic PE SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz \
                 SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
                 SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
-                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
+                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
 ~~~
 {: .bash}
 
