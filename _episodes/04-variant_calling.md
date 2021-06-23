@@ -10,8 +10,8 @@ objectives:
 - "Use command line tools to perform variant calling."
 keypoints:
 - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
-- "To use most powerful bioinformatic tools, you'll need to use the command line."
-- "There are many different file formats for storing genomics data. It's important to understand what type of information is contained in each file, and how it was derived."
+- "To use most powerful bioinformatic tools, you will need to use the command line."
+- "There are many different file formats for storing genomics data. It is important to understand what type of information is contained in each file, and how it was derived."
 ---
 
 We mentioned before that we are working with files from a long-term evolution study of an *E. coli* population (designated Ara-3). Now that we have looked at our data to make sure that it is high quality, and removed low-quality base calls, we can perform variant calling to see how the population changed over time. We care how this population changed relative to the original population, *E. coli* strain REL606. Therefore, we will align each of our samples to the *E. coli* REL606 reference genome, and see what differences exist in our reads versus the genome.
@@ -120,8 +120,8 @@ Have a look at the [bwa options page](http://bio-bwa.sourceforge.net/bwa.shtml).
 parameters here, your use case might require a change of parameters. *NOTE: Always read the manual page for any tool before using 
 and make sure the options you use are appropriate for your data.*
 
-We're going to start by aligning the reads from just one of the 
-samples in our dataset (`SRR2584866`). Later, we'll be 
+We are going to start by aligning the reads from just one of the 
+samples in our dataset (`SRR2584866`). Later, we will be 
 iterating this whole process on all of our sample files.
 
 ~~~
@@ -187,7 +187,7 @@ $ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584
 ~~~
 {: .bash}
 
-Our files are pretty small, so we won't see this output. If you run the workflow with larger files, you will see something like this:
+Our files are pretty small, so we will not see this output. If you run the workflow with larger files, you will see something like this:
 ~~~
 [bam_sort_core] merging from 2 files...
 ~~~
@@ -224,7 +224,7 @@ This will give you the following statistics about your sorted bam file:
 ## Variant calling
 
 A variant call is a conclusion that there is a nucleotide difference vs. some reference at a given position in an individual genome
-or transcriptome, often referred to as a Single Nucleotide Polymorphism (SNP). The call is usually accompanied by an estimate of 
+or transcriptome, often referred to as a Single Nucleotide Variant (SNV). The call is usually accompanied by an estimate of 
 variant frequency and some measure of confidence. Similar to other steps in this workflow, there are a number of tools available for 
 variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the 
 variants.
@@ -251,18 +251,18 @@ $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf \
 
 We have now generated a file with coverage information for every base.
 
-### Step 2: Detect the single nucleotide polymorphisms (SNPs)
+### Step 2: Detect the single nucleotide variants (SNVs)
 
-Identify SNPs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
+Identify SNVs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
 
 ~~~
 $ bcftools call --ploidy 1 -m -v -o results/bcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf 
 ~~~
 {: .bash}
 
-### Step 3: Filter and report the SNP variants in variant calling format (VCF)
+### Step 3: Filter and report the SNV variants in variant calling format (VCF)
 
-Filter the SNPs for the final output in VCF format, using `vcfutils.pl`:
+Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
 $ vcfutils.pl varFilter results/bcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
@@ -370,7 +370,7 @@ to learn more about the VCF file format.
 
 > ## Exercise
 > 
-> Use the `grep` and `wc` commands you've learned to assess how many variants are in the vcf file. 
+> Use the `grep` and `wc` commands you have learned to assess how many variants are in the vcf file. 
 >
 >> ## Solution
 >> 
@@ -448,7 +448,7 @@ AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTG
 The first line of output shows the genome coordinates in our reference genome. The second line shows the reference
 genome sequence. The third line shows the consensus sequence determined from the sequence reads. A `.` indicates
 a match to the reference sequence, so we can see that the consensus from our sample matches the reference in most
-locations. That is good! If that wasn't the case, we should probably reconsider our choice of reference.
+locations. That is good! If that was not the case, we should probably reconsider our choice of reference.
 
 Below the horizontal line, we can see all of the reads in our sample aligned with the reference genome. Only 
 positions where the called base differs from the reference are shown. You can use the arrow keys on your keyboard
@@ -479,9 +479,9 @@ this box, type the name of the "chromosome" followed by a colon and the position
 [IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`. 
-Open a new tab in your terminal window and create a new folder. We'll put this folder on our Desktop for 
+Open a new tab in your terminal window and create a new folder. We will put this folder on our Desktop for 
 demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and 
-instead organize files within a directory structure like we've been using in our `dc_workshop` directory.
+instead organize files within a directory structure like we have been using in our `dc_workshop` directory.
 
 ~~~
 $ mkdir ~/Desktop/files_for_igv
@@ -503,7 +503,7 @@ $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vc
 
 You will need to type the password for your AWS instance each time you call `scp`. 
 
-Next, we need to open the IGV software. If you haven't done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
+Next, we need to open the IGV software. If you have not done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
 to unzip it, and then drag the program into your Applications folder. 
 
 1. Open IGV.
@@ -525,26 +525,26 @@ Zoom in to inspect variants you see in your filtered VCF file to become more fam
 corresponds to alignment information at those loci.
 Use [this website](http://software.broadinstitute.org/software/igv/AlignmentData) and the links therein to understand how IGV colors the alignments.
 
-Now that we've run through our workflow for a single sample, we want to repeat this workflow for our other five
-samples. However, we don't want to type each of these individual steps again five more times. That would be very
+Now that we have run through our workflow for a single sample, we want to repeat this workflow for our other five
+samples. However, we do not want to type each of these individual steps again five more times. That would be very
 time consuming and error-prone, and would become impossible as we gathered more and more samples. Luckily, we
 already know the tools we need to use to automate this workflow and run it on as many files as we want using a
-single line of code. Those tools are: wildcards, for loops, and bash scripts. We'll use all three in the next 
+single line of code. Those tools are: wildcards, for loops, and bash scripts. We will use all three in the next 
 lesson. 
 
-> ## Installing Software
+> ## Installing software
 > 
-> It's worth noting that all of the software we are using for
+> It is worth noting that all of the software we are using for
 > this workshop has been pre-installed on our remote computer. 
 > This saves us a lot of time - installing software can be a 
 > time-consuming and frustrating task - however, this does mean that
-> you won't be able to walk out the door and start doing these
-> analyses on your own computer. You'll need to install 
+> you will not be able to walk out the door and start doing these
+> analyses on your own computer. You will need to install 
 > the software first. Look at the [setup instructions](http://www.datacarpentry.org/wrangling-genomics/setup.html) for more information 
 > on installing these software packages.
 {: .callout}
 
-> ## BWA Alignment options
+> ## BWA alignment options
 > BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence 
 > reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such 
 > as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it 
