@@ -283,7 +283,7 @@ for fq1 in ~/dc_workshop/data/trimmed_fastq_small/*_1.trim.sub.fastq
     bam=~/dc_workshop/results/bam/${base}.aligned.bam
     sorted_bam=~/dc_workshop/results/bam/${base}.aligned.sorted.bam
     raw_bcf=~/dc_workshop/results/bcf/${base}_raw.bcf
-    variants=~/dc_workshop/results/bcf/${base}_variants.vcf
+    variants=~/dc_workshop/results/vcf/${base}_variants.vcf
     final_variants=~/dc_workshop/results/vcf/${base}_final_variants.vcf 
 
     bwa mem $genome $fq1 $fq2 > $sam
