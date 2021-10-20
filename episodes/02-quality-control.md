@@ -37,7 +37,7 @@ makes this feasible. Standards ensure that data is stored in a way that is gener
 within the community. The tools that are used to analyze data at different stages of the workflow are therefore
 built under the assumption that the data will be provided in a specific format.
 
-# Starting with Data
+# Starting with data
 
 Often times, the first step in a bioinformatic workflow is getting the data you want to work with onto a computer where you can work with it. If you have outsourced sequencing of your data, the sequencing center will usually provide you with a link that you can use to download your data. Today we will be working with publicly available sequencing data.
 
@@ -47,7 +47,9 @@ The data are paired-end, so we will download two files for each sample. We will 
 
 To download the data, run the commands below.
 
-Here we are using the `-p` option for `mkdir`. This option allows `mkdir` to create the new directory, even if one of the parent directories doesn't already exist. It also supresses errors if the directory already exists, without overwriting that directory.
+
+Here we are using the `-p` option for `mkdir`. This option allows `mkdir` to create the new directory, even if one of the parent directories does not already exist. It also supresses errors if the directory already exists, without overwriting that directory. 
+
 
 It will take about 15 minutes to download the files.
 ~~~
@@ -85,7 +87,7 @@ $ gunzip SRR2584863_1.fastq.gz
 ~~~
 {: .bash}
 
-# Quality Control
+# Quality control
 
 We will now assess the quality of the sequence reads contained in our fastq files.
 
@@ -234,7 +236,7 @@ DESCRIPTION
                     flag set in the header will be excluded from the analysis.
                     Files must have the same names given to them by casava
                     (including being gzipped and ending with .gz) otherwise they
-                    won't be grouped together correctly.
+                    will not be grouped together correctly.
 
     --nano          Files come from naopore sequences and are in fast5 format. In
                     this mode you can pass in directories to process and the program
@@ -319,11 +321,13 @@ sudo apt-get install fastqc
 
 If this happens check with your instructor before trying to install it.
 
-## Assessing Quality using FastQC
-In real life, you won't be assessing the quality of your reads by visually inspecting your
-FASTQ files. Rather, you'll be using a software program to assess read quality and
-filter out poor quality reads. We'll first use a program called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to visualize the quality of our reads.
-Later in our workflow, we'll use another program to filter out poor quality reads.
+
+## Assessing quality using FastQC
+In real life, you will not be assessing the quality of your reads by visually inspecting your 
+FASTQ files. Rather, you will be using a software program to assess read quality and 
+filter out poor quality reads. We will first use a program called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to visualize the quality of our reads. 
+Later in our workflow, we will use another program to filter out poor quality reads. 
+
 
 FastQC has a number of features which can give you a quick impression of any problems your
 data may have, so you can take these issues into consideration before moving forward with your
@@ -354,7 +358,7 @@ Here, we see positions within the read in which the boxes span a much wider rang
 
 ## Running FastQC
 
-We will now assess the quality of the reads that we downloaded. First, make sure you're still in the `untrimmed_fastq` directory
+We will now assess the quality of the reads that we downloaded. First, make sure you are still in the `untrimmed_fastq` directory
 
 ~~~
 $ cd ~/dc_workshop/data/untrimmed_fastq/
@@ -446,8 +450,9 @@ SRR2584863_2.fastq.gz     SRR2584866_2.fastq.gz     SRR2589044_2.fastq.gz
 {: .output}
 
 For each input FASTQ file, FastQC has created a `.zip` file and a
-`.html` file. The `.zip` file extension indicates that this is
-actually a compressed set of multiple output files. We'll be working
+
+`.html` file. The `.zip` file extension indicates that this is 
+actually a compressed set of multiple output files. We will be working
 with these output files soon. The `.html` file is a stable webpage
 displaying the summary report for each of our samples.
 
@@ -472,13 +477,14 @@ $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
 
 ## Viewing the FastQC results
 
-If we were working on our local computers, we'd be able to look at
+
+If we were working on our local computers, we would be able to look at 
 each of these HTML files by opening them in a web browser.
 
-However, these files are currently sitting on our remote AWS
-instance, where our local computer can't see them.
-And, since we are only logging into the AWS instance via the
-command line - it doesn't have any web browser setup to display
+However, these files are currently sitting on our remote AWS 
+instance, where our local computer can not see them.
+And, since we are only logging into the AWS instance via the 
+command line - it does not have any web browser setup to display 
 these files either.
 
 So the easiest way to look at these webpage summary reports will be
@@ -489,7 +495,7 @@ use `scp`, which we learned yesterday in the Shell Genomics lesson.
 
 First we
 will make a new directory on our computer to store the HTML files
-we're transferring. Let's put it on our desktop for now. Open a new
+we are transferring. Let's put it on our desktop for now. Open a new
 tab in your terminal program (you can use the pull down menu at the
 top of your screen or the Cmd+t keyboard shortcut) and type:
 
@@ -526,7 +532,7 @@ the address for your remote computer. Make sure you replace everything
 after `dcuser@` with your instance number (the one you used to log in).
 
 The second part starts with a `:` and then gives the absolute path
-of the files you want to transfer from your remote computer. Don't
+of the files you want to transfer from your remote computer. Do not
 forget the `:`. We used a wildcard (`*.html`) to indicate that we want all of
 the HTML files.
 
@@ -565,7 +571,8 @@ in your file browser.
 {: .challenge}
 
 ## Decoding the other FastQC outputs
-We've now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we haven't talked about! Below we have provided a brief overview of interpretations for each of these plots. For more information, please see the FastQC documentation [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/)
+We have now looked at quite a few "Per base sequence quality" FastQC graphs, but there are nine other graphs that we have not talked about! Below we have provided a brief overview of interpretations for each of these plots. For more information, please see the FastQC documentation [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) 
+
 
 + [**Per tile sequence quality**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/12%20Per%20Tile%20Sequence%20Quality.html): the machines that perform sequencing are divided into tiles. This plot displays patterns in base quality along these tiles. Consistently low scores are often found around the edges, but hot spots can also occur in the middle if an air bubble was introduced at some point during the run.
 + [**Per sequence quality scores**](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/3%20Per%20Sequence%20Quality%20Scores.html): a density plot of quality for all reads at all positions. This plot shows what quality scores are most common.
@@ -580,11 +587,11 @@ We've now looked at quite a few "Per base sequence quality" FastQC graphs, but t
 
 ## Working with the FastQC text output
 
-Now that we've looked at our HTML reports to get a feel for the data,
+Now that we have looked at our HTML reports to get a feel for the data,
 let's look more closely at the other output files. Go back to the tab
 in your terminal program that is connected to your AWS instance
-(the tab label will start with `dcuser@ip`) and make sure you're in
-our results subdirectory.
+(the tab label will start with `dcuser@ip`) and make sure you are in
+our results subdirectory.   
 
 ~~~
 $ cd ~/dc_workshop/results/fastqc_untrimmed_reads/
@@ -621,15 +628,15 @@ caution: filename not matched:  SRR2589044_2_fastqc.zip
 ~~~
 {: .output}
 
-This didn't work. We unzipped the first file and then got a warning
-message for each of the other `.zip` files. This is because `unzip`
-expects to get only one zip file as input. We could go through and
-unzip each file one at a time, but this is very time consuming and
+This did not work. We unzipped the first file and then got a warning
+message for each of the other `.zip` files. This is because `unzip` 
+expects to get only one zip file as input. We could go through and 
+unzip each file one at a time, but this is very time consuming and 
 error-prone. Someday you may have 500 files to unzip!
 
 A more efficient way is to use a `for` loop like we learned in the Shell Genomics lesson to iterate through all of
-our `.zip` files. Let's see what that looks like and then we'll
-discuss what we're doing with each line of our loop.
+our `.zip` files. Let's see what that looks like and then we will 
+discuss what we are doing with each line of our loop.
 
 ~~~
 $ for filename in *.zip
@@ -680,8 +687,10 @@ Archive:  SRR2589044_2_fastqc.zip
 The `unzip` program is decompressing the `.zip` files and creating
 a new directory (with subdirectories) for each of our samples, to
 store all of the different output that is produced by FastQC. There
-are a lot of files here. The one we're going to focus on is the
-`summary.txt` file.
+
+are a lot of files here. The one we are going to focus on is the 
+`summary.txt` file. 
+
 
 If you list the files in our directory now you will see:
 
@@ -696,8 +705,8 @@ SRR2584863_2_fastqc.zip   SRR2584866_2_fastqc.zip   SRR2589044_2_fastqc.zip
 {:. output}
 
 The `.html` files and the uncompressed `.zip` files are still present,
-but now we also have a new directory for each of our samples. We can
-see for sure that it's a directory if we use the `-F` flag for `ls`.
+but now we also have a new directory for each of our samples. We can 
+see for sure that it is a directory if we use the `-F` flag for `ls`. 
 
 ~~~
 $ ls -F
@@ -751,11 +760,12 @@ WARN    Adapter Content SRR2584863_1.fastq
 The summary file gives us a list of tests that FastQC ran, and tells
 us whether this sample passed, failed, or is borderline (`WARN`). Remember, to quit from `less` you must type `q`.
 
-## Documenting Our Work
+## Documenting our work
 
 We can make a record of the results we obtained for all our samples
-by concatenating all of our `summary.txt` files into a single file
-using the `cat` command. We'll call this `fastqc_summaries.txt` and move
+
+by concatenating all of our `summary.txt` files into a single file 
+using the `cat` command. We will call this `fastqc_summaries.txt` and move
 it to `~/dc_workshop/docs`.
 
 ~~~
@@ -798,24 +808,26 @@ $ cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 {: .challenge}
 
 
-# Other notes  -- Optional
 
-> ## Quality Encodings Vary
+# Other notes  -- optional 
+
+
+> ## Quality encodings vary
 >
-> Although we've used a particular quality encoding system to demonstrate interpretation of
-> read quality, different sequencing machines use different encoding systems. This means that,
-> depending on which sequencer you use to generate your data, a `#` may not be an indicator of
+> Although we have used a particular quality encoding system to demonstrate interpretation of 
+> read quality, different sequencing machines use different encoding systems. This means that, 
+> depending on which sequencer you use to generate your data, a `#` may not be an indicator of 
 > a poor quality base call.
 >
 > This mainly relates to older Solexa/Illumina data,
-> but it's essential that you know which sequencing platform was
+> but it is essential that you know which sequencing platform was
 > used to generate your data, so that you can tell your quality control program which encoding
 > to use. If you choose the wrong encoding, you run the risk of throwing away good reads or
 > (even worse) not throwing away bad reads!
 {: .callout}
 
 
-> ## Same Symbols, Different Meanings
+> ## Same symbols, different meanings
 >
 > Here we see `>` being used as a shell prompt, whereas `>` is also
 > used to redirect output.

@@ -3,7 +3,7 @@ title: "Trimming and Filtering"
 teaching: 30
 exercises: 25
 questions:
-- "How can I get rid of sequence data that doesn't meet my quality standards?"
+- "How can I get rid of sequence data that does not meet my quality standards?"
 objectives:
 - "Clean FASTQ reads using Trimmomatic."
 - "Select and set multiple options for command-line bioinformatic tools."
@@ -13,20 +13,20 @@ keypoints:
 - "Data cleaning is an essential step in a genomics workflow."
 ---
 
-# Cleaning Reads
+# Cleaning reads
 
 In the previous episode, we took a high-level look at the quality
 of each of our samples using FastQC. We visualized per-base quality
 graphs showing the distribution of read quality at each base across
 all reads in a sample and extracted information about which samples
-fail which quality checks. Some of our samples failed quite a few quality metrics used by FastQC. This doesn't mean,
-though, that our samples should be thrown out! It's very common to have some quality metrics fail, and this may or may not be a problem for your downstream application. For our variant calling workflow, we will be removing some of the low quality sequences to reduce our false positive rate due to sequencing error.
+fail which quality checks. Some of our samples failed quite a few quality metrics used by FastQC. This does not mean,
+though, that our samples should be thrown out! It is very common to have some quality metrics fail, and this may or may not be a problem for your downstream application. For our variant calling workflow, we will be removing some of the low quality sequences to reduce our false positive rate due to sequencing error.
 
 We will use a program called
 [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) to
 filter poor quality reads and trim poor quality bases from our samples.
 
-## Trimmomatic Options
+## Trimmomatic options
 
 Trimmomatic has a variety of options to trim your reads. If we run the following command, we can see some of our options.
 
@@ -89,7 +89,7 @@ $ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
 ~~~
 {: .bash}
 
-In this example, we've told Trimmomatic:
+In this example, we have told Trimmomatic:
 
 | code   | meaning |
 | ------- | ---------- |
@@ -194,7 +194,7 @@ SRR2589044_1.trim.fastq.gz  SRR2589044_2.fastq.gz         SRR2589044_2un.trim.fa
 {: .output}
 
 The output files are also FASTQ files. It should be smaller than our
-input file, because we've removed reads. We can confirm this:
+input file, because we have removed reads. We can confirm this:
 
 ~~~
 $ ls SRR2589044* -l -h
@@ -212,7 +212,7 @@ $ ls SRR2589044* -l -h
 {: .output}
 
 
-We've just successfully run Trimmomatic on one of our FASTQ files!
+We have just successfully run Trimmomatic on one of our FASTQ files!
 However, there is some bad news. Trimmomatic can only operate on
 one sample at a time and we have more than one sample. The good news
 is that we can use a `for` loop to iterate through our sample files
@@ -239,8 +239,8 @@ $ for infile in *_1.fastq.gz
 
 
 Go ahead and run the for loop. It should take a few minutes for
-Trimmomatic to run for each of our six input files. Once it's done
-running, take a look at your directory contents. You'll notice that even though we ran Trimmomatic on file `SRR2589044` before running the for loop, there is only one set of files for it. Because we matched the ending `_1.fastq.gz`, we re-ran Trimmomatic on this file, overwriting our first results. That's ok, but it's good to be aware that it happened.
+Trimmomatic to run for each of our six input files. Once it is done
+running, take a look at your directory contents. You will notice that even though we ran Trimmomatic on file `SRR2589044` before running the for loop, there is only one set of files for it. Because we matched the ending `_1.fastq.gz`, we re-ran Trimmomatic on this file, overwriting our first results. That is ok, but it is good to be aware that it happened.
 
 ~~~
 $ ls
@@ -279,7 +279,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz
 > {: .solution}
 {: .challenge}
 
-We've now completed the trimming and filtering steps of our quality
+We have now completed the trimming and filtering steps of our quality
 control process! Before we move on, let's move our trimmed FASTQ files
 to a new subdirectory within our `data/` directory.
 
@@ -300,7 +300,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 ~~~
 {: .output}
 
-> ## Bonus Exercise (Advanced)
+> ## Bonus exercise (advanced)
 >
 > Now that our samples have gone through quality control, they should perform
 > better on the quality tests run by FastQC. Go ahead and re-run
