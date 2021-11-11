@@ -265,7 +265,7 @@ $ bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/
 Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
 
 ~~~
-$ vcfutils.pl varFilter results/bcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
+$ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
 ~~~
 {: .bash}
 
@@ -360,10 +360,10 @@ For our file, the metrics presented are GT:PL:GQ.
 
 | metric | definition | 
 | ------- | ---------- |
-| GT | the genotype of this sample which for a diploid genome is encoded with a 0 for the REF allele, 1 for the first ALT allele, 2 for the second and so on. So 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc. |
+| AD, DP | the depth per allele by sample and coverage |
+| GT | the genotype for the sample at this loci. For a diploid organism, the GT field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc. A 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. |
 | PL | the likelihoods of the given genotypes |
 | GQ | the Phred-scaled confidence for the genotype | 
-| AD, DP | the depth per allele by sample and coverage |
 
 The Broad Institute's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=1268) is an excellent place
 to learn more about the VCF file format.
