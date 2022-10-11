@@ -3,12 +3,13 @@ layout: lesson
 root: .
 ---
 
-A lot of genomics analysis is done using command-line tools for three reasons:   
+A lot of genomics analysis is done using command-line tools for four reasons:   
 1) you will often be working with a large number of files, and working through the command-line rather than 
 through a graphical user interface (GUI) allows you to automate repetitive tasks,    
-2) you will often need more compute power than is available on your personal computer, and 
+2) you will often need more compute power and disk space than is available on your personal computer, and 
 connecting to and interacting with remote computers requires a command-line interface, and    
-3) you will often need to customize your analyses, and command-line tools often enable more 
+3) you will often be using command-line tools published in peer-reviewed literature, and these are run on the command-line, and
+4) you will often need to customize your analyses, and command-line tools often enable more 
 customization than the corresponding GUI tools (if in fact a GUI tool even exists).   
 
 In a [previous lesson](http://www.datacarpentry.org/shell-genomics/), you learned how to use the bash shell to interact with your computer through a command line interface. In this 
