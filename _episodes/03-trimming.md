@@ -82,7 +82,7 @@ and options, see [the Trimmomatic manual](http://www.usadellab.org/cms/uploads/s
 However, a complete command for Trimmomatic will look something like the command below. This command is an example and will not work, as we do not have the files it refers to:
 
 ~~~
-$ trimmomatic PE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
+$ trimmomaticPE -threads 4 SRR_1056_1.fastq SRR_1056_2.fastq  \
               SRR_1056_1.trimmed.fastq SRR_1056_1un.trimmed.fastq \
               SRR_1056_2.trimmed.fastq SRR_1056_2un.trimmed.fastq \
               ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20
@@ -143,7 +143,7 @@ will use these numbers as a default and recognize they are needed to for Trimmom
 to run properly. This command will take a few minutes to run.
 
 ~~~
-$ trimmomatic PE SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz \
+$ trimmomaticPE SRR2589044_1.fastq.gz SRR2589044_2.fastq.gz \
                 SRR2589044_1.trim.fastq.gz SRR2589044_1un.trim.fastq.gz \
                 SRR2589044_2.trim.fastq.gz SRR2589044_2un.trim.fastq.gz \
                 SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15
@@ -234,7 +234,7 @@ gzip SRR2584863_1.fastq
 $ for infile in *_1.fastq.gz
 > do
 >   base=$(basename ${infile} _1.fastq.gz)
->   trimmomatic PE ${infile} ${base}_2.fastq.gz \
+>   trimmomaticPE ${infile} ${base}_2.fastq.gz \
 >                ${base}_1.trim.fastq.gz ${base}_1un.trim.fastq.gz \
 >                ${base}_2.trim.fastq.gz ${base}_2un.trim.fastq.gz \
 >                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 
