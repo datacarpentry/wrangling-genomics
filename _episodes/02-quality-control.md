@@ -86,7 +86,7 @@ We will now assess the quality of the sequence reads contained in our fastq file
 
 ## Details on the FASTQ format
 
-Although it looks complicated (and it is), we can understand the [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. 
+Although it looks complicated (and it is), we can understand the [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. 
 Some rules about the format include:
 
 |Line|Description|
