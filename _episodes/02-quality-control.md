@@ -43,7 +43,7 @@ Often times, the first step in a bioinformatic workflow is getting the data you 
 
 We are studying a population of *Escherichia coli* (designated Ara-3), which were propagated for more than 50,000 generations in a glucose-limited minimal medium. We will be working with three samples from this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how with our variant calling workflow.
 
-The data are paired-end, so we will download two files for each sample. We will use the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) to get our data. The ENA "provides a comprehensive record of the world's nucleotide sequencing information, covering raw sequencing data, sequence assembly information and functional annotation." The ENA also provides sequencing data in the fastq format, an important format for sequencing reads that we will be learning about today.
+The data are paired-end, so we will download two files for each sample. We will use the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) (ENA) to get our data. The ENA "provides a comprehensive record of the world's nucleotide sequencing information, covering raw sequencing data, sequence assembly information and functional annotation." The ENA also provides sequencing data in the fastq format, an important format for sequencing reads that we will be learning about today.
 
 To download the data, run the commands below.
 
@@ -96,7 +96,7 @@ We will now assess the quality of the sequence reads contained in our fastq file
 
 Although it looks complicated (and it is), we can understand the
 [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format with a little decoding. Some rules about the format
-include...
+include:
 
 |Line|Description|
 |----|-----------|
@@ -105,7 +105,7 @@ include...
 |3|Always begins with a '+' and sometimes the same info in line 1|
 |4|Has a string of characters which represent the quality scores; must have same number of characters as line 2|
 
-We can view the first complete read in one of the files our dataset by using `head` to look at
+We can view the first complete read in one of the files in our dataset by using `head` to look at
 the first four lines.
 
 ~~~
@@ -121,36 +121,26 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 ~~~
 {: .output}
 
-Line 4 shows the quality for each nucleotide in the read. Quality is interpreted as the
-probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call
-accuracy (e.g. 90%). To make it possible to line up each individual nucleotide with its quality
-score, the numerical score is converted into a code where each individual character
-represents the numerical quality score for an individual nucleotide. For example, in the line
-above, the quality score line is:
+Line 4 shows the [Pred quality score](https://www.illumina.com/documents/products/technotes/technote_Q-Scores.pdf) (Q score) for each nucleotide in the read. This score indicates the probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call accuracy (e.g. 90%). To make it possible to line up each individual nucleotide with its quality score, the numerical score is converted into a code, where each individual character represents the numerical Q score for an individual nucleotide. For example, in the line above, the Q score line is:
 
 ~~~
 CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBDDACCCCAA@@CA@C>C3>@5(8&>C:9?8+89<4(:83825C(:A#########################
 ~~~
 {: .output}
 
-The numerical value assigned to each of these characters depends on the
-sequencing platform that generated the reads. The sequencing machine used to generate our data
-uses the standard Sanger quality PHRED score encoding, using Illumina version 1.8 onwards.
-Each character is assigned a quality score between 0 and 41 as shown in
-the chart below.
+The numerical value assigned to each of these characters depends on the sequencing platform that generated the reads. The sequencing machine used to generate our data uses the standard [Sanger](https://sapac.illumina.com/science/technology/next-generation-sequencing/ngs-vs-sanger-sequencing.html) quality PHRED score encoding, using Illumina version 1.8 onwards.
+Each character is assigned a Q score between 0 and 41 as shown in the chart below.
 
 ~~~
 Quality encoding: !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ
                    |         |         |         |         |
-Quality score:    01........11........21........31........41
+         Q score: 01........11........21........31........41
 ~~~
 {: .output}
 
-Each quality score represents the probability that the corresponding nucleotide call is
-incorrect. This quality score is logarithmically based, so a quality score of 10 reflects a
-base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%.
-These probability values are the results from the base calling algorithm and depend on how
-much signal was captured for the base incorporation.
+Each Q score represents the probability that the corresponding nucleotide call is incorrect. This Q score is logarithmically related to the
+base calling error probabilities, and therefore a Q score of 10 (Q10) reflects a base call accuracy of 90% (or an incorrect base call probability of 1 in 10), but a quality score of 20 (Q20) reflects a base call accuracy of 99% (1/100). These probability values are the results from the base calling algorithm and depend on how much signal was captured for the base incorporation. Sanger sequencing systems generally produce base call accuracy of
+~99.4%, or ~Q20. 
 
 Looking back at our read:
 
@@ -162,13 +152,11 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 ~~~
 {: .output}
 
-we can now see that there is a range of quality scores, but that the end of the sequence is
-very poor (`#` = a quality score of 2).
+We can now see that there is a range of quality scores, but that the end of the sequence is very poor (`#` = Q2).
 
 > ## Exercise
 >
-> What is the last read in the `SRR2584863_1.fastq ` file? How confident
-> are you in this read?
+> What is the last read in the `SRR2584863_1.fastq ` file? How confident are you in this read?
 >
 >> ## Solution
 >> ~~~
@@ -192,7 +180,7 @@ very poor (`#` = a quality score of 2).
 > {: .solution}
 {: .challenge}
 
-At this point, lets validate that all the relevant tools are installed. If you are using the AWS AMI then these _should_ be preinstalled.
+At this point, let's validate that all the relevant tools are installed. If you are using the AWS AMI then fastqc _should_ be preinstalled.
 
 ~~~
 $ fastqc -h
@@ -311,7 +299,7 @@ BUGS
 ~~~
 {: .bash}
 
-if fastqc is not installed then you would expect to see an error like
+If fastqc is _not_ pre-installed, you would expect to see an error like this:
 
 ~~~
 $ fastqc -h
@@ -319,46 +307,30 @@ The program 'fastqc' is currently not installed. You can install it by typing:
 sudo apt-get install fastqc
 ~~~
 
-If this happens check with your instructor before trying to install it.
+If this happens, check with your instructor **before** trying to install it.
 
 
 ## Assessing quality using FastQC
-In real life, you will not be assessing the quality of your reads by visually inspecting your 
-FASTQ files. Rather, you will be using a software program to assess read quality and 
-filter out poor quality reads. We will first use a program called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to visualize the quality of our reads. 
+In real life, you will not be assessing the quality of your reads by visually inspecting your FASTQ files. Instead, you will be using a software program to assess read quality and filter out poor quality reads. We will first use a program called [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to visualize the quality of our reads.
 Later in our workflow, we will use another program to filter out poor quality reads. 
 
-
-FastQC has a number of features which can give you a quick impression of any problems your
-data may have, so you can take these issues into consideration before moving forward with your
-analyses. Rather than looking at quality scores for each individual read, FastQC looks at
-quality collectively across all reads within a sample. The image below shows one FastQC-generated plot that indicates
-a very high quality sample:
+FastQC has a number of features that can give you a quick impression of any problems your data may have, so you can take these issues into consideration before moving forward with your analyses. Rather than looking at Q scores for each individual read, FastQC looks at quality collectively across all reads within a sample. The image below shows a FastQC-generated plot that indicates a very high-quality sample:
 
 ![good_quality](../img/good_quality1.8.png)
 
-The x-axis displays the base position in the read, and the y-axis shows quality scores. In this
-example, the sample contains reads that are 40 bp long. This is much shorter than the reads we
-are working with in our workflow. For each position, there is a box-and-whisker plot showing
-the distribution of quality scores for all reads at that position. The horizontal red line
-indicates the median quality score and the yellow box shows the 1st to
-3rd quartile range. This means that 50% of reads have a quality score that falls within the
-range of the yellow box at that position. The whiskers show the absolute range, which covers
-the lowest (0th quartile) to highest (4th quartile) values.
+The x-axis displays the base position in the read, and the y-axis shows Q scores. In this example, the sample contains reads that are 40 bp long, which is much shorter than the reads we are working with in our workflow. For each position, there is a box-and-whisker plot showing the distribution of Q scores for all reads at that position. The horizontal red line indicates the median Q score and the yellow box shows the 1st to 3rd quartile range. This means that 50% of reads have a Q score that falls within the range of the yellow box at that position. The whiskers show the absolute range, which covers the lowest (0th quartile) to highest (4th quartile) Q values.
 
-For each position in this sample, the quality values do not drop much lower than 32. This
-is a high quality score. The plot background is also color-coded to identify good (green),
-acceptable (yellow), and bad (red) quality scores.
+For each position in this sample, the quality values do not drop much lower than 32. This is a high Q score. The plot background is also color-coded to identify good (green), acceptable (yellow), and bad (red) Q scores.
 
 Now let's take a look at a quality plot on the other end of the spectrum.
 
 ![bad_quality](../img/bad_quality1.8.png)
 
-Here, we see positions within the read in which the boxes span a much wider range. Also, quality scores drop quite low into the "bad" range, particularly on the tail end of the reads. The FastQC tool produces several other diagnostic plots to assess sample quality, in addition to the one plotted above.
+Here, we see positions within the read in which the boxes span a much wider range. Also, Q scores often drop quite low into the "bad" range, particularly on the tail end of the reads. The FastQC tool produces several other useful diagnostic plots to assess sample quality, in addition to the one plotted above.
 
 ## Running FastQC
 
-We will now assess the quality of the reads that we downloaded. First, make sure you are still in the `untrimmed_fastq` directory
+We will now assess the quality of the reads that we downloaded. First, make sure you are still in the `untrimmed_fastq` directory:
 
 ~~~
 $ cd ~/dc_workshop/data/untrimmed_fastq/
@@ -368,8 +340,7 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 > ## Exercise
 >
 >  How big are the files?
-> (Hint: Look at the options for the `ls` command to see how to show
-> file sizes.)
+> (Hint: Look at the options for the `ls` command to see how to show file sizes)
 >
 >> ## Solution
 >>
@@ -390,9 +361,9 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 >>
 >> There are six FASTQ files ranging from 124M (124MB) to 545M.
 
->> Note: it is good practice to check file sizes when producing outputs, especially after steps with long running times (where there is room for workflow crashes that produce empty output files!). **Pending link**
+>> **Note:** it is good practice to check file sizes regularly. At the beginning of your workflow to confirm that your data has been downloaded correctly, and throughout the different stages of your analyses when producing outputs, especially after steps with long running times (where there is room for workflow crashes that produce empty output files!).
 
->> Interpretation: a size range of 124M - 545M is commonly observed for this high-throughput sequencing data. Approximate sizes of sequencing run output folders vary according to the sequencing platform and provider (see some examples for [Illumina](https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html), a leading provider of sequencing services), as well as the genome source (compare genome assemblies from different species with this [Genome Size Checker](https://www.ncbi.nlm.nih.gov/assembly/help/genome-size-check/)).
+>> **Interpretation:** a size range of 124M - 545M is commonly observed in low-throughput sequencing data like Sanger. Approximate sizes of sequencing run output folders vary according to the sequencing platform and are much bigger for Next Generation Sequencing (NGS) technologies (in the order of GB for [Illumina output folders](https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html)). The genome source also needs to be accounted for, as genome assemblies vary across different species (you can compare some with this [Genome Size Checker](https://www.ncbi.nlm.nih.gov/assembly/help/genome-size-check/)).
 
 >> {: .solution}
 {: .challenge}
