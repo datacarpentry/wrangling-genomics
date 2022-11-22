@@ -389,7 +389,9 @@ $ cd ~/dc_workshop/data/untrimmed_fastq/
 >> {: .output}
 >>
 >> There are six FASTQ files ranging from 124M (124MB) to 545M.
->> Note: why should file sizes be checked?
+
+>> Note: it is good practice to check file sizes when producing outputs, especially after steps with long running times (where there is room for workflow crashes that produce empty output files!). **Pending link**
+
 >> Interpretation: a size range of 124M - 545M is commonly observed for this high-throughput sequencing data. Approximate sizes of sequencing run output folders vary according to the sequencing platform and provider (see some examples for [Illumina](https://sapac.support.illumina.com/bulletins/2018/01/approximate-sizes-of-sequencing-run-output-folders.html), a leading provider of sequencing services), as well as the genome source (compare genome assemblies from different species with this [Genome Size Checker](https://www.ncbi.nlm.nih.gov/assembly/help/genome-size-check/)).
 
 >> {: .solution}
