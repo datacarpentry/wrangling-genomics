@@ -111,14 +111,14 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 ~~~
 {: .output}
 
-Line 4 shows the [Pred quality score](https://www.illumina.com/documents/products/technotes/technote_Q-Scores.pdf) (Q score) for each nucleotide in the read. This score indicates the probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call accuracy (e.g. 90%). To make it possible to line up each individual nucleotide with its quality score, the numerical score is converted into a code, where each individual character represents the numerical Q score for an individual nucleotide. For example, in the line above, the Q score line is:
+Line 4 shows the [Phred quality score](https://www.illumina.com/documents/products/technotes/technote_Q-Scores.pdf) (Q score) for each nucleotide in the read. This score indicates the probability of an incorrect base call (e.g. 1 in 10) or, equivalently, the base call accuracy (e.g. 90%). To make it possible to line up each individual nucleotide with its quality score, the numerical score is converted into a code, where each individual character represents the numerical Q score for an individual nucleotide. For example, in the line above, the Q score line is:
 
 ~~~
 CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBDDACCCCAA@@CA@C>C3>@5(8&>C:9?8+89<4(:83825C(:A#########################
 ~~~
 {: .output}
 
-The numerical value assigned to each of these characters depends on the sequencing platform that generated the reads. The sequencing machine used to generate our data uses the standard [Sanger](https://sapac.illumina.com/science/technology/next-generation-sequencing/ngs-vs-sanger-sequencing.html) quality PHRED score encoding, using Illumina version 1.8 onwards.
+The numerical value assigned to each of these characters depends on the sequencing platform that generated the reads. The sequencing machine used to generate our data uses the standard [Sanger](https://sapac.illumina.com/science/technology/next-generation-sequencing/ngs-vs-sanger-sequencing.html) quality Phred score encoding, using Illumina version 1.8 onwards.
 Each character is assigned a Q score between 0 and 41 as shown in the chart below.
 
 ~~~
