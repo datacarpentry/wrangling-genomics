@@ -177,7 +177,6 @@ $ samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR258486
 ~~~
 {: .output}
 
-
 ### Sort BAM file by coordinates
 
 Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
@@ -551,4 +550,40 @@ lesson.
 > is faster and more accurate. 
 {: .callout}
 
+
+### Workflow optimization
+
+#### Reducing unnecessary disk input-output
+
+In our workflow, we aligned the reads using `bwa mem` to create a `.sam` file, and we used `samtools view` to compress
+this `.sam` into a `.bam` file. 
+
+~~~
+$ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
+$ samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
+~~~
+{: .bash}
+
+However, writing a `.sam` file to disk can be slow, and it is also unnecessary, because we no longer need the `.sam` file 
+after we created the `.bam` file.
+When we work with larger sequence data files, we would want to avoid writing large uncompressed files to disks in order to
+improve computational efficiency. Accordingly, we can avoid writing the `.sam` file to disk by using a pipe `|` to connect
+the above two commands:
+
+~~~
+$ bwa mem data/ref_genome/ecoli_rel606.fasta \
+data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq \
+data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq |
+samtools view -S -b - > results/bam/SRR2584866.aligned.bam
+~~~
+{: .bash}
+
+Here, the `\` character allows us to continue a command on the next line. We could also omit the `\` character and write
+the entire command in one line, but this may be harder to read.
+
+As we can see in this code, instead of directing the output of `bwa mem` to `results/sam/SRR2584866.aligned.sam`, and
+using `samtools view` to read from `results/sam/SRR2584866.aligned.sam`, we bypass these unnecessary write + read steps
+by connecting the standard output of `bwa mem` to the standard input of `samtools view` using the pipe `|` character.
+Additionally, notice that we replaced `results/sam/SRR2584866.aligned.sam` with `-`, which instructs `samtools view`
+to read the data from the standard input.
 
