@@ -515,15 +515,17 @@ $ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fas
 > If you are using zsh instead of bash (macOS for example changed the default recently to zsh), it is
 > likely that a `no matches found` error will be displayed. The reason for this is that the wildcard
 > ("*") is not correctly interpreted. To fix this problem the wildcard needs to be escaped with a "\\":
->> ~~~
->> $ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/\*.html ~/Desktop/fastqc_html
->> ~~~
->> {: .bash}
+> ~~~
+> $ scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/\*.html ~/Desktop/fastqc_html
+> ~~~
+> {: .bash}
+>
 > Alternatively, you can put the whole path into quotation marks:
->> ~~~
->> $ scp "dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html" ~/Desktop/fastqc_html
->> ~~~
->> {: .bash}
+> ~~~
+> $ scp "dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html" ~/Desktop/fastqc_html
+> ~~~
+> {: .bash}
+>
 {: .callout}
 
 As a reminder, the first part
