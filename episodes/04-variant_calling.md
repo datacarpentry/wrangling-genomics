@@ -270,6 +270,26 @@ $ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR25
 {: .bash}
 
 
+> ## Filtering 
+> The `vcfutils.pl varFilter` call filters out variants that do not meet minimum quality default criteria, which can be changed through
+>  its options. Using `bcftools` we can verify that the quality of the variant call set has improved after this filtering step by 
+>  calculating the ratio of [transitions(TS)](https://en.wikipedia.org/wiki/Transition_%28genetics%29) to 
+>  [transversions (TV)](https://en.wikipedia.org/wiki/Transversion) ratio (TS/TV), 
+>  where transitions should be more likely to occur than transversions:
+> 
+> ~~~
+> $ bcftools stats results/bcf/SRR2584866_variants.vcf | grep TSTV
+> # TSTV, transitions/transversions:
+> # TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)
+> TSTV	0	628	58	10.83	628	58	10.83
+> $ bcftools stats results/vcf/SRR2584866_final_variants.vcf | grep TSTV
+> # TSTV, transitions/transversions:
+> # TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)
+> TSTV	0	621	54	11.50	621	54	11.50
+> ~~~
+> {: .bash}
+{: .callout}
+
 ## Explore the VCF format:
 
 ~~~
