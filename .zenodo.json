@@ -2,128 +2,90 @@
   "contributors": [
     {
       "type": "Editor",
+      "name": "Asela Wijeratne"
+    },
+    {
+      "type": "Editor",
       "name": "Joshua R. Herr",
       "orcid": "0000-0003-3425-292X"
     },
     {
       "type": "Editor",
-      "name": "Fotis Psomopoulos",
-      "orcid": "0000-0002-0222-4273"
+      "name": "Valerie Gartner",
+      "orcid": "0000-0001-5171-401X"
+    },
+    {
+      "type": "Editor",
+      "name": "Rhondene Wint"
     }
   ],
   "creators": [
     {
-      "name": "Erin Alison Becker",
-      "orcid": "0000-0002-6832-0233"
-    },
-    {
-      "name": "Taylor Reiter",
-      "orcid": "0000-0002-7388-421X"
-    },
-    {
-      "name": "Fotis Psomopoulos",
+      "name": "Fotis E. Psomopoulos",
       "orcid": "0000-0002-0222-4273"
     },
     {
-      "name": "Sheldon John McKay",
-      "orcid": "0000-0002-4011-3160"
+      "name": "Valerie Gartner"
     },
     {
-      "name": "Jessica Elizabeth Mizzi",
-      "orcid": "0000-0002-6604-4618"
-    },
-    {
-      "name": "Jason Williams",
-      "orcid": "0000-0003-3049-2010"
-    },
-    {
-      "name": "Peter R. Hoyt",
-      "orcid": "0000-0002-2767-0923"
-    },
-    {
-      "name": "Kate Crosby"
-    },
-    {
-      "name": "Lex Nederbragt",
-      "orcid": "0000-0001-5539-0999"
-    },
-    {
-      "name": "Tracy Teal",
-      "orcid": "0000-0002-9180-9598"
-    },
-    {
-      "name": "Aniello Infante",
-      "orcid": "0000-0002-1669-8795"
-    },
-    {
-      "name": "Tessa Pierce",
-      "orcid": "0000-0002-2942-5331"
-    },
-    {
-      "name": "François Michonneau",
-      "orcid": "0000-0002-9092-966X"
-    },
-    {
-      "name": "Gaius Augustus",
-      "orcid": "0000-0001-9439-0836"
-    },
-    {
-      "name": "Rayna Michelle Harris",
-      "orcid": "0000-0002-7943-5650"
-    },
-    {
-      "name": "dbmarchant"
-    },
-    {
-      "name": "Adam Thomas"
-    },
-    {
-      "name": "Karen Cranston",
-      "orcid": "0000-0002-4798-9499"
-    },
-    {
-      "name": "Kevin Weitemier",
-      "orcid": "0000-0002-5793-0343"
-    },
-    {
-      "name": "Sheldon McKay"
-    },
-    {
-      "name": "Kari L Jordan",
-      "orcid": "0000-0003-4121-2432"
-    },
-    {
-      "name": "Toby Hodges",
-      "orcid": "0000-0003-1766-456X"
-    },
-    {
-      "name": "Ahmed R. Hasan",
-      "orcid": "0000-0003-0002-8399"
-    },
-    {
-      "name": "Anita Schürch",
+      "name": "A.C. Schürch",
       "orcid": "0000-0003-1894-7545"
     },
     {
-      "name": "Dev Paudel",
-      "orcid": "0000-0002-0739-4343"
+      "name": "Bianca Peterson"
     },
     {
-      "name": "Gregg TeHennepe",
-      "orcid": "0000-0003-3851-2637"
+      "name": "Alana Alexander"
     },
     {
-      "name": "Luis Avila"
+      "name": "Dinindu Senanayake"
     },
     {
-      "name": "Ryan Peek",
-      "orcid": "0000-0002-9577-6885"
+      "name": "Tejashree Modak"
     },
     {
-      "name": "Vasilis Lenis"
+      "name": "Peter Hoyt",
+      "orcid": "0000-0002-2767-0923"
     },
     {
-      "name": "Winni Kretzschmar"
+      "name": "Ailith Ewing"
+    },
+    {
+      "name": "Frederick Varn",
+      "orcid": "0000-0001-6307-016X"
+    },
+    {
+      "name": "Klemens Noga",
+      "orcid": "0000-0002-1135-167X"
+    },
+    {
+      "name": "Murray Cadzow",
+      "orcid": "0000-0002-2299-4136"
+    },
+    {
+      "name": "Nooriyah"
+    },
+    {
+      "name": "SR Steinkamp"
+    },
+    {
+      "name": "Sarah Williams"
+    },
+    {
+      "name": "Schuyler Smith"
+    },
+    {
+      "name": "Tyler Chafin"
+    },
+    {
+      "name": "biowizz"
+    },
+    {
+      "name": "Joseph Sarro"
+    },
+    {
+      "name": "Robert Castelo",
+      "orcid": "0000-0003-2229-4508"
     }
   ],
   "license": {
