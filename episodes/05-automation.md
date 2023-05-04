@@ -19,7 +19,7 @@ exercises: 15
 
 ## What is a shell script?
 
-You wrote a simple shell script in a [previous lesson](https://www.datacarpentry.org/shell-genomics/05-writing-scripts/) that we used to extract bad reads from our
+You wrote a simple shell script in a [previous lesson](https://www.datacarpentry.org/shell-genomics/05-writing-scripts) that we used to extract bad reads from our
 FASTQ files and put them into a new file.
 
 Here is the script you wrote:
@@ -75,7 +75,6 @@ Within the Bash shell you can create variables at any time (as we did
 above, and during the 'for' loop lesson). Assign any name and the
 value using the assignment operator: '='. You can check the current
 definition of your variable by typing into your script: echo $variable\_name.
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -229,10 +228,10 @@ replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]
 
 We can extend these principles to the entire variant calling workflow. To do this, we will take all of the individual commands that we wrote before, put them into a single file, add variables so that the script knows to iterate through our input files and write to the appropriate output files. This is very similar to what we did with our `read_qc.sh` script, but will be a bit more complex.
 
-Download the script from [here](https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh). Download to `~/dc_workshop/scripts`.
+Download the script from [here](files/run_variant_calling.sh). Download to `~/dc_workshop/scripts`.
 
 ```bash
-curl -O https://raw.githubusercontent.com/datacarpentry/wrangling-genomics/gh-pages/files/run_variant_calling.sh
+curl -O https://datacarpentry.org/wrangling-genomics/files/run_variant_calling.sh
 ```
 
 Our variant calling workflow has the following steps:
@@ -408,7 +407,6 @@ It is a good idea to add comments to your code so that you (or a collaborator) c
 Look through your existing script. Discuss with a neighbor where you should add comments. Add comments (anything following
 a `#` character will be interpreted as a comment, bash will not try to run these comments as code).
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Now we can run our script:
@@ -445,8 +443,6 @@ For SRR2589044 from generation 5000 there were 10 mutations, for SRR2584863 from
 and SRR2584866 from generation 766 mutations. In the last generation, a hypermutable phenotype had evolved, causing this
 strain to have more mutations.
 
-
-
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -458,7 +454,6 @@ strain to have more mutations.
 If you have time after completing the previous exercise, use `run_variant_calling.sh` to run the variant calling pipeline
 on the full-sized trimmed FASTQ files. You should have a copy of these already in `~/dc_workshop/data/trimmed_fastq`, but if
 you do not, there is a copy in `~/.solutions/wrangling-solutions/trimmed_fastq`. Does the number of variants change per sample?
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
