@@ -25,7 +25,13 @@
     <loc>https://datacarpentry.github.io/wrangling-genomics/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/aio.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/discuss.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/images.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/index.html</loc>
@@ -55,16 +61,34 @@
     <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/aio.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/discuss.html</loc>
   </url>
   <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://datacarpentry.github.io/wrangling-genomics/key-points.html</loc>
   </url>
   <url>
     <loc>https://datacarpentry.github.io/wrangling-genomics/profiles.html</loc>
