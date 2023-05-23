@@ -348,12 +348,12 @@ that directory.</p>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz</span></code></pre>
 </div>
-<div id="callout1" class="callout callout">
+<div id="faster-option" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="faster-option" class="callout-inner">
-<h3 class="callout-title">Faster option<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Faster option<a class="anchor" aria-label="anchor" href="#faster-option"></a>
 </h3>
 <div class="callout-content">
 <p>If your workshop is short on time or the venue’s internet connection
@@ -457,12 +457,12 @@ CCCFFFFFGHHHHJIJJJJIJJJIIJJJJIIIJJGFIIIJEDDFEGGJIFHHJIJJDECCGGEGIIJFHFFFACD:BBBD
 <p>we can now see that there is a range of quality scores, but that the
 end of the sequence is very poor (<code>#</code> = a quality score of
 2).</p>
-<div id="challenge1" class="callout challenge">
+<div id="exercise" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
 </h3>
 <div class="callout-content">
 <p>What is the last read in the <code>SRR2584863_1.fastq</code> file?
@@ -675,12 +675,12 @@ directory</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/data/untrimmed_fastq/</span></code></pre>
 </div>
-<div id="challenge2" class="callout challenge">
+<div id="exercise-1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
 </h3>
 <div class="callout-content">
 <p>How big are the files? (Hint: Look at the options for the
@@ -825,12 +825,12 @@ top of your screen or the Cmd+t keyboard shortcut) and type:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/<span class="pp">*</span>.html ~/Desktop/fastqc_html</span></code></pre>
 </div>
-<div id="callout2" class="callout callout">
+<div id="note-on-using-zsh" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="note-on-using-zsh" class="callout-inner">
-<h3 class="callout-title">Note on using zsh<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Note on using zsh<a class="anchor" aria-label="anchor" href="#note-on-using-zsh"></a>
 </h3>
 <div class="callout-content">
 <p>If you are using zsh instead of bash (macOS for example changed the
@@ -879,12 +879,12 @@ SRR2589044_2_fastqc.html                      100%  251KB 592.2KB/s   00:00</cod
 <p>Now we can go to our new directory and open the 6 HTML files.</p>
 <p>Depending on your system, you should be able to select and open them
 all at once via a right click menu in your file browser.</p>
-<div id="challenge3" class="callout challenge">
+<div id="exercise-2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-2" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge3"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"></a>
 </h3>
 <div class="callout-content">
 <p>Discuss your results with a neighbor. Which sample(s) looks the best
@@ -1150,12 +1150,12 @@ single file using the <code>cat</code> command. We will call this
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat <span class="pp">*</span>/summary.txt <span class="op">&gt;</span> ~/dc_workshop/docs/fastqc_summaries.txt</span></code></pre>
 </div>
-<div id="challenge4" class="callout challenge">
+<div id="exercise-3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-3" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge4"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"></a>
 </h3>
 <div class="callout-content">
 <p>Which samples failed at least one of FastQC’s quality tests? What
@@ -1202,12 +1202,12 @@ FAIL    Adapter Content SRR2589044_2.fastq.gz</code></pre>
 </div>
 </section><section id="other-notes-optional"><h2 class="section-heading">Other notes – optional<a class="anchor" aria-label="anchor" href="#other-notes-optional"></a>
 </h2>
-<hr class="half-width"><div id="callout3" class="callout callout">
+<hr class="half-width"><div id="quality-encodings-vary" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="quality-encodings-vary" class="callout-inner">
-<h3 class="callout-title">Quality encodings vary<a class="anchor" aria-label="anchor" href="#callout3"></a>
+<h3 class="callout-title">Quality encodings vary<a class="anchor" aria-label="anchor" href="#quality-encodings-vary"></a>
 </h3>
 <div class="callout-content">
 <p>Although we have used a particular quality encoding system to
@@ -1224,12 +1224,12 @@ reads!</p>
 </div>
 </div>
 </div>
-<div id="callout4" class="callout callout">
+<div id="same-symbols-different-meanings" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="same-symbols-different-meanings" class="callout-inner">
-<h3 class="callout-title">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#callout4"></a>
+<h3 class="callout-title">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#same-symbols-different-meanings"></a>
 </h3>
 <div class="callout-content">
 <p>Here we see <code>&gt;</code> being used as a shell prompt, whereas
@@ -1289,7 +1289,7 @@ multiple files with a single command.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -1313,7 +1313,7 @@ multiple files with a single command.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/02-quality-control.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2023-05-16"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

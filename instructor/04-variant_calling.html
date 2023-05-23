@@ -314,12 +314,12 @@ we will practice that here.</p>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> curl <span class="at">-L</span> <span class="at">-o</span> data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> gunzip data/ref_genome/ecoli_rel606.fasta.gz</span></code></pre>
 </div>
-<div id="challenge1" class="callout challenge">
+<div id="exercise" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
 </h3>
 <div class="callout-content">
 <p>We saved this file as
@@ -335,7 +335,7 @@ it. What is the real name of the genome?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -585,12 +585,12 @@ specifies where to write the output file:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  <span class="op">&gt;</span> results/vcf/SRR2584866_final_variants.vcf</span></code></pre>
 </div>
-<div id="callout1" class="callout callout">
+<div id="filtering" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="filtering" class="callout-inner">
-<h3 class="callout-title">Filtering<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
 </h3>
 <div class="callout-content">
 <p>The <code>vcfutils.pl varFilter</code> call filters out variants that
@@ -729,12 +729,12 @@ allele, etc. A 0/0 means homozygous reference, 0/1 is heterozygous, and
 </tr></tbody></table><p>The Broad Institute’s <a href="https://www.broadinstitute.org/gatk/guide/article?id=1268" class="external-link">VCF
 guide</a> is an excellent place to learn more about the VCF file
 format.</p>
-<div id="challenge2" class="callout challenge">
+<div id="exercise-1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
 </h3>
 <div class="callout-content">
 <p>Use the <code>grep</code> and <code>wc</code> commands you have
@@ -749,7 +749,7 @@ learned to assess how many variants are in the vcf file.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -847,12 +847,12 @@ In this box, type the name of the “chromosome” followed by a colon and
 the position of the variant you would like to view (e.g. for this
 sample, type <code>CP000819.1:50</code> to view the 50th base. Type
 <code>Ctrl^C</code> or <code>q</code> to exit <code>tview</code>.</p>
-<div id="challenge3" class="callout challenge">
+<div id="exercise-2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-2" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge3"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"></a>
 </h3>
 <div class="callout-content">
 <p>Visualize the alignment of the reads for our <code>SRR2584866</code>
@@ -868,7 +868,7 @@ canonical nucleotide in that position?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -961,12 +961,12 @@ know the tools we need to use to automate this workflow and run it on as
 many files as we want using a single line of code. Those tools are:
 wildcards, for loops, and bash scripts. We will use all three in the
 next lesson.</p>
-<div id="callout2" class="callout callout">
+<div id="installing-software" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="installing-software" class="callout-inner">
-<h3 class="callout-title">Installing software<a class="anchor" aria-label="anchor" href="#callout2"></a>
+<h3 class="callout-title">Installing software<a class="anchor" aria-label="anchor" href="#installing-software"></a>
 </h3>
 <div class="callout-content">
 <p>It is worth noting that all of the software we are using for this
@@ -980,12 +980,12 @@ packages.</p>
 </div>
 </div>
 </div>
-<div id="callout3" class="callout callout">
+<div id="bwa-alignment-options" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="bwa-alignment-options" class="callout-inner">
-<h3 class="callout-title">BWA alignment options<a class="anchor" aria-label="anchor" href="#callout3"></a>
+<h3 class="callout-title">BWA alignment options<a class="anchor" aria-label="anchor" href="#bwa-alignment-options"></a>
 </h3>
 <div class="callout-content">
 <p>BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM.
@@ -1047,7 +1047,7 @@ file, and how it was derived.</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -1071,7 +1071,7 @@ file, and how it was derived.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/04-variant_calling.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2023-05-16"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>

@@ -421,12 +421,12 @@ sequences listed in <code>SRR_adapters.fa</code>
 </tr><tr class="even"><td><code>SLIDINGWINDOW:4:20</code></td>
 <td>to use a sliding window of size 4 that will remove bases if their
 phred score is below 20</td>
-</tr></tbody></table><div id="callout1" class="callout callout">
+</tr></tbody></table><div id="multi-line-commands" class="callout callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="multi-line-commands" class="callout-inner">
-<h3 class="callout-title">Multi-line commands<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<h3 class="callout-title">Multi-line commands<a class="anchor" aria-label="anchor" href="#multi-line-commands"></a>
 </h3>
 <div class="callout-content">
 <p>Some of the commands we ran in this lesson are long! When typing a
@@ -489,12 +489,12 @@ Quality encoding detected as phred33
 Input Read Pairs: 1107090 Both Surviving: 885220 (79.96%) Forward Only Surviving: 216472 (19.55%) Reverse Only Surviving: 2850 (0.26%) Dropped: 2548 (0.23%)
 TrimmomaticPE: Completed successfully</code></pre>
 </div>
-<div id="challenge1" class="callout challenge">
+<div id="exercise" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge1"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
 </h3>
 <div class="callout-content">
 <p>Use the output from your Trimmomatic command to answer the following
@@ -511,7 +511,7 @@ questions.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>0.23%</li>
 <li>79.96%</li>
@@ -599,12 +599,12 @@ SRR2584863_2.fastq.gz         SRR2584866_2.trim.fastq.gz    SRR2589044_2un.trim.
 SRR2584863_2.trim.fastq.gz    SRR2584866_2un.trim.fastq.gz
 SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz</code></pre>
 </div>
-<div id="challenge2" class="callout challenge">
+<div id="exercise-1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#challenge2"></a>
+<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
 </h3>
 <div class="callout-content">
 <p>We trimmed our fastq files with Nextera adapters, but there are other
@@ -620,7 +620,7 @@ Trimmomatic?</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -657,12 +657,12 @@ SRR2584863_1un.trim.fastq.gz  SRR2584866_1un.trim.fastq.gz  SRR2589044_1un.trim.
 SRR2584863_2.trim.fastq.gz    SRR2584866_2.trim.fastq.gz    SRR2589044_2.trim.fastq.gz
 SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.fastq.gz</code></pre>
 </div>
-<div id="challenge3" class="callout challenge">
+<div id="bonus-exercise-advanced" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="bonus-exercise-advanced" class="callout-inner">
-<h3 class="callout-title">Bonus exercise (advanced)<a class="anchor" aria-label="anchor" href="#challenge3"></a>
+<h3 class="callout-title">Bonus exercise (advanced)<a class="anchor" aria-label="anchor" href="#bonus-exercise-advanced"></a>
 </h3>
 <div class="callout-content">
 <p>Now that our samples have gone through quality control, they should
@@ -679,7 +679,7 @@ whether your per base sequence quality is higher after trimming.</p>
   Show me the solution
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>In your AWS terminal window do:</p>
 <div class="codewrapper sourceCode" id="cb20">
@@ -753,7 +753,7 @@ important!</li>
         <p>Materials licensed under <a href="../LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">Template licensed under CC-BY 4.0</a> by <a href="https://carpentries.org" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.11.16" class="external-link">sandpaper (0.11.16)</a>,
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.12.0" class="external-link">sandpaper (0.12.0)</a>,
         <a href="https://github.com/carpentries/pegboard" class="external-link">pegboard (0.5.3)</a>,
       and <a href="https://github.com/carpentries/varnish/tree/0.2.16" class="external-link">varnish (0.2.16)</a>.</p>
 			</div>
@@ -777,7 +777,7 @@ important!</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/03-trimming.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2023-05-16"
+  "datePublished": "2023-05-23"
 }
 
   </script><script>
