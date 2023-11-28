@@ -560,7 +560,7 @@ This saves us a lot of time - installing software can be a
 time-consuming and frustrating task - however, this does mean that
 you will not be able to walk out the door and start doing these
 analyses on your own computer. You will need to install
-the software first. Look at the [setup instructions](https://www.datacarpentry.org/wrangling-genomics/setup.html) for more information
+the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/index.html#setup) for more information
 on installing these software packages.
 
 
