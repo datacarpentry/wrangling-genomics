@@ -317,10 +317,10 @@ we will practice that here.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> data/ref_genome</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> curl <span class="at">-L</span> <span class="at">-o</span> data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> gunzip data/ref_genome/ecoli_rel606.fasta.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> data/ref_genome</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">$</span> curl <span class="at">-L</span> <span class="at">-o</span> data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">$</span> gunzip data/ref_genome/ecoli_rel606.fasta.gz</span></code></pre>
 </div>
 <div id="exercise" class="callout challenge">
 <div class="callout-square">
@@ -341,12 +341,12 @@ it. What is the real name of the genome?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> head data/ref_genome/ecoli_rel606.fasta</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> head data/ref_genome/ecoli_rel606.fasta</span></code></pre>
 </div>
 <p>The name of the sequence follows the <code>&gt;</code> character. The
 name is
@@ -363,9 +363,9 @@ run our variant calling workflow quite quickly.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> curl <span class="at">-L</span> <span class="at">-o</span> sub.tar.gz https://ndownloader.figshare.com/files/14418248</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tar xvf sub.tar.gz</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mv sub/ ~/dc_workshop/data/trimmed_fastq_small</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> curl <span class="at">-L</span> <span class="at">-o</span> sub.tar.gz https://ndownloader.figshare.com/files/14418248</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">$</span> tar xvf sub.tar.gz</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">$</span> mv sub/ ~/dc_workshop/data/trimmed_fastq_small</span></code></pre>
 </div>
 <p>You will also need to create directories for the results that will be
 generated as part of this workflow. We can do this in a single line of
@@ -374,7 +374,7 @@ as input.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> results/sam results/bam results/bcf results/vcf</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> results/sam results/bam results/bcf results/vcf</span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="index-the-reference-genome">Index the reference genome<a class="anchor" aria-label="anchor" href="#index-the-reference-genome"></a></h4>
@@ -387,7 +387,7 @@ reference genome or you are using a different tool for alignment.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bwa index data/ref_genome/ecoli_rel606.fasta</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">$</span> bwa index data/ref_genome/ecoli_rel606.fasta</span></code></pre>
 </div>
 <p>While the index is created, you will see output that looks something
 like this:</p>
@@ -419,7 +419,7 @@ This command will not run, as we do not have the files
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bwa mem ref_genome.fasta input_file_R1.fastq input_file_R2.fastq <span class="op">&gt;</span> output.sam</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">$</span> bwa mem ref_genome.fasta input_file_R1.fastq input_file_R2.fastq <span class="op">&gt;</span> output.sam</span></code></pre>
 </div>
 <p>Have a look at the <a href="https://bio-bwa.sourceforge.net/bwa.shtml" class="external-link">bwa options page</a>.
 While we are running bwa with the default parameters here, your use case
@@ -432,7 +432,7 @@ iterating this whole process on all of our sample files.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq <span class="op">&gt;</span> results/sam/SRR2584866.aligned.sam</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">$</span> bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq <span class="op">&gt;</span> results/sam/SRR2584866.aligned.sam</span></code></pre>
 </div>
 <p>You will see output that starts like this:</p>
 <div class="codewrapper">
@@ -477,7 +477,7 @@ to output BAM format (<code>-b</code>):</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> samtools view <span class="at">-S</span> <span class="at">-b</span> results/sam/SRR2584866.aligned.sam <span class="op">&gt;</span> results/bam/SRR2584866.aligned.bam</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">$</span> samtools view <span class="at">-S</span> <span class="at">-b</span> results/sam/SRR2584866.aligned.sam <span class="op">&gt;</span> results/bam/SRR2584866.aligned.bam</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -494,7 +494,7 @@ the output.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> samtools sort <span class="at">-o</span> results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam </span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">$</span> samtools sort <span class="at">-o</span> results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam </span></code></pre>
 </div>
 <p>Our files are pretty small, so we will not see this output. If you
 run the workflow with larger files, you will see something like
@@ -513,7 +513,7 @@ alignment files as input.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> flagstat results/bam/SRR2584866.aligned.sorted.bam</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">samtools</span> flagstat results/bam/SRR2584866.aligned.sorted.bam</span></code></pre>
 </div>
 <p>This will give you the following statistics about your sorted bam
 file:</p>
@@ -556,8 +556,8 @@ path to the reference genome:</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bcftools mpileup <span class="at">-O</span> b <span class="at">-o</span> results/bcf/SRR2584866_raw.bcf <span class="dt">\</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>-f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam </span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> bcftools mpileup <span class="at">-O</span> b <span class="at">-o</span> results/bcf/SRR2584866_raw.bcf <span class="dt">\</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>-f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam </span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -578,7 +578,7 @@ specifies where to write the output file:</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bcftools call <span class="at">--ploidy</span> 1 <span class="at">-m</span> <span class="at">-v</span> <span class="at">-o</span> results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf </span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">$</span> bcftools call <span class="at">--ploidy</span> 1 <span class="at">-m</span> <span class="at">-v</span> <span class="at">-o</span> results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf </span></code></pre>
 </div>
 </div>
 <div class="section level4">
@@ -589,15 +589,14 @@ specifies where to write the output file:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  <span class="op">&gt;</span> results/vcf/SRR2584866_final_variants.vcf</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  <span class="op">&gt;</span> results/vcf/SRR2584866_final_variants.vcf</span></code></pre>
 </div>
-<div id="filtering" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="filtering" class="callout-inner">
-<h3 class="callout-title">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a></h3>
 <div class="callout-content">
 <p>The <code>vcfutils.pl varFilter</code> call filters out variants that
 do not meet minimum quality default criteria, which can be changed
@@ -610,14 +609,14 @@ than transversions:</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bcftools stats results/bcf/SRR2584866_variants.vcf <span class="kw">|</span> <span class="fu">grep</span> TSTV</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># TSTV, transitions/transversions:</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="ex">TSTV</span>	0	628	58	10.83	628	58	10.83</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bcftools stats results/vcf/SRR2584866_final_variants.vcf <span class="kw">|</span> <span class="fu">grep</span> TSTV</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># TSTV, transitions/transversions:</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="ex">TSTV</span>	0	621	54	11.50	621	54	11.50</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats results/bcf/SRR2584866_variants.vcf <span class="kw">|</span> <span class="fu">grep</span> TSTV</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co"># TSTV, transitions/transversions:</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="ex">TSTV</span>	0	628	58	10.83	628	58	10.83</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="ex">$</span> bcftools stats results/vcf/SRR2584866_final_variants.vcf <span class="kw">|</span> <span class="fu">grep</span> TSTV</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co"># TSTV, transitions/transversions:</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co"># TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="ex">TSTV</span>	0	621	54	11.50	621	54	11.50</span></code></pre>
 </div>
 </div>
 </div>
@@ -629,7 +628,7 @@ than transversions:</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> less <span class="at">-S</span> results/vcf/SRR2584866_final_variants.vcf</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">$</span> less <span class="at">-S</span> results/vcf/SRR2584866_final_variants.vcf</span></code></pre>
 </div>
 <p>You will see the header (which describes the format), the time and
 date the file was created, the version of bcftools that was used, the
@@ -753,12 +752,12 @@ learned to assess how many variants are in the vcf file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"#"</span> results/vcf/SRR2584866_final_variants.vcf <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"#"</span> results/vcf/SRR2584866_final_variants.vcf <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -787,7 +786,7 @@ index the BAM file using <code>samtools</code>:</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> samtools index results/bam/SRR2584866.aligned.sorted.bam</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">$</span> samtools index results/bam/SRR2584866.aligned.sorted.bam</span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="viewing-with-tview">Viewing with <code>tview</code>
@@ -805,7 +804,7 @@ giving it the sorted bam file and the reference file:</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">$</span> samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -870,12 +869,12 @@ canonical nucleotide in that position?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> samtools tview ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">$</span> samtools tview ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta</span></code></pre>
 </div>
 <p>Then type <code>g</code>. In the dialogue box, type
 <code>CP000819.1:4377265</code>. <code>G</code> is the variant.
@@ -908,8 +907,8 @@ files within a directory structure like we have been using in our
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir ~/Desktop/files_for_igv</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop/files_for_igv</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">$</span> mkdir ~/Desktop/files_for_igv</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="ex">$</span> cd ~/Desktop/files_for_igv</span></code></pre>
 </div>
 <p>Now we will transfer our files to that new directory. Remember to
 replace the text between the <code>@</code> and the <code>:</code> with
@@ -919,10 +918,10 @@ AWS instance).</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv</span></code></pre>
 </div>
 <p>You will need to type the password for your AWS instance each time
 you call <code>scp</code>.</p>
@@ -963,13 +962,12 @@ know the tools we need to use to automate this workflow and run it on as
 many files as we want using a single line of code. Those tools are:
 wildcards, for loops, and bash scripts. We will use all three in the
 next lesson.</p>
-<div id="installing-software" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="installing-software" class="callout-inner">
-<h3 class="callout-title">Installing software<a class="anchor" aria-label="anchor" href="#installing-software"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="installing-software">Installing software<a class="anchor" aria-label="anchor" href="#installing-software"></a></h3>
 <div class="callout-content">
 <p>It is worth noting that all of the software we are using for this
 workshop has been pre-installed on our remote computer. This saves us a
@@ -982,13 +980,12 @@ packages.</p>
 </div>
 </div>
 </div>
-<div id="bwa-alignment-options" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="bwa-alignment-options" class="callout-inner">
-<h3 class="callout-title">BWA alignment options<a class="anchor" aria-label="anchor" href="#bwa-alignment-options"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="bwa-alignment-options">BWA alignment options<a class="anchor" aria-label="anchor" href="#bwa-alignment-options"></a></h3>
 <div class="callout-content">
 <p>BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM.
 The first algorithm is designed for Illumina sequence reads up to 100bp,
@@ -1078,7 +1075,7 @@ file, and how it was derived.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/04-variant_calling.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

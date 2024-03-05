@@ -297,9 +297,9 @@ put them into a new file.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-B1</span> <span class="at">-A2</span> NNNNNNNNNN <span class="pp">*</span>.fastq <span class="op">&gt;</span> scripted_bad_reads.txt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Script finished!"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-B1</span> <span class="at">-A2</span> NNNNNNNNNN <span class="pp">*</span>.fastq <span class="op">&gt;</span> scripted_bad_reads.txt</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Script finished!"</span></span></code></pre>
 </div>
 <p>That script was only two lines long, but shell scripts can be much
 more complicated than that and can be used to perform a large number of
@@ -323,36 +323,35 @@ new shell scripts.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> for filename in <span class="pp">*</span>.zip</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> do</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> unzip <span class="va">$filename</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> for filename in <span class="pp">*</span>.zip</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="op">&gt;</span> do</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="op">&gt;</span> unzip <span class="va">$filename</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
 </div>
 <p>And here is the one you wrote for running Trimmomatic on all of our
 <code>.fastq</code> sample files:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> for infile in <span class="pp">*</span>_1.fastq.gz</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> do</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>   base=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${infile}</span> _1.fastq.gz<span class="va">)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>   trimmomatic <span class="ex">PE</span> <span class="va">${infile}</span> <span class="va">${base}</span>_2.fastq.gz <span class="dt">\</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>                <span class="va">${base}</span>_1.trim.fastq.gz <span class="va">${base}</span>_1un.trim.fastq.gz <span class="dt">\</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>                <span class="va">${base}</span>_2.trim.fastq.gz <span class="va">${base}</span>_2un.trim.fastq.gz <span class="dt">\</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> for infile in <span class="pp">*</span>_1.fastq.gz</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="op">&gt;</span> do</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="op">&gt;</span>   base=<span class="va">$(</span><span class="fu">basename</span> <span class="va">${infile}</span> _1.fastq.gz<span class="va">)</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="op">&gt;</span>   trimmomatic <span class="ex">PE</span> <span class="va">${infile}</span> <span class="va">${base}</span>_2.fastq.gz <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="op">&gt;</span>                <span class="va">${base}</span>_1.trim.fastq.gz <span class="va">${base}</span>_1un.trim.fastq.gz <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="op">&gt;</span>                <span class="va">${base}</span>_2.trim.fastq.gz <span class="va">${base}</span>_2un.trim.fastq.gz <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="op">&gt;</span>                SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 </span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
 </div>
 <p>Notice that in this <code>for</code> loop, we used two variables,
 <code>infile</code>, which was defined in the <code>for</code>
 statement, and <code>base</code>, which was created from the filename
 during each iteration of the loop.</p>
-<div id="creating-variables" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="creating-variables" class="callout-inner">
-<h3 class="callout-title">Creating variables<a class="anchor" aria-label="anchor" href="#creating-variables"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="creating-variables">Creating variables<a class="anchor" aria-label="anchor" href="#creating-variables"></a></h3>
 <div class="callout-content">
 <p>Within the Bash shell you can create variables at any time (as we did
 above, and during the ‘for’ loop lesson). Assign any name and the value
@@ -380,10 +379,10 @@ file.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/dc_workshop/scripts</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/scripts</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch read_qc.sh</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls </span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/dc_workshop/scripts</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/scripts</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">$</span> touch read_qc.sh</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="ex">$</span> ls </span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -396,7 +395,7 @@ file.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nano read_qc.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">$</span> nano read_qc.sh</span></code></pre>
 </div>
 <p><strong>Enter the following pieces of code into your shell script
 (not into your terminal prompt).</strong></p>
@@ -469,13 +468,12 @@ doing.</p>
 <pre class="output" tabindex="0"><code>echo "Saving summary..."
 cat */summary.txt &gt; ~/dc_workshop/docs/fastqc_summaries.txt</code></pre>
 </div>
-<div id="using-echo-statements" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="using-echo-statements" class="callout-inner">
-<h3 class="callout-title">Using<code>echo</code>statements<a class="anchor" aria-label="anchor" href="#using-echo-statements"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="using-echo-statements">Using <code>echo</code> statements<a class="anchor" aria-label="anchor" href="#using-echo-statements"></a></h3>
 <div class="callout-content">
 <p>We have used <code>echo</code> statements to add progress statements
 to our script. Our script will print these statements as it is running
@@ -516,7 +514,7 @@ script:</p>
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bash read_qc.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">$</span> bash read_qc.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -556,7 +554,7 @@ appropriate output files. This is very similar to what we did with our
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://datacarpentry.org/wrangling-genomics/files/run_variant_calling.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://datacarpentry.org/wrangling-genomics/files/run_variant_calling.sh</span></code></pre>
 </div>
 <p>Our variant calling workflow has the following steps:</p>
 <ol style="list-style-type: decimal"><li>Index the reference genome for use by bwa and samtools.</li>
@@ -570,8 +568,8 @@ intermediate steps.</li>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/scripts</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> less run_variant_calling.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/scripts</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="ex">$</span> less run_variant_calling.sh</span></code></pre>
 </div>
 <p>The script should look like this:</p>
 <div class="codewrapper">
@@ -654,9 +652,9 @@ which file we are on.</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fq1 <span class="kw">in</span> ~/dc_workshop/data/trimmed_fastq_small/<span class="pp">*</span>_1.trim.sub.fastq</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"working with file </span><span class="va">$fq1</span><span class="st">"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="cf">for</span> fq1 <span class="kw">in</span> ~/dc_workshop/data/trimmed_fastq_small/<span class="pp">*</span>_1.trim.sub.fastq</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>    <span class="cf">do</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"working with file </span><span class="va">$fq1</span><span class="st">"</span></span></code></pre>
 </div>
 <p>We then extract the base name of the file (excluding the path and
 <code>.fastq</code> extension) and assign it to a new variable called
@@ -664,8 +662,8 @@ which file we are on.</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$fq1</span> _1.trim.sub.fastq<span class="va">)</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"base name is </span><span class="va">$base</span><span class="st">"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>    <span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="va">$fq1</span> _1.trim.sub.fastq<span class="va">)</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"base name is </span><span class="va">$base</span><span class="st">"</span></span></code></pre>
 </div>
 <p>We can use the <code>base</code> variable to access both the
 <code>base_1.fastq</code> and <code>base_2.fastq</code> input files, and
@@ -677,17 +675,17 @@ but add a different extension (e.g. <code>.sam</code>,
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">#input fastq files</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">fq1</span><span class="op">=</span>~/dc_workshop/data/trimmed_fastq_small/<span class="va">${base}</span>_1.trim.sub.fastq</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">fq2</span><span class="op">=</span>~/dc_workshop/data/trimmed_fastq_small/<span class="va">${base}</span>_2.trim.sub.fastq</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># output files</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">sam</span><span class="op">=</span>~/dc_workshop/results/sam/<span class="va">${base}</span>.aligned.sam</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">bam</span><span class="op">=</span>~/dc_workshop/results/bam/<span class="va">${base}</span>.aligned.bam</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">sorted_bam</span><span class="op">=</span>~/dc_workshop/results/bam/<span class="va">${base}</span>.aligned.sorted.bam</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">raw_bcf</span><span class="op">=</span>~/dc_workshop/results/bcf/<span class="va">${base}</span>_raw.bcf</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">variants</span><span class="op">=</span>~/dc_workshop/results/bcf/<span class="va">${base}</span>_variants.vcf</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">final_variants</span><span class="op">=</span>~/dc_workshop/results/vcf/<span class="va">${base}</span>_final_variants.vcf     </span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>    <span class="co">#input fastq files</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>    <span class="va">fq1</span><span class="op">=</span>~/dc_workshop/data/trimmed_fastq_small/<span class="va">${base}</span>_1.trim.sub.fastq</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>    <span class="va">fq2</span><span class="op">=</span>~/dc_workshop/data/trimmed_fastq_small/<span class="va">${base}</span>_2.trim.sub.fastq</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>    </span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>    <span class="co"># output files</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>    <span class="va">sam</span><span class="op">=</span>~/dc_workshop/results/sam/<span class="va">${base}</span>.aligned.sam</span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a>    <span class="va">bam</span><span class="op">=</span>~/dc_workshop/results/bam/<span class="va">${base}</span>.aligned.bam</span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>    <span class="va">sorted_bam</span><span class="op">=</span>~/dc_workshop/results/bam/<span class="va">${base}</span>.aligned.sorted.bam</span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a>    <span class="va">raw_bcf</span><span class="op">=</span>~/dc_workshop/results/bcf/<span class="va">${base}</span>_raw.bcf</span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a>    <span class="va">variants</span><span class="op">=</span>~/dc_workshop/results/bcf/<span class="va">${base}</span>_variants.vcf</span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a>    <span class="va">final_variants</span><span class="op">=</span>~/dc_workshop/results/vcf/<span class="va">${base}</span>_final_variants.vcf     </span></code></pre>
 </div>
 <p>And finally, the actual workflow steps:</p>
 <ol style="list-style-type: decimal"><li>align the reads to the reference genome and output a
@@ -754,7 +752,7 @@ code).</p>
 <div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> bash run_variant_calling.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="ex">$</span> bash run_variant_calling.sh</span></code></pre>
 </div>
 <div id="exercise-1" class="callout challenge">
 <div class="callout-square">
@@ -789,11 +787,11 @@ directory.</p>
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> for infile in ~/dc_workshop/results/vcf/<span class="pp">*</span>_final_variants.vcf</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> do</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>     echo <span class="va">${infile}</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span>     grep <span class="ex">-v</span> <span class="st">"#"</span> <span class="va">${infile}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="ex">$</span> for infile in ~/dc_workshop/results/vcf/<span class="pp">*</span>_final_variants.vcf</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="op">&gt;</span> do</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="op">&gt;</span>     echo <span class="va">${infile}</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="op">&gt;</span>     grep <span class="ex">-v</span> <span class="st">"#"</span> <span class="va">${infile}</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
 </div>
 <p>For SRR2589044 from generation 5000 there were 10 mutations, for
 SRR2584863 from generation 15000 there were 25 mutations, and SRR2584866
@@ -895,7 +893,7 @@ automated progress update.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/05-automation.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>

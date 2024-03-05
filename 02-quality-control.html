@@ -346,23 +346,22 @@ that directory.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/dc_workshop/data/untrimmed_fastq/</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/dc_workshop/data/untrimmed_fastq</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/dc_workshop/data/untrimmed_fastq/</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="bu">cd</span> ~/dc_workshop/data/untrimmed_fastq</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_1.fastq.gz</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/004/SRR2589044/SRR2589044_2.fastq.gz</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_1.fastq.gz</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/003/SRR2584863/SRR2584863_2.fastq.gz</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz</span></code></pre>
 </div>
-<div id="faster-option" class="callout callout">
+<div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="faster-option" class="callout-inner">
-<h3 class="callout-title">Faster option<a class="anchor" aria-label="anchor" href="#faster-option"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="faster-option">Faster option<a class="anchor" aria-label="anchor" href="#faster-option"></a></h3>
 <div class="callout-content">
 <p>If your workshop is short on time or the venue’s internet connection
 is weak or unstable, learners can avoid needing to download the data and
@@ -371,7 +370,7 @@ directory.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cp ~/.backup/untrimmed_fastq/<span class="pp">*</span>fastq.gz .</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> cp ~/.backup/untrimmed_fastq/<span class="pp">*</span>fastq.gz .</span></code></pre>
 </div>
 <p>This command creates a copy of each of the files in the
 <code>.backup/untrimmed_fastq/</code> directory that end in
@@ -387,7 +386,7 @@ unzip one of the files so that we can look at the fastq format.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> gunzip SRR2584863_1.fastq.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> gunzip SRR2584863_1.fastq.gz</span></code></pre>
 </div>
 </section><section id="quality-control"><h2 class="section-heading">Quality control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
 </h2>
@@ -413,7 +412,7 @@ by using <code>head</code> to look at the first four lines.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> head <span class="at">-n</span> 4 SRR2584863_1.fastq</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> head <span class="at">-n</span> 4 SRR2584863_1.fastq</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -483,12 +482,12 @@ How confident are you in this read?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tail <span class="at">-n</span> 4 SRR2584863_1.fastq</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">$</span> tail <span class="at">-n</span> 4 SRR2584863_1.fastq</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -512,119 +511,119 @@ preinstalled.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> fastqc <span class="at">-h</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="ex">FastQC</span> <span class="at">-</span> A high throughput sequence QC analysis tool</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">SYNOPSIS</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="ex">fastqc</span> seqfile1 seqfile2 .. seqfileN</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fastqc</span> [-o output dir] [--<span class="er">(</span><span class="ex">no</span><span class="kw">)</span><span class="ex">extract]</span> [-f fastq<span class="kw">|</span><span class="ex">bam</span><span class="kw">|</span><span class="ex">sam]</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>           <span class="ex">[-c</span> contaminant file] seqfile1 .. seqfileN</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="ex">DESCRIPTION</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">FastQC</span> reads a set of sequence files and produces from each one a quality</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">control</span> report consisting of a number of different modules, each one of</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">which</span> will help to identify a different potential type of problem in your</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">data.</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">If</span> no files to process are specified on the command line then the program</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">will</span> start as an interactive graphical application.  If files are provided</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">on</span> the command line then the program will run with no user interaction</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">required.</span>  In this mode it is suitable for inclusion into a standardised</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="ex">analysis</span> pipeline.</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="ex">The</span> options for the program as as follows:</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-h</span> <span class="at">--help</span>       Print this help file and exit</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-v</span> <span class="at">--version</span>    Print the version of the program and exit</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-o</span> <span class="at">--outdir</span>     Create all output files in the specified output directory.</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">Please</span> note that this directory must exist as the program</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">will</span> not create it.  If this option is not set then the</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">output</span> file for each sequence file is created in the same</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">directory</span> as the sequence file which was processed.</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--casava</span>        Files come from raw casava output. Files in the same sample</span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">group</span> <span class="er">(</span><span class="ex">differing</span> only by the group number<span class="kw">)</span> <span class="ex">will</span> be analysed</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">as</span> a set rather than individually. Sequences with the filter</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">flag</span> set in the header will be excluded from the analysis.</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">Files</span> must have the same names given to them by casava</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">(</span><span class="ex">including</span> being gzipped and ending with .gz<span class="kw">)</span> <span class="ex">otherwise</span> they</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">will</span> not be grouped together correctly.</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--nano</span>          Files come from naopore sequences and are in fast5 format. In</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">this</span> mode you can pass in directories to process and the program</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">will</span> take in all fast5 files within those directories and produce</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">a</span> single output file from the sequences found in all files.</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--nofilter</span>      If running with <span class="at">--casava</span> then don<span class="st">'t remove read flagged by</span></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="st">                    casava as poor quality when performing the QC analysis.</span></span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="st">    --extract       If set then the zipped output file will be uncompressed in</span></span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="st">                    the same directory after it has been created.  By default</span></span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="st">                    this option will be set if fastqc is run in non-interactive</span></span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="st">                    mode.</span></span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="st">    -j --java       Provides the full path to the java binary you want to use to</span></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="st">                    launch fastqc. If not supplied then java is assumed to be in</span></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="st">                    your path.</span></span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="st">    --noextract     Do not uncompress the output file after creating it.  You</span></span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="st">                    should set this option if you do not wish to uncompress</span></span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="st">                    the output when running in non-interactive mode.</span></span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="st">    --nogroup       Disable grouping of bases for reads &gt;50bp. All reports will</span></span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a><span class="st">                    show data for every base in the read.  WARNING: Using this</span></span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="st">                    option will cause fastqc to crash and burn if you use it on</span></span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="st">                    really long reads, and your plots may end up a ridiculous size.</span></span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="st">                    You have been warned!</span></span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="st">    -f --format     Bypasses the normal sequence file format detection and</span></span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="st">                    forces the program to use the specified format.  Valid</span></span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a><span class="st">                    formats are bam,sam,bam_mapped,sam_mapped and fastq</span></span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="st">    -t --threads    Specifies the number of files which can be processed</span></span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="st">                    simultaneously.  Each thread will be allocated 250MB of</span></span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="st">                    memory so you shouldn'</span>t run more threads than your</span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">available</span> memory will cope with, and not more than</span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">6</span> threads on a 32 bit machine</span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-c</span>              Specifies a non-default file which contains the list of</span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--contaminants</span>  contaminants to screen overrepresented sequences against.</span>
-<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">The</span> file must contain sets of named contaminants in the</span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">form</span> name[tab]sequence.  Lines prefixed with a hash will</span>
-<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">be</span> ignored.</span>
-<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-a</span>              Specifies a non-default file which contains the list of</span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--adapters</span>      adapter sequences which will be explicity searched against</span>
-<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">the</span> library. The file must contain sets of named adapters</span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>                    <span class="er">in</span> <span class="ex">the</span> form name[tab]sequence.  Lines prefixed with a hash</span>
-<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">will</span> be ignored.</span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>    <span class="ex">-l</span>              Specifies a non-default file which contains a set of criteria</span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a>    <span class="ex">--limits</span>        which will be used to determine the warn/error limits for the</span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">various</span> modules.  This file can also be used to selectively</span>
-<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">remove</span> some modules from the output all together.  The format</span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">needs</span> to mirror the default limits.txt file found in the</span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">Configuration</span> folder.</span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>   <span class="ex">-k</span> <span class="at">--kmers</span>       Specifies the length of Kmer to look for in the Kmer content</span>
-<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">module.</span> Specified Kmer length must be between 2 and 10. Default</span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">length</span> is 7 if not specified.</span>
-<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a>   <span class="ex">-q</span> <span class="at">--quiet</span>       Supress all progress messages on stdout and only report errors.</span>
-<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>   <span class="ex">-d</span> <span class="at">--dir</span>         Selects a directory to be used for temporary files written when</span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">generating</span> report images. Defaults to system temp directory if</span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>                    <span class="ex">not</span> specified.</span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="ex">BUGS</span></span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Any</span> bugs in fastqc should be reported either to simon.andrews@babraham.ac.uk</span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a>    <span class="ex">or</span> in www.bioinformatics.babraham.ac.uk/bugzilla/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">$</span> fastqc <span class="at">-h</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>            <span class="ex">FastQC</span> <span class="at">-</span> A high throughput sequence QC analysis tool</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="ex">SYNOPSIS</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>        <span class="ex">fastqc</span> seqfile1 seqfile2 .. seqfileN</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>    <span class="ex">fastqc</span> [-o output dir] [--<span class="er">(</span><span class="ex">no</span><span class="kw">)</span><span class="ex">extract]</span> [-f fastq<span class="kw">|</span><span class="ex">bam</span><span class="kw">|</span><span class="ex">sam]</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>           <span class="ex">[-c</span> contaminant file] seqfile1 .. seqfileN</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="ex">DESCRIPTION</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    <span class="ex">FastQC</span> reads a set of sequence files and produces from each one a quality</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>    <span class="ex">control</span> report consisting of a number of different modules, each one of</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>    <span class="fu">which</span> will help to identify a different potential type of problem in your</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>    <span class="ex">data.</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>    <span class="ex">If</span> no files to process are specified on the command line then the program</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>    <span class="ex">will</span> start as an interactive graphical application.  If files are provided</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>    <span class="ex">on</span> the command line then the program will run with no user interaction</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>    <span class="ex">required.</span>  In this mode it is suitable for inclusion into a standardised</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>    <span class="ex">analysis</span> pipeline.</span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a>    <span class="ex">The</span> options for the program as as follows:</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>    <span class="ex">-h</span> <span class="at">--help</span>       Print this help file and exit</span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a>    <span class="ex">-v</span> <span class="at">--version</span>    Print the version of the program and exit</span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a>    <span class="ex">-o</span> <span class="at">--outdir</span>     Create all output files in the specified output directory.</span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>                    <span class="ex">Please</span> note that this directory must exist as the program</span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a>                    <span class="ex">will</span> not create it.  If this option is not set then the</span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>                    <span class="ex">output</span> file for each sequence file is created in the same</span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>                    <span class="ex">directory</span> as the sequence file which was processed.</span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a>    <span class="ex">--casava</span>        Files come from raw casava output. Files in the same sample</span>
+<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a>                    <span class="ex">group</span> <span class="er">(</span><span class="ex">differing</span> only by the group number<span class="kw">)</span> <span class="ex">will</span> be analysed</span>
+<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a>                    <span class="fu">as</span> a set rather than individually. Sequences with the filter</span>
+<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a>                    <span class="ex">flag</span> set in the header will be excluded from the analysis.</span>
+<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a>                    <span class="ex">Files</span> must have the same names given to them by casava</span>
+<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a>                    <span class="kw">(</span><span class="ex">including</span> being gzipped and ending with .gz<span class="kw">)</span> <span class="ex">otherwise</span> they</span>
+<span id="cb11-42"><a href="#cb11-42" tabindex="-1"></a>                    <span class="ex">will</span> not be grouped together correctly.</span>
+<span id="cb11-43"><a href="#cb11-43" tabindex="-1"></a></span>
+<span id="cb11-44"><a href="#cb11-44" tabindex="-1"></a>    <span class="ex">--nano</span>          Files come from naopore sequences and are in fast5 format. In</span>
+<span id="cb11-45"><a href="#cb11-45" tabindex="-1"></a>                    <span class="ex">this</span> mode you can pass in directories to process and the program</span>
+<span id="cb11-46"><a href="#cb11-46" tabindex="-1"></a>                    <span class="ex">will</span> take in all fast5 files within those directories and produce</span>
+<span id="cb11-47"><a href="#cb11-47" tabindex="-1"></a>                    <span class="ex">a</span> single output file from the sequences found in all files.</span>
+<span id="cb11-48"><a href="#cb11-48" tabindex="-1"></a></span>
+<span id="cb11-49"><a href="#cb11-49" tabindex="-1"></a>    <span class="ex">--nofilter</span>      If running with <span class="at">--casava</span> then don<span class="st">'t remove read flagged by</span></span>
+<span id="cb11-50"><a href="#cb11-50" tabindex="-1"></a><span class="st">                    casava as poor quality when performing the QC analysis.</span></span>
+<span id="cb11-51"><a href="#cb11-51" tabindex="-1"></a></span>
+<span id="cb11-52"><a href="#cb11-52" tabindex="-1"></a><span class="st">    --extract       If set then the zipped output file will be uncompressed in</span></span>
+<span id="cb11-53"><a href="#cb11-53" tabindex="-1"></a><span class="st">                    the same directory after it has been created.  By default</span></span>
+<span id="cb11-54"><a href="#cb11-54" tabindex="-1"></a><span class="st">                    this option will be set if fastqc is run in non-interactive</span></span>
+<span id="cb11-55"><a href="#cb11-55" tabindex="-1"></a><span class="st">                    mode.</span></span>
+<span id="cb11-56"><a href="#cb11-56" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" tabindex="-1"></a><span class="st">    -j --java       Provides the full path to the java binary you want to use to</span></span>
+<span id="cb11-58"><a href="#cb11-58" tabindex="-1"></a><span class="st">                    launch fastqc. If not supplied then java is assumed to be in</span></span>
+<span id="cb11-59"><a href="#cb11-59" tabindex="-1"></a><span class="st">                    your path.</span></span>
+<span id="cb11-60"><a href="#cb11-60" tabindex="-1"></a></span>
+<span id="cb11-61"><a href="#cb11-61" tabindex="-1"></a><span class="st">    --noextract     Do not uncompress the output file after creating it.  You</span></span>
+<span id="cb11-62"><a href="#cb11-62" tabindex="-1"></a><span class="st">                    should set this option if you do not wish to uncompress</span></span>
+<span id="cb11-63"><a href="#cb11-63" tabindex="-1"></a><span class="st">                    the output when running in non-interactive mode.</span></span>
+<span id="cb11-64"><a href="#cb11-64" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" tabindex="-1"></a><span class="st">    --nogroup       Disable grouping of bases for reads &gt;50bp. All reports will</span></span>
+<span id="cb11-66"><a href="#cb11-66" tabindex="-1"></a><span class="st">                    show data for every base in the read.  WARNING: Using this</span></span>
+<span id="cb11-67"><a href="#cb11-67" tabindex="-1"></a><span class="st">                    option will cause fastqc to crash and burn if you use it on</span></span>
+<span id="cb11-68"><a href="#cb11-68" tabindex="-1"></a><span class="st">                    really long reads, and your plots may end up a ridiculous size.</span></span>
+<span id="cb11-69"><a href="#cb11-69" tabindex="-1"></a><span class="st">                    You have been warned!</span></span>
+<span id="cb11-70"><a href="#cb11-70" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" tabindex="-1"></a><span class="st">    -f --format     Bypasses the normal sequence file format detection and</span></span>
+<span id="cb11-72"><a href="#cb11-72" tabindex="-1"></a><span class="st">                    forces the program to use the specified format.  Valid</span></span>
+<span id="cb11-73"><a href="#cb11-73" tabindex="-1"></a><span class="st">                    formats are bam,sam,bam_mapped,sam_mapped and fastq</span></span>
+<span id="cb11-74"><a href="#cb11-74" tabindex="-1"></a></span>
+<span id="cb11-75"><a href="#cb11-75" tabindex="-1"></a><span class="st">    -t --threads    Specifies the number of files which can be processed</span></span>
+<span id="cb11-76"><a href="#cb11-76" tabindex="-1"></a><span class="st">                    simultaneously.  Each thread will be allocated 250MB of</span></span>
+<span id="cb11-77"><a href="#cb11-77" tabindex="-1"></a><span class="st">                    memory so you shouldn'</span>t run more threads than your</span>
+<span id="cb11-78"><a href="#cb11-78" tabindex="-1"></a>                    <span class="ex">available</span> memory will cope with, and not more than</span>
+<span id="cb11-79"><a href="#cb11-79" tabindex="-1"></a>                    <span class="ex">6</span> threads on a 32 bit machine</span>
+<span id="cb11-80"><a href="#cb11-80" tabindex="-1"></a></span>
+<span id="cb11-81"><a href="#cb11-81" tabindex="-1"></a>    <span class="ex">-c</span>              Specifies a non-default file which contains the list of</span>
+<span id="cb11-82"><a href="#cb11-82" tabindex="-1"></a>    <span class="ex">--contaminants</span>  contaminants to screen overrepresented sequences against.</span>
+<span id="cb11-83"><a href="#cb11-83" tabindex="-1"></a>                    <span class="ex">The</span> file must contain sets of named contaminants in the</span>
+<span id="cb11-84"><a href="#cb11-84" tabindex="-1"></a>                    <span class="ex">form</span> name<span class="pp">[</span><span class="ss">tab</span><span class="pp">]</span>sequence.  Lines prefixed with a hash will</span>
+<span id="cb11-85"><a href="#cb11-85" tabindex="-1"></a>                    <span class="ex">be</span> ignored.</span>
+<span id="cb11-86"><a href="#cb11-86" tabindex="-1"></a></span>
+<span id="cb11-87"><a href="#cb11-87" tabindex="-1"></a>    <span class="ex">-a</span>              Specifies a non-default file which contains the list of</span>
+<span id="cb11-88"><a href="#cb11-88" tabindex="-1"></a>    <span class="ex">--adapters</span>      adapter sequences which will be explicity searched against</span>
+<span id="cb11-89"><a href="#cb11-89" tabindex="-1"></a>                    <span class="ex">the</span> library. The file must contain sets of named adapters</span>
+<span id="cb11-90"><a href="#cb11-90" tabindex="-1"></a>                    <span class="er">in</span> <span class="ex">the</span> form name<span class="pp">[</span><span class="ss">tab</span><span class="pp">]</span>sequence.  Lines prefixed with a hash</span>
+<span id="cb11-91"><a href="#cb11-91" tabindex="-1"></a>                    <span class="ex">will</span> be ignored.</span>
+<span id="cb11-92"><a href="#cb11-92" tabindex="-1"></a></span>
+<span id="cb11-93"><a href="#cb11-93" tabindex="-1"></a>    <span class="ex">-l</span>              Specifies a non-default file which contains a set of criteria</span>
+<span id="cb11-94"><a href="#cb11-94" tabindex="-1"></a>    <span class="ex">--limits</span>        which will be used to determine the warn/error limits for the</span>
+<span id="cb11-95"><a href="#cb11-95" tabindex="-1"></a>                    <span class="ex">various</span> modules.  This file can also be used to selectively</span>
+<span id="cb11-96"><a href="#cb11-96" tabindex="-1"></a>                    <span class="ex">remove</span> some modules from the output all together.  The format</span>
+<span id="cb11-97"><a href="#cb11-97" tabindex="-1"></a>                    <span class="ex">needs</span> to mirror the default limits.txt file found in the</span>
+<span id="cb11-98"><a href="#cb11-98" tabindex="-1"></a>                    <span class="ex">Configuration</span> folder.</span>
+<span id="cb11-99"><a href="#cb11-99" tabindex="-1"></a></span>
+<span id="cb11-100"><a href="#cb11-100" tabindex="-1"></a>   <span class="ex">-k</span> <span class="at">--kmers</span>       Specifies the length of Kmer to look for in the Kmer content</span>
+<span id="cb11-101"><a href="#cb11-101" tabindex="-1"></a>                    <span class="ex">module.</span> Specified Kmer length must be between 2 and 10. Default</span>
+<span id="cb11-102"><a href="#cb11-102" tabindex="-1"></a>                    <span class="ex">length</span> is 7 if not specified.</span>
+<span id="cb11-103"><a href="#cb11-103" tabindex="-1"></a></span>
+<span id="cb11-104"><a href="#cb11-104" tabindex="-1"></a>   <span class="ex">-q</span> <span class="at">--quiet</span>       Supress all progress messages on stdout and only report errors.</span>
+<span id="cb11-105"><a href="#cb11-105" tabindex="-1"></a></span>
+<span id="cb11-106"><a href="#cb11-106" tabindex="-1"></a>   <span class="ex">-d</span> <span class="at">--dir</span>         Selects a directory to be used for temporary files written when</span>
+<span id="cb11-107"><a href="#cb11-107" tabindex="-1"></a>                    <span class="ex">generating</span> report images. Defaults to system temp directory if</span>
+<span id="cb11-108"><a href="#cb11-108" tabindex="-1"></a>                    <span class="ex">not</span> specified.</span>
+<span id="cb11-109"><a href="#cb11-109" tabindex="-1"></a></span>
+<span id="cb11-110"><a href="#cb11-110" tabindex="-1"></a><span class="ex">BUGS</span></span>
+<span id="cb11-111"><a href="#cb11-111" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" tabindex="-1"></a>    <span class="ex">Any</span> bugs in fastqc should be reported either to simon.andrews@babraham.ac.uk</span>
+<span id="cb11-113"><a href="#cb11-113" tabindex="-1"></a>    <span class="ex">or</span> in www.bioinformatics.babraham.ac.uk/bugzilla/</span></code></pre>
 </div>
 <p>if fastqc is not installed then you would expect to see an error
 like</p>
@@ -679,7 +678,7 @@ directory</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/data/untrimmed_fastq/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/data/untrimmed_fastq/</span></code></pre>
 </div>
 <div id="exercise-1" class="callout challenge">
 <div class="callout-square">
@@ -699,12 +698,12 @@ directory</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> <span class="at">-h</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> <span class="at">-h</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -727,7 +726,7 @@ all of the FASTQ files in this directory.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> fastqc <span class="pp">*</span>.fastq<span class="pp">*</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">$</span> fastqc <span class="pp">*</span>.fastq<span class="pp">*</span></span></code></pre>
 </div>
 <p>You will see an automatically updating output message telling you the
 progress of the analysis. It will start like this:</p>
@@ -763,7 +762,7 @@ $</code></pre>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">$</span> ls</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -788,16 +787,16 @@ will move these output files into a new directory within our
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/dc_workshop/results/fastqc_untrimmed_reads</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mv <span class="pp">*</span>.zip ~/dc_workshop/results/fastqc_untrimmed_reads/</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mv <span class="pp">*</span>.html ~/dc_workshop/results/fastqc_untrimmed_reads/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/dc_workshop/results/fastqc_untrimmed_reads</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">$</span> mv <span class="pp">*</span>.zip ~/dc_workshop/results/fastqc_untrimmed_reads/</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="ex">$</span> mv <span class="pp">*</span>.html ~/dc_workshop/results/fastqc_untrimmed_reads/</span></code></pre>
 </div>
 <p>Now we can navigate into this results directory and do some closer
 inspection of our output files.</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/results/fastqc_untrimmed_reads/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/results/fastqc_untrimmed_reads/</span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -820,22 +819,21 @@ top of your screen or the Cmd+t keyboard shortcut) and type:</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/Desktop/fastqc_html</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">$</span> mkdir <span class="at">-p</span> ~/Desktop/fastqc_html</span></code></pre>
 </div>
 <p>Now we can transfer our HTML files to our local computer using
 <code>scp</code>.</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/<span class="pp">*</span>.html ~/Desktop/fastqc_html</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/<span class="pp">*</span>.html ~/Desktop/fastqc_html</span></code></pre>
 </div>
-<div id="note-on-using-zsh" class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="note-on-using-zsh" class="callout-inner">
-<h3 class="callout-title">Note on using zsh<a class="anchor" aria-label="anchor" href="#note-on-using-zsh"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="note-on-using-zsh">Note on using zsh<a class="anchor" aria-label="anchor" href="#note-on-using-zsh"></a></h3>
 <div class="callout-content">
 <p>If you are using zsh instead of bash (macOS for example changed the
 default recently to zsh), it is likely that a
@@ -845,13 +843,13 @@ this problem the wildcard needs to be escaped with a “\”:</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/\*.html ~/Desktop/fastqc_html</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/\*.html ~/Desktop/fastqc_html</span></code></pre>
 </div>
 <p>Alternatively, you can put the whole path into quotation marks:</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scp <span class="st">"dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html"</span> ~/Desktop/fastqc_html</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">$</span> scp <span class="st">"dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/*.html"</span> ~/Desktop/fastqc_html</span></code></pre>
 </div>
 </div>
 </div>
@@ -902,7 +900,7 @@ worst?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>All of the reads contain usable data, but the quality decreases
 toward the end of the reads.</p>
@@ -981,8 +979,8 @@ in our results subdirectory.</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/results/fastqc_untrimmed_reads/</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/results/fastqc_untrimmed_reads/</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="ex">$</span> ls</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1000,7 +998,7 @@ at once using a wildcard.</p>
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> unzip <span class="pp">*</span>.zip</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">$</span> unzip <span class="pp">*</span>.zip</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1024,10 +1022,10 @@ discuss what we are doing with each line of our loop.</p>
 <div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> for filename in <span class="pp">*</span>.zip</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> do</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> unzip <span class="va">$filename</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="ex">$</span> for filename in <span class="pp">*</span>.zip</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="op">&gt;</span> do</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="op">&gt;</span> unzip <span class="va">$filename</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre>
 </div>
 <p>In this example, the input is six filenames (one filename for each of
 our <code>.zip</code> files). Each time the loop iterates, it will
@@ -1088,7 +1086,7 @@ of our samples. We can see for sure that it is a directory if we use the
 <div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1105,7 +1103,7 @@ directories.</p>
 <div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span> SRR2584863_1_fastqc/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span> SRR2584863_1_fastqc/</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1117,7 +1115,7 @@ for this sample.</p>
 <div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> less SRR2584863_1_fastqc/summary.txt</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="ex">$</span> less SRR2584863_1_fastqc/summary.txt</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1150,7 +1148,7 @@ single file using the <code>cat</code> command. We will call this
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat <span class="pp">*</span>/summary.txt <span class="op">&gt;</span> ~/dc_workshop/docs/fastqc_summaries.txt</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="ex">$</span> cat <span class="pp">*</span>/summary.txt <span class="op">&gt;</span> ~/dc_workshop/docs/fastqc_summaries.txt</span></code></pre>
 </div>
 <div id="exercise-3" class="callout challenge">
 <div class="callout-square">
@@ -1170,14 +1168,14 @@ test(s) did those samples fail?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4">Show me the solution</h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>We can get the list of all failed tests using <code>grep</code>.</p>
 <div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/docs</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> grep FAIL fastqc_summaries.txt</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="ex">$</span> cd ~/dc_workshop/docs</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="ex">$</span> grep FAIL fastqc_summaries.txt</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1202,13 +1200,12 @@ FAIL    Adapter Content SRR2589044_2.fastq.gz</code></pre>
 </div>
 </section><section id="other-notes-optional"><h2 class="section-heading">Other notes – optional<a class="anchor" aria-label="anchor" href="#other-notes-optional"></a>
 </h2>
-<hr class="half-width"><div id="quality-encodings-vary" class="callout callout">
+<hr class="half-width"><div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="quality-encodings-vary" class="callout-inner">
-<h3 class="callout-title">Quality encodings vary<a class="anchor" aria-label="anchor" href="#quality-encodings-vary"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="quality-encodings-vary">Quality encodings vary<a class="anchor" aria-label="anchor" href="#quality-encodings-vary"></a></h3>
 <div class="callout-content">
 <p>Although we have used a particular quality encoding system to
 demonstrate interpretation of read quality, different sequencing
@@ -1224,13 +1221,12 @@ reads!</p>
 </div>
 </div>
 </div>
-<div id="same-symbols-different-meanings" class="callout callout">
+<div id="callout4" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="same-symbols-different-meanings" class="callout-inner">
-<h3 class="callout-title">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#same-symbols-different-meanings"></a>
-</h3>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="same-symbols-different-meanings">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#same-symbols-different-meanings"></a></h3>
 <div class="callout-content">
 <p>Here we see <code>&gt;</code> being used as a shell prompt, whereas
 <code>&gt;</code> is also used to redirect output. Similarly,
@@ -1318,7 +1314,7 @@ multiple files with a single command.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/02-quality-control.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-02-27"
+  "datePublished": "2024-03-05"
 }
 
   </script><script>
