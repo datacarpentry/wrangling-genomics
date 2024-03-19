@@ -358,12 +358,13 @@ that directory.</p>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_1.fastq.gz</span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR258/006/SRR2584866/SRR2584866_2.fastq.gz</span></code></pre>
 </div>
-<div id="callout1" class="callout">
+<div id="faster-option" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="faster-option">Faster option<a class="anchor" aria-label="anchor" href="#faster-option"></a></h3>
+<div id="faster-option" class="callout-inner">
+<h3 class="callout-title">Faster option<a class="anchor" aria-label="anchor" href="#faster-option"></a>
+</h3>
 <div class="callout-content">
 <p>If your workshop is short on time or the venue’s internet connection
 is weak or unstable, learners can avoid needing to download the data and
@@ -830,12 +831,13 @@ top of your screen or the Cmd+t keyboard shortcut) and type:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">$</span> scp dcuser@ec2-34-238-162-94.compute-1.amazonaws.com:~/dc_workshop/results/fastqc_untrimmed_reads/<span class="pp">*</span>.html ~/Desktop/fastqc_html</span></code></pre>
 </div>
-<div id="callout2" class="callout">
+<div id="note-on-using-zsh" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="note-on-using-zsh">Note on using zsh<a class="anchor" aria-label="anchor" href="#note-on-using-zsh"></a></h3>
+<div id="note-on-using-zsh" class="callout-inner">
+<h3 class="callout-title">Note on using zsh<a class="anchor" aria-label="anchor" href="#note-on-using-zsh"></a>
+</h3>
 <div class="callout-content">
 <p>If you are using zsh instead of bash (macOS for example changed the
 default recently to zsh), it is likely that a
@@ -1202,12 +1204,13 @@ FAIL    Adapter Content SRR2589044_2.fastq.gz</code></pre>
 </div>
 </section><section id="other-notes-optional"><h2 class="section-heading">Other notes – optional<a class="anchor" aria-label="anchor" href="#other-notes-optional"></a>
 </h2>
-<hr class="half-width"><div id="callout3" class="callout">
+<hr class="half-width"><div id="quality-encodings-vary" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="quality-encodings-vary">Quality encodings vary<a class="anchor" aria-label="anchor" href="#quality-encodings-vary"></a></h3>
+<div id="quality-encodings-vary" class="callout-inner">
+<h3 class="callout-title">Quality encodings vary<a class="anchor" aria-label="anchor" href="#quality-encodings-vary"></a>
+</h3>
 <div class="callout-content">
 <p>Although we have used a particular quality encoding system to
 demonstrate interpretation of read quality, different sequencing
@@ -1223,12 +1226,13 @@ reads!</p>
 </div>
 </div>
 </div>
-<div id="callout4" class="callout">
+<div id="same-symbols-different-meanings" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="same-symbols-different-meanings">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#same-symbols-different-meanings"></a></h3>
+<div id="same-symbols-different-meanings" class="callout-inner">
+<h3 class="callout-title">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#same-symbols-different-meanings"></a>
+</h3>
 <div class="callout-content">
 <p>Here we see <code>&gt;</code> being used as a shell prompt, whereas
 <code>&gt;</code> is also used to redirect output. Similarly,
@@ -1293,7 +1297,7 @@ multiple files with a single command.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.2" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.3" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.4" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.1" class="external-link">varnish (1.0.1)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1316,7 +1320,7 @@ multiple files with a single command.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/02-quality-control.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-03-12"
+  "datePublished": "2024-03-19"
 }
 
   </script><script>
