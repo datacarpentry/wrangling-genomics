@@ -440,7 +440,7 @@ $ for infile in ~/dc_workshop/results/vcf/*_final_variants.vcf
 ```
 
 For SRR2589044 from generation 5000 there were 10 mutations, for SRR2584863 from generation 15000 there were 25 mutations,
-and SRR2584866 from generation 766 mutations. In the last generation, a hypermutable phenotype had evolved, causing this
+and SRR2584866 from generation 50000 there were 766 mutations. In the last generation, a hypermutable phenotype had evolved, causing this
 strain to have more mutations.
 
 :::::::::::::::::::::::::
