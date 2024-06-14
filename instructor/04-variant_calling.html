@@ -257,7 +257,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Variant Calling Workflow</h1>
-        <p>Last updated on 2023-05-04 |
+        <p>Last updated on 2024-06-14 |
         
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/04-variant_calling.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -349,7 +349,7 @@ it. What is the real name of the genome?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -618,7 +618,7 @@ than transversions:</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats results/bcf/SRR2584866_variants.vcf <span class="kw">|</span> <span class="fu">grep</span> TSTV</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">$</span> bcftools stats results/vcf/SRR2584866_variants.vcf <span class="kw">|</span> <span class="fu">grep</span> TSTV</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co"># TSTV, transitions/transversions:</span></span>
 <span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)</span></span>
 <span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="ex">TSTV</span>	0	628	58	10.83	628	58	10.83</span>
@@ -761,7 +761,7 @@ learned to assess how many variants are in the vcf file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2">Show me the solution</h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -878,7 +878,7 @@ canonical nucleotide in that position?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3">Show me the solution</h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1085,7 +1085,7 @@ file, and how it was derived.</li>
   "url": "https://datacarpentry.github.io/wrangling-genomics/instructor/04-variant_calling.html",
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/04-variant_calling.html",
   "dateCreated": "2015-03-24",
-  "dateModified": "2023-05-04",
+  "dateModified": "2024-06-14",
   "datePublished": "2024-06-14"
 }
 
