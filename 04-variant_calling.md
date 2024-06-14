@@ -271,7 +271,7 @@ calculating the ratio of [transitions(TS)](https://en.wikipedia.org/wiki/Transit
 where transitions should be more likely to occur than transversions:
 
 ```bash
-$ bcftools stats results/bcf/SRR2584866_variants.vcf | grep TSTV
+$ bcftools stats results/vcf/SRR2584866_variants.vcf | grep TSTV
 # TSTV, transitions/transversions:
 # TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)
 TSTV	0	628	58	10.83	628	58	10.83
