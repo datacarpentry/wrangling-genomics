@@ -158,6 +158,7 @@ what we are doing.
 
 ```output
 echo "Saving summary..."
+mkdir -p ~/dc_workshops/docs
 cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
 ```
 
