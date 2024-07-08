@@ -500,7 +500,7 @@ in the gene *mutL*, which controls DNA mismatch repair.
 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
 Open a new tab in your terminal window and create a new folder. We will put this folder on our Desktop for
-demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and
+demonstration purposes, but in general you should avoid proliferating folders and files on your Desktop and
 instead organize files within a directory structure like we have been using in our `dc_workshop` directory.
 
 ```bash
