@@ -46,7 +46,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -170,7 +170,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -189,7 +189,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -203,14 +203,14 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#background">Background</a></li>
 <li><a href="#the-data">The data</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -219,7 +219,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-quality-control.html">2. Assessing Read Quality</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -228,7 +228,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="03-trimming.html">3. Trimming and Filtering</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -237,7 +237,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="04-variant_calling.html">4. Variant Calling Workflow</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -246,7 +246,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-automation.html">5. Automating a Variant Calling Workflow</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -278,10 +278,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -302,20 +302,20 @@
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/02-quality-control.html" rel="next">
-          Next: Assessing Read... 
+          Next: Assessing Read...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Background and Metadata</h1>
         <p>Last updated on 2023-05-04 |
-        
+
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/01-background.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -346,8 +346,8 @@
 </div>
 </div>
 </div>
-<section id="background"><h2 class="section-heading">Background<a class="anchor" aria-label="anchor" href="#background"></a>
-</h2>
+<section><h2 class="section-heading" id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+<a class="anchor" aria-label="anchor" href="#background"></a></h2>
 <hr class="half-width"><p>We are going to use a long-term sequencing dataset from a population
 of <em>Escherichia coli</em>.</p>
 <ul><li>
@@ -369,8 +369,8 @@ occurring strains of <em>E. coli</em> are harmless. Most importantly,
 the genetics of <em>E. coli</em> are fairly well understood and can be
 manipulated to study adaptation and evolution.</li>
 </ul></li>
-</ul></section><section id="the-data"><h2 class="section-heading">The data<a class="anchor" aria-label="anchor" href="#the-data"></a>
-</h2>
+</ul></section><section><h2 class="section-heading" id="the-data">The data<a class="anchor" aria-label="anchor" href="#the-data"></a>
+<a class="anchor" aria-label="anchor" href="#the-data"></a></h2>
 <hr class="half-width"><ul><li><p>The data we are going to use is part of a long-term evolution
 experiment led by <a href="https://en.wikipedia.org/wiki/E._coli_long-term_evolution_experiment" class="external-link">Richard
 Lenski</a>.</p></li>
@@ -457,7 +457,7 @@ the columns represent:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>25 different generations</li>
 <li>62 rows, 12 columns</li>
@@ -494,7 +494,7 @@ metadata.</li>
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/02-quality-control.html" rel="next">
-          Next: Assessing Read... 
+          Next: Assessing Read...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -505,18 +505,18 @@ metadata.</li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/01-background.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/datacarpentry/wrangling-genomics/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/datacarpentry/wrangling-genomics/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/datacarpentry/wrangling-genomics/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -541,7 +541,7 @@ metadata.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/01-background.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-08"
 }
 
   </script><script>

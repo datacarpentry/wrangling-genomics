@@ -46,7 +46,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -170,7 +170,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -189,7 +189,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -198,7 +198,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="01-background.html">1. Background and Metadata</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -207,7 +207,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-quality-control.html">2. Assessing Read Quality</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -221,7 +221,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#cleaning-reads">Cleaning reads</a></li>
@@ -229,7 +229,7 @@
 <li><a href="#running-trimmomatic">Running Trimmomatic</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -238,7 +238,7 @@
     <div class="accordion-header" id="flush-heading5">
         <a href="04-variant_calling.html">4. Variant Calling Workflow</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -247,7 +247,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-automation.html">5. Automating a Variant Calling Workflow</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -279,10 +279,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -303,20 +303,20 @@
           Previous: Assessing Read
         </a>
         <a class="chapter-link float-end" href="../instructor/04-variant_calling.html" rel="next">
-          Next: Variant Calling... 
+          Next: Variant Calling...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Trimming and Filtering</h1>
         <p>Last updated on 2023-05-04 |
-        
+
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/03-trimming.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 55 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -348,8 +348,8 @@ tools.</li>
 </div>
 </div>
 </div>
-<section id="cleaning-reads"><h2 class="section-heading">Cleaning reads<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a>
-</h2>
+<section><h2 class="section-heading" id="cleaning-reads">Cleaning reads<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a>
+<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a></h2>
 <hr class="half-width"><p>In the previous episode, we took a high-level look at the quality of
 each of our samples using FastQC. We visualized per-base quality graphs
 showing the distribution of read quality at each base across all reads
@@ -364,8 +364,8 @@ error.</p>
 <p>We will use a program called <a href="https://www.usadellab.org/cms/?page=trimmomatic" class="external-link">Trimmomatic</a>
 to filter poor quality reads and trim poor quality bases from our
 samples.</p>
-</section><section id="trimmomatic-options"><h2 class="section-heading">Trimmomatic options<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a>
-</h2>
+</section><section><h2 class="section-heading" id="trimmomatic-options">Trimmomatic options<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a>
+<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a></h2>
 <hr class="half-width"><p>Trimmomatic has a variety of options to trim your reads. If we run
 the following command, we can see some of our options.</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -377,11 +377,11 @@ the following command, we can see some of our options.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>Usage: 
+<pre class="output" tabindex="0"><code>Usage:
        PE [-version] [-threads &lt;threads&gt;] [-phred33|-phred64] [-trimlog &lt;trimLogFile&gt;] [-summary &lt;statsSummaryFile&gt;] [-quiet] [-validatePairs] [-basein &lt;inputBase&gt; | &lt;inputFile1&gt; &lt;inputFile2&gt;] [-baseout &lt;outputBase&gt; | &lt;outputFile1P&gt; &lt;outputFile1U&gt; &lt;outputFile2P&gt; &lt;outputFile2U&gt;] &lt;trimmer1&gt;...
-   or: 
+   or:
        SE [-version] [-threads &lt;threads&gt;] [-phred33|-phred64] [-trimlog &lt;trimLogFile&gt;] [-summary &lt;statsSummaryFile&gt;] [-quiet] &lt;inputFile&gt; &lt;outputFile&gt; &lt;trimmer1&gt;...
-   or: 
+   or:
        -version</code></pre>
 </div>
 <p>This output shows us that we must first specify whether we have
@@ -503,8 +503,8 @@ your code more readable.</p>
 </div>
 </div>
 </div>
-</section><section id="running-trimmomatic"><h2 class="section-heading">Running Trimmomatic<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a>
-</h2>
+</section><section><h2 class="section-heading" id="running-trimmomatic">Running Trimmomatic<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a>
+<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a></h2>
 <hr class="half-width"><p>Now we will run Trimmomatic on our data. To begin, navigate to your
 <code>untrimmed_fastq</code> data directory:</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -576,7 +576,7 @@ questions.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>0.23%</li>
 <li>79.96%</li>
@@ -683,7 +683,7 @@ Trimmomatic?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -740,7 +740,7 @@ whether your per base sequence quality is higher after trimming.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>In your AWS terminal window do:</p>
 <div class="codewrapper sourceCode" id="cb20">
@@ -796,7 +796,7 @@ important!</li>
           Previous: Assessing Read
         </a>
         <a class="chapter-link float-end" href="../instructor/04-variant_calling.html" rel="next">
-          Next: Variant Calling... 
+          Next: Variant Calling...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -807,18 +807,18 @@ important!</li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/03-trimming.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/datacarpentry/wrangling-genomics/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/datacarpentry/wrangling-genomics/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/datacarpentry/wrangling-genomics/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -843,7 +843,7 @@ important!</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/03-trimming.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-08"
 }
 
   </script><script>

@@ -46,7 +46,7 @@
             </li>
           </ul></li>
       </div>
-      
+
       <div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -170,7 +170,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -189,7 +189,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -198,7 +198,7 @@
     <div class="accordion-header" id="flush-heading2">
         <a href="01-background.html">1. Background and Metadata</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -207,7 +207,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="02-quality-control.html">2. Assessing Read Quality</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -216,7 +216,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="03-trimming.html">3. Trimming and Filtering</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -230,14 +230,14 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#alignment-to-a-reference-genome">Alignment to a reference genome</a></li>
 <li><a href="#setting-up">Setting up</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -246,7 +246,7 @@
     <div class="accordion-header" id="flush-heading6">
         <a href="05-automation.html">5. Automating a Variant Calling Workflow</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -278,10 +278,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -302,20 +302,20 @@
           Previous: Trimming and
         </a>
         <a class="chapter-link float-end" href="../instructor/05-automation.html" rel="next">
-          Next: Automating a Variant... 
+          Next: Automating a Variant...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Variant Calling Workflow</h1>
         <p>Last updated on 2024-06-14 |
-        
+
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/04-variant_calling.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 60 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -356,8 +356,8 @@ population changed relative to the original population, <em>E. coli</em>
 strain REL606. Therefore, we will align each of our samples to the
 <em>E. coli</em> REL606 reference genome, and see what differences exist
 in our reads versus the genome.</p>
-<section id="alignment-to-a-reference-genome"><h2 class="section-heading">Alignment to a reference genome<a class="anchor" aria-label="anchor" href="#alignment-to-a-reference-genome"></a>
-</h2>
+<section><h2 class="section-heading" id="alignment-to-a-reference-genome">Alignment to a reference genome<a class="anchor" aria-label="anchor" href="#alignment-to-a-reference-genome"></a>
+<a class="anchor" aria-label="anchor" href="#alignment-to-a-reference-genome"></a></h2>
 <hr class="half-width"><figure><img src="../fig/variant_calling_workflow_align.png" alt="workflow_align" class="figure mx-auto d-block"></figure><p>We perform read alignment or mapping to determine where in the genome
 our reads originated from. There are a number of tools to choose from
 and, while there is no gold standard, there are some tools that are
@@ -367,8 +367,8 @@ sequences against a large reference genome.</p>
 <p>The alignment process consists of two steps:</p>
 <ol style="list-style-type: decimal"><li>Indexing the reference genome</li>
 <li>Aligning the reads to the reference genome</li>
-</ol></section><section id="setting-up"><h2 class="section-heading">Setting up<a class="anchor" aria-label="anchor" href="#setting-up"></a>
-</h2>
+</ol></section><section><h2 class="section-heading" id="setting-up">Setting up<a class="anchor" aria-label="anchor" href="#setting-up"></a>
+<a class="anchor" aria-label="anchor" href="#setting-up"></a></h2>
 <hr class="half-width"><p>First we download the reference genome for <em>E. coli</em> REL606.
 Although we could copy or move the file with <code>cp</code> or
 <code>mv</code>, most genomics workflows begin with a download step, so
@@ -1090,7 +1090,7 @@ file, and how it was derived.</li>
           Previous: Trimming and
         </a>
         <a class="chapter-link float-end" href="../instructor/05-automation.html" rel="next">
-          Next: Automating a Variant... 
+          Next: Automating a Variant...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -1101,18 +1101,18 @@ file, and how it was derived.</li>
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/datacarpentry/wrangling-genomics/edit/main/episodes/04-variant_calling.md" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/datacarpentry/wrangling-genomics/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/datacarpentry/wrangling-genomics/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/datacarpentry/wrangling-genomics/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
 			</div>
@@ -1137,7 +1137,7 @@ file, and how it was derived.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/04-variant_calling.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2024-06-14",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-08"
 }
 
   </script><script>
