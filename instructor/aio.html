@@ -298,10 +298,10 @@
             </div>
 
             <hr class="half-width">
-<div class="accordion accordion-flush resources" id="accordionFlush12">
+<div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -325,7 +325,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources">
+            <hr class="half-width lesson-resources">
 <a href="../instructor/aio.html">See all in one page</a>
 
 
@@ -387,7 +387,6 @@
 </div>
 </div>
 <section><h2 class="section-heading" id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
-<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
 <hr class="half-width">
 <p>We are going to use a long-term sequencing dataset from a population
@@ -419,7 +418,6 @@ manipulated to study adaptation and evolution.</li>
 </ul>
 </li>
 </ul></section><section><h2 class="section-heading" id="the-data">The data<a class="anchor" aria-label="anchor" href="#the-data"></a>
-<a class="anchor" aria-label="anchor" href="#the-data"></a>
 </h2>
 <hr class="half-width">
 <ul>
@@ -523,8 +521,7 @@ the columns represent:</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="challenge" class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#challenge"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Based on the metadata, can you answer the following questions?</p>
 <ol style="list-style-type: decimal">
@@ -561,8 +558,7 @@ the columns represent:</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>It is important to record and understand your experiment’s
@@ -611,7 +607,6 @@ files.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="bioinformatic-workflows">Bioinformatic workflows<a class="anchor" aria-label="anchor" href="#bioinformatic-workflows"></a>
-<a class="anchor" aria-label="anchor" href="#bioinformatic-workflows"></a>
 </h2>
 <hr class="half-width">
 <p>When working with high-throughput sequencing data, the raw reads you
@@ -638,7 +633,6 @@ tools that are used to analyze data at different stages of the workflow
 are therefore built under the assumption that the data will be provided
 in a specific format.</p>
 </section><section><h2 class="section-heading" id="starting-with-data">Starting with data<a class="anchor" aria-label="anchor" href="#starting-with-data"></a>
-<a class="anchor" aria-label="anchor" href="#starting-with-data"></a>
 </h2>
 <hr class="half-width">
 <p>Often times, the first step in a bioinformatic workflow is getting
@@ -687,8 +681,7 @@ that directory.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="faster-option" class="callout-inner">
-<h3 class="callout-title">Faster option<a class="anchor" aria-label="anchor" href="#faster-option"></a>
-</h3>
+<h3 class="callout-title">Faster option</h3>
 <div class="callout-content">
 <p>If your workshop is short on time or the venue’s internet connection
 is weak or unstable, learners can avoid needing to download the data and
@@ -716,7 +709,6 @@ unzip one of the files so that we can look at the fastq format.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> gunzip SRR2584863_1.fastq.gz</span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="quality-control">Quality control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
-<a class="anchor" aria-label="anchor" href="#quality-control"></a>
 </h2>
 <hr class="half-width">
 <p>We will now assess the quality of the sequence reads contained in our
@@ -817,8 +809,7 @@ end of the sequence is very poor (<code>#</code> = a quality score of
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>What is the last read in the <code>SRR2584863_1.fastq</code> file?
 How confident are you in this read?</p>
@@ -1035,8 +1026,7 @@ directory</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>How big are the files? (Hint: Look at the options for the
 <code>ls</code> command to see how to show file sizes.)</p>
@@ -1184,8 +1174,7 @@ top of your screen or the Cmd+t keyboard shortcut) and type:</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="note-on-using-zsh" class="callout-inner">
-<h3 class="callout-title">Note on using zsh<a class="anchor" aria-label="anchor" href="#note-on-using-zsh"></a>
-</h3>
+<h3 class="callout-title">Note on using zsh</h3>
 <div class="callout-content">
 <p>If you are using zsh instead of bash (macOS for example changed the
 default recently to zsh), it is likely that a
@@ -1238,8 +1227,7 @@ all at once via a right click menu in your file browser.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-2" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>Discuss your results with a neighbor. Which sample(s) looks the best
 in terms of per base sequence quality? Which sample(s) look the
@@ -1512,8 +1500,7 @@ single file using the <code>cat</code> command. We will call this
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-3" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-3"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>Which samples failed at least one of FastQC’s quality tests? What
 test(s) did those samples fail?</p>
@@ -1556,7 +1543,6 @@ FAIL    Adapter Content SRR2589044_2.fastq.gz</code></pre>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="other-notes-optional">Other notes – optional<a class="anchor" aria-label="anchor" href="#other-notes-optional"></a>
-<a class="anchor" aria-label="anchor" href="#other-notes-optional"></a>
 </h2>
 <hr class="half-width">
 <div id="quality-encodings-vary" class="callout">
@@ -1564,8 +1550,7 @@ FAIL    Adapter Content SRR2589044_2.fastq.gz</code></pre>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="quality-encodings-vary" class="callout-inner">
-<h3 class="callout-title">Quality encodings vary<a class="anchor" aria-label="anchor" href="#quality-encodings-vary"></a>
-</h3>
+<h3 class="callout-title">Quality encodings vary</h3>
 <div class="callout-content">
 <p>Although we have used a particular quality encoding system to
 demonstrate interpretation of read quality, different sequencing
@@ -1586,8 +1571,7 @@ reads!</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="same-symbols-different-meanings" class="callout-inner">
-<h3 class="callout-title">Same symbols, different meanings<a class="anchor" aria-label="anchor" href="#same-symbols-different-meanings"></a>
-</h3>
+<h3 class="callout-title">Same symbols, different meanings</h3>
 <div class="callout-content">
 <p>Here we see <code>&gt;</code> being used as a shell prompt, whereas
 <code>&gt;</code> is also used to redirect output. Similarly,
@@ -1606,8 +1590,7 @@ the value of a variable.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Quality encodings vary across sequencing platforms.</li>
@@ -1657,7 +1640,6 @@ tools.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="cleaning-reads">Cleaning reads<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a>
-<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a>
 </h2>
 <hr class="half-width">
 <p>In the previous episode, we took a high-level look at the quality of
@@ -1675,7 +1657,6 @@ error.</p>
 to filter poor quality reads and trim poor quality bases from our
 samples.</p>
 </section><section><h2 class="section-heading" id="trimmomatic-options">Trimmomatic options<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a>
-<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a>
 </h2>
 <hr class="half-width">
 <p>Trimmomatic has a variety of options to trim your reads. If we run
@@ -1885,8 +1866,7 @@ phred score is below 20</td>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="multi-line-commands" class="callout-inner">
-<h3 class="callout-title">Multi-line commands<a class="anchor" aria-label="anchor" href="#multi-line-commands"></a>
-</h3>
+<h3 class="callout-title">Multi-line commands</h3>
 <div class="callout-content">
 <p>Some of the commands we ran in this lesson are long! When typing a
 long command into your terminal, you can use the <code>\</code>
@@ -1896,7 +1876,6 @@ your code more readable.</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="running-trimmomatic">Running Trimmomatic<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a>
-<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a>
 </h2>
 <hr class="half-width">
 <p>Now we will run Trimmomatic on our data. To begin, navigate to your
@@ -1955,8 +1934,7 @@ TrimmomaticPE: Completed successfully</code></pre>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>Use the output from your Trimmomatic command to answer the following
 questions.</p>
@@ -1972,7 +1950,7 @@ questions.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>0.23%</li>
@@ -2067,8 +2045,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz</code></pre>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>We trimmed our fastq files with Nextera adapters, but there are other
 adapters that are commonly used. What other adapter files came with
@@ -2081,7 +2058,7 @@ Trimmomatic?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2123,8 +2100,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="bonus-exercise-advanced" class="callout-inner">
-<h3 class="callout-title">Bonus exercise (advanced)<a class="anchor" aria-label="anchor" href="#bonus-exercise-advanced"></a>
-</h3>
+<h3 class="callout-title">Bonus exercise (advanced)</h3>
 <div class="callout-content">
 <p>Now that our samples have gone through quality control, they should
 perform better on the quality tests run by FastQC. Go ahead and re-run
@@ -2138,7 +2114,7 @@ whether your per base sequence quality is higher after trimming.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>In your AWS terminal window do:</p>
 <div class="codewrapper sourceCode" id="cb20">
@@ -2173,8 +2149,7 @@ well though, and its performance is good enough for our workflow.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>The options you set for the command-line tools you use are
@@ -2232,7 +2207,6 @@ strain REL606. Therefore, we will align each of our samples to the
 <em>E. coli</em> REL606 reference genome, and see what differences exist
 in our reads versus the genome.</p>
 <section><h2 class="section-heading" id="alignment-to-a-reference-genome">Alignment to a reference genome<a class="anchor" aria-label="anchor" href="#alignment-to-a-reference-genome"></a>
-<a class="anchor" aria-label="anchor" href="#alignment-to-a-reference-genome"></a>
 </h2>
 <hr class="half-width">
 <figure><img src="../fig/variant_calling_workflow_align.png" alt="workflow_align" class="figure mx-auto d-block"></figure><p>We perform read alignment or mapping to determine where in the genome
@@ -2246,7 +2220,6 @@ sequences against a large reference genome.</p>
 <li>Indexing the reference genome</li>
 <li>Aligning the reads to the reference genome</li>
 </ol></section><section><h2 class="section-heading" id="setting-up">Setting up<a class="anchor" aria-label="anchor" href="#setting-up"></a>
-<a class="anchor" aria-label="anchor" href="#setting-up"></a>
 </h2>
 <hr class="half-width">
 <p>First we download the reference genome for <em>E. coli</em> REL606.
@@ -2266,8 +2239,7 @@ we will practice that here.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>We saved this file as
 <code>data/ref_genome/ecoli_rel606.fasta.gz</code> and then decompressed
@@ -2280,7 +2252,7 @@ it. What is the real name of the genome?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2543,8 +2515,7 @@ specifies where to write the output file:</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="filtering" class="callout-inner">
-<h3 class="callout-title">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
-</h3>
+<h3 class="callout-title">Filtering</h3>
 <div class="callout-content">
 <p>The <code>vcfutils.pl varFilter</code> call filters out variants that
 do not meet minimum quality default criteria, which can be changed
@@ -2744,8 +2715,7 @@ format.</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>Use the <code>grep</code> and <code>wc</code> commands you have
 learned to assess how many variants are in the vcf file.</p>
@@ -2757,7 +2727,7 @@ learned to assess how many variants are in the vcf file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2862,8 +2832,7 @@ sample, type <code>CP000819.1:50</code> to view the 50th base. Type
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-2" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>Visualize the alignment of the reads for our <code>SRR2584866</code>
 sample. What variant is present at position 4377265? What is the
@@ -2876,7 +2845,7 @@ canonical nucleotide in that position?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2977,8 +2946,7 @@ next lesson.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="installing-software" class="callout-inner">
-<h3 class="callout-title">Installing software<a class="anchor" aria-label="anchor" href="#installing-software"></a>
-</h3>
+<h3 class="callout-title">Installing software</h3>
 <div class="callout-content">
 <p>It is worth noting that all of the software we are using for this
 workshop has been pre-installed on our remote computer. This saves us a
@@ -2996,8 +2964,7 @@ packages.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="bwa-alignment-options" class="callout-inner">
-<h3 class="callout-title">BWA alignment options<a class="anchor" aria-label="anchor" href="#bwa-alignment-options"></a>
-</h3>
+<h3 class="callout-title">BWA alignment options</h3>
 <div class="callout-content">
 <p>BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM.
 The first algorithm is designed for Illumina sequence reads up to 100bp,
@@ -3013,8 +2980,7 @@ for high-quality queries as it is faster and more accurate.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Bioinformatic command line tools are collections of commands that
@@ -3066,7 +3032,6 @@ file, and how it was derived.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="what-is-a-shell-script">What is a shell script?<a class="anchor" aria-label="anchor" href="#what-is-a-shell-script"></a>
-<a class="anchor" aria-label="anchor" href="#what-is-a-shell-script"></a>
 </h2>
 <hr class="half-width">
 <p>You wrote a simple shell script in a <a href="https://www.datacarpentry.org/shell-genomics/05-writing-scripts" class="external-link">previous
@@ -3130,8 +3095,7 @@ during each iteration of the loop.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="creating-variables" class="callout-inner">
-<h3 class="callout-title">Creating variables<a class="anchor" aria-label="anchor" href="#creating-variables"></a>
-</h3>
+<h3 class="callout-title">Creating variables</h3>
 <div class="callout-content">
 <p>Within the Bash shell you can create variables at any time (as we did
 above, and during the ‘for’ loop lesson). Assign any name and the value
@@ -3149,7 +3113,6 @@ a single file with a <code>.sh</code> extension. The <code>.sh</code> is
 not essential, but serves as a reminder to ourselves and to the computer
 that this is a shell script.</p>
 </section><section><h2 class="section-heading" id="analyzing-quality-with-fastqc">Analyzing quality with FastQC<a class="anchor" aria-label="anchor" href="#analyzing-quality-with-fastqc"></a>
-<a class="anchor" aria-label="anchor" href="#analyzing-quality-with-fastqc"></a>
 </h2>
 <hr class="half-width">
 <p>We will use the command <code>touch</code> to create a new file where
@@ -3256,8 +3219,7 @@ cat */summary.txt &gt; ~/dc_workshop/docs/fastqc_summaries.txt</code></pre>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="using-echo-statements" class="callout-inner">
-<h3 class="callout-title">Using <code>echo</code> statements<a class="anchor" aria-label="anchor" href="#using-echo-statements"></a>
-</h3>
+<h3 class="callout-title">Using <code>echo</code> statements</h3>
 <div class="callout-content">
 <p>We have used <code>echo</code> statements to add progress statements
 to our script. Our script will print these statements as it is running
@@ -3326,7 +3288,6 @@ sample file (six times total).</p>
 <pre class="output" tabindex="0"><code>replace SRR2584866_fastqc/Icons/fastqc_icon.png? [y]es, [n]o, [A]ll, [N]one, [r]ename:</code></pre>
 </div>
 </section><section><h2 class="section-heading" id="automating-the-rest-of-our-variant-calling-workflow">Automating the rest of our variant calling workflow<a class="anchor" aria-label="anchor" href="#automating-the-rest-of-our-variant-calling-workflow"></a>
-<a class="anchor" aria-label="anchor" href="#automating-the-rest-of-our-variant-calling-workflow"></a>
 </h2>
 <hr class="half-width">
 <p>We can extend these principles to the entire variant calling
@@ -3538,8 +3499,7 @@ but add a different extension (e.g. <code>.sam</code>,
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>It is a good idea to add comments to your code so that you (or a
 collaborator) can make sense of what you did later. Look through your
@@ -3561,8 +3521,7 @@ code).</p>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>The samples we just performed variant calling on are part of the
 long-term evolution experiment introduced at the beginning of our
@@ -3609,8 +3568,7 @@ mutations.</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="bonus-exercise" class="callout-inner">
-<h3 class="callout-title">Bonus exercise<a class="anchor" aria-label="anchor" href="#bonus-exercise"></a>
-</h3>
+<h3 class="callout-title">Bonus exercise</h3>
 <div class="callout-content">
 <p>If you have time after completing the previous exercise, use
 <code>run_variant_calling.sh</code> to run the variant calling pipeline
@@ -3627,8 +3585,7 @@ number of variants change per sample?</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>We can combine multiple commands into a shell script to automate a
@@ -3664,7 +3621,7 @@ automated progress update.</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -3687,8 +3644,8 @@ automated progress update.</li>
   "url": "https://datacarpentry.github.io/wrangling-genomics/instructor/aio.html",
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/aio.html",
   "dateCreated": "2015-03-24",
-  "dateModified": "2024-08-20",
-  "datePublished": "2024-08-20"
+  "dateModified": "2024-08-27",
+  "datePublished": "2024-08-27"
 }
 
   </script><script>

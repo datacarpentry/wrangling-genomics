@@ -255,10 +255,10 @@
               </div>
             </div>
 
-            <hr class="half-width"><div class="accordion accordion-flush resources" id="accordionFlush12">
+            <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
                     RESOURCES
                   </button>
                 </h2>
@@ -278,7 +278,7 @@
                 </div>
               </div>
             </div>
-            <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
+            <hr class="half-width lesson-resources"><a href="../instructor/aio.html">See all in one page</a>
 
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
@@ -348,8 +348,7 @@ tools.</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="cleaning-reads">Cleaning reads<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a>
-<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a></h2>
+<section><h2 class="section-heading" id="cleaning-reads">Cleaning reads<a class="anchor" aria-label="anchor" href="#cleaning-reads"></a></h2>
 <hr class="half-width"><p>In the previous episode, we took a high-level look at the quality of
 each of our samples using FastQC. We visualized per-base quality graphs
 showing the distribution of read quality at each base across all reads
@@ -364,8 +363,7 @@ error.</p>
 <p>We will use a program called <a href="https://www.usadellab.org/cms/?page=trimmomatic" class="external-link">Trimmomatic</a>
 to filter poor quality reads and trim poor quality bases from our
 samples.</p>
-</section><section><h2 class="section-heading" id="trimmomatic-options">Trimmomatic options<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a>
-<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a></h2>
+</section><section><h2 class="section-heading" id="trimmomatic-options">Trimmomatic options<a class="anchor" aria-label="anchor" href="#trimmomatic-options"></a></h2>
 <hr class="half-width"><p>Trimmomatic has a variety of options to trim your reads. If we run
 the following command, we can see some of our options.</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -493,8 +491,7 @@ phred score is below 20</td>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="multi-line-commands" class="callout-inner">
-<h3 class="callout-title">Multi-line commands<a class="anchor" aria-label="anchor" href="#multi-line-commands"></a>
-</h3>
+<h3 class="callout-title">Multi-line commands</h3>
 <div class="callout-content">
 <p>Some of the commands we ran in this lesson are long! When typing a
 long command into your terminal, you can use the <code>\</code>
@@ -503,8 +500,7 @@ your code more readable.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="running-trimmomatic">Running Trimmomatic<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a>
-<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a></h2>
+</section><section><h2 class="section-heading" id="running-trimmomatic">Running Trimmomatic<a class="anchor" aria-label="anchor" href="#running-trimmomatic"></a></h2>
 <hr class="half-width"><p>Now we will run Trimmomatic on our data. To begin, navigate to your
 <code>untrimmed_fastq</code> data directory:</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -561,8 +557,7 @@ TrimmomaticPE: Completed successfully</code></pre>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>Use the output from your Trimmomatic command to answer the following
 questions.</p>
@@ -576,7 +571,7 @@ questions.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>0.23%</li>
 <li>79.96%</li>
@@ -669,8 +664,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2589044_1.fastq.gz</code></pre>
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="exercise-1" class="callout-inner">
-<h3 class="callout-title">Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"></a>
-</h3>
+<h3 class="callout-title">Exercise</h3>
 <div class="callout-content">
 <p>We trimmed our fastq files with Nextera adapters, but there are other
 adapters that are commonly used. What other adapter files came with
@@ -683,7 +677,7 @@ Trimmomatic?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -725,8 +719,7 @@ SRR2584863_2un.trim.fastq.gz  SRR2584866_2un.trim.fastq.gz  SRR2589044_2un.trim.
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="bonus-exercise-advanced" class="callout-inner">
-<h3 class="callout-title">Bonus exercise (advanced)<a class="anchor" aria-label="anchor" href="#bonus-exercise-advanced"></a>
-</h3>
+<h3 class="callout-title">Bonus exercise (advanced)</h3>
 <div class="callout-content">
 <p>Now that our samples have gone through quality control, they should
 perform better on the quality tests run by FastQC. Go ahead and re-run
@@ -740,7 +733,7 @@ whether your per base sequence quality is higher after trimming.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>In your AWS terminal window do:</p>
 <div class="codewrapper sourceCode" id="cb20">
@@ -775,8 +768,7 @@ well though, and its performance is good enough for our workflow.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>The options you set for the command-line tools you use are
 important!</li>
@@ -820,7 +812,7 @@ important!</li>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.5" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.3" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.6" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.6" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.4" class="external-link">varnish (1.0.4)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -843,7 +835,7 @@ important!</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/03-trimming.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2023-05-04",
-  "datePublished": "2024-08-20"
+  "datePublished": "2024-08-27"
 }
 
   </script><script>
