@@ -274,7 +274,7 @@ What other adapter files came with Trimmomatic?
 ## Solution
 
 ```bash
-$ ls ~/miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/
+$ ls ~/.miniconda3/pkgs/trimmomatic-0.38-0/share/trimmomatic-0.38-0/adapters/
 ```
 
 ```output
