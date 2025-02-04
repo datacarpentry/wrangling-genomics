@@ -102,8 +102,9 @@ community listed at <https://carpentries.org/connect/> including via social
 media, slack, newsletters, and email lists. You can also [reach us by
 email][contact].
 
-[repo]: https://example.com/FIXME
-[repo-issues]: https://example.com/FIXME/issues
+
+[repo]: https://github.com/datacarpentry/wrangling-genomics
+[repo-issues]: https://github.com/datacarpentry/wrangling-genomics/issues
 [contact]: mailto:team@carpentries.org
 [cp-site]: https://carpentries.org/
 [dc-issues]: https://github.com/issues?q=user%3Adatacarpentry

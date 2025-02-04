@@ -271,7 +271,7 @@ calculating the ratio of [transitions(TS)](https://en.wikipedia.org/wiki/Transit
 where transitions should be more likely to occur than transversions:
 
 ```bash
-$ bcftools stats results/bcf/SRR2584866_variants.vcf | grep TSTV
+$ bcftools stats results/vcf/SRR2584866_variants.vcf | grep TSTV
 # TSTV, transitions/transversions:
 # TSTV	[2]id	[3]ts	[4]tv	[5]ts/tv	[6]ts (1st ALT)	[7]tv (1st ALT)	[8]ts/tv (1st ALT)
 TSTV	0	628	58	10.83	628	58	10.83
@@ -500,7 +500,7 @@ in the gene *mutL*, which controls DNA mismatch repair.
 
 In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
 Open a new tab in your terminal window and create a new folder. We will put this folder on our Desktop for
-demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and
+demonstration purposes, but in general you should avoid proliferating folders and files on your Desktop and
 instead organize files within a directory structure like we have been using in our `dc_workshop` directory.
 
 ```bash
@@ -560,7 +560,7 @@ This saves us a lot of time - installing software can be a
 time-consuming and frustrating task - however, this does mean that
 you will not be able to walk out the door and start doing these
 analyses on your own computer. You will need to install
-the software first. Look at the [setup instructions](https://www.datacarpentry.org/wrangling-genomics/setup.html) for more information
+the software first. Look at the [setup instructions](https://datacarpentry.org/genomics-workshop/index.html#setup) for more information
 on installing these software packages.
 
 
