@@ -742,22 +742,22 @@ CP000819.1      64042   .       G       A       225     .       DP=18;VDB=0.4513
 understand our output.</p>
 <p>The first few columns represent the information we have about a
 predicted variation.</p>
-<table class="table"><colgroup><col width="2%"><col width="97%"></colgroup><thead><tr class="header"><th>column</th>
+<table class="table"><colgroup><col width="2%"><col width="97%"></colgroup><thead><tr><th>column</th>
 <th>info</th>
-</tr></thead><tbody><tr class="odd"><td>CHROM</td>
+</tr></thead><tbody><tr><td>CHROM</td>
 <td>contig location where the variation occurs</td>
-</tr><tr class="even"><td>POS</td>
+</tr><tr><td>POS</td>
 <td>position within the contig where the variation occurs</td>
-</tr><tr class="odd"><td>ID</td>
+</tr><tr><td>ID</td>
 <td>a <code>.</code> until we add annotation information</td>
-</tr><tr class="even"><td>REF</td>
+</tr><tr><td>REF</td>
 <td>reference genotype (forward strand)</td>
-</tr><tr class="odd"><td>ALT</td>
+</tr><tr><td>ALT</td>
 <td>sample genotype (forward strand)</td>
-</tr><tr class="even"><td>QUAL</td>
+</tr><tr><td>QUAL</td>
 <td>Phred-scaled probability that the observed variant exists at this
 site (higher is better)</td>
-</tr><tr class="odd"><td>FILTER</td>
+</tr><tr><td>FILTER</td>
 <td>a <code>.</code> if no quality filters have been applied, PASS if a
 filter is passed, or the name of the filters this variant failed</td>
 </tr></tbody></table><p>In an ideal world, the information in the <code>QUAL</code> column
@@ -765,26 +765,26 @@ would be all we needed to filter out bad variant calls. However, in
 reality we need to filter on multiple other metrics.</p>
 <p>The last two columns contain the genotypes and can be tricky to
 decode.</p>
-<table class="table"><colgroup><col width="2%"><col width="97%"></colgroup><thead><tr class="header"><th>column</th>
+<table class="table"><colgroup><col width="2%"><col width="97%"></colgroup><thead><tr><th>column</th>
 <th>info</th>
-</tr></thead><tbody><tr class="odd"><td>FORMAT</td>
+</tr></thead><tbody><tr><td>FORMAT</td>
 <td>lists in order the metrics presented in the final column</td>
-</tr><tr class="even"><td>results</td>
+</tr><tr><td>results</td>
 <td>lists the values associated with those metrics in order</td>
 </tr></tbody></table><p>For our file, the metrics presented are GT:PL:GQ.</p>
-<table class="table"><colgroup><col width="2%"><col width="97%"></colgroup><thead><tr class="header"><th>metric</th>
+<table class="table"><colgroup><col width="2%"><col width="97%"></colgroup><thead><tr><th>metric</th>
 <th>definition</th>
-</tr></thead><tbody><tr class="odd"><td>AD, DP</td>
+</tr></thead><tbody><tr><td>AD, DP</td>
 <td>the depth per allele by sample and coverage</td>
-</tr><tr class="even"><td>GT</td>
+</tr><tr><td>GT</td>
 <td>the genotype for the sample at this loci. For a diploid organism,
 the GT field indicates the two alleles carried by the sample, encoded by
 a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT
 allele, etc. A 0/0 means homozygous reference, 0/1 is heterozygous, and
 1/1 is homozygous for the alternate allele.</td>
-</tr><tr class="odd"><td>PL</td>
+</tr><tr><td>PL</td>
 <td>the likelihoods of the given genotypes</td>
-</tr><tr class="even"><td>GQ</td>
+</tr><tr><td>GQ</td>
 <td>the Phred-scaled confidence for the genotype</td>
 </tr></tbody></table><p>The Broad Institute’s <a href="https://www.broadinstitute.org/gatk/guide/article?id=1268" class="external-link">VCF
 guide</a> is an excellent place to learn more about the VCF file
@@ -1133,7 +1133,7 @@ file, and how it was derived.</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/04-variant_calling.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2024-07-08",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-05-05"
 }
 
   </script><script>

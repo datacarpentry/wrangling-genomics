@@ -452,56 +452,56 @@ notes and sources here</a>.</p>
 <p>This metadata describes information on the <em>Ara-3</em> clones and
 the columns represent:</p>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th>Column</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>strain</td>
 <td>strain name</td>
 </tr>
-<tr class="even">
+<tr>
 <td>generation</td>
 <td>generation when sample frozen</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>clade</td>
 <td>based on parsimony-based tree</td>
 </tr>
-<tr class="even">
+<tr>
 <td>reference</td>
 <td>study the samples were originally sequenced for</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>population</td>
 <td>ancestral population group</td>
 </tr>
-<tr class="even">
+<tr>
 <td>mutator</td>
 <td>hypermutability mutant status</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>facility</td>
 <td>facility samples were sequenced at</td>
 </tr>
-<tr class="even">
+<tr>
 <td>run</td>
 <td>Sequence read archive sample ID</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>read_type</td>
 <td>library type of reads</td>
 </tr>
-<tr class="even">
+<tr>
 <td>read_length</td>
 <td>length of reads in sample</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>sequencing_depth</td>
 <td>depth of sequencing</td>
 </tr>
-<tr class="even">
+<tr>
 <td>cit</td>
 <td>citrate-using mutant status</td>
 </tr>
@@ -532,7 +532,7 @@ the columns represent:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>25 different generations</li>
@@ -715,24 +715,24 @@ a little decoding. Some rules about the format include…</p>
 <col width="3%">
 <col width="96%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>1</td>
 <td>Always begins with ‘@’ and then information about the read</td>
 </tr>
-<tr class="even">
+<tr>
 <td>2</td>
 <td>The actual DNA sequence</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>3</td>
 <td>Always begins with a ‘+’ and sometimes the same info in line 1</td>
 </tr>
-<tr class="even">
+<tr>
 <td>4</td>
 <td>Has a string of characters which represent the quality scores; must
 have same number of characters as line 2</td>
@@ -1693,37 +1693,37 @@ the optional settings and lastly the name of the output file.</p>
 <col width="11%">
 <col width="88%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>option</th>
 <th>meaning</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>&lt;inputFile1&gt;</td>
 <td>Input reads to be trimmed. Typically the file name will contain an
 <code>_1</code> or <code>_R1</code> in the name.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>&lt;inputFile2&gt;</td>
 <td>Input reads to be trimmed. Typically the file name will contain an
 <code>_2</code> or <code>_R2</code> in the name.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>&lt;outputFile1P&gt;</td>
 <td>Output file that contains surviving pairs from the <code>_1</code>
 file.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>&lt;outputFile1U&gt;</td>
 <td>Output file that contains orphaned reads from the <code>_1</code>
 file.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>&lt;outputFile2P&gt;</td>
 <td>Output file that contains surviving pairs from the <code>_2</code>
 file.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>&lt;outputFile2U&gt;</td>
 <td>Output file that contains orphaned reads from the <code>_2</code>
 file.</td>
@@ -1737,46 +1737,46 @@ parameters:</p>
 <col width="11%">
 <col width="88%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>step</th>
 <th>meaning</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>ILLUMINACLIP</code></td>
 <td>Perform adapter removal.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>SLIDINGWINDOW</code></td>
 <td>Perform sliding window trimming, cutting once the average quality
 within the window falls below a threshold.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>LEADING</code></td>
 <td>Cut bases off the start of a read, if below a threshold
 quality.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>TRAILING</code></td>
 <td>Cut bases off the end of a read, if below a threshold quality.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>CROP</code></td>
 <td>Cut the read to a specified length.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>HEADCROP</code></td>
 <td>Cut the specified number of bases from the start of the read.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>MINLEN</code></td>
 <td>Drop an entire read if it is below a specified length.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>TOPHRED33</code></td>
 <td>Convert quality scores to Phred-33.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>TOPHRED64</code></td>
 <td>Convert quality scores to Phred-64.</td>
 </tr>
@@ -1804,55 +1804,55 @@ do not have the files it refers to:</p>
 <col width="11%">
 <col width="88%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>code</th>
 <th>meaning</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>PE</code></td>
 <td>that it will be taking a paired end file as input</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>-threads 4</code></td>
 <td>to use four computing threads to run (this will speed up our
 run)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>SRR_1056_1.fastq</code></td>
 <td>the first input file name</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>SRR_1056_2.fastq</code></td>
 <td>the second input file name</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>SRR_1056_1.trimmed.fastq</code></td>
 <td>the output file for surviving pairs from the <code>_1</code>
 file</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>SRR_1056_1un.trimmed.fastq</code></td>
 <td>the output file for orphaned reads from the <code>_1</code>
 file</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>SRR_1056_2.trimmed.fastq</code></td>
 <td>the output file for surviving pairs from the <code>_2</code>
 file</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>SRR_1056_2un.trimmed.fastq</code></td>
 <td>the output file for orphaned reads from the <code>_2</code>
 file</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>ILLUMINACLIP:SRR_adapters.fa</code></td>
 <td>to clip the Illumina adapters from the input file using the adapter
 sequences listed in <code>SRR_adapters.fa</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>SLIDINGWINDOW:4:20</code></td>
 <td>to use a sliding window of size 4 that will remove bases if their
 phred score is below 20</td>
@@ -2615,37 +2615,37 @@ predicted variation.</p>
 <col width="2%">
 <col width="97%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>column</th>
 <th>info</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>CHROM</td>
 <td>contig location where the variation occurs</td>
 </tr>
-<tr class="even">
+<tr>
 <td>POS</td>
 <td>position within the contig where the variation occurs</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>ID</td>
 <td>a <code>.</code> until we add annotation information</td>
 </tr>
-<tr class="even">
+<tr>
 <td>REF</td>
 <td>reference genotype (forward strand)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>ALT</td>
 <td>sample genotype (forward strand)</td>
 </tr>
-<tr class="even">
+<tr>
 <td>QUAL</td>
 <td>Phred-scaled probability that the observed variant exists at this
 site (higher is better)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>FILTER</td>
 <td>a <code>.</code> if no quality filters have been applied, PASS if a
 filter is passed, or the name of the filters this variant failed</td>
@@ -2662,16 +2662,16 @@ decode.</p>
 <col width="2%">
 <col width="97%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>column</th>
 <th>info</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>FORMAT</td>
 <td>lists in order the metrics presented in the final column</td>
 </tr>
-<tr class="even">
+<tr>
 <td>results</td>
 <td>lists the values associated with those metrics in order</td>
 </tr>
@@ -2683,16 +2683,16 @@ decode.</p>
 <col width="2%">
 <col width="97%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>metric</th>
 <th>definition</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>AD, DP</td>
 <td>the depth per allele by sample and coverage</td>
 </tr>
-<tr class="even">
+<tr>
 <td>GT</td>
 <td>the genotype for the sample at this loci. For a diploid organism,
 the GT field indicates the two alleles carried by the sample, encoded by
@@ -2700,11 +2700,11 @@ a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT
 allele, etc. A 0/0 means homozygous reference, 0/1 is heterozygous, and
 1/1 is homozygous for the alternate allele.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>PL</td>
 <td>the likelihoods of the given genotypes</td>
 </tr>
-<tr class="even">
+<tr>
 <td>GQ</td>
 <td>the Phred-scaled confidence for the genotype</td>
 </tr>
@@ -3553,7 +3553,7 @@ directory.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3657,8 +3657,8 @@ automated progress update.</li>
   "url": "https://datacarpentry.github.io/wrangling-genomics/aio.html",
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/aio.html",
   "dateCreated": "2015-03-24",
-  "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "dateModified": "2026-05-05",
+  "datePublished": "2026-05-05"
 }
 
   </script><script>

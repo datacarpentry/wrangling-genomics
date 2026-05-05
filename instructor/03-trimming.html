@@ -392,49 +392,49 @@ Trimmomatic expects the two input files, and then the names of the
 output files. These files are described below. While, in single end
 mode, Trimmomatic will expect 1 file as input, after which you can enter
 the optional settings and lastly the name of the output file.</p>
-<table class="table"><colgroup><col width="11%"><col width="88%"></colgroup><thead><tr class="header"><th>option</th>
+<table class="table"><colgroup><col width="11%"><col width="88%"></colgroup><thead><tr><th>option</th>
 <th>meaning</th>
-</tr></thead><tbody><tr class="odd"><td>&lt;inputFile1&gt;</td>
+</tr></thead><tbody><tr><td>&lt;inputFile1&gt;</td>
 <td>Input reads to be trimmed. Typically the file name will contain an
 <code>_1</code> or <code>_R1</code> in the name.</td>
-</tr><tr class="even"><td>&lt;inputFile2&gt;</td>
+</tr><tr><td>&lt;inputFile2&gt;</td>
 <td>Input reads to be trimmed. Typically the file name will contain an
 <code>_2</code> or <code>_R2</code> in the name.</td>
-</tr><tr class="odd"><td>&lt;outputFile1P&gt;</td>
+</tr><tr><td>&lt;outputFile1P&gt;</td>
 <td>Output file that contains surviving pairs from the <code>_1</code>
 file.</td>
-</tr><tr class="even"><td>&lt;outputFile1U&gt;</td>
+</tr><tr><td>&lt;outputFile1U&gt;</td>
 <td>Output file that contains orphaned reads from the <code>_1</code>
 file.</td>
-</tr><tr class="odd"><td>&lt;outputFile2P&gt;</td>
+</tr><tr><td>&lt;outputFile2P&gt;</td>
 <td>Output file that contains surviving pairs from the <code>_2</code>
 file.</td>
-</tr><tr class="even"><td>&lt;outputFile2U&gt;</td>
+</tr><tr><td>&lt;outputFile2U&gt;</td>
 <td>Output file that contains orphaned reads from the <code>_2</code>
 file.</td>
 </tr></tbody></table><p>The last thing trimmomatic expects to see is the trimming
 parameters:</p>
-<table class="table"><colgroup><col width="11%"><col width="88%"></colgroup><thead><tr class="header"><th>step</th>
+<table class="table"><colgroup><col width="11%"><col width="88%"></colgroup><thead><tr><th>step</th>
 <th>meaning</th>
-</tr></thead><tbody><tr class="odd"><td><code>ILLUMINACLIP</code></td>
+</tr></thead><tbody><tr><td><code>ILLUMINACLIP</code></td>
 <td>Perform adapter removal.</td>
-</tr><tr class="even"><td><code>SLIDINGWINDOW</code></td>
+</tr><tr><td><code>SLIDINGWINDOW</code></td>
 <td>Perform sliding window trimming, cutting once the average quality
 within the window falls below a threshold.</td>
-</tr><tr class="odd"><td><code>LEADING</code></td>
+</tr><tr><td><code>LEADING</code></td>
 <td>Cut bases off the start of a read, if below a threshold
 quality.</td>
-</tr><tr class="even"><td><code>TRAILING</code></td>
+</tr><tr><td><code>TRAILING</code></td>
 <td>Cut bases off the end of a read, if below a threshold quality.</td>
-</tr><tr class="odd"><td><code>CROP</code></td>
+</tr><tr><td><code>CROP</code></td>
 <td>Cut the read to a specified length.</td>
-</tr><tr class="even"><td><code>HEADCROP</code></td>
+</tr><tr><td><code>HEADCROP</code></td>
 <td>Cut the specified number of bases from the start of the read.</td>
-</tr><tr class="odd"><td><code>MINLEN</code></td>
+</tr><tr><td><code>MINLEN</code></td>
 <td>Drop an entire read if it is below a specified length.</td>
-</tr><tr class="even"><td><code>TOPHRED33</code></td>
+</tr><tr><td><code>TOPHRED33</code></td>
 <td>Convert quality scores to Phred-33.</td>
-</tr><tr class="odd"><td><code>TOPHRED64</code></td>
+</tr><tr><td><code>TOPHRED64</code></td>
 <td>Convert quality scores to Phred-64.</td>
 </tr></tbody></table><p>We will use only a few of these options and trimming steps in our
 analysis. It is important to understand the steps you are using to clean
@@ -453,34 +453,34 @@ do not have the files it refers to:</p>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a>              ILLUMINACLIP:SRR_adapters.fa SLIDINGWINDOW:4:20</span></code></pre>
 </div>
 <p>In this example, we have told Trimmomatic:</p>
-<table class="table"><colgroup><col width="11%"><col width="88%"></colgroup><thead><tr class="header"><th>code</th>
+<table class="table"><colgroup><col width="11%"><col width="88%"></colgroup><thead><tr><th>code</th>
 <th>meaning</th>
-</tr></thead><tbody><tr class="odd"><td><code>PE</code></td>
+</tr></thead><tbody><tr><td><code>PE</code></td>
 <td>that it will be taking a paired end file as input</td>
-</tr><tr class="even"><td><code>-threads 4</code></td>
+</tr><tr><td><code>-threads 4</code></td>
 <td>to use four computing threads to run (this will speed up our
 run)</td>
-</tr><tr class="odd"><td><code>SRR_1056_1.fastq</code></td>
+</tr><tr><td><code>SRR_1056_1.fastq</code></td>
 <td>the first input file name</td>
-</tr><tr class="even"><td><code>SRR_1056_2.fastq</code></td>
+</tr><tr><td><code>SRR_1056_2.fastq</code></td>
 <td>the second input file name</td>
-</tr><tr class="odd"><td><code>SRR_1056_1.trimmed.fastq</code></td>
+</tr><tr><td><code>SRR_1056_1.trimmed.fastq</code></td>
 <td>the output file for surviving pairs from the <code>_1</code>
 file</td>
-</tr><tr class="even"><td><code>SRR_1056_1un.trimmed.fastq</code></td>
+</tr><tr><td><code>SRR_1056_1un.trimmed.fastq</code></td>
 <td>the output file for orphaned reads from the <code>_1</code>
 file</td>
-</tr><tr class="odd"><td><code>SRR_1056_2.trimmed.fastq</code></td>
+</tr><tr><td><code>SRR_1056_2.trimmed.fastq</code></td>
 <td>the output file for surviving pairs from the <code>_2</code>
 file</td>
-</tr><tr class="even"><td><code>SRR_1056_2un.trimmed.fastq</code></td>
+</tr><tr><td><code>SRR_1056_2un.trimmed.fastq</code></td>
 <td>the output file for orphaned reads from the <code>_2</code>
 file</td>
-</tr><tr class="odd"><td><code>ILLUMINACLIP:SRR_adapters.fa</code></td>
+</tr><tr><td><code>ILLUMINACLIP:SRR_adapters.fa</code></td>
 <td>to clip the Illumina adapters from the input file using the adapter
 sequences listed in <code>SRR_adapters.fa</code>
 </td>
-</tr><tr class="even"><td><code>SLIDINGWINDOW:4:20</code></td>
+</tr><tr><td><code>SLIDINGWINDOW:4:20</code></td>
 <td>to use a sliding window of size 4 that will remove bases if their
 phred score is below 20</td>
 </tr></tbody></table><div id="multi-line-commands" class="callout">
@@ -838,7 +838,7 @@ important!</li>
   "identifier": "https://datacarpentry.github.io/wrangling-genomics/instructor/03-trimming.html",
   "dateCreated": "2015-03-24",
   "dateModified": "2025-02-04",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-05-05"
 }
 
   </script><script>
