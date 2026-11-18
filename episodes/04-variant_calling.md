@@ -53,7 +53,9 @@ The workshop backup contains the same sequence in an uncompressed FASTA file. It
 $ sed '1s/^>NC_012967\.1 />CP000819.1 /' ~/.backup/ref_genome/ecoli_rel606.fasta > data/ref_genome/ecoli_rel606.fasta
 ```
 
-Continue with the exercise below.
+This command changes only the accession in the first FASTA header and preserves the nucleotide sequence.
+
+Skip the download, checksum verification, and decompression steps below, and continue with the Exercise.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
