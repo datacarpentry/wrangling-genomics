@@ -36,12 +36,46 @@ The alignment process consists of two steps:
 
 ## Setting up
 
-First we download the reference genome for *E. coli* REL606. Although we could copy or move the file with `cp` or `mv`, most genomics workflows begin with a download step, so we will practice that here.
+First we create a directory for the *E. coli* REL606 reference genome.
 
 ```bash
 $ cd ~/dc_workshop
 $ mkdir -p data/ref_genome
-$ curl -L -o data/ref_genome/ecoli_rel606.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+```
+
+::::::::::::::::::::::::::::::::::::::: callout
+
+### Working offline on the workshop image
+
+The workshop backup contains the same sequence in an uncompressed FASTA file. Its header uses the RefSeq accession `NC_012967.1`. To use the backup, copy it with the GenBank accession `CP000819.1` in the header so the chromosome name matches the examples below:
+
+```bash
+$ sed '1s/^>NC_012967\.1 />CP000819.1 /' ~/.backup/ref_genome/ecoli_rel606.fasta > data/ref_genome/ecoli_rel606.fasta
+```
+
+Continue with the exercise below.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+Download the compressed reference genome from NCBI.
+
+```bash
+$ curl -fL -o data/ref_genome/ecoli_rel606.fasta.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/GCA_000017985.1_ASM1798v1_genomic.fna.gz
+```
+
+Before decompressing the file, we can check that it downloaded intact. An MD5 checksum is a value calculated from the contents of a file. Run `md5sum` on the compressed reference (on macOS, use `md5 -q`).
+
+```bash
+$ md5sum data/ref_genome/ecoli_rel606.fasta.gz
+```
+
+```output
+84ac547b7fa22c6291aa519f2d1ce444  data/ref_genome/ecoli_rel606.fasta.gz
+```
+
+Compare the first column with the value for `GCA_000017985.1_ASM1798v1_genomic.fna.gz` in [NCBI's checksum list](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/017/985/GCA_000017985.1_ASM1798v1/md5checksums.txt). If the values differ, repeat the download and check again. Once they match, decompress the file.
+
+```bash
 $ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 ```
 
@@ -49,7 +83,7 @@ $ gunzip data/ref_genome/ecoli_rel606.fasta.gz
 
 ### Exercise
 
-We saved this file as `data/ref_genome/ecoli_rel606.fasta.gz` and then decompressed it.
+We now have the reference sequence in `data/ref_genome/ecoli_rel606.fasta`.
 What is the real name of the genome?
 
 :::::::::::::::  solution
